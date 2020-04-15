@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace emotionRecognition
 {
-    public partial class Form1 : Form
+    public partial class PPage : Form
     {
-        public Form1()
+        public PPage()
         {
             InitializeComponent();
         }
+
+        private void PPage_Load(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
