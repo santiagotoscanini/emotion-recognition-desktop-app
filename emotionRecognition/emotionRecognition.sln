@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.29920.165
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UI", "emotionRecognition\UI.csproj", "{FB09AAE5-9FE7-489A-930F-E1BFC9B294A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BussinessLogic", "emotionRecognitionDomain\BussinessLogic.csproj", "{A8763D1E-E444-42B1-BB93-0692200A03A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BussinessLogic", "emotionRecognitionDomain\BussinessLogic.csproj", "{A8763D1E-E444-42B1-BB93-0692200A03A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "emotionRecognitionTest\Tests.csproj", "{8417234D-2C8B-40EC-9828-10809E28652C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "emotionRecognitionTest\Tests.csproj", "{8417234D-2C8B-40EC-9828-10809E28652C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,8 +23,8 @@ Global
 		{A8763D1E-E444-42B1-BB93-0692200A03A0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A8763D1E-E444-42B1-BB93-0692200A03A0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A8763D1E-E444-42B1-BB93-0692200A03A0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8417234D-2C8B-40EC-9828-10809E28652C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8417234D-2C8B-40EC-9828-10809E28652C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8417234D-2C8B-40EC-9828-10809E28652C}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{8417234D-2C8B-40EC-9828-10809E28652C}.Debug|Any CPU.Build.0 = Release|Any CPU
 		{8417234D-2C8B-40EC-9828-10809E28652C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8417234D-2C8B-40EC-9828-10809E28652C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
