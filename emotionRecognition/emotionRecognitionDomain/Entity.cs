@@ -2,10 +2,21 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace emotionRecognition
+namespace BussinessLogic
 {
-    class Entity
+    public class Entity
     {
-        public string Name{ get; set; }
+        public string Name { get; set; }
+
+        public Entity(string Name)
+        {
+            this.Name = Name;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return obj is Entity entity &&
+                   Name == entity.Name;
+        }
     }
 }
