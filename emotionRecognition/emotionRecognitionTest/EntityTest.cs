@@ -1,7 +1,7 @@
 ﻿using BussinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace EnitityTest
+namespace Tests
 {
     [TestClass]
     public class EnitityTest

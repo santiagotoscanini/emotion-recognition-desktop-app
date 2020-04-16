@@ -6,16 +6,19 @@ namespace BussinessLogic
 {
     public class SystemData
     {
-        private List<Entity> entityList;
+        private HashSet<Entity> entityList;
+        private HashSet<Sentiment> sentimentList;
+
         public SystemData()
         {
-            entityList = new List<Entity>();
+            entityList = new HashSet<Entity>();
+            sentimentList = new HashSet<Sentiment>();
         }
 
         public bool addEntity(Entity entity)
         {
             bool sucess = false;
-            if (!hasEntity(entity))
+            if (!this.hasEntity(entity))
             {
                 sucess = true;
                 this.entityList.Add(entity);
@@ -31,10 +34,37 @@ namespace BussinessLogic
         public bool removeEntity(Entity entity)
         {
             bool sucess = false;
-            if (hasEntity(entity))
+            if (this.hasEntity(entity))
             {
                 sucess = true;
                 this.entityList.Remove(entity);
+            }
+            return sucess;
+        }
+
+        public bool hasSentiment(Sentiment sentiment)
+        {
+            return this.sentimentList.Contains(sentiment);
+        }
+
+        public bool addSentiment(Sentiment sentiment)
+        {
+            bool sucess = false;
+            if (!this.hasSentiment(sentiment))
+            {
+                sucess = true;
+                this.sentimentList.Add(sentiment);
+            }
+            return sucess;
+        }
+
+        public bool removeSentiment(Sentiment sentiment)
+        {
+            bool sucess = false;
+            if (this.hasSentiment(sentiment))
+            {
+                sucess = true;
+                this.sentimentList.Remove(sentiment);
             }
             return sucess;
         }

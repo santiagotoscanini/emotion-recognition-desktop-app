@@ -38,6 +38,32 @@ namespace Tests
             system.addEntity(entity);
             Assert.IsTrue(system.removeEntity(entity));
         }
-
+        public void AddSentimentNonExistant()
+        {
+            SystemData system = new SystemData();
+            Sentiment sentiment = new Sentiment("Good",1);
+            system.addSentiment(sentiment);
+            Assert.IsTrue(system.hasSentiment(sentiment));
+        }
+        public void AddSentimentExistant()
+        {
+            SystemData system = new SystemData();
+            Sentiment sentiment = new Sentiment("Good", 1);
+            system.addSentiment(sentiment);
+            Assert.IsFalse(system.addSentiment(sentiment));
+        }
+        public void RemoveSentimentNonExistant()
+        {
+            SystemData system = new SystemData();
+            Sentiment sentiment = new Sentiment("Good", 1);
+            Assert.IsFalse(system.removeSentiment(sentiment));
+        }
+        public void RemoveSentimentExistant()
+        {
+            SystemData system = new SystemData();
+            Sentiment sentiment = new Sentiment("Good", 1);
+            system.addSentiment(sentiment);
+            Assert.IsTrue(system.removeSentiment(sentiment));
+        }
     }
 }

@@ -4,21 +4,22 @@ using System.Text;
 
 namespace BussinessLogic
 {
-    public class Entity
+    public class Sentiment
     {
         public string Name { get; }
-        public Entity()
-        {
-            this.Name = "";
-        }
-        public Entity(string Name)
+
+        public int State { get; }
+
+        public Sentiment(string Name, int State)
         {
             this.Name = Name;
+            this.State = State;
         }
+
         public override bool Equals(object obj)
         {
-            return obj is Entity entity &&
-                   Name == entity.Name;
+            return obj is Sentiment sentiment &&
+                   Name == sentiment.Name;
         }
     }
 }
