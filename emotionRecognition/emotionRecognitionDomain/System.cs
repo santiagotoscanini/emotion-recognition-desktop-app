@@ -6,8 +6,8 @@ namespace BussinessLogic
 {
     public class SystemData
     {
-        private HashSet<Entity> entityList;
-        private HashSet<Sentiment> sentimentList;
+        private readonly HashSet<Entity> entityList;
+        private readonly HashSet<Sentiment> sentimentList;
 
         public SystemData()
         {
