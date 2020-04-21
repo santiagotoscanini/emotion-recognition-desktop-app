@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using static BussinessLogic.Module;
 
 namespace BussinessLogic
 {
@@ -8,9 +9,9 @@ namespace BussinessLogic
     {
         public string Name { get; }
 
-        public int State { get; }
+        public SentimentState State { get; }
 
-        public Sentiment(string Name, int State)
+        public Sentiment(string Name, SentimentState State)
         {
             this.Name = Name;
             this.State = State;

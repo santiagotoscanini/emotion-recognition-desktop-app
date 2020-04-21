@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BussinessLogic;
 using System.Net;
+using static BussinessLogic.Module;
 
 namespace Tests
 {
@@ -52,14 +53,14 @@ namespace Tests
         [TestMethod]
         public void AddSentimentNonExistant()
         {
-            Sentiment sentiment = new Sentiment("Good",1);
+            Sentiment sentiment = new Sentiment("Good", SentimentState.POSITIVE);
             Assert.IsTrue(repository.addSentiment(sentiment));
             Assert.IsTrue(repository.hasSentiment(sentiment));
         }
         [TestMethod]
         public void AddSentimentExistant()
         {
-            Sentiment sentiment = new Sentiment("Good", 1);
+            Sentiment sentiment = new Sentiment("Good", SentimentState.POSITIVE);
             repository.addSentiment(sentiment);
             Assert.IsFalse(repository.addSentiment(sentiment));
             Assert.IsTrue(repository.hasSentiment(sentiment));
@@ -67,14 +68,14 @@ namespace Tests
         [TestMethod]
         public void RemoveSentimentNonExistant()
         {
-            Sentiment sentiment = new Sentiment("Good", 1);
+            Sentiment sentiment = new Sentiment("Good", SentimentState.POSITIVE);
             Assert.IsFalse(repository.removeSentiment(sentiment));
             Assert.IsFalse(repository.hasSentiment(sentiment));
         }
         [TestMethod]
         public void RemoveSentimentExistant()
         {
-            Sentiment sentiment = new Sentiment("Good", 1);
+            Sentiment sentiment = new Sentiment("Good", SentimentState.POSITIVE);
             repository.addSentiment(sentiment);
             Assert.IsTrue(repository.removeSentiment(sentiment));
             Assert.IsFalse(repository.hasSentiment(sentiment));

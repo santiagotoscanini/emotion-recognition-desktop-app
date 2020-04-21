@@ -1,5 +1,6 @@
 ﻿using BussinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static BussinessLogic.Module;
 
 namespace Tests
 {
@@ -9,9 +10,9 @@ namespace Tests
         [TestMethod]
         public void CreateSentiment()
         {
-            Sentiment sentiment = new Sentiment("Good",1);
+            Sentiment sentiment = new Sentiment("Good", SentimentState.POSITIVE);
             Assert.AreEqual("Good", sentiment.Name);
-            Assert.AreEqual(1, sentiment.State);
+            Assert.AreEqual(SentimentState.POSITIVE, sentiment.State);
         }
     }
 }

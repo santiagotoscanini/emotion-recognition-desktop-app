@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using static BussinessLogic.Module;
 
 namespace BussinessLogic
 {
@@ -10,8 +11,7 @@ namespace BussinessLogic
         public string Text { get; }
         public bool Analized { get; private set; }
         private Entity Entity { get; set; }
-        private List<Sentiment> Sentiments { get; set; }
-        private int Grade { get; set; }
+        private PhraseState State { get; set; }
         public Entity getEntityValue()
         {
             if (this.Analized)
@@ -23,37 +23,26 @@ namespace BussinessLogic
                 throw new InvalidOperationException("Phrase was not analized");
             }
         }
-        public List<Sentiment> getSentimentsValue()
+        public PhraseState getPhraseState()
         {
             if (this.Analized)
             {
-                return this.Sentiments;
+                return this.State;
             }
             else
             {
                 throw new InvalidOperationException("Phrase was not analized");
             }
         }
-        public int getGradeValue()
-        {
-            if (this.Analized)
-            {
-                return this.Grade;
-            }
-            else
-            {
-                throw new InvalidOperationException("Phrase was not analized");
-            }
-        }
+
         public Phrase(string Text)
         {
             this.Text = Text;
             this.Entity = new Entity();
             this.Analized = false;
-            this.Sentiments = new List<Sentiment>();
-            this.Grade = 0;
+            this.State = PhraseState.NEUTRAL;
         }
-        public void SetAnalisisResult(Entity Entity, List<Sentiment> Sentiments)
+        public void SetAnalisisResult(Entity Entity, PhraseState State)
         {
             if (this.Analized)
             {
@@ -63,13 +52,8 @@ namespace BussinessLogic
             {
                 this.Analized = true;
                 this.Entity = Entity;
-                this.Sentiments = Sentiments;
-                this.Grade = CalculateGrade();
+                this.State = State;
             }
-        }
-        private int CalculateGrade()
-        {
-            return this.Sentiments.Sum(sentiment => sentiment.State);
         }
     }
 }
