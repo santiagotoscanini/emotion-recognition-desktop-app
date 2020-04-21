@@ -2,14 +2,24 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace emotionRecognition
+namespace BussinessLogic
 {
-    static class Module
+    public static class Module
     {
-        public enum State
+        public enum SentimentState
         {
             NEGATIVE,
             POSITIVE
+        }
+        public enum PhraseState
+        {
+            HIGH_POSITVE,
+            MEDIUM_POSITIVE,
+            LOW_POSITIVE,
+            NEUTRAL,
+            LOW_NEGATIVE,
+            MEDIUM_NEGATIVE,
+            HIGH_NEGATIVE
         }
     }
 }

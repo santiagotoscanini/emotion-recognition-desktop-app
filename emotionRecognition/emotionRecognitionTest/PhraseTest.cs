@@ -2,6 +2,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
+using static BussinessLogic.Module;
 
 namespace Tests
 {
@@ -28,47 +29,34 @@ namespace Tests
         [TestMethod]
         public void SetAnalysisValuesEntitySentiment()
         {
-            List<Sentiment> sentiments = new List<Sentiment>();
-            Sentiment sentiment = new Sentiment("great",3);
             Entity entity = new Entity("The sun");
 
-            sentiments.Add(sentiment);
-            phrase.SetAnalisisResult(entity, sentiments);
+            phrase.SetAnalisisResult(entity, PhraseState.HIGH_POSITVE);
 
             Assert.IsTrue(phrase.Analized);
             Assert.AreEqual("The sun", phrase.getEntityValue().Name);
-            Assert.AreEqual("great", phrase.getSentimentsValue()[0].Name);
-            Assert.AreEqual(3, phrase.getGradeValue());
+            Assert.AreEqual(PhraseState.HIGH_POSITVE, phrase.getPhraseState());
         }
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void SetAnalysisValuesEntitySentimentSecondTime()
         {
-            List<Sentiment> sentiments = new List<Sentiment>();
-            Sentiment sentiment = new Sentiment("great", 3);
             Entity entity = new Entity("The sun");
 
-            sentiments.Add(sentiment);
-            phrase.SetAnalisisResult(entity, sentiments);
-            phrase.SetAnalisisResult(entity, sentiments);
+            phrase.SetAnalisisResult(entity, PhraseState.HIGH_POSITVE);
+            phrase.SetAnalisisResult(entity, PhraseState.NEUTRAL);
         }
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void GetSentimentFromEntityNotAnalize()
         {
-            _ = phrase.getSentimentsValue();
+            _ = phrase.getPhraseState();
         }
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void GetEntityFromEntityNotAnalize()
         {
             _ = phrase.getEntityValue();
-        }
-        [TestMethod]
-        [ExpectedException(typeof(InvalidOperationException))]
-        public void GetGradeFromEntityNotAnalize()
-        {
-            _ = phrase.getGradeValue();
         }
     }
 }
