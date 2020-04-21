@@ -109,5 +109,39 @@ namespace Tests
             Assert.IsTrue(repository.removePhrase(phrase));
             Assert.IsFalse(repository.hasPhrase(phrase));
         }
+        [TestMethod]
+        public void GetCorrectEnity()
+        {
+            Phrase phrase = new Phrase("The sun is great");
+            this.repository.addEntity(new Entity("The moon"));
+            this.repository.addEntity(new Entity("ORT"));
+            this.repository.addEntity(new Entity("The sun"));
+
+            Entity entity = repository.getEntityFromPhrase(phrase);
+            Assert.AreEqual("The sun", entity.Name);
+        }
+        [TestMethod]
+        public void GetEmptyEnity()
+        {
+            Phrase phrase = new Phrase("It is a test");
+            this.repository.addEntity(new Entity("The moon"));
+            this.repository.addEntity(new Entity("ORT"));
+            this.repository.addEntity(new Entity("The sun"));
+
+            Entity entity = repository.getEntityFromPhrase(phrase);
+            Assert.AreEqual("", entity.Name);
+        }
+        [TestMethod]
+        public void GetFirstEntity()
+        {
+            Phrase phrase = new Phrase("The moon and The sun are great");
+            this.repository.addEntity(new Entity("The moon"));
+            this.repository.addEntity(new Entity("ORT"));
+            this.repository.addEntity(new Entity("The sun"));
+
+            Entity entity = repository.getEntityFromPhrase(phrase);
+            Assert.AreEqual("The moon", entity.Name);
+        }
+
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Text;
 
 namespace BussinessLogic
@@ -109,6 +110,23 @@ namespace BussinessLogic
                 this.phraseList.Remove(phrase);
             }
             return sucess;
+        }
+
+        public Entity getEntityFromPhrase(Phrase phrase)
+        {
+            Entity entityOfPhrase = new Entity();
+            int lastEntityIndex = phrase.Text.Length;
+            foreach(Entity entity in entityList)
+            {
+                int entityPositionInEntity = phrase.Text.IndexOf(entity.Name);
+
+                if (entityPositionInEntity != -1 && lastEntityIndex > entityPositionInEntity)
+                {
+                    entityOfPhrase = entity;
+                    lastEntityIndex = entityPositionInEntity;
+                }
+            }
+            return entityOfPhrase;
         }
     }
 }
