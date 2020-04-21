@@ -6,7 +6,6 @@ namespace Tests
     [TestClass]
     public class SentimentTest
     {
-        //- Crear un Stack y ver que está vacía.
         [TestMethod]
         public void CreateSentiment()
         {
