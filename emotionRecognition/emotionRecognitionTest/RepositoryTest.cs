@@ -15,6 +15,23 @@ namespace Tests
         {
             repository = new Repository();
         }
+        private void PopulateRepository()
+        {
+            this.repository.addEntity(new Entity("The moon"));
+            this.repository.addEntity(new Entity("ORT"));
+            this.repository.addEntity(new Entity("The sun"));
+
+            this.repository.addSentiment(new Sentiment("ok", SentimentState.POSITIVE));
+            this.repository.addSentiment(new Sentiment("great", SentimentState.POSITIVE));
+            this.repository.addSentiment(new Sentiment("awesome", SentimentState.POSITIVE));
+            this.repository.addSentiment(new Sentiment("not nice", SentimentState.NEGATIVE));
+            this.repository.addSentiment(new Sentiment("gross", SentimentState.NEGATIVE));
+            this.repository.addSentiment(new Sentiment("bad", SentimentState.NEGATIVE));
+            this.repository.addSentiment(new Sentiment("average", SentimentState.NEGATIVE));
+            this.repository.addSentiment(new Sentiment("horrendous", SentimentState.NEGATIVE));
+            this.repository.addSentiment(new Sentiment("not impressive", SentimentState.NEGATIVE));
+            this.repository.addSentiment(new Sentiment("marvelous", SentimentState.POSITIVE));
+        }
         [TestCleanup]
         public void CleanUp()
         {
@@ -114,35 +131,92 @@ namespace Tests
         public void GetCorrectEnity()
         {
             Phrase phrase = new Phrase("The sun is great");
-            this.repository.addEntity(new Entity("The moon"));
-            this.repository.addEntity(new Entity("ORT"));
-            this.repository.addEntity(new Entity("The sun"));
+            PopulateRepository();
 
-            Entity entity = repository.getEntityFromPhrase(phrase);
-            Assert.AreEqual("The sun", entity.Name);
+            repository.doAnalysis(phrase);
+            Assert.AreEqual("The sun", phrase.getEntityValue().Name);
         }
         [TestMethod]
         public void GetEmptyEnity()
         {
             Phrase phrase = new Phrase("It is a test");
-            this.repository.addEntity(new Entity("The moon"));
-            this.repository.addEntity(new Entity("ORT"));
-            this.repository.addEntity(new Entity("The sun"));
+            PopulateRepository();
 
-            Entity entity = repository.getEntityFromPhrase(phrase);
-            Assert.AreEqual("", entity.Name);
+            repository.doAnalysis(phrase);
+            Assert.AreEqual("", phrase.getEntityValue().Name);
         }
         [TestMethod]
         public void GetFirstEntity()
         {
             Phrase phrase = new Phrase("The moon and The sun are great");
-            this.repository.addEntity(new Entity("The moon"));
-            this.repository.addEntity(new Entity("ORT"));
-            this.repository.addEntity(new Entity("The sun"));
+            PopulateRepository();
 
-            Entity entity = repository.getEntityFromPhrase(phrase);
-            Assert.AreEqual("The moon", entity.Name);
+            repository.doAnalysis(phrase);
+            Assert.AreEqual("The moon", phrase.getEntityValue().Name);
         }
+        [TestMethod]
+        public void GetLowPositiveSentiment()
+        {
+            Phrase phrase = new Phrase("The moon is ok");
+            PopulateRepository();
 
+            repository.doAnalysis(phrase);
+            Assert.AreEqual(PhraseState.LOW_POSITIVE, phrase.getPhraseState());
+        }
+        [TestMethod]
+        public void GetMediumPositiveSentiment()
+        {
+            Phrase phrase = new Phrase("The moon is ok and great");
+            PopulateRepository();
+
+            repository.doAnalysis(phrase);
+            Assert.AreEqual(PhraseState.MEDIUM_POSITIVE, phrase.getPhraseState());
+        }
+        [TestMethod]
+        public void GetHighPositiveSentiment()
+        {
+            Phrase phrase = new Phrase("The moon is ok, great and awesome");
+            PopulateRepository();
+
+            repository.doAnalysis(phrase);
+            Assert.AreEqual(PhraseState.HIGH_POSITVE, phrase.getPhraseState());
+        }
+        [TestMethod]
+        public void GetLowNegativeSentiment()
+        {
+            Phrase phrase = new Phrase("The moon is bad");
+            PopulateRepository();
+
+            repository.doAnalysis(phrase);
+            Assert.AreEqual(PhraseState.LOW_NEGATIVE, phrase.getPhraseState());
+
+        }
+        [TestMethod]
+        public void GetMediumNegativeSentiment()
+        {
+            Phrase phrase = new Phrase("The moon is gross and bad");
+            PopulateRepository();
+
+            repository.doAnalysis(phrase);
+            Assert.AreEqual(PhraseState.MEDIUM_NEGATIVE, phrase.getPhraseState());
+        }
+        [TestMethod]
+        public void GetHighNegativeSentiment()
+        {
+            Phrase phrase = new Phrase("The moon is gross, bad and horrendous");
+            PopulateRepository();
+
+            repository.doAnalysis(phrase);
+            Assert.AreEqual(PhraseState.HIGH_NEGATIVE, phrase.getPhraseState());
+        }
+        [TestMethod]
+        public void GetNeutralSentiment()
+        {
+            Phrase phrase = new Phrase("The moon is great and bad");
+            PopulateRepository();
+
+            repository.doAnalysis(phrase);
+            Assert.AreEqual(PhraseState.NEUTRAL, phrase.getPhraseState());
+        }
     }
 }

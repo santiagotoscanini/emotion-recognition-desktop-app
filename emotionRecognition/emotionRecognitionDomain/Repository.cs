@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using System.Text;
+using static BussinessLogic.Module;
 
 namespace BussinessLogic
 {
@@ -112,7 +113,7 @@ namespace BussinessLogic
             return sucess;
         }
 
-        public Entity getEntityFromPhrase(Phrase phrase)
+        private Entity getEntityFromPhrase(Phrase phrase)
         {
             Entity entityOfPhrase = new Entity();
             int lastEntityIndex = phrase.Text.Length;
@@ -127,6 +128,78 @@ namespace BussinessLogic
                 }
             }
             return entityOfPhrase;
+        }
+
+        public void doAnalysis(Phrase phrase)
+        {
+            Entity entityOfPhrase = getEntityFromPhrase(phrase);
+            PhraseState stateOfPhrase = getStateFromPhrase(phrase);
+
+            phrase.SetAnalisisResult(entityOfPhrase, stateOfPhrase);
+        }
+
+        private PhraseState getStateFromPhrase(Phrase phrase)
+        {
+            PhraseState stateOfPhrase = PhraseState.NEUTRAL;
+            int value = 0;
+            foreach (Sentiment sentiment in sentimentList)
+            {
+                if (phrase.Text.Contains(sentiment.Name))
+                {
+                    if(value == 0)
+                    {
+                        value += sentiment.State == SentimentState.POSITIVE ? 1 : -1;
+                    }
+                    else if(sentiment.State == SentimentState.POSITIVE && value > 0)
+                    {
+                        value++;
+                        if (value > 2)
+                        {
+                            break;
+                        }
+                    }
+                    else if (sentiment.State == SentimentState.NEGATIVE && value < 0)
+                    {
+                        value--;
+                        if (value < -2)
+                        {
+                            break;
+                        }
+                    }
+                    else{
+                        value = 0;
+                        break;
+                    }
+
+                }
+            }
+
+            switch (value)
+            {
+                case 0:
+                    stateOfPhrase = PhraseState.NEUTRAL;
+                    break;
+                case 1:
+                    stateOfPhrase = PhraseState.LOW_POSITIVE;
+                    break;
+                case 2:
+                    stateOfPhrase = PhraseState.MEDIUM_POSITIVE;
+                    break;
+                case 3:
+                    stateOfPhrase = PhraseState.HIGH_POSITVE;
+                    break;
+                case -1:
+                    stateOfPhrase = PhraseState.LOW_NEGATIVE;
+                    break;
+                case -2:
+                    stateOfPhrase = PhraseState.MEDIUM_NEGATIVE;
+                    break;
+                case -3:
+                    stateOfPhrase = PhraseState.HIGH_NEGATIVE;
+                    break;
+            }
+
+            return stateOfPhrase;
         }
     }
 }
