@@ -8,26 +8,17 @@ namespace Tests
     [TestClass]
     public class PhraseTest
     {
-        private Entity entity;
-        private Sentiment sentiment;
-        private List<Sentiment> sentiments;
         private Phrase phrase;
 
         [TestInitialize]
         public void SetUp()
         {
             phrase = new Phrase("The sun is great");
-            entity = new Entity("The sun");
-            sentiment = new Sentiment("great", 3);
-            sentiments = new List<Sentiment>();
         }
         [TestCleanup]
         public void ClenUp()
         {
             phrase = null;
-            entity = null;
-            sentiment = null;
-            sentiments = null;
         }
         [TestMethod]
         public void CreatePhrase()
@@ -37,6 +28,10 @@ namespace Tests
         [TestMethod]
         public void SetAnalysisValuesEntitySentiment()
         {
+            List<Sentiment> sentiments = new List<Sentiment>();
+            Sentiment sentiment = new Sentiment("great",3);
+            Entity entity = new Entity("The sun");
+
             sentiments.Add(sentiment);
             phrase.SetAnalisisResult(entity, sentiments);
 
@@ -49,6 +44,10 @@ namespace Tests
         [ExpectedException(typeof(InvalidOperationException))]
         public void SetAnalysisValuesEntitySentimentSecondTime()
         {
+            List<Sentiment> sentiments = new List<Sentiment>();
+            Sentiment sentiment = new Sentiment("great", 3);
+            Entity entity = new Entity("The sun");
+
             sentiments.Add(sentiment);
             phrase.SetAnalisisResult(entity, sentiments);
             phrase.SetAnalisisResult(entity, sentiments);
