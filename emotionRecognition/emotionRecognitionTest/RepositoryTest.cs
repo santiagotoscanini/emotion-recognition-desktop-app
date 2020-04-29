@@ -1,7 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using BussinessLogic;
-using System.Net;
-using static BussinessLogic.Module;
 
 namespace Tests
 {
@@ -15,28 +13,31 @@ namespace Tests
         {
             repository = new Repository();
         }
+
         private void PopulateRepository()
         {
-            this.repository.addEntity(new Entity("The moon"));
-            this.repository.addEntity(new Entity("ORT"));
-            this.repository.addEntity(new Entity("The sun"));
+            repository.addEntity(new Entity("The moon"));
+            repository.addEntity(new Entity("ORT"));
+            repository.addEntity(new Entity("The sun"));
 
-            this.repository.addSentiment(new Sentiment("ok", SentimentState.POSITIVE));
-            this.repository.addSentiment(new Sentiment("great", SentimentState.POSITIVE));
-            this.repository.addSentiment(new Sentiment("awesome", SentimentState.POSITIVE));
-            this.repository.addSentiment(new Sentiment("not nice", SentimentState.NEGATIVE));
-            this.repository.addSentiment(new Sentiment("gross", SentimentState.NEGATIVE));
-            this.repository.addSentiment(new Sentiment("bad", SentimentState.NEGATIVE));
-            this.repository.addSentiment(new Sentiment("average", SentimentState.NEGATIVE));
-            this.repository.addSentiment(new Sentiment("horrendous", SentimentState.NEGATIVE));
-            this.repository.addSentiment(new Sentiment("not impressive", SentimentState.NEGATIVE));
-            this.repository.addSentiment(new Sentiment("marvelous", SentimentState.POSITIVE));
+            repository.addSentiment(new Sentiment("ok", SentimentState.POSITIVE));
+            repository.addSentiment(new Sentiment("great", SentimentState.POSITIVE));
+            repository.addSentiment(new Sentiment("awesome", SentimentState.POSITIVE));
+            repository.addSentiment(new Sentiment("not nice", SentimentState.NEGATIVE));
+            repository.addSentiment(new Sentiment("gross", SentimentState.NEGATIVE));
+            repository.addSentiment(new Sentiment("bad", SentimentState.NEGATIVE));
+            repository.addSentiment(new Sentiment("average", SentimentState.NEGATIVE));
+            repository.addSentiment(new Sentiment("horrendous", SentimentState.NEGATIVE));
+            repository.addSentiment(new Sentiment("not impressive", SentimentState.NEGATIVE));
+            repository.addSentiment(new Sentiment("marvelous", SentimentState.POSITIVE));
         }
+
         [TestCleanup]
         public void CleanUp()
         {
             repository = null;
         }
+
         [TestMethod]
         public void AddEntityNonExistant()
         {
@@ -44,6 +45,7 @@ namespace Tests
             Assert.IsTrue(repository.addEntity(entity));
             Assert.IsTrue(repository.hasEntity(entity));
         }
+
         [TestMethod]
         public void AddEntityExistant()
         {
@@ -52,6 +54,7 @@ namespace Tests
             Assert.IsFalse(repository.addEntity(entity));
             Assert.IsTrue(repository.hasEntity(entity));
         }
+
         [TestMethod]
         public void RemoveEntityNonExistant()
         {
@@ -59,6 +62,7 @@ namespace Tests
             Assert.IsFalse(repository.removeEntity(entity));
             Assert.IsFalse(repository.hasEntity(entity));
         }
+
         [TestMethod]
         public void RemoveEntityExistant()
         {
@@ -67,6 +71,7 @@ namespace Tests
             Assert.IsTrue(repository.removeEntity(entity));
             Assert.IsFalse(repository.hasEntity(entity));
         }
+
         [TestMethod]
         public void AddSentimentNonExistant()
         {
@@ -74,6 +79,7 @@ namespace Tests
             Assert.IsTrue(repository.addSentiment(sentiment));
             Assert.IsTrue(repository.hasSentiment(sentiment));
         }
+
         [TestMethod]
         public void AddSentimentExistant()
         {
@@ -82,6 +88,7 @@ namespace Tests
             Assert.IsFalse(repository.addSentiment(sentiment));
             Assert.IsTrue(repository.hasSentiment(sentiment));
         }
+
         [TestMethod]
         public void RemoveSentimentNonExistant()
         {
@@ -89,6 +96,7 @@ namespace Tests
             Assert.IsFalse(repository.removeSentiment(sentiment));
             Assert.IsFalse(repository.hasSentiment(sentiment));
         }
+
         [TestMethod]
         public void RemoveSentimentExistant()
         {
@@ -97,6 +105,7 @@ namespace Tests
             Assert.IsTrue(repository.removeSentiment(sentiment));
             Assert.IsFalse(repository.hasSentiment(sentiment));
         }
+
         [TestMethod]
         public void AddPhraseNonExistant()
         {
@@ -104,6 +113,7 @@ namespace Tests
             Assert.IsTrue(repository.addPhrase(phrase));
             Assert.IsTrue(repository.hasPhrase(phrase));
         }
+
         [TestMethod]
         public void AddPhraseExistant()
         {
@@ -112,6 +122,7 @@ namespace Tests
             Assert.IsFalse(repository.addPhrase(phrase));
             Assert.IsTrue(repository.hasPhrase(phrase));
         }
+
         [TestMethod]
         public void RemovePhraseNonExistant()
         {
@@ -119,6 +130,7 @@ namespace Tests
             Assert.IsFalse(repository.removePhrase(phrase));
             Assert.IsFalse(repository.hasPhrase(phrase));
         }
+
         [TestMethod]
         public void RemovePhraseExistant()
         {
@@ -127,6 +139,7 @@ namespace Tests
             Assert.IsTrue(repository.removePhrase(phrase));
             Assert.IsFalse(repository.hasPhrase(phrase));
         }
+
         [TestMethod]
         public void GetCorrectEnity()
         {
@@ -136,6 +149,7 @@ namespace Tests
             repository.doAnalysis(phrase);
             Assert.AreEqual("The sun", phrase.getEntityValue().Name);
         }
+
         [TestMethod]
         public void GetEmptyEnity()
         {
@@ -145,6 +159,7 @@ namespace Tests
             repository.doAnalysis(phrase);
             Assert.AreEqual("", phrase.getEntityValue().Name);
         }
+
         [TestMethod]
         public void GetFirstEntity()
         {
@@ -154,6 +169,7 @@ namespace Tests
             repository.doAnalysis(phrase);
             Assert.AreEqual("The moon", phrase.getEntityValue().Name);
         }
+
         [TestMethod]
         public void GetLowPositiveSentiment()
         {
@@ -163,6 +179,7 @@ namespace Tests
             repository.doAnalysis(phrase);
             Assert.AreEqual(PhraseState.LOW_POSITIVE, phrase.getPhraseState());
         }
+
         [TestMethod]
         public void GetMediumPositiveSentiment()
         {
@@ -172,6 +189,7 @@ namespace Tests
             repository.doAnalysis(phrase);
             Assert.AreEqual(PhraseState.MEDIUM_POSITIVE, phrase.getPhraseState());
         }
+
         [TestMethod]
         public void GetHighPositiveSentiment()
         {
@@ -181,6 +199,7 @@ namespace Tests
             repository.doAnalysis(phrase);
             Assert.AreEqual(PhraseState.HIGH_POSITVE, phrase.getPhraseState());
         }
+
         [TestMethod]
         public void GetLowNegativeSentiment()
         {
@@ -191,6 +210,7 @@ namespace Tests
             Assert.AreEqual(PhraseState.LOW_NEGATIVE, phrase.getPhraseState());
 
         }
+
         [TestMethod]
         public void GetMediumNegativeSentiment()
         {
@@ -200,6 +220,7 @@ namespace Tests
             repository.doAnalysis(phrase);
             Assert.AreEqual(PhraseState.MEDIUM_NEGATIVE, phrase.getPhraseState());
         }
+
         [TestMethod]
         public void GetHighNegativeSentiment()
         {
@@ -209,6 +230,7 @@ namespace Tests
             repository.doAnalysis(phrase);
             Assert.AreEqual(PhraseState.HIGH_NEGATIVE, phrase.getPhraseState());
         }
+
         [TestMethod]
         public void GetNeutralSentiment()
         {

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
-using static BussinessLogic.Module;
+﻿using System.Collections.Generic;
 
 namespace BussinessLogic
 {
@@ -21,96 +17,60 @@ namespace BussinessLogic
 
         public HashSet<Entity> GetEntities()
         {
-            return new HashSet<Entity>(this.entityList);
+            return new HashSet<Entity>(entityList);
         }
         public HashSet<Sentiment> GetSentiments()
         {
-            return new HashSet<Sentiment>(this.sentimentList);
+            return new HashSet<Sentiment>(sentimentList);
         }
         public HashSet<Phrase> GetPhrases()
         {
-            return new HashSet<Phrase>(this.phraseList);
+            return new HashSet<Phrase>(phraseList);
         }
 
         public bool addEntity(Entity entity)
         {
-            bool sucess = false;
-            if (!this.hasEntity(entity))
-            {
-                sucess = true;
-                this.entityList.Add(entity);
-            }
-            return sucess;
+            return entityList.Add(entity);
         }
 
         public bool hasEntity(Entity entity)
         {
-            return this.entityList.Contains(entity);
+            return entityList.Contains(entity);
         }
 
         public bool removeEntity(Entity entity)
-        {
-            bool sucess = false;
-            if (this.hasEntity(entity))
-            {
-                sucess = true;
-                this.entityList.Remove(entity);
-            }
-            return sucess;
+        {    
+            return entityList.Remove(entity);
         }
 
         public bool hasSentiment(Sentiment sentiment)
         {
-            return this.sentimentList.Contains(sentiment);
+            return sentimentList.Contains(sentiment);
         }
 
         public bool addSentiment(Sentiment sentiment)
         {
-            bool sucess = false;
-            if (!this.hasSentiment(sentiment))
-            {
-                sucess = true;
-                this.sentimentList.Add(sentiment);
-            }
-            return sucess;
+            return sentimentList.Add(sentiment);
         }
 
         public bool removeSentiment(Sentiment sentiment)
         {
-            bool sucess = false;
-            if (this.hasSentiment(sentiment))
-            {
-                sucess = true;
-                this.sentimentList.Remove(sentiment);
-            }
-            return sucess;
+            return sentimentList.Remove(sentiment);
         }
 
         public bool hasPhrase(Phrase phrase)
         {
-            return this.phraseList.Contains(phrase);
+            return phraseList.Contains(phrase);
         }
 
         public bool addPhrase(Phrase phrase)
         {
-            bool sucess = false;
-            if (!this.hasPhrase(phrase))
-            {
-                sucess = true;
-                this.phraseList.Add(phrase);
-            }
-            return sucess;
+            return phraseList.Add(phrase);
         }
 
         public bool removePhrase(Phrase phrase)
         {
-            bool sucess = false;
-            if (this.hasPhrase(phrase))
-            {
-                sucess = true;
-                this.phraseList.Remove(phrase);
-            }
-            return sucess;
+            return phraseList.Remove(phrase);
         }
 
         private Entity getEntityFromPhrase(Phrase phrase)

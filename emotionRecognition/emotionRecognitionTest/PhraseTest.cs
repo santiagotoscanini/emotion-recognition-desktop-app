@@ -1,8 +1,6 @@
 ﻿using BussinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
-using System.Collections.Generic;
-using static BussinessLogic.Module;
 
 namespace Tests
 {
@@ -16,16 +14,19 @@ namespace Tests
         {
             phrase = new Phrase("The sun is great");
         }
+
         [TestCleanup]
-        public void ClenUp()
+        public void CleanUp()
         {
             phrase = null;
         }
+
         [TestMethod]
         public void CreatePhrase()
         {
             Assert.AreEqual("The sun is great", phrase.Text);
         }
+
         [TestMethod]
         public void SetAnalysisValuesEntitySentiment()
         {
@@ -37,6 +38,7 @@ namespace Tests
             Assert.AreEqual("The sun", phrase.getEntityValue().Name);
             Assert.AreEqual(PhraseState.HIGH_POSITVE, phrase.getPhraseState());
         }
+
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void SetAnalysisValuesEntitySentimentSecondTime()
@@ -46,12 +48,14 @@ namespace Tests
             phrase.SetAnalisisResult(entity, PhraseState.HIGH_POSITVE);
             phrase.SetAnalisisResult(entity, PhraseState.NEUTRAL);
         }
+
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void GetSentimentFromEntityNotAnalize()
         {
             _ = phrase.getPhraseState();
         }
+
         [TestMethod]
         [ExpectedException(typeof(InvalidOperationException))]
         public void GetEntityFromEntityNotAnalize()
