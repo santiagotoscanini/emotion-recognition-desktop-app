@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using static BussinessLogic.Module;
 
 namespace BussinessLogic
 {
@@ -12,11 +8,13 @@ namespace BussinessLogic
         public bool Analized { get; private set; }
         private Entity Entity { get; set; }
         private PhraseState State { get; set; }
+        private DateTime Date { get; set; }
+
         public Entity getEntityValue()
         {
-            if (this.Analized)
+            if (Analized)
             {
-                return this.Entity;
+                return Entity;
             }
             else
             {
@@ -25,9 +23,9 @@ namespace BussinessLogic
         }
         public PhraseState getPhraseState()
         {
-            if (this.Analized)
+            if (Analized)
             {
-                return this.State;
+                return State;
             }
             else
             {
@@ -38,19 +36,21 @@ namespace BussinessLogic
         public Phrase(string Text)
         {
             this.Text = Text;
-            this.Entity = new Entity();
-            this.Analized = false;
-            this.State = PhraseState.NEUTRAL;
+            Entity = new Entity();
+            Analized = false;
+            State = PhraseState.NEUTRAL;
+            Date = new DateTime();
         }
+         
         public void SetAnalisisResult(Entity Entity, PhraseState State)
         {
-            if (this.Analized)
+            if (Analized)
             {
                 throw new InvalidOperationException("Phrase was analized already");
             }
             else
             {
-                this.Analized = true;
+                Analized = true;
                 this.Entity = Entity;
                 this.State = State;
             }

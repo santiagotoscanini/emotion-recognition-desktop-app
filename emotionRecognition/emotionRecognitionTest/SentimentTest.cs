@@ -1,6 +1,5 @@
 ﻿using BussinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using static BussinessLogic.Module;
 
 namespace Tests
 {

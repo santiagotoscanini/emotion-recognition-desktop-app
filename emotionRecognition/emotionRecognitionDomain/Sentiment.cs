@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using static BussinessLogic.Module;
-
-namespace BussinessLogic
+﻿namespace BussinessLogic
 {
     public class Sentiment
     {
