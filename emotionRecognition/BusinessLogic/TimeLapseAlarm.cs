@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using BussinessLogic.Enums;
+using BusinessLogic.Enums;
 
-namespace BussinessLogic
+namespace BusinessLogic
 {
     public class TimeLapseAlarm
     {

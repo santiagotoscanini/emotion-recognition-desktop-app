@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogic;
+using System;
 using System.Windows.Forms;
 
 namespace emotionRecognition
@@ -9,17 +10,28 @@ namespace emotionRecognition
         private const string NoEntitiesRegisteredErrorMessage = "No hay entidades registradas";
         private const string CantSaveEmptyEntityErrorMessage = "No se pueden guardar entidades vacías";
         private const string EntityAlreadyExistsErrorMessage = "Esa entidad ya existe";
+        private BusinessLogicController controller;
 
-        public AddEntityUserControl()
+        public AddEntityUserControl(Repository repository)
         {
             InitializeComponent();
+            this.controller = new BusinessLogicController(repository);
             LoadEntityList();
         }
 
         private void LoadEntityList()
         {
-            //TODO: here we load the registered entities, else it shows a message
+            ClearList();
+            foreach (Entity entity in controller.GetEntities())
+            {
+                LstEntites.Items.Add(entity.Name);
+            }
             ValidateIfIsEmpty();
+        }
+
+        private void ClearList()
+        {
+            LstEntites.Items.Clear();
         }
 
         private void ValidateIfIsEmpty()
@@ -57,15 +69,19 @@ namespace emotionRecognition
         {
             if (CheckDataToCreate())
             {
-                //TODO: save and update with the result if it was saved or not
-                LstEntites.Items.Add(TxtNewEntity.Text);
-                ActualizeEntityList(true);
+                string entityName = TxtNewEntity.Text;
+                bool wasCreated = controller.AddEntity(entityName);
+                if (wasCreated)
+                {
+                    LstEntites.Items.Add(entityName);
+                }
+                ActualizeEntityList(wasCreated);
             }
         }
 
         private bool CheckDataToCreate()
         {
-            if (TxtNewEntity.Text.Length > 0)
+            if (!string.IsNullOrWhiteSpace(TxtNewEntity.Text))
             {
                 return true;
             }
@@ -84,8 +100,6 @@ namespace emotionRecognition
                 ShowErrorMessageInCreate(EntityAlreadyExistsErrorMessage);
             }
         }
-
-        
 
         private void ShowErrorMessageInCreate(string ErrorMessage)
         {

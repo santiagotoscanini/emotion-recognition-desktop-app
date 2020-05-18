@@ -1,5 +1,5 @@
-﻿using BussinessLogic;
-using BussinessLogic.Enums;
+﻿using BusinessLogic;
+using BusinessLogic.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -30,6 +30,17 @@ namespace Tests
             DateTime actualDateTime = DateTime.Now;
 
             new Phrase("", sentiments, entities, actualDateTime);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CreatePhraseWithOnlySpacesAsText()
+        {
+            HashSet<Sentiment> sentiments = new HashSet<Sentiment>();
+            HashSet<Entity> entities = new HashSet<Entity>();
+            DateTime actualDateTime = DateTime.Now;
+
+            new Phrase("      ", sentiments, entities, actualDateTime);
         }
 
         [TestMethod]

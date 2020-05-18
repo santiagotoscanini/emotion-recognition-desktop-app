@@ -1,4 +1,4 @@
-﻿namespace BussinessLogic.Enums
+﻿namespace BusinessLogic.Enums
 {
     public enum PhraseState
     {

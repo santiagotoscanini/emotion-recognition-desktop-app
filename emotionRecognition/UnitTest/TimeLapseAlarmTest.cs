@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BussinessLogic;
-using BussinessLogic.Enums;
+using BusinessLogic;
+using BusinessLogic.Enums;
 using System;
 using System.Collections.Generic;
 

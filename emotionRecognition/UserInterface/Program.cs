@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogic;
+using System;
 using System.Windows.Forms;
 
 namespace emotionRecognition
@@ -10,7 +11,7 @@ namespace emotionRecognition
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainWindow());
+            Application.Run(new MainWindow(new Repository()));
         }
     }
 }

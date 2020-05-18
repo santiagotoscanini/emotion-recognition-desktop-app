@@ -1,5 +1,5 @@
-﻿using BussinessLogic;
-using BussinessLogic.Enums;
+﻿using BusinessLogic;
+using BusinessLogic.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
@@ -22,6 +22,13 @@ namespace Tests
         public void CreateEmptySentimentText()
         {
             new Sentiment("", SentimentState.POSITIVE);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CreateOnlySpacesSentimentText()
+        {
+            new Sentiment("      ", SentimentState.POSITIVE);
         }
 
         [TestMethod]

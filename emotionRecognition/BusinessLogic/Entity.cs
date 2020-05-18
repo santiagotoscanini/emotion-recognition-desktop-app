@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BussinessLogic
+namespace BusinessLogic
 {
     public class Entity
     {
@@ -8,7 +8,7 @@ namespace BussinessLogic
 
         public Entity(string Name)
         {
-            if (string.IsNullOrEmpty(Name))
+            if (string.IsNullOrWhiteSpace(Name))
             {
                 throw new ArgumentException("Text cannot be null or empty", "Text");
             }

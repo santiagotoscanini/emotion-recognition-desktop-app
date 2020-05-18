@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BussinessLogic
+namespace BusinessLogic
 {
     public class Repository
     {
@@ -8,6 +8,7 @@ namespace BussinessLogic
         private HashSet<Sentiment> Sentiments;
         private List<Phrase> Phrases;
         private List<TimeLapseAlarm> Alarms;
+
         public Repository()
         {
             Entities = new HashSet<Entity>();
@@ -19,6 +20,11 @@ namespace BussinessLogic
         public bool AddEntity(Entity entity)
         {
             return Entities.Add(entity);
+        }
+
+        public HashSet<Entity> GetEntities()
+        {
+            return new HashSet<Entity>(Entities);
         }
 
         public bool AddSentiment(Sentiment sentiment)

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BusinessLogicController.cs" />
     <Compile Include="Entity.cs" />
     <Compile Include="Enums\AlarmPosibleState.cs" />
     <Compile Include="Enums\PhraseState.cs" />

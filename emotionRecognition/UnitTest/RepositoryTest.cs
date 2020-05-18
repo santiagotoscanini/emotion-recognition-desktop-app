@@ -1,6 +1,6 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BussinessLogic;
-using BussinessLogic.Enums;
+using BusinessLogic;
+using BusinessLogic.Enums;
 using System.Collections.Generic;
 using System;
 
@@ -91,6 +91,17 @@ namespace Tests
             TimeLapseAlarm alarm = new TimeLapseAlarm(entity, timeSearchMethodType, quantityOfTimeToSearchBack, alarmPosibleState, quantityOfSentimentsNeeded);
             
             repository.AddAlarm(alarm);
-        }   
+        }
+
+        [TestMethod]
+        public void GetEntities()
+        {
+            Entity entity = new Entity("C#");
+            repository.AddEntity(entity);
+
+            HashSet<Entity> entities = repository.GetEntities();
+
+            Assert.AreEqual(1, entities.Count);
+        }
     }
 }

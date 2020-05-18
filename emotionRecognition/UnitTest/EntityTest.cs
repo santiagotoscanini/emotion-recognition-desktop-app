@@ -1,4 +1,4 @@
-﻿using BussinessLogic;
+﻿using BusinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 
@@ -19,6 +19,13 @@ namespace Tests
         public void CreateEmptyEntityText()
         {
             new Entity("");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CreateOnlySpacesEntityText()
+        {
+            new Entity("      ");
         }
 
         [TestMethod]

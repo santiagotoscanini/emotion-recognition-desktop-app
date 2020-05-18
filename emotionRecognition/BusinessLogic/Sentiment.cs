@@ -1,7 +1,7 @@
-﻿using BussinessLogic.Enums;
+﻿using BusinessLogic.Enums;
 using System;
 
-namespace BussinessLogic
+namespace BusinessLogic
 {
     public class Sentiment
     {
@@ -10,7 +10,7 @@ namespace BussinessLogic
         
         public Sentiment(string Text, SentimentState State)
         {
-            if (string.IsNullOrEmpty(Text))
+            if (string.IsNullOrWhiteSpace(Text))
             {
                 throw new ArgumentNullException("Text", "Text cannot be null");
             }

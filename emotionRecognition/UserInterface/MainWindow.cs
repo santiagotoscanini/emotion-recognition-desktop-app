@@ -1,13 +1,17 @@
-﻿using System;
+﻿using BusinessLogic;
+using System;
 using System.Windows.Forms;
 
 namespace emotionRecognition
 {
     public partial class MainWindow : Form
     {
-        public MainWindow()
+        private BusinessLogicController controller;
+
+        public MainWindow(Repository repository)
         {
             InitializeComponent();
+            this.controller = new BusinessLogicController(repository);
         }
 
         public void OnRefresh(ApplicationState applicationState)
@@ -20,7 +24,7 @@ namespace emotionRecognition
                     this.PnlMain.Controls.Add(new AddAlarmUserControl());
                     break;
                 case ApplicationState.ADDING_A_ENTITY:
-                    this.PnlMain.Controls.Add(new AddEntityUserControl());
+                    this.PnlMain.Controls.Add(new AddEntityUserControl(controller.Repository));
                     break;
                 case ApplicationState.ADDING_A_PHRASE:
                     this.PnlMain.Controls.Add(new AddPhraseUserControl());

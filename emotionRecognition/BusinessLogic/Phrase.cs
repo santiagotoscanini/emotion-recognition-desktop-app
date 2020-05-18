@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using BussinessLogic.Enums;
+using BusinessLogic.Enums;
 
-namespace BussinessLogic 
+namespace BusinessLogic 
 {
     public class Phrase
     {
@@ -13,7 +13,7 @@ namespace BussinessLogic
 
         public Phrase(string Text, HashSet<Sentiment> sentiments, HashSet<Entity> entities, DateTime CreationDate)
         {
-            if (string.IsNullOrEmpty(Text))
+            if (string.IsNullOrWhiteSpace(Text))
             {
                 throw new ArgumentException("Text cannot be null or empty", "Text");
             }
