@@ -10,7 +10,7 @@ namespace emotionRecognition
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new PPage());
+            Application.Run(new MainWindow());
         }
     }
 }
