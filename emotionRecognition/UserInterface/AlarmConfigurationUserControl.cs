@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogic;
+using System;
 using System.Windows.Forms;
 
 namespace UserInterface
@@ -7,14 +8,24 @@ namespace UserInterface
     {
         private const string EmptyText = "";
         private const string CompleteAllFieldsErrorMessage = "Asegurate de completar todos los campos";
+        private BusinessLogicController controller;
 
-        public AlarmConfigurationUserControl()
+        public AlarmConfigurationUserControl(Repository repository)
         {
             InitializeComponent();
-            this.Controls.Add(TxtTimeFrame);
+            controller = new BusinessLogicController(repository);
+            LoadEntities();
         }
 
-        private void BtnSafe_Click(object sender, EventArgs e)
+        private void LoadEntities()
+        {
+            foreach (Entity entity in controller.GetEntities())
+            {
+                CboEntity.Items.Add(entity.Name);
+            }
+        }
+
+        private void BtnSave_Click(object sender, EventArgs e)
         {
             HideErrorMessage();
             if (CheckData())
@@ -37,7 +48,7 @@ namespace UserInterface
 
         private void CreateAlarm()
         {
-            //TODO: here we create the alarm
+            controller.AddAlarm(CboEntity.Text, RdoPositive.Checked, uint.Parse(TxtPostsAmount.Text), RdoDays.Checked, uint.Parse(TxtTimeFrame.Text));
             ClearFields();
         }
 
@@ -56,6 +67,37 @@ namespace UserInterface
         private void HideErrorMessage()
         {
             LblErrorMassage.Text = EmptyText;
+        }
+
+        private void AlarmConfigurationUserControl_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RdoPositive_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void RdoNegative_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TxtPostsAmount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void TxtTimeFrame_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }

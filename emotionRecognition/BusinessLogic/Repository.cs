@@ -28,11 +28,6 @@ namespace BusinessLogic
             return new HashSet<Entity>(Entities);
         }
 
-        public List<Phrase> GetPhrases()
-        {
-            return new List<Phrase>(Phrases);
-        }
-
         public bool AddSentiment(Sentiment sentiment)
         {
             return Sentiments.Add(sentiment);
@@ -99,9 +94,19 @@ namespace BusinessLogic
             Phrases.Add(phrase);
         }
 
+        public List<Phrase> GetPhrases()
+        {
+            return new List<Phrase>(Phrases);
+        }
+
         public void AddAlarm(TimeLapseAlarm alarm)
         {
             Alarms.Add(alarm);
+        }
+
+        public List<TimeLapseAlarm> GetAlarms()
+        {
+            return new List<TimeLapseAlarm>(Alarms);
         }
     }
 }

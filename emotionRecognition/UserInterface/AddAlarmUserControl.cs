@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogic;
+using System;
 using System.Windows.Forms;
 using UserInterface;
 
@@ -6,9 +7,12 @@ namespace emotionRecognition
 {
     public partial class AddAlarmUserControl : UserControl
     {
-        public AddAlarmUserControl()
+        private BusinessLogicController controller;
+
+        public AddAlarmUserControl(Repository repository)
         {
             InitializeComponent();
+            controller = new BusinessLogicController(repository);
             this.OnRefresh(ApplicationState.CONFIG_AN_ALARM);
         }
 
@@ -19,23 +23,23 @@ namespace emotionRecognition
             switch (applicationState)
             {
                 case ApplicationState.CONFIG_AN_ALARM:
-                    this.PnlAlarm.Controls.Add(new AlarmConfigurationUserControl());
+                    this.PnlAlarm.Controls.Add(new AlarmConfigurationUserControl(controller.Repository));
                     break;
                 case ApplicationState.ALARMS_REPORT:
-                    this.PnlAlarm.Controls.Add(new AlarmReportUserControl());
+                    this.PnlAlarm.Controls.Add(new AlarmReportUserControl(controller.Repository));
                     break;
             }
 
         }
 
-        private void BtnAlarmReportButton_Click(object sender, EventArgs e)
-        {
-            this.OnRefresh(ApplicationState.ALARMS_REPORT);
-        }
-
         private void AlarmConfigButton_Click(object sender, EventArgs e)
         {
             this.OnRefresh(ApplicationState.CONFIG_AN_ALARM);
+        }
+
+        private void BtnAlarmReport_Click(object sender, EventArgs e)
+        {
+            this.OnRefresh(ApplicationState.ALARMS_REPORT);
         }
     }
 }

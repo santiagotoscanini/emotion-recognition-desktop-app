@@ -106,6 +106,7 @@ namespace Tests
                 quantityOfSentimentsNeeded);
 
             Assert.IsTrue(alarm.CheckIfAlarmIsActivated(phrases));
+            Assert.IsTrue(alarm.IsActivated);
         }
 
         [TestMethod]
@@ -136,6 +137,7 @@ namespace Tests
                 quantityOfSentimentsNeeded);
 
             Assert.IsFalse(alarm.CheckIfAlarmIsActivated(phrases));
+            Assert.IsFalse(alarm.IsActivated);
         }
 
         [TestMethod]
@@ -167,6 +169,7 @@ namespace Tests
                 quantityOfSentimentsNeeded);
 
             Assert.IsTrue(alarm.CheckIfAlarmIsActivated(phrases));
+            Assert.IsTrue(alarm.IsActivated);
         }
         
         [TestMethod]
@@ -196,6 +199,7 @@ namespace Tests
                 quantityOfSentimentsNeeded);
 
             Assert.IsFalse(alarm.CheckIfAlarmIsActivated(phrases));
+            Assert.IsFalse(alarm.IsActivated);
         }
 
         [TestMethod]
@@ -226,6 +230,7 @@ namespace Tests
                 quantityOfSentimentsNeeded);
 
             Assert.IsFalse(alarm.CheckIfAlarmIsActivated(phrases));
+            Assert.IsFalse(alarm.IsActivated);
         }
     }
 }

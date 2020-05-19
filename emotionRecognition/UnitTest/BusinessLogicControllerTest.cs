@@ -1,6 +1,7 @@
 ﻿using BusinessLogic;
 using BusinessLogic.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System.Collections.Generic;
 using System;
 
 namespace Tests
@@ -29,6 +30,31 @@ namespace Tests
             Assert.AreEqual(0, businessLogicController.GetEntities().Count);
             businessLogicController.AddEntity("test1");
             Assert.AreEqual(1, businessLogicController.GetEntities().Count);
+        }
+        
+        [TestMethod]
+        public void AddAlarm()
+        {
+            Assert.AreEqual(0, businessLogicController.GetAlarmsChecked().Count);
+
+            businessLogicController.AddAlarm("1", true, 2, false, 3);
+
+            Assert.AreEqual(1, businessLogicController.GetAlarmsChecked().Count);
+        }
+
+        [TestMethod]
+        public void GetAlarmsChecked()
+        {
+            businessLogicController.AddAlarm("Valorant", true, 1, true, 1);
+            businessLogicController.AddPhrase("Valorant is good", DateTime.Now);
+            businessLogicController.AddPositiveSentiment("Good");
+            businessLogicController.AddEntity("Valorant");
+
+            businessLogicController.AnalizePhrases();
+
+            List<TimeLapseAlarm> alarms = businessLogicController.GetAlarmsChecked();
+
+            Assert.AreEqual(true, alarms[0].IsActivated);
         }
 
         [TestMethod]

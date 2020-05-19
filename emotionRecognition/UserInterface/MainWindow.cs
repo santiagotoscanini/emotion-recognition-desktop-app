@@ -21,7 +21,7 @@ namespace emotionRecognition
             switch (applicationState)
             {
                 case ApplicationState.ADDING_AN_ALARM:
-                    this.PnlMain.Controls.Add(new AddAlarmUserControl());
+                    this.PnlMain.Controls.Add(new AddAlarmUserControl(controller.Repository));
                     break;
                 case ApplicationState.ADDING_A_ENTITY:
                     this.PnlMain.Controls.Add(new AddEntityUserControl(controller.Repository));

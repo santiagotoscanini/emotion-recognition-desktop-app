@@ -105,6 +105,21 @@ namespace Tests
         }
 
         [TestMethod]
+        public void GetAlarms()
+        {
+            Assert.AreEqual(0, repository.GetAlarms().Count);
+
+            TimeLapseAlarm alarm = new TimeLapseAlarm(
+                new Entity("C#"), 
+                TimeSearchMethodType.DAYS,
+                3,
+                AlarmPosibleState.NEGATIVE,
+                4);
+            repository.AddAlarm(alarm);
+
+            Assert.AreEqual(1, repository.GetAlarms().Count);
+        }
+        
         public void GetPhrases()
         {
             Phrase phrase = new Phrase("Test", repository.GetSentiments(),repository.GetEntities(), new DateTime());

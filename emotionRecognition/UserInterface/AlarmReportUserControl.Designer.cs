@@ -28,55 +28,106 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LstAlarms = new System.Windows.Forms.ListBox();
             this.LblAlarms = new System.Windows.Forms.Label();
-            this.LblErrorMessage = new System.Windows.Forms.Label();
+            this.GrdAlarms = new System.Windows.Forms.DataGridView();
+            this.Entidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SearchType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SentimentToDetect = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NumberOfSentimentsNeeded = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsActivated = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.GrdAlarms)).BeginInit();
             this.SuspendLayout();
-            // 
-            // LstAlarms
-            // 
-            this.LstAlarms.FormattingEnabled = true;
-            this.LstAlarms.ItemHeight = 20;
-            this.LstAlarms.Location = new System.Drawing.Point(43, 68);
-            this.LstAlarms.Name = "LstAlarms";
-            this.LstAlarms.Size = new System.Drawing.Size(703, 364);
-            this.LstAlarms.TabIndex = 0;
             // 
             // LblAlarms
             // 
             this.LblAlarms.AutoSize = true;
-            this.LblAlarms.Location = new System.Drawing.Point(39, 20);
+            this.LblAlarms.Location = new System.Drawing.Point(26, 13);
+            this.LblAlarms.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LblAlarms.Name = "LblAlarms";
-            this.LblAlarms.Size = new System.Drawing.Size(151, 20);
+            this.LblAlarms.Size = new System.Drawing.Size(100, 13);
             this.LblAlarms.TabIndex = 1;
             this.LblAlarms.Text = "Alarmas generadas:";
             // 
-            // LblErrorMessage
+            // GrdAlarms
             // 
-            this.LblErrorMessage.AutoSize = true;
-            this.LblErrorMessage.Location = new System.Drawing.Point(371, 229);
-            this.LblErrorMessage.Name = "LblErrorMessage";
-            this.LblErrorMessage.Size = new System.Drawing.Size(0, 20);
-            this.LblErrorMessage.TabIndex = 2;
+            this.GrdAlarms.AllowUserToAddRows = false;
+            this.GrdAlarms.AllowUserToDeleteRows = false;
+            this.GrdAlarms.AllowUserToOrderColumns = true;
+            this.GrdAlarms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GrdAlarms.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Entidad,
+            this.SearchType,
+            this.Time,
+            this.SentimentToDetect,
+            this.NumberOfSentimentsNeeded,
+            this.IsActivated});
+            this.GrdAlarms.Location = new System.Drawing.Point(14, 46);
+            this.GrdAlarms.Name = "GrdAlarms";
+            this.GrdAlarms.ReadOnly = true;
+            this.GrdAlarms.RowHeadersVisible = false;
+            this.GrdAlarms.Size = new System.Drawing.Size(503, 206);
+            this.GrdAlarms.TabIndex = 2;
+            // 
+            // Entidad
+            // 
+            this.Entidad.HeaderText = "Entidadas";
+            this.Entidad.Name = "Entidad";
+            this.Entidad.ReadOnly = true;
+            // 
+            // SearchType
+            // 
+            this.SearchType.HeaderText = "Tipo de busqueda";
+            this.SearchType.Name = "SearchType";
+            this.SearchType.ReadOnly = true;
+            // 
+            // Time
+            // 
+            this.Time.HeaderText = "Tiempo";
+            this.Time.Name = "Time";
+            this.Time.ReadOnly = true;
+            // 
+            // SentimentToDetect
+            // 
+            this.SentimentToDetect.HeaderText = "Sentimiento a detectar";
+            this.SentimentToDetect.Name = "SentimentToDetect";
+            this.SentimentToDetect.ReadOnly = true;
+            // 
+            // NumberOfSentimentsNeeded
+            // 
+            this.NumberOfSentimentsNeeded.HeaderText = "Cantidad de sentimientos";
+            this.NumberOfSentimentsNeeded.Name = "NumberOfSentimentsNeeded";
+            this.NumberOfSentimentsNeeded.ReadOnly = true;
+            // 
+            // IsActivated
+            // 
+            this.IsActivated.HeaderText = "Activada";
+            this.IsActivated.Name = "IsActivated";
+            this.IsActivated.ReadOnly = true;
             // 
             // AlarmReportUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.LblErrorMessage);
+            this.Controls.Add(this.GrdAlarms);
             this.Controls.Add(this.LblAlarms);
-            this.Controls.Add(this.LstAlarms);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "AlarmReportUserControl";
-            this.Size = new System.Drawing.Size(798, 476);
+            this.Size = new System.Drawing.Size(532, 309);
+            ((System.ComponentModel.ISupportInitialize)(this.GrdAlarms)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox LstAlarms;
         private System.Windows.Forms.Label LblAlarms;
-        private System.Windows.Forms.Label LblErrorMessage;
+        private System.Windows.Forms.DataGridView GrdAlarms;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Entidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SearchType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Time;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SentimentToDetect;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NumberOfSentimentsNeeded;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IsActivated;
     }
 }

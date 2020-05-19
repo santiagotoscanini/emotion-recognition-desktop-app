@@ -1,4 +1,5 @@
-﻿using System;
+using BusinessLogic.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace BusinessLogic
@@ -23,6 +24,29 @@ namespace BusinessLogic
             return Repository.GetEntities();
         }
 
+        public void AddAlarm(string entityName, bool searchInDays, uint timeToSearchBack, bool detectPositiveSentiments, uint sentimentsNeeded)
+        {
+            Entity entity = new Entity(entityName);
+            TimeSearchMethodType searchMethodType = searchInDays ? TimeSearchMethodType.DAYS : TimeSearchMethodType.HOURS;
+            AlarmPosibleState alarmPosibleState= detectPositiveSentiments ? AlarmPosibleState.POSITIVE : AlarmPosibleState.NEGATIVE;
+
+            TimeLapseAlarm alarm = new TimeLapseAlarm(entity, searchMethodType, timeToSearchBack, alarmPosibleState, sentimentsNeeded);
+
+            Repository.AddAlarm(alarm);
+        }
+
+        public List<TimeLapseAlarm> GetAlarmsChecked()
+        {
+            List<TimeLapseAlarm> alarms = Repository.GetAlarms();
+
+            foreach (TimeLapseAlarm alarm in alarms)
+            {
+                alarm.CheckIfAlarmIsActivated(Repository.GetPhrases());
+            }
+
+            return alarms;
+        }
+        
         public void AddPhrase(string phraseText, DateTime dateTime)
         {
             Phrase phraseToAdd = new Phrase(phraseText, Repository.GetSentiments(), Repository.GetEntities(), dateTime);

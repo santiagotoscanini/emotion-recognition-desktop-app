@@ -11,6 +11,7 @@ namespace BusinessLogic
         public uint QuantityOfTimeToSearchBack { get; }
         public AlarmPosibleState AlarmPosibleState { get; }
         public uint QuantityOfSentimentsNeeded { get; }
+        public bool IsActivated { get; private set; }
 
         public TimeLapseAlarm(Entity Entity, TimeSearchMethodType TimeSearchMethodType, uint QuantityOfTimeToSearchBack, AlarmPosibleState AlarmPosibleState, uint QuantityOfSentimentsNeeded)
         {
@@ -26,6 +27,7 @@ namespace BusinessLogic
             this.QuantityOfTimeToSearchBack = QuantityOfTimeToSearchBack;
             this.AlarmPosibleState = AlarmPosibleState;
             this.QuantityOfSentimentsNeeded = QuantityOfSentimentsNeeded;
+            IsActivated = false;
         }
 
         public bool CheckIfAlarmIsActivated(List<Phrase> allPhrases)
@@ -33,8 +35,8 @@ namespace BusinessLogic
             DateTime beginDateToSearch = GetBeginDateToSearch();
             List<Phrase> phrasesToBeChecked = FilterPhrasesToBeChecked(allPhrases, beginDateToSearch);
             uint alarmCounter = GetNumberOfPhrases(phrasesToBeChecked);
-
-            return alarmCounter >= QuantityOfSentimentsNeeded;
+            IsActivated = alarmCounter >= QuantityOfSentimentsNeeded;
+            return IsActivated;
         }
 
         private DateTime GetBeginDateToSearch()
@@ -62,7 +64,6 @@ namespace BusinessLogic
                         phrase.CreationDate.Ticks >= beginDateToSearch.Ticks &&
                         phrase.CreationDate.Ticks <= DateTime.Now.Ticks
                     );
-
         }
         
         private uint GetNumberOfPhrases(List<Phrase> phrasesToBeChecked)

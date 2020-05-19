@@ -1,33 +1,45 @@
-﻿using System.Windows.Forms;
+﻿using BusinessLogic;
+using BusinessLogic.Enums;
+using System.Windows.Forms;
 
 namespace UserInterface
 {
     public partial class AlarmReportUserControl : UserControl
     {
-        private const string NoAlarmRegisteredErrorMessage = "No hay alarmas registradas";
-        public AlarmReportUserControl()
+        private readonly BusinessLogicController controller;
+
+        public AlarmReportUserControl(Repository repository)
         {
             InitializeComponent();
+            controller = new BusinessLogicController(repository);
             LoadAlarms();
         }
 
         private void LoadAlarms()
         {
-            //TODO:  list the alarms 
-            ValidateIfIsEmpty();
-        }
-        private void ValidateIfIsEmpty()
-        {
-            if (LstAlarms.Items.Count == 0)
+            foreach(TimeLapseAlarm alarm in controller.GetAlarmsChecked())
             {
-                ShowErrorMessage();
+                AddRow(
+                    alarm.Entity.Name, 
+                    alarm.TimeSearchMethodType.Equals(TimeSearchMethodType.DAYS),
+                    alarm.QuantityOfTimeToSearchBack,
+                    alarm.AlarmPosibleState.Equals(AlarmPosibleState.POSITIVE),
+                    alarm.QuantityOfSentimentsNeeded,
+                    alarm.IsActivated
+                    );
             }
         }
 
-        private void ShowErrorMessage()
+        private void AddRow(string entityName, bool searchMethodDays, uint timeToSearch, bool detectPositives, uint sentimentsNeeded, bool isActivated)
         {
-            LblErrorMessage.Text = NoAlarmRegisteredErrorMessage;
-            LblErrorMessage.Visible = true;
+            GrdAlarms.Rows.Add(
+                entityName,
+                searchMethodDays ? "Dias" : "Horas",
+                timeToSearch,
+                detectPositives ? "Positivo" : "Negativo",
+                sentimentsNeeded,
+                isActivated
+                );
         }
     }
 }

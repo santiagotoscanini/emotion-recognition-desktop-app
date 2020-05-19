@@ -71,10 +71,6 @@ namespace emotionRecognition
             {
                 string entityName = TxtNewEntity.Text;
                 bool wasCreated = controller.AddEntity(entityName);
-                if (wasCreated)
-                {
-                    LstEntites.Items.Add(entityName);
-                }
                 ActualizeEntityList(wasCreated);
             }
         }
