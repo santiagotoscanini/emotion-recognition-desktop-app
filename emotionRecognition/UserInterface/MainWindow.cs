@@ -30,7 +30,7 @@ namespace emotionRecognition
                     this.PnlMain.Controls.Add(new AddPhraseUserControl());
                     break;
                 case ApplicationState.ADDING_A_SENTIMENT:
-                    this.PnlMain.Controls.Add(new AddSentimentUserControl());
+                    this.PnlMain.Controls.Add(new AddSentimentUserControl(controller.Repository));
                     break;
             }
         }

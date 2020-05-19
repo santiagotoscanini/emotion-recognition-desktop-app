@@ -103,5 +103,16 @@ namespace Tests
 
             Assert.AreEqual(1, entities.Count);
         }
+
+        [TestMethod]
+        public void GetPositiveSentiment()
+        {
+            Sentiment positiveSentiment = new Sentiment("love", SentimentState.POSITIVE);
+            repository.AddSentiment(positiveSentiment);
+
+            HashSet<Sentiment> positiveSentiments = repository.GetPositiveSentiments();
+
+            Assert.AreEqual(1, positiveSentiments.Count);
+        }
     }
 }

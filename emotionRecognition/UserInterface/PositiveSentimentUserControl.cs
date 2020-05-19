@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogic;
+using System;
 using System.Windows.Forms;
 
 namespace UserInterface
@@ -10,17 +11,28 @@ namespace UserInterface
         private const string CanNotSaveEmptyData = "No se pueden guardar sentimientos vacíos";
         private const string SelectSentimentToDeleteErrorMessage = "Debes seleccionar un sentimiento para poder eliminarlo";
         private const string EmptyText = "";
+        private BusinessLogicController controller;
 
-        public PositiveSentimentUserControl()
+        public PositiveSentimentUserControl(Repository repository)
         {
             InitializeComponent();
+            this.controller = new BusinessLogicController(repository);
             LoadSentimentsList();
         }
 
         private void LoadSentimentsList()
         {
-            //TODO: here we load the registered positive sentiments
+            ClearList();
+            foreach (Sentiment sentiment in controller.GetPositiveSentiments())
+            {
+                LstSentiments.Items.Add(sentiment.Text);
+            }
             ValidateIfIsEmpty();
+        }
+
+        private void ClearList()
+        {
+            LstSentiments.Items.Clear();
         }
 
         private void ValidateIfIsEmpty()
@@ -35,7 +47,7 @@ namespace UserInterface
             }
         }
 
-        private void ShowErrorMessageInList(String ErrorMessage)
+        private void ShowErrorMessageInList(string ErrorMessage)
         {
             LblErrorMessageEmptyList.Text = ErrorMessage;
             LblErrorMessageEmptyList.Visible = true;
@@ -64,15 +76,15 @@ namespace UserInterface
         {
             if (CheckDataToCreate())
             {
-                //TODO: save and update with the result if it was saved or not
-                LstSentiments.Items.Add(TxtNewSentiment.Text);
-                ActualizeSentimentsList(true);
+                string sentimentText = TxtNewSentiment.Text;
+                bool wasCreated = controller.AddPositiveSentiment(sentimentText);
+                ActualizeSentimentsList(wasCreated);
             }
         }
 
         private bool CheckDataToCreate()
         {
-            if (TxtNewSentiment.Text.Length > 0)
+            if (!string.IsNullOrWhiteSpace(TxtNewSentiment.Text))
             {
                 return true;
             }
@@ -81,14 +93,14 @@ namespace UserInterface
             return false;
         }
 
-        private void ShowErrorMessageInCreate(String ErrorMessage)
+        private void ShowErrorMessageInCreate(string ErrorMessage)
         {
             LblErrorMessageEmptyData.Text = ErrorMessage;
         }
 
-        private void ActualizeSentimentsList(Boolean WasCreated)
+        private void ActualizeSentimentsList(bool WasModified)
         {
-            if (WasCreated)
+            if (WasModified)
             {
                 LoadSentimentsList();
             }
@@ -113,8 +125,9 @@ namespace UserInterface
         {
             if (CheckDataToDelete())
             {
-                LstSentiments.Items.Remove(LstSentiments.SelectedItem); //TODO: delete and update with the result if it was deleted or not
-                ActualizeSentimentsList(true);
+                string deletedSentiment = LstSentiments.SelectedItem.ToString();
+                bool wasDeleted = controller.DeletePositiveSentiment(deletedSentiment);
+                ActualizeSentimentsList(wasDeleted);
             }
         }
 
@@ -129,7 +142,7 @@ namespace UserInterface
             return false;
         }
 
-        private void ShowErrorMessageInDelete(String ErrorMessage)
+        private void ShowErrorMessageInDelete(string ErrorMessage)
         {
             LblErrorMessageNotSelectedSentiment.Text = ErrorMessage;
         }

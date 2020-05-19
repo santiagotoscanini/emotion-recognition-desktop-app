@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BusinessLogic;
+using System;
 using System.Windows.Forms;
 using UserInterface;
 
@@ -6,9 +7,12 @@ namespace emotionRecognition
 {
     public partial class AddSentimentUserControl : UserControl
     {
-        public AddSentimentUserControl()
+        private BusinessLogicController controller;
+
+        public AddSentimentUserControl(Repository repository)
         {
             InitializeComponent();
+            this.controller = new BusinessLogicController(repository);
             OnRefresh(ApplicationState.ADDING_POSITIVE_SENTIMENT);
         }
 
@@ -19,10 +23,10 @@ namespace emotionRecognition
             switch (applicationState)
             {
                 case ApplicationState.ADDING_POSITIVE_SENTIMENT:
-                    PnlSentiments.Controls.Add(new PositiveSentimentUserControl());
+                    PnlSentiments.Controls.Add(new PositiveSentimentUserControl(controller.Repository));
                     break;
                 case ApplicationState.ADDING_NEGATIVE_SENTIMENT:
-                    this.PnlSentiments.Controls.Add(new NegativeSentimentUserControl());
+                    this.PnlSentiments.Controls.Add(new NegativeSentimentUserControl(controller.Repository));
                     break;
             }
 

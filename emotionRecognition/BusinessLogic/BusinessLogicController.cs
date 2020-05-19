@@ -21,5 +21,37 @@ namespace BusinessLogic
         {
             return Repository.GetEntities();
         }
+
+        public bool AddPositiveSentiment(string text)
+        {
+            Sentiment positiveSentimentToAdd = new Sentiment(text, Enums.SentimentState.POSITIVE);
+            return Repository.AddSentiment(positiveSentimentToAdd);
+        }
+
+        public HashSet<Sentiment> GetPositiveSentiments()
+        {
+            return Repository.GetPositiveSentiments();
+        }
+
+        public bool DeletePositiveSentiment(string text)
+        {
+            return Repository.RemoveUnusedSentiment(new Sentiment(text, Enums.SentimentState.POSITIVE));
+        }
+
+        public bool AddNegativeSentiment(string text)
+        {
+            Sentiment negativeSentimentToAdd = new Sentiment(text, Enums.SentimentState.NEGATIVE);
+            return Repository.AddSentiment(negativeSentimentToAdd);
+        }
+
+        public HashSet<Sentiment> GetNegativeSentiments()
+        {
+            return Repository.GetNegativeSentiments();
+        }
+
+        public bool DeleteNegativeSentiment(string text)
+        {
+            return Repository.RemoveUnusedSentiment(new Sentiment(text, Enums.SentimentState.NEGATIVE));
+        }
     }
 }
