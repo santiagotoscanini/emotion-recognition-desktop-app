@@ -1,4 +1,4 @@
-﻿using System;
+﻿using BusinessLogic;
 using System.Windows.Forms;
 
 namespace UserInterface
@@ -6,31 +6,26 @@ namespace UserInterface
     public partial class PhraseReportUserControl : UserControl
     {
         private const string NoPhrasesRegister = "No hay frases registradas";
+        private BusinessLogicController controller;
 
-        public PhraseReportUserControl()
+        public PhraseReportUserControl(Repository repository)
         {
             InitializeComponent();
+            this.controller = new BusinessLogicController(repository);
             LoadPhrasesReport();
         }
 
         private void LoadPhrasesReport()
         {
-            //TODO: here we will load the list of saved phrases
-            ValidateIfIsEmpty();
-        }
-
-        private void ValidateIfIsEmpty()
-        {
-            if (LstPhrases.Items.Count == 0)
+            controller.AnalizePhrases();
+            foreach (Phrase phrase in controller.GetPhrases())
             {
-                ShowErrorMessage(NoPhrasesRegister);
+                GrdReport.Rows.Add(
+                    phrase.Text,
+                    phrase.CreationDate,
+                    phrase.Entity == null ? null:phrase.Entity.ToString(),
+                    phrase.GetStringFromPhraseState());
             }
-        }
-
-        private void ShowErrorMessage(string ErrorMessage)
-        {
-            LblErrorMessageEmptyList.Text = ErrorMessage;
-            LblErrorMessageEmptyList.Visible = true;
         }
     }
 }

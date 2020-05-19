@@ -1,6 +1,5 @@
-﻿using BusinessLogic.Enums;
+using BusinessLogic.Enums;
 using System.Collections.Generic;
-using System.Security.Policy;
 
 namespace BusinessLogic
 {
@@ -29,11 +28,21 @@ namespace BusinessLogic
             return new HashSet<Entity>(Entities);
         }
 
+        public List<Phrase> GetPhrases()
+        {
+            return new List<Phrase>(Phrases);
+        }
+
         public bool AddSentiment(Sentiment sentiment)
         {
             return Sentiments.Add(sentiment);
         }
 
+        public HashSet<Sentiment> GetSentiments()
+        {
+            return new HashSet<Sentiment>(Sentiments);
+        }
+        
         public HashSet<Sentiment> GetPositiveSentiments()
         {
             return new HashSet<Sentiment>(FilterBySentiment(SentimentState.POSITIVE));

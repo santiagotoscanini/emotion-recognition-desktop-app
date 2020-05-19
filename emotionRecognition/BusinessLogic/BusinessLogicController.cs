@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace BusinessLogic
 {
@@ -22,6 +23,18 @@ namespace BusinessLogic
             return Repository.GetEntities();
         }
 
+        public void AddPhrase(string phraseText, DateTime dateTime)
+        {
+            Phrase phraseToAdd = new Phrase(phraseText, Repository.GetSentiments(), Repository.GetEntities(), dateTime);
+
+            Repository.AddPhrase(phraseToAdd);
+        }
+
+        public List<Phrase> GetPhrases()
+        {
+            return Repository.GetPhrases();
+        }
+        
         public bool AddPositiveSentiment(string text)
         {
             Sentiment positiveSentimentToAdd = new Sentiment(text, Enums.SentimentState.POSITIVE);
@@ -42,6 +55,14 @@ namespace BusinessLogic
         {
             Sentiment negativeSentimentToAdd = new Sentiment(text, Enums.SentimentState.NEGATIVE);
             return Repository.AddSentiment(negativeSentimentToAdd);
+        }
+
+        public void AnalizePhrases()
+        {
+            foreach(Phrase phrase in Repository.GetPhrases())
+            {
+                phrase.Analyze(Repository.GetSentiments(),Repository.GetEntities());
+            }
         }
 
         public HashSet<Sentiment> GetNegativeSentiments()

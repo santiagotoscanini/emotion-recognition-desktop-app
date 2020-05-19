@@ -99,6 +99,39 @@ namespace BusinessLogic
             }
 
             return finalPhraseState;
+        }       
+
+        public string GetStringFromPhraseState()
+        {
+            //TODO Create DTO
+            string name = "";
+
+            switch (PhraseState)
+            {
+                case PhraseState.HIGH_POSITIVE:
+                    name = "Altamente Positivo";
+                    break;
+                case PhraseState.MEDIUM_POSITIVE:
+                    name = "Medianamente Positivo";
+                    break;
+                case PhraseState.LOW_POSITIVE:
+                    name = "Poco Positivo";
+                    break;
+                case PhraseState.NEUTRAL:
+                    name = "Neutral";
+                    break;
+                case PhraseState.LOW_NEGATIVE:
+                    name = "Poco Negativo";
+                    break;
+                case PhraseState.MEDIUM_NEGATIVE:
+                    name = "Medianamente Negativo";
+                    break;
+                case PhraseState.HIGH_NEGATIVE:
+                    name = "Altamente Positivo";
+                    break;
+            };
+
+            return name;
         }
     }
 }

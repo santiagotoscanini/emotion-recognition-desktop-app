@@ -39,5 +39,13 @@ namespace Tests
             Assert.IsFalse(entity1.Equals(entity3));
             Assert.IsTrue(entity2.Equals(entity3));
         }
+
+        [TestMethod]
+        public void ToStringMethod()
+        {
+            Entity entity = new Entity("A");
+
+            Assert.AreEqual("A", entity.Name);
+        }
     }
 }

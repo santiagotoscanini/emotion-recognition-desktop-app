@@ -105,6 +105,16 @@ namespace Tests
         }
 
         [TestMethod]
+        public void GetPhrases()
+        {
+            Phrase phrase = new Phrase("Test", repository.GetSentiments(),repository.GetEntities(), new DateTime());
+            repository.AddPhrase(phrase);
+
+            List<Phrase> phrases = repository.GetPhrases();
+
+            Assert.AreEqual(1, phrases.Count);
+        }
+        
         public void GetPositiveSentiment()
         {
             Sentiment positiveSentiment = new Sentiment("love", SentimentState.POSITIVE);

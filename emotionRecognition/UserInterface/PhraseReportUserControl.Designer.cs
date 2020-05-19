@@ -28,55 +28,84 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.LblRegisterPhrase = new System.Windows.Forms.Label();
-            this.LstPhrases = new System.Windows.Forms.ListBox();
-            this.LblErrorMessageEmptyList = new System.Windows.Forms.Label();
+            this.GrdReport = new System.Windows.Forms.DataGridView();
+            this.Phrase = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Entity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.GrdReport)).BeginInit();
             this.SuspendLayout();
             // 
-            // LblRegisterPhrase
+            // GrdReport
             // 
-            this.LblRegisterPhrase.AutoSize = true;
-            this.LblRegisterPhrase.Location = new System.Drawing.Point(80, 23);
-            this.LblRegisterPhrase.Name = "LblRegisterPhrase";
-            this.LblRegisterPhrase.Size = new System.Drawing.Size(145, 20);
-            this.LblRegisterPhrase.TabIndex = 0;
-            this.LblRegisterPhrase.Text = "Frases registradas:";
+            this.GrdReport.AllowUserToAddRows = false;
+            this.GrdReport.AllowUserToDeleteRows = false;
+            this.GrdReport.AllowUserToOrderColumns = true;
+            this.GrdReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.GrdReport.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Phrase,
+            this.Date,
+            this.Entity,
+            this.State});
+            this.GrdReport.Location = new System.Drawing.Point(83, 53);
+            this.GrdReport.Name = "GrdReport";
+            this.GrdReport.ReadOnly = true;
+            this.GrdReport.RowHeadersWidth = 51;
+            this.GrdReport.RowTemplate.Height = 24;
+            this.GrdReport.Size = new System.Drawing.Size(553, 301);
+            this.GrdReport.TabIndex = 4;
             // 
-            // LstPhrases
+            // Phrase
             // 
-            this.LstPhrases.FormattingEnabled = true;
-            this.LstPhrases.ItemHeight = 20;
-            this.LstPhrases.Location = new System.Drawing.Point(84, 66);
-            this.LstPhrases.Name = "LstPhrases";
-            this.LstPhrases.Size = new System.Drawing.Size(613, 364);
-            this.LstPhrases.TabIndex = 1;
+            this.Phrase.HeaderText = "Frase";
+            this.Phrase.MinimumWidth = 6;
+            this.Phrase.Name = "Phrase";
+            this.Phrase.ReadOnly = true;
+            this.Phrase.Width = 125;
             // 
-            // LblErrorMessageEmptyList
+            // Date
             // 
-            this.LblErrorMessageEmptyList.AutoSize = true;
-            this.LblErrorMessageEmptyList.Location = new System.Drawing.Point(342, 212);
-            this.LblErrorMessageEmptyList.Name = "LblErrorMessageEmptyList";
-            this.LblErrorMessageEmptyList.Size = new System.Drawing.Size(0, 20);
-            this.LblErrorMessageEmptyList.TabIndex = 2;
+            this.Date.HeaderText = "Fecha";
+            this.Date.MinimumWidth = 6;
+            this.Date.Name = "Date";
+            this.Date.ReadOnly = true;
+            this.Date.Width = 125;
+            // 
+            // Entity
+            // 
+            this.Entity.HeaderText = "Entidad";
+            this.Entity.MinimumWidth = 6;
+            this.Entity.Name = "Entity";
+            this.Entity.ReadOnly = true;
+            this.Entity.Width = 125;
+            // 
+            // State
+            // 
+            this.State.HeaderText = "Estado";
+            this.State.MinimumWidth = 6;
+            this.State.Name = "State";
+            this.State.ReadOnly = true;
+            this.State.Width = 125;
             // 
             // PhraseReportUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.LblErrorMessageEmptyList);
-            this.Controls.Add(this.LstPhrases);
-            this.Controls.Add(this.LblRegisterPhrase);
+            this.Controls.Add(this.GrdReport);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "PhraseReportUserControl";
-            this.Size = new System.Drawing.Size(798, 476);
+            this.Size = new System.Drawing.Size(709, 381);
+            ((System.ComponentModel.ISupportInitialize)(this.GrdReport)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Label LblRegisterPhrase;
-        private System.Windows.Forms.ListBox LstPhrases;
-        private System.Windows.Forms.Label LblErrorMessageEmptyList;
+        private System.Windows.Forms.DataGridView GrdReport;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Phrase;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Date;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Entity;
+        private System.Windows.Forms.DataGridViewTextBoxColumn State;
+        private System.Windows.Forms.Label LblNoPhrases;
     }
 }

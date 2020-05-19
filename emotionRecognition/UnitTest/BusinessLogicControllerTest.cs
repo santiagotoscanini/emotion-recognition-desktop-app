@@ -1,5 +1,7 @@
 ﻿using BusinessLogic;
+using BusinessLogic.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using System;
 
 namespace Tests
 {
@@ -30,6 +32,34 @@ namespace Tests
         }
 
         [TestMethod]
+        public void GetPhrases()
+        {
+            Assert.AreEqual(0, businessLogicController.GetPhrases().Count);
+            businessLogicController.AddPhrase("test1", new DateTime());
+            Assert.AreEqual(1, businessLogicController.GetPhrases().Count);
+        }
+
+        [TestMethod]
+        public void GetPhrasesReAnalize()
+        {
+            businessLogicController.AddPhrase("The moon is great", new DateTime());
+            foreach(Phrase e in businessLogicController.GetPhrases())
+            {
+                Assert.IsNull(e.Entity);
+                Assert.AreEqual(PhraseState.NEUTRAL, e.PhraseState);
+            }
+
+            businessLogicController.AddEntity("The moon");
+            businessLogicController.AddPositiveSentiment("great");
+            businessLogicController.AnalizePhrases();
+
+            foreach (Phrase e in businessLogicController.GetPhrases())
+            {
+                Assert.AreEqual("The moon",e.Entity.Name);
+                Assert.AreEqual(PhraseState.LOW_POSITIVE, e.PhraseState);
+            }
+        }
+
         public void ValidateAddingDulpicatedPositiveSentiment()
         {
             Assert.IsTrue(businessLogicController.AddPositiveSentiment("test2"));

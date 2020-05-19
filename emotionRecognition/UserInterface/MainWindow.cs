@@ -27,7 +27,7 @@ namespace emotionRecognition
                     this.PnlMain.Controls.Add(new AddEntityUserControl(controller.Repository));
                     break;
                 case ApplicationState.ADDING_A_PHRASE:
-                    this.PnlMain.Controls.Add(new AddPhraseUserControl());
+                    this.PnlMain.Controls.Add(new AddPhraseUserControl(controller.Repository));
                     break;
                 case ApplicationState.ADDING_A_SENTIMENT:
                     this.PnlMain.Controls.Add(new AddSentimentUserControl(controller.Repository));
