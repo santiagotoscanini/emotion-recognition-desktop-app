@@ -72,11 +72,9 @@ namespace BusinessLogic
 
             foreach (Phrase phrase in phrasesToBeChecked)
             {
-                if ((AlarmPosibleState.Equals(AlarmPosibleState.POSITIVE) && phrase.PhraseState > 0) ||
-                    (AlarmPosibleState.Equals(AlarmPosibleState.NEGATIVE) && phrase.PhraseState < 0))
-                {
-                    alarmCounter++;
-                }
+                bool positive = AlarmPosibleState.Equals(AlarmPosibleState.POSITIVE) && phrase.PhraseState > 0;
+                bool negative = AlarmPosibleState.Equals(AlarmPosibleState.NEGATIVE) && phrase.PhraseState < 0;
+                if (positive || negative) alarmCounter++;
             }
             return alarmCounter;
         }

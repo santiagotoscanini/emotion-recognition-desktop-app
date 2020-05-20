@@ -91,7 +91,7 @@ namespace BusinessLogic
             }
             else if (actualSumOfSentiments < -3)
             {
-                finalPhraseState = PhraseState.LOW_POSITIVE;
+                finalPhraseState = PhraseState.HIGH_NEGATIVE;
             }
             else
             {

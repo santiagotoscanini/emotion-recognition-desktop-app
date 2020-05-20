@@ -13,5 +13,4 @@
         REGISTER_A_PHRASE,
         PHRASE_REPORT,
     }
-   
 }

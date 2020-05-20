@@ -35,9 +35,10 @@
             // 
             // BtnAddPhrase
             // 
-            this.BtnAddPhrase.Location = new System.Drawing.Point(257, 7);
+            this.BtnAddPhrase.Location = new System.Drawing.Point(150, 5);
+            this.BtnAddPhrase.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BtnAddPhrase.Name = "BtnAddPhrase";
-            this.BtnAddPhrase.Size = new System.Drawing.Size(145, 44);
+            this.BtnAddPhrase.Size = new System.Drawing.Size(97, 29);
             this.BtnAddPhrase.TabIndex = 3;
             this.BtnAddPhrase.Text = "Registrar Frase";
             this.BtnAddPhrase.UseVisualStyleBackColor = true;
@@ -45,16 +46,18 @@
             // 
             // PnlPhrases
             // 
-            this.PnlPhrases.Location = new System.Drawing.Point(3, 57);
+            this.PnlPhrases.Location = new System.Drawing.Point(2, 37);
+            this.PnlPhrases.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.PnlPhrases.Name = "PnlPhrases";
-            this.PnlPhrases.Size = new System.Drawing.Size(798, 476);
+            this.PnlPhrases.Size = new System.Drawing.Size(532, 309);
             this.PnlPhrases.TabIndex = 5;
             // 
             // BtnPhraseReport
             // 
-            this.BtnPhraseReport.Location = new System.Drawing.Point(400, 7);
+            this.BtnPhraseReport.Location = new System.Drawing.Point(287, 5);
+            this.BtnPhraseReport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BtnPhraseReport.Name = "BtnPhraseReport";
-            this.BtnPhraseReport.Size = new System.Drawing.Size(145, 44);
+            this.BtnPhraseReport.Size = new System.Drawing.Size(97, 29);
             this.BtnPhraseReport.TabIndex = 4;
             this.BtnPhraseReport.Text = "Reporte";
             this.BtnPhraseReport.UseVisualStyleBackColor = true;
@@ -62,14 +65,14 @@
             // 
             // AddPhraseUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.BtnAddPhrase);
             this.Controls.Add(this.PnlPhrases);
             this.Controls.Add(this.BtnPhraseReport);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "AddPhraseUserControl";
-            this.Size = new System.Drawing.Size(804, 541);
+            this.Size = new System.Drawing.Size(536, 352);
             this.ResumeLayout(false);
 
         }

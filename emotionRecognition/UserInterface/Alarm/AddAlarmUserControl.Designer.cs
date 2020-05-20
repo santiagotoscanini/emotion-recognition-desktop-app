@@ -1,6 +1,6 @@
 ﻿namespace UserInterface
 {
-    partial class AlarmConfigurationUserControl
+    partial class AddAlarmUserControl
     {
         /// <summary> 
         /// Variable del diseñador necesaria.
@@ -39,10 +39,13 @@
             this.RdoPositive = new System.Windows.Forms.RadioButton();
             this.LblAlarmType = new System.Windows.Forms.Label();
             this.CboEntity = new System.Windows.Forms.ComboBox();
-            this.LblEntity = new System.Windows.Forms.Label();
-            this.LblErrorMassage = new System.Windows.Forms.Label();
-            this.PnlAlarmType = new System.Windows.Forms.Panel();
-            this.PnlAlarmType.SuspendLayout();
+            this.LblDoneMessage = new System.Windows.Forms.Label();
+            this.LblNoEntities = new System.Windows.Forms.Label();
+            this.LblErrorMessage = new System.Windows.Forms.Label();
+            this.s = new System.Windows.Forms.GroupBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.s.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // TxtPostsAmount
@@ -51,7 +54,7 @@
             this.TxtPostsAmount.Margin = new System.Windows.Forms.Padding(2);
             this.TxtPostsAmount.Name = "TxtPostsAmount";
             this.TxtPostsAmount.Size = new System.Drawing.Size(301, 20);
-            this.TxtPostsAmount.TabIndex = 29;
+            this.TxtPostsAmount.TabIndex = 2;
             this.TxtPostsAmount.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtPostsAmount_KeyPress);
             // 
             // TxtTimeFrame
@@ -60,7 +63,7 @@
             this.TxtTimeFrame.Margin = new System.Windows.Forms.Padding(2);
             this.TxtTimeFrame.Name = "TxtTimeFrame";
             this.TxtTimeFrame.Size = new System.Drawing.Size(145, 20);
-            this.TxtTimeFrame.TabIndex = 28;
+            this.TxtTimeFrame.TabIndex = 3;
             this.TxtTimeFrame.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.TxtTimeFrame_KeyPress);
             // 
             // BtnSave
@@ -69,7 +72,7 @@
             this.BtnSave.Margin = new System.Windows.Forms.Padding(2);
             this.BtnSave.Name = "BtnSave";
             this.BtnSave.Size = new System.Drawing.Size(71, 29);
-            this.BtnSave.TabIndex = 27;
+            this.BtnSave.TabIndex = 5;
             this.BtnSave.Text = "Guardar";
             this.BtnSave.UseVisualStyleBackColor = true;
             this.BtnSave.Click += new System.EventHandler(this.BtnSave_Click);
@@ -77,11 +80,11 @@
             // RdoHours
             // 
             this.RdoHours.AutoSize = true;
-            this.RdoHours.Location = new System.Drawing.Point(287, 250);
+            this.RdoHours.Location = new System.Drawing.Point(100, 15);
             this.RdoHours.Margin = new System.Windows.Forms.Padding(2);
             this.RdoHours.Name = "RdoHours";
             this.RdoHours.Size = new System.Drawing.Size(53, 17);
-            this.RdoHours.TabIndex = 26;
+            this.RdoHours.TabIndex = 1;
             this.RdoHours.TabStop = true;
             this.RdoHours.Text = "Horas";
             this.RdoHours.UseVisualStyleBackColor = true;
@@ -90,11 +93,11 @@
             // 
             this.RdoDays.AutoSize = true;
             this.RdoDays.Checked = true;
-            this.RdoDays.Location = new System.Drawing.Point(212, 252);
+            this.RdoDays.Location = new System.Drawing.Point(21, 15);
             this.RdoDays.Margin = new System.Windows.Forms.Padding(2);
             this.RdoDays.Name = "RdoDays";
             this.RdoDays.Size = new System.Drawing.Size(46, 17);
-            this.RdoDays.TabIndex = 25;
+            this.RdoDays.TabIndex = 0;
             this.RdoDays.TabStop = true;
             this.RdoDays.Text = "Dias";
             this.RdoDays.UseVisualStyleBackColor = true;
@@ -106,7 +109,7 @@
             this.LblTime.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LblTime.Name = "LblTime";
             this.LblTime.Size = new System.Drawing.Size(85, 13);
-            this.LblTime.TabIndex = 24;
+            this.LblTime.TabIndex = 8;
             this.LblTime.Text = "Plazo de tiempo:";
             // 
             // LblPosts
@@ -122,29 +125,27 @@
             // RdoNegative
             // 
             this.RdoNegative.AutoSize = true;
-            this.RdoNegative.Location = new System.Drawing.Point(118, 16);
+            this.RdoNegative.Location = new System.Drawing.Point(118, 15);
             this.RdoNegative.Margin = new System.Windows.Forms.Padding(2);
             this.RdoNegative.Name = "RdoNegative";
             this.RdoNegative.Size = new System.Drawing.Size(68, 17);
-            this.RdoNegative.TabIndex = 22;
+            this.RdoNegative.TabIndex = 1;
             this.RdoNegative.TabStop = true;
             this.RdoNegative.Text = "Negativo";
             this.RdoNegative.UseVisualStyleBackColor = true;
-            this.RdoNegative.CheckedChanged += new System.EventHandler(this.RdoNegative_CheckedChanged);
             // 
             // RdoPositive
             // 
             this.RdoPositive.AutoSize = true;
             this.RdoPositive.Checked = true;
-            this.RdoPositive.Location = new System.Drawing.Point(10, 16);
+            this.RdoPositive.Location = new System.Drawing.Point(15, 15);
             this.RdoPositive.Margin = new System.Windows.Forms.Padding(2);
             this.RdoPositive.Name = "RdoPositive";
             this.RdoPositive.Size = new System.Drawing.Size(62, 17);
-            this.RdoPositive.TabIndex = 21;
+            this.RdoPositive.TabIndex = 0;
             this.RdoPositive.TabStop = true;
             this.RdoPositive.Text = "Positivo";
             this.RdoPositive.UseVisualStyleBackColor = true;
-            this.RdoPositive.CheckedChanged += new System.EventHandler(this.RdoPositive_CheckedChanged);
             // 
             // LblAlarmType
             // 
@@ -164,58 +165,87 @@
             this.CboEntity.Margin = new System.Windows.Forms.Padding(2);
             this.CboEntity.Name = "CboEntity";
             this.CboEntity.Size = new System.Drawing.Size(301, 21);
-            this.CboEntity.TabIndex = 19;
+            this.CboEntity.TabIndex = 0;
             // 
-            // LblEntity
+            // LblDoneMessage
             // 
-            this.LblEntity.AutoSize = true;
-            this.LblEntity.Location = new System.Drawing.Point(36, 12);
-            this.LblEntity.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.LblEntity.Name = "LblEntity";
-            this.LblEntity.Size = new System.Drawing.Size(46, 13);
-            this.LblEntity.TabIndex = 18;
-            this.LblEntity.Text = "Entidad:";
+            this.LblDoneMessage.AutoSize = true;
+            this.LblDoneMessage.ForeColor = System.Drawing.Color.Green;
+            this.LblDoneMessage.Location = new System.Drawing.Point(36, 278);
+            this.LblDoneMessage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LblDoneMessage.Name = "LblDoneMessage";
+            this.LblDoneMessage.Size = new System.Drawing.Size(146, 13);
+            this.LblDoneMessage.TabIndex = 30;
+            this.LblDoneMessage.Text = "Frase agregada exitosamente";
+            this.LblDoneMessage.Visible = false;
             // 
-            // LblErrorMassage
+            // LblNoEntities
             // 
-            this.LblErrorMassage.AutoSize = true;
-            this.LblErrorMassage.Location = new System.Drawing.Point(36, 278);
-            this.LblErrorMassage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.LblErrorMassage.Name = "LblErrorMassage";
-            this.LblErrorMassage.Size = new System.Drawing.Size(0, 13);
-            this.LblErrorMassage.TabIndex = 30;
+            this.LblNoEntities.AutoSize = true;
+            this.LblNoEntities.ForeColor = System.Drawing.Color.Red;
+            this.LblNoEntities.Location = new System.Drawing.Point(353, 41);
+            this.LblNoEntities.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LblNoEntities.Name = "LblNoEntities";
+            this.LblNoEntities.Size = new System.Drawing.Size(113, 13);
+            this.LblNoEntities.TabIndex = 32;
+            this.LblNoEntities.Text = "Aún no hay entidades.";
+            this.LblNoEntities.Visible = false;
             // 
-            // PnlAlarmType
+            // LblErrorMessage
             // 
-            this.PnlAlarmType.Controls.Add(this.RdoNegative);
-            this.PnlAlarmType.Controls.Add(this.RdoPositive);
-            this.PnlAlarmType.Location = new System.Drawing.Point(39, 102);
-            this.PnlAlarmType.Name = "PnlAlarmType";
-            this.PnlAlarmType.Size = new System.Drawing.Size(251, 46);
-            this.PnlAlarmType.TabIndex = 31;
+            this.LblErrorMessage.AutoSize = true;
+            this.LblErrorMessage.ForeColor = System.Drawing.Color.Red;
+            this.LblErrorMessage.Location = new System.Drawing.Point(142, 210);
+            this.LblErrorMessage.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LblErrorMessage.Name = "LblErrorMessage";
+            this.LblErrorMessage.Size = new System.Drawing.Size(250, 13);
+            this.LblErrorMessage.TabIndex = 7;
+            this.LblErrorMessage.Text = "La cantidad de posts y plazo debe de ser mayor a 0";
+            this.LblErrorMessage.Visible = false;
             // 
-            // AlarmConfigurationUserControl
+            // s
+            // 
+            this.s.Controls.Add(this.RdoNegative);
+            this.s.Controls.Add(this.RdoPositive);
+            this.s.Location = new System.Drawing.Point(39, 107);
+            this.s.Name = "s";
+            this.s.Size = new System.Drawing.Size(195, 41);
+            this.s.TabIndex = 1;
+            this.s.TabStop = false;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.RdoDays);
+            this.groupBox1.Controls.Add(this.RdoHours);
+            this.groupBox1.Location = new System.Drawing.Point(210, 250);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(163, 41);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            // 
+            // AddAlarmUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.PnlAlarmType);
-            this.Controls.Add(this.LblErrorMassage);
+            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.s);
+            this.Controls.Add(this.LblErrorMessage);
+            this.Controls.Add(this.LblNoEntities);
+            this.Controls.Add(this.LblDoneMessage);
             this.Controls.Add(this.TxtPostsAmount);
             this.Controls.Add(this.TxtTimeFrame);
             this.Controls.Add(this.BtnSave);
-            this.Controls.Add(this.RdoHours);
-            this.Controls.Add(this.RdoDays);
             this.Controls.Add(this.LblTime);
             this.Controls.Add(this.LblPosts);
             this.Controls.Add(this.LblAlarmType);
             this.Controls.Add(this.CboEntity);
-            this.Controls.Add(this.LblEntity);
             this.Margin = new System.Windows.Forms.Padding(2);
-            this.Name = "AlarmConfigurationUserControl";
+            this.Name = "AddAlarmUserControl";
             this.Size = new System.Drawing.Size(532, 309);
-            this.Load += new System.EventHandler(this.AlarmConfigurationUserControl_Load);
-            this.PnlAlarmType.ResumeLayout(false);
-            this.PnlAlarmType.PerformLayout();
+            this.s.ResumeLayout(false);
+            this.s.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -234,8 +264,10 @@
         private System.Windows.Forms.RadioButton RdoPositive;
         private System.Windows.Forms.Label LblAlarmType;
         private System.Windows.Forms.ComboBox CboEntity;
-        private System.Windows.Forms.Label LblEntity;
-        private System.Windows.Forms.Label LblErrorMassage;
-        private System.Windows.Forms.Panel PnlAlarmType;
+        private System.Windows.Forms.Label LblDoneMessage;
+        private System.Windows.Forms.Label LblNoEntities;
+        private System.Windows.Forms.Label LblErrorMessage;
+        private System.Windows.Forms.GroupBox s;
+        private System.Windows.Forms.GroupBox groupBox1;
     }
 }

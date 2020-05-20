@@ -4,13 +4,13 @@ using System.Windows.Forms;
 
 namespace UserInterface
 {
-    public partial class AlarmConfigurationUserControl : UserControl
+    public partial class AddAlarmUserControl : UserControl
     {
         private const string EmptyText = "";
-        private const string CompleteAllFieldsErrorMessage = "Asegurate de completar todos los campos";
-        private BusinessLogicController controller;
 
-        public AlarmConfigurationUserControl(Repository repository)
+        private readonly BusinessLogicController controller;  
+
+        public AddAlarmUserControl(Repository repository)
         {
             InitializeComponent();
             controller = new BusinessLogicController(repository);
@@ -23,11 +23,21 @@ namespace UserInterface
             {
                 CboEntity.Items.Add(entity.Name);
             }
+            if (CboEntity.Items.Count == 0)
+            {
+                LblNoEntities.Visible = true;
+                CboEntity.Enabled = false;
+            }
+            else
+            {
+                CboEntity.SelectedIndex = 0;
+            }
         }
 
         private void BtnSave_Click(object sender, EventArgs e)
         {
             HideErrorMessage();
+            LblDoneMessage.Visible = false;
             if (CheckData())
             {
                 CreateAlarm();
@@ -36,13 +46,13 @@ namespace UserInterface
 
         private bool CheckData()
         {
-            if(CboEntity.SelectedItem != null && TxtPostsAmount.TextLength > 0 
-                && TxtTimeFrame.TextLength > 0)
+            if(CboEntity.SelectedItem != null && TxtPostsAmount.Text.Length != 0 && int.Parse(TxtPostsAmount.Text) > 0 && TxtTimeFrame.Text.Length != 0
+                && int.Parse(TxtTimeFrame.Text) > 0)
             {
                 return true;
             }
 
-            ShowErrorMessage(CompleteAllFieldsErrorMessage);
+            ShowErrorMessage();
             return false;
         }
 
@@ -50,38 +60,24 @@ namespace UserInterface
         {
             controller.AddAlarm(CboEntity.Text, RdoPositive.Checked, uint.Parse(TxtPostsAmount.Text), RdoDays.Checked, uint.Parse(TxtTimeFrame.Text));
             ClearFields();
+            LblDoneMessage.Visible = true;
         }
 
         private void ClearFields()
         {
-            CboEntity.SelectedItem = null;
+            CboEntity.SelectedIndex = 0;
             TxtPostsAmount.Text = EmptyText;
             TxtTimeFrame.Text = EmptyText;
         }
 
-        private void ShowErrorMessage(String ErrorMessage)
+        private void ShowErrorMessage()
         {
-            LblErrorMassage.Text = ErrorMessage;
+            LblErrorMessage.Visible = true;
         }
 
         private void HideErrorMessage()
         {
-            LblErrorMassage.Text = EmptyText;
-        }
-
-        private void AlarmConfigurationUserControl_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void RdoPositive_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void RdoNegative_CheckedChanged(object sender, EventArgs e)
-        {
-
+            LblErrorMessage.Visible = false;
         }
 
         private void TxtPostsAmount_KeyPress(object sender, KeyPressEventArgs e)

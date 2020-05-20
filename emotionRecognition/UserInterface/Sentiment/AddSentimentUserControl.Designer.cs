@@ -35,9 +35,10 @@
             // 
             // BtnPositive
             // 
-            this.BtnPositive.Location = new System.Drawing.Point(258, 18);
+            this.BtnPositive.Location = new System.Drawing.Point(147, 12);
+            this.BtnPositive.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BtnPositive.Name = "BtnPositive";
-            this.BtnPositive.Size = new System.Drawing.Size(145, 44);
+            this.BtnPositive.Size = new System.Drawing.Size(97, 29);
             this.BtnPositive.TabIndex = 7;
             this.BtnPositive.Text = "Positivos";
             this.BtnPositive.UseVisualStyleBackColor = true;
@@ -45,9 +46,10 @@
             // 
             // BtnNegative
             // 
-            this.BtnNegative.Location = new System.Drawing.Point(401, 18);
+            this.BtnNegative.Location = new System.Drawing.Point(286, 12);
+            this.BtnNegative.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.BtnNegative.Name = "BtnNegative";
-            this.BtnNegative.Size = new System.Drawing.Size(145, 44);
+            this.BtnNegative.Size = new System.Drawing.Size(97, 29);
             this.BtnNegative.TabIndex = 8;
             this.BtnNegative.Text = "Negativos";
             this.BtnNegative.UseVisualStyleBackColor = true;
@@ -55,21 +57,22 @@
             // 
             // PnlSentiments
             // 
-            this.PnlSentiments.Location = new System.Drawing.Point(3, 63);
+            this.PnlSentiments.Location = new System.Drawing.Point(2, 41);
+            this.PnlSentiments.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.PnlSentiments.Name = "PnlSentiments";
-            this.PnlSentiments.Size = new System.Drawing.Size(798, 476);
+            this.PnlSentiments.Size = new System.Drawing.Size(532, 309);
             this.PnlSentiments.TabIndex = 9;
             // 
             // AddSentimentUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.PnlSentiments);
             this.Controls.Add(this.BtnPositive);
             this.Controls.Add(this.BtnNegative);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "AddSentimentUserControl";
-            this.Size = new System.Drawing.Size(804, 541);
+            this.Size = new System.Drawing.Size(536, 352);
             this.ResumeLayout(false);
 
         }

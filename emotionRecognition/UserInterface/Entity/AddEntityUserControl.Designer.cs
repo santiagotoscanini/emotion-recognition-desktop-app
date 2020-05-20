@@ -40,18 +40,19 @@
             // 
             // TxtNewEntity
             // 
-            this.TxtNewEntity.Location = new System.Drawing.Point(74, 123);
-            this.TxtNewEntity.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TxtNewEntity.Location = new System.Drawing.Point(49, 80);
+            this.TxtNewEntity.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.TxtNewEntity.Name = "TxtNewEntity";
-            this.TxtNewEntity.Size = new System.Drawing.Size(478, 26);
-            this.TxtNewEntity.TabIndex = 15;
+            this.TxtNewEntity.Size = new System.Drawing.Size(320, 20);
+            this.TxtNewEntity.TabIndex = 0;
             // 
             // LblNewEnity
             // 
             this.LblNewEnity.AutoSize = true;
-            this.LblNewEnity.Location = new System.Drawing.Point(70, 82);
+            this.LblNewEnity.Location = new System.Drawing.Point(47, 53);
+            this.LblNewEnity.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LblNewEnity.Name = "LblNewEnity";
-            this.LblNewEnity.Size = new System.Drawing.Size(182, 20);
+            this.LblNewEnity.Size = new System.Drawing.Size(123, 13);
             this.LblNewEnity.TabIndex = 14;
             this.LblNewEnity.Text = "Registrar nueva entidad:";
             this.LblNewEnity.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -59,36 +60,39 @@
             // LblEntities
             // 
             this.LblEntities.AutoSize = true;
-            this.LblEntities.Location = new System.Drawing.Point(311, 26);
+            this.LblEntities.Location = new System.Drawing.Point(207, 17);
+            this.LblEntities.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LblEntities.Name = "LblEntities";
-            this.LblEntities.Size = new System.Drawing.Size(81, 20);
+            this.LblEntities.Size = new System.Drawing.Size(54, 13);
             this.LblEntities.TabIndex = 13;
             this.LblEntities.Text = "Entidades";
             // 
             // LstEntites
             // 
             this.LstEntites.FormattingEnabled = true;
-            this.LstEntites.ItemHeight = 20;
-            this.LstEntites.Location = new System.Drawing.Point(74, 230);
+            this.LstEntites.Location = new System.Drawing.Point(49, 149);
+            this.LstEntites.Margin = new System.Windows.Forms.Padding(2);
             this.LstEntites.Name = "LstEntites";
-            this.LstEntites.Size = new System.Drawing.Size(478, 264);
-            this.LstEntites.TabIndex = 18;
+            this.LstEntites.Size = new System.Drawing.Size(320, 173);
+            this.LstEntites.TabIndex = 2;
             // 
             // LblRegisterEnities
             // 
             this.LblRegisterEnities.AutoSize = true;
-            this.LblRegisterEnities.Location = new System.Drawing.Point(70, 188);
+            this.LblRegisterEnities.Location = new System.Drawing.Point(47, 122);
+            this.LblRegisterEnities.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LblRegisterEnities.Name = "LblRegisterEnities";
-            this.LblRegisterEnities.Size = new System.Drawing.Size(168, 20);
+            this.LblRegisterEnities.Size = new System.Drawing.Size(111, 13);
             this.LblRegisterEnities.TabIndex = 19;
             this.LblRegisterEnities.Text = "Entidades registradas:";
             // 
             // BtnAccept
             // 
-            this.BtnAccept.Location = new System.Drawing.Point(593, 115);
+            this.BtnAccept.Location = new System.Drawing.Point(395, 75);
+            this.BtnAccept.Margin = new System.Windows.Forms.Padding(2);
             this.BtnAccept.Name = "BtnAccept";
-            this.BtnAccept.Size = new System.Drawing.Size(88, 42);
-            this.BtnAccept.TabIndex = 21;
+            this.BtnAccept.Size = new System.Drawing.Size(59, 27);
+            this.BtnAccept.TabIndex = 1;
             this.BtnAccept.Text = "Aceptar";
             this.BtnAccept.UseVisualStyleBackColor = true;
             this.BtnAccept.Click += new System.EventHandler(this.BtnAccept_Click);
@@ -96,22 +100,25 @@
             // LblErrorMessageEmptyData
             // 
             this.LblErrorMessageEmptyData.AutoSize = true;
-            this.LblErrorMessageEmptyData.Location = new System.Drawing.Point(70, 157);
+            this.LblErrorMessageEmptyData.ForeColor = System.Drawing.Color.Red;
+            this.LblErrorMessageEmptyData.Location = new System.Drawing.Point(47, 102);
+            this.LblErrorMessageEmptyData.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LblErrorMessageEmptyData.Name = "LblErrorMessageEmptyData";
-            this.LblErrorMessageEmptyData.Size = new System.Drawing.Size(0, 20);
+            this.LblErrorMessageEmptyData.Size = new System.Drawing.Size(0, 13);
             this.LblErrorMessageEmptyData.TabIndex = 23;
             // 
             // LblErrorMessageEmptyList
             // 
             this.LblErrorMessageEmptyList.AutoSize = true;
-            this.LblErrorMessageEmptyList.Location = new System.Drawing.Point(187, 328);
+            this.LblErrorMessageEmptyList.Location = new System.Drawing.Point(125, 213);
+            this.LblErrorMessageEmptyList.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LblErrorMessageEmptyList.Name = "LblErrorMessageEmptyList";
-            this.LblErrorMessageEmptyList.Size = new System.Drawing.Size(0, 20);
+            this.LblErrorMessageEmptyList.Size = new System.Drawing.Size(0, 13);
             this.LblErrorMessageEmptyList.TabIndex = 25;
             // 
             // AddEntityUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.LblErrorMessageEmptyList);
             this.Controls.Add(this.LblErrorMessageEmptyData);
@@ -121,9 +128,9 @@
             this.Controls.Add(this.TxtNewEntity);
             this.Controls.Add(this.LblNewEnity);
             this.Controls.Add(this.LblEntities);
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "AddEntityUserControl";
-            this.Size = new System.Drawing.Size(804, 541);
+            this.Size = new System.Drawing.Size(536, 352);
             this.ResumeLayout(false);
             this.PerformLayout();
 

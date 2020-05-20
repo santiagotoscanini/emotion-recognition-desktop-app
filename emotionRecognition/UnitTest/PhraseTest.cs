@@ -113,6 +113,19 @@ namespace Tests
         }
 
         [TestMethod]
+        public void GetTooHighPositiveSentiment()
+        {
+            HashSet<Sentiment> sentiments = PopulateSentiments();
+            HashSet<Entity> entities = PopulateEntities();
+            DateTime actualDateTime = DateTime.Now;
+
+            Phrase phrase = new Phrase("The moon is ok, great and awesome, cool", sentiments, entities, actualDateTime);
+
+            Assert.AreEqual(PhraseState.HIGH_POSITIVE, phrase.PhraseState);
+        }
+
+
+        [TestMethod]
         public void GetHighPositiveSentiment()
         {
             HashSet<Sentiment> sentiments = PopulateSentiments();
@@ -210,6 +223,18 @@ namespace Tests
         }
 
         [TestMethod]
+        public void GetTooHighNegativeSentiment()
+        {
+            HashSet<Sentiment> sentiments = PopulateSentiments();
+            HashSet<Entity> entities = PopulateEntities();
+            DateTime actualDateTime = DateTime.Now;
+
+            Phrase phrase = new Phrase("The moon is gross, not nice, bad and average", sentiments, entities, actualDateTime);
+
+            Assert.AreEqual(PhraseState.HIGH_NEGATIVE, phrase.PhraseState);
+        }
+
+        [TestMethod]
         public void TestSentimentsWithCapitalLetters()
         {
             HashSet<Sentiment> sentiments = PopulateSentiments();
@@ -219,6 +244,90 @@ namespace Tests
             Phrase phrase = new Phrase("The moon is Ok, gReAt and AwesOmE", sentiments, entities, actualDateTime);
 
             Assert.AreEqual(PhraseState.HIGH_POSITIVE, phrase.PhraseState);
+        }
+
+        [TestMethod]
+        public void GetStringFromPhraseLowPositiveState()
+        {
+            HashSet<Sentiment> sentiments = PopulateSentiments();
+            HashSet<Entity> entities = PopulateEntities();
+            DateTime actualDateTime = DateTime.Now;
+
+            Phrase phrase = new Phrase("The sun is ok", sentiments, entities, actualDateTime);
+
+            Assert.AreEqual(phrase.GetStringFromPhraseState(), "Poco Positivo");
+        }
+
+        [TestMethod]
+        public void GetStringFromPhraseMediumPositiveState()
+        {
+            HashSet<Sentiment> sentiments = PopulateSentiments();
+            HashSet<Entity> entities = PopulateEntities();
+            DateTime actualDateTime = DateTime.Now;
+
+            Phrase phrase = new Phrase("The sun is ok and cool", sentiments, entities, actualDateTime);
+
+            Assert.AreEqual(phrase.GetStringFromPhraseState(), "Medianamente Positivo");
+        }
+
+        [TestMethod]
+        public void GetStringFromPhraseHighPositiveState()
+        {
+            HashSet<Sentiment> sentiments = PopulateSentiments();
+            HashSet<Entity> entities = PopulateEntities();
+            DateTime actualDateTime = DateTime.Now;
+
+            Phrase phrase = new Phrase("Great, The sun is ok and cool", sentiments, entities, actualDateTime);
+
+            Assert.AreEqual(phrase.GetStringFromPhraseState(), "Altamente Positivo");
+        }
+
+        [TestMethod]
+        public void GetStringFromPhraseLowNegativeState()
+        {
+            HashSet<Sentiment> sentiments = PopulateSentiments();
+            HashSet<Entity> entities = PopulateEntities();
+            DateTime actualDateTime = DateTime.Now;
+
+            Phrase phrase = new Phrase("The sun is not nice", sentiments, entities, actualDateTime);
+
+            Assert.AreEqual(phrase.GetStringFromPhraseState(), "Poco Negativo");
+        }
+
+        [TestMethod]
+        public void GetStringFromPhraseMediumNegativeState()
+        {
+            HashSet<Sentiment> sentiments = PopulateSentiments();
+            HashSet<Entity> entities = PopulateEntities();
+            DateTime actualDateTime = DateTime.Now;
+
+            Phrase phrase = new Phrase("The sun is not nice and horrendous", sentiments, entities, actualDateTime);
+
+            Assert.AreEqual(phrase.GetStringFromPhraseState(), "Medianamente Negativo");
+        }
+
+        [TestMethod]
+        public void GetStringFromPhraseHighNegativeState()
+        {
+            HashSet<Sentiment> sentiments = PopulateSentiments();
+            HashSet<Entity> entities = PopulateEntities();
+            DateTime actualDateTime = DateTime.Now;
+
+            Phrase phrase = new Phrase("The moon is bad, not nice and gross", sentiments, entities, actualDateTime);
+
+            Assert.AreEqual(phrase.GetStringFromPhraseState(), "Altamente Positivo");
+        }
+
+        [TestMethod]
+        public void GetStringFromPhraseNeutralState()
+        {
+            HashSet<Sentiment> sentiments = PopulateSentiments();
+            HashSet<Entity> entities = PopulateEntities();
+            DateTime actualDateTime = DateTime.Now;
+
+            Phrase phrase = new Phrase("Great, The sun is not nice and ok", sentiments, entities, actualDateTime);
+
+            Assert.AreEqual(phrase.GetStringFromPhraseState(), "Neutral");
         }
 
         private HashSet<Sentiment> PopulateSentiments()

@@ -49,40 +49,40 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddAlarmUserControl.cs">
+    <Compile Include="Alarm\AlarmUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="AddAlarmUserControl.Designer.cs">
-      <DependentUpon>AddAlarmUserControl.cs</DependentUpon>
+    <Compile Include="Alarm\AlarmUserControl.Designer.cs">
+      <DependentUpon>AlarmUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddEntityUserControl.cs">
+    <Compile Include="Entity\AddEntityUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="AddEntityUserControl.Designer.cs">
+    <Compile Include="Entity\AddEntityUserControl.Designer.cs">
       <DependentUpon>AddEntityUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddPhraseUserControl.cs">
+    <Compile Include="Phrase\AddPhraseUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="AddPhraseUserControl.Designer.cs">
+    <Compile Include="Phrase\AddPhraseUserControl.Designer.cs">
       <DependentUpon>AddPhraseUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="AddSentimentUserControl.cs">
+    <Compile Include="Sentiment\AddSentimentUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="AddSentimentUserControl.Designer.cs">
+    <Compile Include="Sentiment\AddSentimentUserControl.Designer.cs">
       <DependentUpon>AddSentimentUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="AlarmConfigurationUserControl.cs">
+    <Compile Include="Alarm\AddAlarmUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="AlarmConfigurationUserControl.Designer.cs">
-      <DependentUpon>AlarmConfigurationUserControl.cs</DependentUpon>
+    <Compile Include="Alarm\AddAlarmUserControl.Designer.cs">
+      <DependentUpon>AddAlarmUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="AlarmReportUserControl.cs">
+    <Compile Include="Alarm\AlarmReportUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="AlarmReportUserControl.Designer.cs">
+    <Compile Include="Alarm\AlarmReportUserControl.Designer.cs">
       <DependentUpon>AlarmReportUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="ApplicationState.cs" />
@@ -92,63 +92,63 @@
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="NegativeSentimentUserControl.cs">
+    <Compile Include="Sentiment\NegativeSentimentUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NegativeSentimentUserControl.Designer.cs">
+    <Compile Include="Sentiment\NegativeSentimentUserControl.Designer.cs">
       <DependentUpon>NegativeSentimentUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="NewPhraseUserControl.cs">
+    <Compile Include="Phrase\NewPhraseUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="NewPhraseUserControl.Designer.cs">
+    <Compile Include="Phrase\NewPhraseUserControl.Designer.cs">
       <DependentUpon>NewPhraseUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PhraseReportUserControl.cs">
+    <Compile Include="Phrase\PhraseReportUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PhraseReportUserControl.Designer.cs">
+    <Compile Include="Phrase\PhraseReportUserControl.Designer.cs">
       <DependentUpon>PhraseReportUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="PositiveSentimentUserControl.cs">
+    <Compile Include="Sentiment\PositiveSentimentUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="PositiveSentimentUserControl.Designer.cs">
+    <Compile Include="Sentiment\PositiveSentimentUserControl.Designer.cs">
       <DependentUpon>PositiveSentimentUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="AddAlarmUserControl.resx">
-      <DependentUpon>AddAlarmUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="Alarm\AlarmUserControl.resx">
+      <DependentUpon>AlarmUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddEntityUserControl.resx">
+    <EmbeddedResource Include="Entity\AddEntityUserControl.resx">
       <DependentUpon>AddEntityUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddPhraseUserControl.resx">
+    <EmbeddedResource Include="Phrase\AddPhraseUserControl.resx">
       <DependentUpon>AddPhraseUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AddSentimentUserControl.resx">
+    <EmbeddedResource Include="Sentiment\AddSentimentUserControl.resx">
       <DependentUpon>AddSentimentUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AlarmConfigurationUserControl.resx">
-      <DependentUpon>AlarmConfigurationUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="Alarm\AddAlarmUserControl.resx">
+      <DependentUpon>AddAlarmUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="AlarmReportUserControl.resx">
+    <EmbeddedResource Include="Alarm\AlarmReportUserControl.resx">
       <DependentUpon>AlarmReportUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NegativeSentimentUserControl.resx">
+    <EmbeddedResource Include="Sentiment\NegativeSentimentUserControl.resx">
       <DependentUpon>NegativeSentimentUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="NewPhraseUserControl.resx">
+    <EmbeddedResource Include="Phrase\NewPhraseUserControl.resx">
       <DependentUpon>NewPhraseUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PhraseReportUserControl.resx">
+    <EmbeddedResource Include="Phrase\PhraseReportUserControl.resx">
       <DependentUpon>PhraseReportUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="PositiveSentimentUserControl.resx">
+    <EmbeddedResource Include="Sentiment\PositiveSentimentUserControl.resx">
       <DependentUpon>PositiveSentimentUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

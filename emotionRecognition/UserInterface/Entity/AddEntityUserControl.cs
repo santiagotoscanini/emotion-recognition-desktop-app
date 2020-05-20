@@ -6,16 +6,17 @@ namespace emotionRecognition
 {
     public partial class AddEntityUserControl : UserControl
     {
-        private const string EmptyText = "";
-        private const string NoEntitiesRegisteredErrorMessage = "No hay entidades registradas";
         private const string CantSaveEmptyEntityErrorMessage = "No se pueden guardar entidades vacías";
+        private const string NoEntitiesRegisteredErrorMessage = "No hay entidades registradas";
         private const string EntityAlreadyExistsErrorMessage = "Esa entidad ya existe";
-        private BusinessLogicController controller;
+        private const string EmptyText = "";
+
+        private readonly BusinessLogicController controller;
 
         public AddEntityUserControl(Repository repository)
         {
             InitializeComponent();
-            this.controller = new BusinessLogicController(repository);
+            controller = new BusinessLogicController(repository);
             LoadEntityList();
         }
 

@@ -6,15 +6,16 @@ namespace UserInterface
 {
     public partial class NewPhraseUserControl : UserControl
     {
-        private const string CanNotSaveEmptyData = "Asegurate de completar todos los campos";
-        private const string EmptyText = "";
+        private const string CanNotSaveEmptyData = "El texto de la frase no puede estar vacio o ser unicamente espacios";
         private const string SuccessMessage = "Frase agregada satisfactoriamente";
-        private BusinessLogicController controller;
+        private const string EmptyText = "";
+
+        private readonly BusinessLogicController controller;
 
         public NewPhraseUserControl(Repository repository)
         {
             InitializeComponent();
-            this.controller = new BusinessLogicController(repository);
+            controller = new BusinessLogicController(repository);
         }
 
         private void BtnAccept_Click(object sender, EventArgs e)
@@ -57,8 +58,8 @@ namespace UserInterface
         private void CreatePhrase()
         {
             string phraseText = TxtPhrase.Text;
-            DateTime calendar = this.DtpCalendar.Value;
-            DateTime hours = this.DtpTime.Value;
+            DateTime calendar = DtpCalendar.Value;
+            DateTime hours = DtpTime.Value;
 
             DateTime dateTime = new DateTime(calendar.Year,calendar.Month,calendar.Day,hours.Hour,hours.Minute,hours.Second);
             controller.AddPhrase(phraseText, dateTime);

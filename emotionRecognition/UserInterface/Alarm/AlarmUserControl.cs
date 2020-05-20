@@ -5,11 +5,11 @@ using UserInterface;
 
 namespace emotionRecognition
 {
-    public partial class AddAlarmUserControl : UserControl
+    public partial class AlarmUserControl : UserControl
     {
-        private BusinessLogicController controller;
+        private readonly BusinessLogicController controller;
 
-        public AddAlarmUserControl(Repository repository)
+        public AlarmUserControl(Repository repository)
         {
             InitializeComponent();
             controller = new BusinessLogicController(repository);
@@ -23,10 +23,10 @@ namespace emotionRecognition
             switch (applicationState)
             {
                 case ApplicationState.CONFIG_AN_ALARM:
-                    this.PnlAlarm.Controls.Add(new AlarmConfigurationUserControl(controller.Repository));
+                    PnlAlarm.Controls.Add(new AddAlarmUserControl(controller.Repository));
                     break;
                 case ApplicationState.ALARMS_REPORT:
-                    this.PnlAlarm.Controls.Add(new AlarmReportUserControl(controller.Repository));
+                    PnlAlarm.Controls.Add(new AlarmReportUserControl(controller.Repository));
                     break;
             }
 
@@ -34,12 +34,12 @@ namespace emotionRecognition
 
         private void AlarmConfigButton_Click(object sender, EventArgs e)
         {
-            this.OnRefresh(ApplicationState.CONFIG_AN_ALARM);
+            OnRefresh(ApplicationState.CONFIG_AN_ALARM);
         }
 
         private void BtnAlarmReport_Click(object sender, EventArgs e)
         {
-            this.OnRefresh(ApplicationState.ALARMS_REPORT);
+            OnRefresh(ApplicationState.ALARMS_REPORT);
         }
     }
 }

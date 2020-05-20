@@ -47,12 +47,14 @@
             this.Date,
             this.Entity,
             this.State});
-            this.GrdReport.Location = new System.Drawing.Point(83, 53);
+            this.GrdReport.Location = new System.Drawing.Point(62, 43);
+            this.GrdReport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.GrdReport.Name = "GrdReport";
             this.GrdReport.ReadOnly = true;
+            this.GrdReport.RowHeadersVisible = false;
             this.GrdReport.RowHeadersWidth = 51;
             this.GrdReport.RowTemplate.Height = 24;
-            this.GrdReport.Size = new System.Drawing.Size(553, 301);
+            this.GrdReport.Size = new System.Drawing.Size(415, 245);
             this.GrdReport.TabIndex = 4;
             // 
             // Phrase
@@ -89,12 +91,12 @@
             // 
             // PhraseReportUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.GrdReport);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "PhraseReportUserControl";
-            this.Size = new System.Drawing.Size(709, 381);
+            this.Size = new System.Drawing.Size(532, 310);
             ((System.ComponentModel.ISupportInitialize)(this.GrdReport)).EndInit();
             this.ResumeLayout(false);
 

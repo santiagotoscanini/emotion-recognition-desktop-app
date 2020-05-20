@@ -59,10 +59,12 @@ namespace Tests
             Sentiment sentiment = new Sentiment("Good", SentimentState.POSITIVE);
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("The sun is good.", new HashSet<Sentiment>(), new HashSet<Entity>(), actualDateTime);
-            
+            Phrase phrase1 = new Phrase("The sun is bad.", new HashSet<Sentiment>(), new HashSet<Entity>(), actualDateTime);
+            Phrase phrase2 = new Phrase("The sun is good.", new HashSet<Sentiment>(), new HashSet<Entity>(), actualDateTime);
+
             repository.AddSentiment(sentiment);
-            repository.AddPhrase(phrase);
+            repository.AddPhrase(phrase1);
+            repository.AddPhrase(phrase2);
 
             Assert.IsFalse(repository.RemoveUnusedSentiment(sentiment));
         }
@@ -120,6 +122,7 @@ namespace Tests
             Assert.AreEqual(1, repository.GetAlarms().Count);
         }
         
+        [TestMethod]
         public void GetPhrases()
         {
             Phrase phrase = new Phrase("Test", repository.GetSentiments(),repository.GetEntities(), new DateTime());
@@ -130,7 +133,8 @@ namespace Tests
             Assert.AreEqual(1, phrases.Count);
         }
         
-        public void GetPositiveSentiment()
+        [TestMethod]
+        public void GetPositiveSentiments()
         {
             Sentiment positiveSentiment = new Sentiment("love", SentimentState.POSITIVE);
             repository.AddSentiment(positiveSentiment);
@@ -138,6 +142,30 @@ namespace Tests
             HashSet<Sentiment> positiveSentiments = repository.GetPositiveSentiments();
 
             Assert.AreEqual(1, positiveSentiments.Count);
+        }
+
+        [TestMethod]
+        public void GetNegativeSentiments()
+        {
+            Sentiment negativeSentiment = new Sentiment("hate", SentimentState.NEGATIVE);
+            repository.AddSentiment(negativeSentiment);
+
+            HashSet<Sentiment> negativeSentiments = repository.GetNegativeSentiments();
+
+            Assert.AreEqual(1, negativeSentiments.Count);
+        }
+
+        [TestMethod]
+        public void GetSentimenst()
+        {
+            Sentiment positiveSentiment = new Sentiment("love", SentimentState.POSITIVE);
+            Sentiment negativeSentiment = new Sentiment("hate", SentimentState.NEGATIVE);
+            repository.AddSentiment(positiveSentiment);
+            repository.AddSentiment(negativeSentiment);
+
+            HashSet<Sentiment> sentiments = repository.GetSentiments();
+
+            Assert.AreEqual(2, sentiments.Count);
         }
     }
 }

@@ -41,11 +41,20 @@ namespace Tests
         }
 
         [TestMethod]
+        public void TestNullEntityEqualsEntity()
+        {
+            Entity entity1 = new Entity("Test2");
+            Entity entity2 = null;
+
+            Assert.IsFalse(entity1.Equals(entity2));
+        }
+
+        [TestMethod]
         public void ToStringMethod()
         {
             Entity entity = new Entity("A");
 
-            Assert.AreEqual("A", entity.Name);
+            Assert.AreEqual("A", entity.ToString());
         }
     }
 }

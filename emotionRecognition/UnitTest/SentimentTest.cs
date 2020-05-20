@@ -41,5 +41,14 @@ namespace Tests
             Assert.IsTrue(sentiment1.Equals(sentiment2));
             Assert.IsFalse(sentiment1.Equals(sentiment3));
         }
+
+        [TestMethod]
+        public void CheckNullSentimentEqualSentiment()
+        {
+            Sentiment sentiment1 = new Sentiment("Very good", SentimentState.POSITIVE);
+            Sentiment sentiment2 = null;
+
+            Assert.IsFalse(sentiment1.Equals(sentiment2));
+        }
     }
 }

@@ -110,6 +110,38 @@ namespace Tests
         }
 
         [TestMethod]
+        public void CheckIfAlarmNegativeInDaysIsActivated()
+        {
+            List<Phrase> phrases = new List<Phrase>();
+            HashSet<Sentiment> sentiments = new HashSet<Sentiment>();
+            HashSet<Entity> entities = new HashSet<Entity>();
+
+            Entity entity = new Entity("Netflix");
+            entities.Add(entity);
+
+            sentiments.Add(new Sentiment("bad", SentimentState.NEGATIVE));
+            sentiments.Add(new Sentiment("hate", SentimentState.NEGATIVE));
+            DateTime phraseDateTime = DateTime.Now.AddDays(-9);
+
+            phrases.Add(new Phrase("Netflix is bad", sentiments, entities, phraseDateTime));
+            phrases.Add(new Phrase("Netflix is bad and i hate it", sentiments, entities, phraseDateTime));
+
+            uint quantityOfTimeToSearchBack = 10;
+            uint quantityOfSentimentsNeeded = 2;
+
+            TimeLapseAlarm alarm = new TimeLapseAlarm(
+                entity,
+                TimeSearchMethodType.DAYS,
+                quantityOfTimeToSearchBack,
+                AlarmPosibleState.NEGATIVE,
+                quantityOfSentimentsNeeded);
+
+            Assert.IsTrue(alarm.CheckIfAlarmIsActivated(phrases));
+            Assert.IsTrue(alarm.IsActivated);
+        }
+
+
+        [TestMethod]
         public void CheckIfAlarmInDaysIsNotActivated()
         {
             List<Phrase> phrases = new List<Phrase>();
