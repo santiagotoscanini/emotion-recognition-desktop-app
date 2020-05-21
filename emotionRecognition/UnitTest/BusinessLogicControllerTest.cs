@@ -91,6 +91,16 @@ namespace Tests
         }
 
         [TestMethod]
+        public void AnalizePhraseWithoutEntity()
+        {
+            Assert.AreEqual(0, businessLogicController.GetPhrases().Count);
+            Assert.AreEqual(0, businessLogicController.GetEntities().Count);
+            Assert.IsTrue(businessLogicController.AddPositiveSentiment("nice"));
+            businessLogicController.AddPhrase("The sun is nice", new DateTime());
+            Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).PhraseState, PhraseState.NEUTRAL);
+        }
+
+        [TestMethod]
         public void GetPhrases()
         {
             Assert.AreEqual(0, businessLogicController.GetPhrases().Count);
