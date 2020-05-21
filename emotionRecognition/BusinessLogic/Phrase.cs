@@ -34,7 +34,8 @@ namespace BusinessLogic
         public void Analyze(HashSet<Sentiment> sentiments, HashSet<Entity> entities)
         {
             Entity = GetEntity(entities);
-            PhraseState = GetPhraseState(sentiments);
+            if(Entity == null) PhraseState = PhraseState.NEUTRAL;
+            else PhraseState = GetPhraseState(sentiments);
         }
 
         private Entity GetEntity(HashSet<Entity> entities)
