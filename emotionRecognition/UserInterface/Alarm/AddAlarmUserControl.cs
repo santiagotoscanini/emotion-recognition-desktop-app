@@ -6,8 +6,6 @@ namespace UserInterface
 {
     public partial class AddAlarmUserControl : UserControl
     {
-        private const string EmptyText = "";
-
         private readonly BusinessLogicController controller;  
 
         public AddAlarmUserControl(Repository repository)
@@ -27,6 +25,7 @@ namespace UserInterface
             {
                 LblNoEntities.Visible = true;
                 CboEntity.Enabled = false;
+                BtnSave.Enabled = false;
             }
             else
             {
@@ -46,8 +45,7 @@ namespace UserInterface
 
         private bool CheckData()
         {
-            if(CboEntity.SelectedItem != null && TxtPostsAmount.Text.Length != 0 && int.Parse(TxtPostsAmount.Text) > 0 && TxtTimeFrame.Text.Length != 0
-                && int.Parse(TxtTimeFrame.Text) > 0)
+            if(CboEntity.SelectedItem != null)
             {
                 return true;
             }
@@ -58,7 +56,7 @@ namespace UserInterface
 
         private void CreateAlarm()
         {
-            controller.AddAlarm(CboEntity.Text, RdoPositive.Checked, uint.Parse(TxtPostsAmount.Text), RdoDays.Checked, uint.Parse(TxtTimeFrame.Text));
+            controller.AddAlarm(CboEntity.Text, RdoPositive.Checked, uint.Parse(NudPostQuantity.Text), RdoDays.Checked, uint.Parse(NudTimeLapse.Text));
             ClearFields();
             LblDoneMessage.Visible = true;
         }
@@ -66,8 +64,8 @@ namespace UserInterface
         private void ClearFields()
         {
             CboEntity.SelectedIndex = 0;
-            TxtPostsAmount.Text = EmptyText;
-            TxtTimeFrame.Text = EmptyText;
+            NudTimeLapse.Value = 1;
+            NudPostQuantity.Value = 1;
         }
 
         private void ShowErrorMessage()

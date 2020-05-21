@@ -32,14 +32,15 @@ namespace emotionRecognition
 
         }
 
-        private void BtnPositive_Click(object sender, EventArgs e)
+        private void RbtNegative_CheckedChanged(object sender, EventArgs e)
+        {
+            OnRefresh(ApplicationState.ADDING_NEGATIVE_SENTIMENT);
+        }
+
+        private void RbtPositive_CheckedChanged(object sender, EventArgs e)
         {
             OnRefresh(ApplicationState.ADDING_POSITIVE_SENTIMENT);
         }
 
-        private void BtnNegative_Click(object sender, EventArgs e)
-        {
-            OnRefresh(ApplicationState.ADDING_NEGATIVE_SENTIMENT);
-        }
     }
 }
