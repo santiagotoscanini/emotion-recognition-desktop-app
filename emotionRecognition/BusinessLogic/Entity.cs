@@ -6,13 +6,13 @@ namespace BusinessLogic
     {
         public string Name { get; }
 
-        public Entity(string Name)
+        public Entity(string name)
         {
-            if (string.IsNullOrWhiteSpace(Name))
+            if (string.IsNullOrWhiteSpace(name))
             {
                 throw new ArgumentException("Text cannot be null or empty", "Text");
             }
-            this.Name = Name;
+            Name = name;
         }
 
         public override bool Equals(object obj)

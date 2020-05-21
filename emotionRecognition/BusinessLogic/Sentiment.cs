@@ -8,14 +8,14 @@ namespace BusinessLogic
         public string Text { get; }
         public SentimentState State { get; }
         
-        public Sentiment(string Text, SentimentState State)
+        public Sentiment(string text, SentimentState state)
         {
-            if (string.IsNullOrWhiteSpace(Text))
+            if (string.IsNullOrWhiteSpace(text))
             {
-                throw new ArgumentNullException("Text", "Text cannot be null");
+                throw new ArgumentNullException("text", "Text cannot be null");
             }
-            this.Text = Text.ToLower();
-            this.State = State;
+            Text = text.ToLower();
+            State = state;
         }
 
         public override bool Equals(object obj)

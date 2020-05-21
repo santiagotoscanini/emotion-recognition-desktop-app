@@ -13,20 +13,20 @@ namespace BusinessLogic
         public uint QuantityOfSentimentsNeeded { get; }
         public bool IsActivated { get; private set; }
 
-        public TimeLapseAlarm(Entity Entity, TimeSearchMethodType TimeSearchMethodType, uint QuantityOfTimeToSearchBack, AlarmPosibleState AlarmPosibleState, uint QuantityOfSentimentsNeeded)
+        public TimeLapseAlarm(Entity entity, TimeSearchMethodType timeSearchMethodType, uint quantityOfTimeToSearchBack, AlarmPosibleState alarmPosibleState, uint quantityOfSentimentsNeeded)
         {
-            if(QuantityOfTimeToSearchBack == 0 ) {
-                throw new ArgumentException("Cannot create an alarm with quantity of time to search back equals to zero", "QuantityOfTimeToSearchBack");
+            if(quantityOfTimeToSearchBack == 0 ) {
+                throw new ArgumentException("Cannot create an alarm with quantity of time to search back equals to zero", "quantityOfTimeToSearchBack");
             }
-            if(QuantityOfSentimentsNeeded == 0) {
-                throw new ArgumentException("Cannot create an alarm with quantity of sentiments needed equals to zero", "QuantityOfSentimentsNeeded");
+            if(quantityOfSentimentsNeeded == 0) {
+                throw new ArgumentException("Cannot create an alarm with quantity of sentiments needed equals to zero", "quantityOfSentimentsNeeded");
             }
 
-            this.Entity = Entity ?? throw new ArgumentNullException("Cannot create an alarm with null entity", "QuantityOfSentimentsNeeded");
-            this.TimeSearchMethodType = TimeSearchMethodType;
-            this.QuantityOfTimeToSearchBack = QuantityOfTimeToSearchBack;
-            this.AlarmPosibleState = AlarmPosibleState;
-            this.QuantityOfSentimentsNeeded = QuantityOfSentimentsNeeded;
+            Entity = entity ?? throw new ArgumentNullException("Cannot create an alarm with null entity", "entity");
+            TimeSearchMethodType = timeSearchMethodType;
+            QuantityOfTimeToSearchBack = quantityOfTimeToSearchBack;
+            AlarmPosibleState = alarmPosibleState;
+            QuantityOfSentimentsNeeded = quantityOfSentimentsNeeded;
             IsActivated = false;
         }
 

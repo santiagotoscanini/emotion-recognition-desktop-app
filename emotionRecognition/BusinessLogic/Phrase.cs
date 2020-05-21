@@ -11,23 +11,23 @@ namespace BusinessLogic
         public Entity Entity { get; private set; }
         public PhraseState PhraseState { get; private set; }
 
-        public Phrase(string Text, HashSet<Sentiment> sentiments, HashSet<Entity> entities, DateTime CreationDate)
+        public Phrase(string text, HashSet<Sentiment> sentiments, HashSet<Entity> entities, DateTime creationDate)
         {
-            if (string.IsNullOrWhiteSpace(Text))
+            if (string.IsNullOrWhiteSpace(text))
             {
-                throw new ArgumentException("Text cannot be null or empty", "Text");
+                throw new ArgumentException("Text cannot be null or empty", "text");
             }
             if(sentiments == null)
             {
-                throw new ArgumentNullException("Sentiments", "Sentiments cannot be null");
+                throw new ArgumentNullException("sentiments", "Sentiments cannot be null");
             }
             if (entities == null)
             {
-                throw new ArgumentNullException("Entities", "Entities cannot be null");
+                throw new ArgumentNullException("entities", "Entities cannot be null");
             }
 
-            this.Text = Text;
-            this.CreationDate = CreationDate;
+            Text = text;
+            CreationDate = creationDate;
             Analyze(sentiments, entities);
         }
 
@@ -103,7 +103,6 @@ namespace BusinessLogic
 
         public string GetStringFromPhraseState()
         {
-            //TODO Create DTO
             string name = "";
 
             switch (PhraseState)
