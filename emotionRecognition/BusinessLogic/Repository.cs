@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BusinessLogic
 {
-    public class Repository
+    public class Repository 
     {
         private HashSet<Entity> Entities;
         private HashSet<Sentiment> Sentiments;
@@ -104,7 +104,7 @@ namespace BusinessLogic
             Alarms.Add(alarm);
         }
 
-        public List<TimeLapseAlarm> GetAlarms()
+        public IEnumerable<TimeLapseAlarm> GetAlarms()
         {
             return new List<TimeLapseAlarm>(Alarms);
         }

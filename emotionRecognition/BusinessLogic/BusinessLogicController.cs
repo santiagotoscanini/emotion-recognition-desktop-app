@@ -1,6 +1,7 @@
 using BusinessLogic.Enums;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BusinessLogic
 {
@@ -56,7 +57,7 @@ namespace BusinessLogic
             AnalyzeAlarms();
         }
 
-        public List<TimeLapseAlarm> GetAlarmsChecked()
+        public IEnumerable<TimeLapseAlarm> GetAlarmsChecked()
         {
             AnalyzeAlarms();
             return Repository.GetAlarms();
@@ -64,7 +65,7 @@ namespace BusinessLogic
 
         private void AnalyzeAlarms()
         {
-            List<TimeLapseAlarm> alarms = Repository.GetAlarms();
+            List<TimeLapseAlarm> alarms = Repository.GetAlarms().ToList();
 
             foreach (TimeLapseAlarm alarm in alarms)
             {

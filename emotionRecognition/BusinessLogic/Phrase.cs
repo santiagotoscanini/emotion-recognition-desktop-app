@@ -11,7 +11,7 @@ namespace BusinessLogic
         public Entity Entity { get; private set; }
         public PhraseState PhraseState { get; private set; }
 
-        public Phrase(string text, HashSet<Sentiment> sentiments, HashSet<Entity> entities, DateTime creationDate)
+        public Phrase(string text, IEnumerable<Sentiment> sentiments, IEnumerable<Entity> entities, DateTime creationDate)
         {
             if (string.IsNullOrWhiteSpace(text))
             {
@@ -31,13 +31,13 @@ namespace BusinessLogic
             Analyze(sentiments, entities);
         }
 
-        public void Analyze(HashSet<Sentiment> sentiments, HashSet<Entity> entities)
+        public void Analyze(IEnumerable<Sentiment> sentiments, IEnumerable<Entity> entities)
         {
             Entity = GetEntity(entities);
             PhraseState = GetPhraseState(sentiments);
         }
 
-        private Entity GetEntity(HashSet<Entity> entities)
+        private Entity GetEntity(IEnumerable<Entity> entities)
         {
             int lowestIndexOfPhrase = Text.Length;
             Entity entityInLowestIndex = null;
@@ -54,7 +54,7 @@ namespace BusinessLogic
             return entityInLowestIndex;
         }
 
-        private PhraseState GetPhraseState(HashSet<Sentiment> sentiments)
+        private PhraseState GetPhraseState(IEnumerable<Sentiment> sentiments)
         {
             int actualSumOfSentiments = 0;
 
