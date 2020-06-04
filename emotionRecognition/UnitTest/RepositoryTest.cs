@@ -18,6 +18,12 @@ namespace Tests
             repository = new Repository();
         }
 
+        [TestCleanup]
+        public void Cleanup()
+        {
+            repository = new Repository();
+        }
+
         [TestMethod]
         public void ValidateWhenAddingEntity()
         {

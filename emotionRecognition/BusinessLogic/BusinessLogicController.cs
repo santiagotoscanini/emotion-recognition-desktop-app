@@ -1,6 +1,8 @@
 using BusinessLogic.Enums;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
 using System.Linq;
 
 namespace BusinessLogic
@@ -40,7 +42,7 @@ namespace BusinessLogic
             return isContained;
         }
 
-        public HashSet<Entity> GetEntities()
+        public IEnumerable<Entity> GetEntities()
         {
             return Repository.GetEntities();
         }
@@ -67,9 +69,15 @@ namespace BusinessLogic
         {
             List<TimeLapseAlarm> alarms = Repository.GetAlarms().ToList();
 
-            foreach (TimeLapseAlarm alarm in alarms)
+            using (Context context = new Context())
             {
-                alarm.CheckIfAlarmIsActivated(Repository.GetPhrases());
+                foreach (TimeLapseAlarm alarm in alarms)
+                {
+                    alarm.CheckIfAlarmIsActivated(Repository.GetPhrases());
+
+                    context.Alarms.AddOrUpdate(alarm);
+                }
+                context.SaveChanges();
             }
         }
 
@@ -81,16 +89,23 @@ namespace BusinessLogic
             AnalyzeAlarms();
         }
 
-        public List<Phrase> GetPhrases()
+        public IEnumerable<Phrase> GetPhrases()
         {
             return Repository.GetPhrases();
         }
 
         public void AnalyzePhrases()
         {
-            foreach (Phrase phrase in Repository.GetPhrases())
+            using (Context context = new Context())
             {
-                phrase.Analyze(Repository.GetSentiments(), Repository.GetEntities());
+                foreach (Phrase phrase in Repository.GetPhrases())
+                {
+                    phrase.Analyze(Repository.GetSentiments(), Repository.GetEntities());
+
+                    context.Phrases.Attach(phrase);
+                    context.Entry(phrase).State = EntityState.Modified;
+                }
+                context.SaveChanges();
             }
         }
 
@@ -123,7 +138,7 @@ namespace BusinessLogic
             return isContained;
         }
 
-        public HashSet<Sentiment> GetPositiveSentiments()
+        public IEnumerable<Sentiment> GetPositiveSentiments()
         {
             return Repository.GetPositiveSentiments();
         }
@@ -148,7 +163,7 @@ namespace BusinessLogic
             return wasAdded;
         }
 
-        public HashSet<Sentiment> GetNegativeSentiments()
+        public IEnumerable<Sentiment> GetNegativeSentiments()
         {
             return Repository.GetNegativeSentiments();
         }

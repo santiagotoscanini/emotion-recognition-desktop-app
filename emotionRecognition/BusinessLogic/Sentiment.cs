@@ -1,12 +1,15 @@
 ﻿using BusinessLogic.Enums;
 using System;
+using System.Collections.Generic;
 
 namespace BusinessLogic
 {
     public class Sentiment
     {
-        public string Text { get; }
-        public SentimentState State { get; }
+        public string Text { get; set; }
+        public SentimentState State { get; set; }
+
+        public Sentiment() { }
         
         public Sentiment(string text, SentimentState state)
         {

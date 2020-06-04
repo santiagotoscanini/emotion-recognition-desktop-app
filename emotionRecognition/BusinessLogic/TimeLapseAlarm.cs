@@ -1,17 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using BusinessLogic.Enums;
 
 namespace BusinessLogic
 {
     public class TimeLapseAlarm
     {
-        public Entity Entity { get; }
-        public TimeSearchMethodType TimeSearchMethodType { get; }
-        public uint QuantityOfTimeToSearchBack { get; }
-        public AlarmPosibleState AlarmPosibleState { get; }
-        public uint QuantityOfSentimentsNeeded { get; }
-        public bool IsActivated { get; private set; }
+        public int Id { get; set; }
+        public Entity Entity { get; set; }
+        public TimeSearchMethodType TimeSearchMethodType { get; set; }
+        public uint QuantityOfTimeToSearchBack { get; set; }
+        public AlarmPosibleState AlarmPosibleState { get; set; }
+        public uint QuantityOfSentimentsNeeded { get; set; }
+        public bool IsActivated { get; set; }
+
+        public TimeLapseAlarm() { }
 
         public TimeLapseAlarm(Entity entity, TimeSearchMethodType timeSearchMethodType, uint quantityOfTimeToSearchBack, AlarmPosibleState alarmPosibleState, uint quantityOfSentimentsNeeded)
         {
@@ -30,7 +34,7 @@ namespace BusinessLogic
             IsActivated = false;
         }
 
-        public bool CheckIfAlarmIsActivated(List<Phrase> allPhrases)
+        public bool CheckIfAlarmIsActivated(IEnumerable<Phrase> allPhrases)
         {
             DateTime beginDateToSearch = GetBeginDateToSearch();
             List<Phrase> phrasesToBeChecked = FilterPhrasesToBeChecked(allPhrases, beginDateToSearch);
@@ -56,9 +60,10 @@ namespace BusinessLogic
             return beginDateToSearch;
         }
 
-        private List<Phrase> FilterPhrasesToBeChecked(List<Phrase> allPhrases, DateTime beginDateToSearch)
+        private List<Phrase> FilterPhrasesToBeChecked(IEnumerable<Phrase> allPhrases, DateTime beginDateToSearch)
         {
-            return allPhrases.FindAll(phrase =>
+            List<Phrase> phrases = allPhrases.ToList();
+            return phrases.FindAll(phrase =>
                         phrase.Entity != null &&
                         phrase.Entity.Equals(Entity) &&
                         phrase.CreationDate.Ticks >= beginDateToSearch.Ticks &&

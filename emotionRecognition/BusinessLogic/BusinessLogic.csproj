@@ -54,10 +54,15 @@
     <Compile Include="BusinessLogicController.cs" />
     <Compile Include="Context.cs" />
     <Compile Include="Entity.cs" />
+    <Compile Include="EntityFrameworkIntegrationTest.cs" />
     <Compile Include="Enums\AlarmPosibleState.cs" />
     <Compile Include="Enums\PhraseState.cs" />
     <Compile Include="Enums\SentimentState.cs" />
     <Compile Include="Enums\TimeSearchMethodType.cs" />
+    <Compile Include="FluentApiConfiguration\TimeLapseAlarmTypeConfiguration.cs" />
+    <Compile Include="FluentApiConfiguration\SentimentTypeConfiguration.cs" />
+    <Compile Include="FluentApiConfiguration\PhraseTypeConfiguration.cs" />
+    <Compile Include="FluentApiConfiguration\EntityTypeConfiguration.cs" />
     <Compile Include="Phrase.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository.cs" />

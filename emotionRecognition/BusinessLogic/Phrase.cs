@@ -6,10 +6,14 @@ namespace BusinessLogic
 {
     public class Phrase
     {
-        public string Text { get; }
-        public DateTime CreationDate { get; }
-        public Entity Entity { get; private set; }
-        public PhraseState PhraseState { get; private set; }
+        public int Id { get; set; } 
+        public string Text { get; set; }
+        public DateTime CreationDate { get; set; }
+        public string EntityKey { get; set; }
+        public Entity Entity { get; set; }
+        public PhraseState PhraseState { get; set; }
+
+        public Phrase() { }
 
         public Phrase(string text, IEnumerable<Sentiment> sentiments, IEnumerable<Entity> entities, DateTime creationDate)
         {
