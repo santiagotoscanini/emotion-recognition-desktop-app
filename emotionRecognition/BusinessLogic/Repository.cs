@@ -38,7 +38,7 @@ namespace BusinessLogic
 
             using (Context context = new Context())
             {
-                entities = new List<Entity>(context.Entities);
+                entities = context.Entities.Include(p => p.Alarms).Include(p => p.Phrases).ToList();
             }
 
             return entities;
@@ -69,10 +69,26 @@ namespace BusinessLogic
 
             using (Context context = new Context())
             {
-                sentiments = new List<Sentiment>(context.Sentiments);
+                sentiments = context.Sentiments.ToList();
             }
 
             return sentiments;
+        }
+
+        public Entity GetEntityFromName(string entityName)
+        {
+            Entity entity;
+            using (Context context = new Context())
+            {
+                entity = context.Entities.Find(entityName);
+
+                if (entity == null)
+                {
+                    throw new ArgumentException("Entity name is not loaded", "entityName");
+                }
+            }
+
+            return entity;
         }
 
         public IEnumerable<Sentiment> GetPositiveSentiments()
@@ -131,11 +147,10 @@ namespace BusinessLogic
         {
             using (Context context = new Context())
              {
-                if (phrase.Entity != null && phrase.EntityKey == null)
+                if(phrase.Entity != null)
                 {
-                    phrase.EntityKey = context.Entities.First(phrase.Entity.Equals).Name;
+                    context.Entities.Attach(phrase.Entity);
                 }
-                phrase.Entity = null;
                 context.Phrases.Add(phrase);
                 context.SaveChanges();
             }
@@ -147,7 +162,7 @@ namespace BusinessLogic
 
             using (Context context = new Context())
             {
-                phrases = new List<Phrase>(context.Phrases.Include(p => p.Entity).ToList());
+                phrases = context.Phrases.Include(p => p.Entity).ToList();
             }
             
             return phrases;
@@ -157,7 +172,7 @@ namespace BusinessLogic
         {
             using (Context context = new Context())
             {
-                alarm.Entity = null;
+                context.Entities.Attach(alarm.Entity);
                 context.Alarms.Add(alarm);
                 context.SaveChanges();
             }
@@ -169,7 +184,7 @@ namespace BusinessLogic
 
             using (Context context = new Context())
             {
-                alarms = new List<TimeLapseAlarm>(context.Alarms.Include(a=>a.Entity).ToList());
+                alarms = context.Alarms.Include(a=>a.Entity).ToList();
             }
 
             return alarms;

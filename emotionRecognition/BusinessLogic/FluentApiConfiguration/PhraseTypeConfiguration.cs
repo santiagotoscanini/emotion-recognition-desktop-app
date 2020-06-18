@@ -9,8 +9,7 @@ namespace BusinessLogic.FluentApiConfiguration
             HasKey(x => x.Id);
 
             HasOptional(p => p.Entity)
-                .WithMany(e => e.Phrases)
-                .HasForeignKey(p => p.EntityKey);
+                .WithMany(e => e.Phrases);
         }
 
     }

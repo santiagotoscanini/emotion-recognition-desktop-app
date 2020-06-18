@@ -95,6 +95,8 @@ namespace Tests
         public void AddAlarm()
         {
             Entity entity = new Entity("C#");
+            repository.AddEntity(entity);
+
             TimeSearchMethodType timeSearchMethodType = TimeSearchMethodType.DAYS;
             uint quantityOfTimeToSearchBack = 1;
             AlarmPosibleState alarmPosibleState = AlarmPosibleState.POSITIVE;
@@ -120,9 +122,11 @@ namespace Tests
         public void GetAlarms()
         {
             Assert.AreEqual(0, repository.GetAlarms().ToList().Count);
+            Entity entity = new Entity("C#");
+            repository.AddEntity(entity);
 
             TimeLapseAlarm alarm = new TimeLapseAlarm(
-                new Entity("C#"), 
+                entity, 
                 TimeSearchMethodType.DAYS,
                 3,
                 AlarmPosibleState.NEGATIVE,

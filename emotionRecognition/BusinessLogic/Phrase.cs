@@ -9,7 +9,6 @@ namespace BusinessLogic
         public int Id { get; set; } 
         public string Text { get; set; }
         public DateTime CreationDate { get; set; }
-        public string EntityKey { get; set; }
         public Entity Entity { get; set; }
         public PhraseState PhraseState { get; set; }
 

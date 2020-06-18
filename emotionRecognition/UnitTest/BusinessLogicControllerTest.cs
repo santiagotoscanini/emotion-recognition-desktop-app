@@ -60,6 +60,8 @@ namespace Tests
         [TestMethod]
         public void AddAlarmSearchInDays()
         {
+            businessLogicController.AddEntity("1");
+
             Assert.AreEqual(0, businessLogicController.GetAlarmsChecked().ToList().Count);
 
             businessLogicController.AddAlarm("1", true, 2, false, 3);
@@ -70,6 +72,8 @@ namespace Tests
         [TestMethod]
         public void AddAlarmSearchInHours()
         {
+            businessLogicController.AddEntity("1");
+
             Assert.AreEqual(0, businessLogicController.GetAlarmsChecked().ToList().Count);
 
             businessLogicController.AddAlarm("1", false, 2, false, 3);
@@ -80,6 +84,7 @@ namespace Tests
         [TestMethod]
         public void GetAlarmsChecked()
         {
+            businessLogicController.AddEntity("Valorant");
             businessLogicController.AddAlarm("Valorant", true, 1, true, 2);
             businessLogicController.AddPhrase("Valorant is good", DateTime.Now);
             businessLogicController.AddPositiveSentiment("Good");
@@ -202,10 +207,10 @@ namespace Tests
             businessLogicController.AddEntity("Titanic");
             businessLogicController.AddPhrase("I hate Titanic", DateTime.Today);
             Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).Text, "I hate Titanic");
-            Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).PhraseState, PhraseState.NEUTRAL);
+            Assert.AreEqual(PhraseState.NEUTRAL, businessLogicController.GetPhrases().ElementAt(0).PhraseState);
 
             businessLogicController.AddNegativeSentiment("hate");
-            Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).PhraseState, PhraseState.LOW_NEGATIVE);
+            Assert.AreEqual(PhraseState.LOW_NEGATIVE, businessLogicController.GetPhrases().ElementAt(0).PhraseState);
         }
 
 

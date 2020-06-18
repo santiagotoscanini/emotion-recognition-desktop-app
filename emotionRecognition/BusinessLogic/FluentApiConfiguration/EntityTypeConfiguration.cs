@@ -7,10 +7,6 @@ namespace BusinessLogic.FluentApiConfiguration
         public EntityTypeConfiguration()
         {
             HasKey(x => x.Name);
-
-            //HasMany(x => x.Alarms)
-            //    .WithOptional(a => a.Entity)
-            //    .HasForeignKey(a => a.EntityKey);
         }
     }
 }

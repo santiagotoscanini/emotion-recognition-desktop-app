@@ -20,7 +20,6 @@ namespace BusinessLogic
             Database.SetInitializer<Context>(new DropCreateDatabaseIfModelChanges<Context>());
         }
 
-
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new EntityTypeConfiguration());

@@ -48,10 +48,9 @@ namespace BusinessLogic
         }
 
 
-        // TODO revisar aca porque no se guarda
         public void AddAlarm(string entityName, bool searchInDays, uint sentimentsNeeded, bool detectPositiveSentiments, uint timeToSearchBack)
         {
-            Entity entity = new Entity(entityName);
+            Entity entity = Repository.GetEntityFromName(entityName);
             TimeSearchMethodType searchMethodType = searchInDays ? TimeSearchMethodType.DAYS : TimeSearchMethodType.HOURS;
             AlarmPosibleState alarmPosibleState = detectPositiveSentiments ? AlarmPosibleState.POSITIVE : AlarmPosibleState.NEGATIVE;
 
@@ -100,16 +99,11 @@ namespace BusinessLogic
         {
             using (Context context = new Context())
             {
-                foreach (Phrase phrase in Repository.GetPhrases())
+                foreach (Phrase phrase in context.Phrases.ToList())
                 {
-                    phrase.Analyze(Repository.GetSentiments(), Repository.GetEntities());
-                    if (phrase.Entity != null && phrase.EntityKey == null)
-                    {
-                        phrase.EntityKey = context.Entities.AsNoTracking().FirstOrDefault(phrase.Entity.Equals).Name;
-                    }
-                    phrase.Entity = null;
                     context.Phrases.Attach(phrase);
-                    context.Entry(phrase).State = EntityState.Modified;
+
+                    phrase.Analyze(context.Sentiments.ToList(), context.Entities.ToList());
                 }
                 context.SaveChanges();
             }
