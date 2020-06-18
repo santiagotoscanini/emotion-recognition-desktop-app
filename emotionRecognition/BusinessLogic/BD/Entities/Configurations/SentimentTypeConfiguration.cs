@@ -6,7 +6,7 @@ namespace BusinessLogic.FluentApiConfiguration
     {
         public SentimentTypeConfiguration()
         {
-            HasKey(x => x.Text);
+            HasKey(x => x.Text);          
         }
     }
 }

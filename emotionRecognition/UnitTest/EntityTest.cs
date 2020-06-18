@@ -1,12 +1,14 @@
 ﻿using BusinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using UnitTest;
 
 namespace Tests
 {
     [TestClass]
     public class EnitityTest
     {
+
         [TestMethod]
         public void CreateEntity()
         {

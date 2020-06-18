@@ -4,11 +4,12 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using UnitTest;
 
 namespace Tests
 {
     [TestClass]
-    public class BusinessLogicControllerTest
+    public class BusinessLogicControllerTest : TestUtils
     {
         private BusinessLogicController businessLogicController;
 
@@ -16,6 +17,13 @@ namespace Tests
         public void initializeTests()
         {
             businessLogicController = new BusinessLogicController(new Repository());
+            cleanDB();
+        }
+
+        [TestCleanup]
+        public void cleanupTests()
+        {
+            cleanDB();
         }
 
         [TestMethod]
@@ -75,7 +83,6 @@ namespace Tests
             businessLogicController.AddAlarm("Valorant", true, 1, true, 2);
             businessLogicController.AddPhrase("Valorant is good", DateTime.Now);
             businessLogicController.AddPositiveSentiment("Good");
-            businessLogicController.AddEntity("Valorant");
 
             IEnumerable<TimeLapseAlarm> alarms = businessLogicController.GetAlarmsChecked();
 
@@ -86,7 +93,7 @@ namespace Tests
         public void AddPhrase()
         {
             Assert.AreEqual(0, businessLogicController.GetPhrases().ToList().Count);
-            businessLogicController.AddPhrase("test01", new DateTime());
+            businessLogicController.AddPhrase("test01", DateTime.Now);
             Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).Text, "test01");
         }
 
@@ -94,27 +101,27 @@ namespace Tests
         public void GetPhrases()
         {
             Assert.AreEqual(0, businessLogicController.GetPhrases().ToList().Count);
-            businessLogicController.AddPhrase("test1", new DateTime());
+            businessLogicController.AddPhrase("test1", DateTime.Now);
             Assert.AreEqual(1, businessLogicController.GetPhrases().ToList().Count);
         }
 
         [TestMethod]
         public void GetPhrasesReAnalize()
         {
-            businessLogicController.AddPhrase("The moon is great", new DateTime());
-            foreach(Phrase e in businessLogicController.GetPhrases())
+            businessLogicController.AddPhrase("The moon is great", DateTime.Now);
+            foreach(Phrase phrase in businessLogicController.GetPhrases())
             {
-                Assert.IsNull(e.Entity);
-                Assert.AreEqual(PhraseState.NEUTRAL, e.PhraseState);
+                Assert.IsNull(phrase.Entity);
+                Assert.AreEqual(PhraseState.NEUTRAL, phrase.PhraseState);
             }
 
             businessLogicController.AddEntity("The moon");
             businessLogicController.AddPositiveSentiment("great");
 
-            foreach (Phrase e in businessLogicController.GetPhrases())
+            foreach (Phrase phrase in businessLogicController.GetPhrases())
             {
-                Assert.AreEqual("The moon",e.Entity.Name);
-                Assert.AreEqual(PhraseState.LOW_POSITIVE, e.PhraseState);
+                Assert.AreEqual("The moon", phrase.Entity.Name);
+                Assert.AreEqual(PhraseState.LOW_POSITIVE, phrase.PhraseState);
             }
         }
 
@@ -123,7 +130,7 @@ namespace Tests
         {
             Assert.AreEqual(businessLogicController.GetPhrases().ToList().Count, 0);
             businessLogicController.AddEntity("Titanic");
-            businessLogicController.AddPhrase("I love Titanic", new DateTime());
+            businessLogicController.AddPhrase("I love Titanic", DateTime.Now);
             Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).Text, "I love Titanic");
             Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).PhraseState, PhraseState.NEUTRAL);      
 
@@ -193,7 +200,7 @@ namespace Tests
         {
             Assert.AreEqual(businessLogicController.GetPhrases().ToList().Count, 0);
             businessLogicController.AddEntity("Titanic");
-            businessLogicController.AddPhrase("I hate Titanic", new DateTime());
+            businessLogicController.AddPhrase("I hate Titanic", DateTime.Today);
             Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).Text, "I hate Titanic");
             Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).PhraseState, PhraseState.NEUTRAL);
 

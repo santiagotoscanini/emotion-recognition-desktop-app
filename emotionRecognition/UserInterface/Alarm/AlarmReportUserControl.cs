@@ -19,7 +19,7 @@ namespace UserInterface
         {
             foreach(TimeLapseAlarm alarm in controller.GetAlarmsChecked())
             {
-                AddRow(
+                           AddRow(
                     alarm.Entity.Name, 
                     alarm.TimeSearchMethodType.Equals(TimeSearchMethodType.DAYS),
                     alarm.QuantityOfTimeToSearchBack,

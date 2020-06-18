@@ -47,6 +47,8 @@ namespace BusinessLogic
             return Repository.GetEntities();
         }
 
+
+        // TODO revisar aca porque no se guarda
         public void AddAlarm(string entityName, bool searchInDays, uint sentimentsNeeded, bool detectPositiveSentiments, uint timeToSearchBack)
         {
             Entity entity = new Entity(entityName);
@@ -101,7 +103,11 @@ namespace BusinessLogic
                 foreach (Phrase phrase in Repository.GetPhrases())
                 {
                     phrase.Analyze(Repository.GetSentiments(), Repository.GetEntities());
-
+                    if (phrase.Entity != null && phrase.EntityKey == null)
+                    {
+                        phrase.EntityKey = context.Entities.AsNoTracking().FirstOrDefault(phrase.Entity.Equals).Name;
+                    }
+                    phrase.Entity = null;
                     context.Phrases.Attach(phrase);
                     context.Entry(phrase).State = EntityState.Modified;
                 }

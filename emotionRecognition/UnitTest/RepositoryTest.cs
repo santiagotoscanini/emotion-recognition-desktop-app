@@ -4,11 +4,12 @@ using BusinessLogic.Enums;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using UnitTest;
 
 namespace Tests
 {
     [TestClass]
-    public class RepositoryTest
+    public class RepositoryTest : TestUtils
     {
         private Repository repository;
 
@@ -16,12 +17,14 @@ namespace Tests
         public void Initialize()
         {
             repository = new Repository();
+            cleanDB();
         }
 
         [TestCleanup]
         public void Cleanup()
         {
             repository = new Repository();
+            cleanDB();
         }
 
         [TestMethod]
@@ -132,7 +135,7 @@ namespace Tests
         [TestMethod]
         public void GetPhrases()
         {
-            Phrase phrase = new Phrase("Test", repository.GetSentiments(),repository.GetEntities(), new DateTime());
+            Phrase phrase = new Phrase("Test", repository.GetSentiments(),repository.GetEntities(), DateTime.Now);
             repository.AddPhrase(phrase);
 
             IEnumerable<Phrase> phrases = repository.GetPhrases();
