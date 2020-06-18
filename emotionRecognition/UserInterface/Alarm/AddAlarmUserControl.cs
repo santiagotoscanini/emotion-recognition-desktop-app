@@ -56,7 +56,7 @@ namespace UserInterface
 
         private void CreateAlarm()
         {
-            controller.AddAlarm(CboEntity.Text, RdoPositive.Checked, uint.Parse(NudPostQuantity.Text), RdoDays.Checked, uint.Parse(NudTimeLapse.Text));
+            controller.AddAlarm(CboEntity.Text, RdoDays.Checked, uint.Parse(NudPostQuantity.Text), RdoPositive.Checked, uint.Parse(NudTimeLapse.Text));
             ClearFields();
             LblDoneMessage.Visible = true;
         }

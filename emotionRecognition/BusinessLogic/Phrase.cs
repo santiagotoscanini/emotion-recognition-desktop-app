@@ -129,7 +129,7 @@ namespace BusinessLogic
                     name = "Medianamente Negativo";
                     break;
                 case PhraseState.HIGH_NEGATIVE:
-                    name = "Altamente Positivo";
+                    name = "Altamente Negativo";
                     break;
             };
 
