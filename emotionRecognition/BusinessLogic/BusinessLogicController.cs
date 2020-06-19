@@ -1,6 +1,9 @@
 using BusinessLogic.Enums;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Migrations;
+using System.Linq;
 
 namespace BusinessLogic
 {
@@ -39,14 +42,14 @@ namespace BusinessLogic
             return isContained;
         }
 
-        public HashSet<Entity> GetEntities()
+        public IEnumerable<Entity> GetEntities()
         {
             return Repository.GetEntities();
         }
 
         public void AddAlarm(string entityName, bool searchInDays, uint sentimentsNeeded, bool detectPositiveSentiments, uint timeToSearchBack)
         {
-            Entity entity = new Entity(entityName);
+            Entity entity = Repository.GetEntityFromName(entityName);
             TimeSearchMethodType searchMethodType = searchInDays ? TimeSearchMethodType.DAYS : TimeSearchMethodType.HOURS;
             AlarmPosibleState alarmPosibleState = detectPositiveSentiments ? AlarmPosibleState.POSITIVE : AlarmPosibleState.NEGATIVE;
 
@@ -56,7 +59,7 @@ namespace BusinessLogic
             AnalyzeAlarms();
         }
 
-        public List<TimeLapseAlarm> GetAlarmsChecked()
+        public IEnumerable<TimeLapseAlarm> GetAlarmsChecked()
         {
             AnalyzeAlarms();
             return Repository.GetAlarms();
@@ -64,11 +67,17 @@ namespace BusinessLogic
 
         private void AnalyzeAlarms()
         {
-            List<TimeLapseAlarm> alarms = Repository.GetAlarms();
+            List<TimeLapseAlarm> alarms = Repository.GetAlarms().ToList();
 
-            foreach (TimeLapseAlarm alarm in alarms)
+            using (Context context = new Context())
             {
-                alarm.CheckIfAlarmIsActivated(Repository.GetPhrases());
+                foreach (TimeLapseAlarm alarm in alarms)
+                {
+                    alarm.CheckIfAlarmIsActivated(Repository.GetPhrases());
+
+                    context.Alarms.AddOrUpdate(alarm);
+                }
+                context.SaveChanges();
             }
         }
 
@@ -80,16 +89,22 @@ namespace BusinessLogic
             AnalyzeAlarms();
         }
 
-        public List<Phrase> GetPhrases()
+        public IEnumerable<Phrase> GetPhrases()
         {
             return Repository.GetPhrases();
         }
 
         public void AnalyzePhrases()
         {
-            foreach (Phrase phrase in Repository.GetPhrases())
+            using (Context context = new Context())
             {
-                phrase.Analyze(Repository.GetSentiments(), Repository.GetEntities());
+                foreach (Phrase phrase in context.Phrases.ToList())
+                {
+                    context.Phrases.Attach(phrase);
+
+                    phrase.Analyze(context.Sentiments.ToList(), context.Entities.ToList());
+                }
+                context.SaveChanges();
             }
         }
 
@@ -122,7 +137,7 @@ namespace BusinessLogic
             return isContained;
         }
 
-        public HashSet<Sentiment> GetPositiveSentiments()
+        public IEnumerable<Sentiment> GetPositiveSentiments()
         {
             return Repository.GetPositiveSentiments();
         }
@@ -147,7 +162,7 @@ namespace BusinessLogic
             return wasAdded;
         }
 
-        public HashSet<Sentiment> GetNegativeSentiments()
+        public IEnumerable<Sentiment> GetNegativeSentiments()
         {
             return Repository.GetNegativeSentiments();
         }

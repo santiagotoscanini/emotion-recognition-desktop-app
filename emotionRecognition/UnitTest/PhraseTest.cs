@@ -315,7 +315,7 @@ namespace Tests
 
             Phrase phrase = new Phrase("The moon is bad, not nice and gross", sentiments, entities, actualDateTime);
 
-            Assert.AreEqual(phrase.GetStringFromPhraseState(), "Altamente Positivo");
+            Assert.AreEqual(phrase.GetStringFromPhraseState(), "Altamente Negativo");
         }
 
         [TestMethod]

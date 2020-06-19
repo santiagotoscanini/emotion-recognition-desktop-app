@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using BusinessLogic.Enums;
 
-namespace BusinessLogic
+namespace BusinessLogic 
 {
     public class Phrase
     {
-        public int Id { get; set; }
+        public int Id { get; set; } 
         public string Text { get; set; }
         public DateTime CreationDate { get; set; }
+        public string EntityKey { get; set; }
         public Entity Entity { get; set; }
         public PhraseState PhraseState { get; set; }
 
@@ -20,7 +21,7 @@ namespace BusinessLogic
             {
                 throw new ArgumentException("Text cannot be null or empty", "text");
             }
-            if (sentiments == null)
+            if(sentiments == null)
             {
                 throw new ArgumentNullException("sentiments", "Sentiments cannot be null");
             }
@@ -98,11 +99,11 @@ namespace BusinessLogic
             }
             else
             {
-                finalPhraseState = (PhraseState)actualSumOfSentiments;
+                finalPhraseState = (PhraseState) actualSumOfSentiments;
             }
 
             return finalPhraseState;
-        }
+        }       
 
         public string GetStringFromPhraseState()
         {
@@ -129,7 +130,7 @@ namespace BusinessLogic
                     name = "Medianamente Negativo";
                     break;
                 case PhraseState.HIGH_NEGATIVE:
-                    name = "Altamente Negativo";
+                    name = "Altamente Positivo";
                     break;
             };
 

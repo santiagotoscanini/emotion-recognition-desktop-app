@@ -6,7 +6,7 @@ namespace UserInterface
 {
     public partial class AddAlarmUserControl : UserControl
     {
-        private readonly BusinessLogicController controller;  
+        private readonly BusinessLogicController controller;
 
         public AddAlarmUserControl(Repository repository)
         {
@@ -45,7 +45,7 @@ namespace UserInterface
 
         private bool CheckData()
         {
-            if(CboEntity.SelectedItem != null)
+            if (CboEntity.SelectedItem != null)
             {
                 return true;
             }
@@ -56,7 +56,7 @@ namespace UserInterface
 
         private void CreateAlarm()
         {
-            controller.AddAlarm(CboEntity.Text, RdoPositive.Checked, uint.Parse(NudPostQuantity.Text), RdoDays.Checked, uint.Parse(NudTimeLapse.Text));
+            controller.AddAlarm(CboEntity.Text, RdoDays.Checked, uint.Parse(NudPostQuantity.Text), RdoPositive.Checked, uint.Parse(NudTimeLapse.Text));
             ClearFields();
             LblDoneMessage.Visible = true;
         }

@@ -10,7 +10,7 @@ namespace BusinessLogic
         public SentimentState State { get; set; }
 
         public Sentiment() { }
-
+        
         public Sentiment(string text, SentimentState state)
         {
             if (string.IsNullOrWhiteSpace(text))
@@ -29,7 +29,7 @@ namespace BusinessLogic
             }
             Sentiment sentiment = obj as Sentiment;
             return Text.Equals(sentiment.Text);
-
+            
         }
 
         public override int GetHashCode()

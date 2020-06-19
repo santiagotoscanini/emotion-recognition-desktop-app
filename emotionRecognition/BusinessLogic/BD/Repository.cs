@@ -1,13 +1,10 @@
 using BusinessLogic.Enums;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Core;
-using System.Linq;
 
 namespace BusinessLogic
 {
-    public class Repository
+    public class Repository 
     {
         public Repository()
         {
@@ -23,7 +20,7 @@ namespace BusinessLogic
                     context.Entities.Add(entity);
                     context.SaveChanges();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     result = false;
                 }
@@ -38,7 +35,7 @@ namespace BusinessLogic
 
             using (Context context = new Context())
             {
-                entities = context.Entities.Include(p => p.Alarms).Include(p => p.Phrases).ToList();
+                entities = new List<Entity>(context.Entities);
             }
 
             return entities;
@@ -69,26 +66,10 @@ namespace BusinessLogic
 
             using (Context context = new Context())
             {
-                sentiments = context.Sentiments.ToList();
+                sentiments = new List<Sentiment>(context.Sentiments);
             }
 
             return sentiments;
-        }
-
-        public Entity GetEntityFromName(string entityName)
-        {
-            Entity entity;
-            using (Context context = new Context())
-            {
-                entity = context.Entities.Find(entityName);
-
-                if (entity == null)
-                {
-                    throw new ArgumentException("Entity name is not loaded", "entityName");
-                }
-            }
-
-            return entity;
         }
 
         public IEnumerable<Sentiment> GetPositiveSentiments()
@@ -125,14 +106,9 @@ namespace BusinessLogic
 
             using (Context context = new Context())
             {
-                foreach (Phrase phrase in context.Phrases)
-                {
-                    if (phrase.Text.Contains(sentiment.Text)) return false;
-                }
                 try
                 {
-                    Sentiment sentimentFound = context.Sentiments.FirstOrDefault(s => s.Text.Equals(sentiment.Text));
-                    context.Sentiments.Remove(sentimentFound);
+                    context.Sentiments.Remove(sentiment);
                     context.SaveChanges();
                 }
                 catch (Exception e)
@@ -147,10 +123,6 @@ namespace BusinessLogic
         {
             using (Context context = new Context())
             {
-                if (phrase.Entity != null)
-                {
-                    context.Entities.Attach(phrase.Entity);
-                }
                 context.Phrases.Add(phrase);
                 context.SaveChanges();
             }
@@ -161,10 +133,10 @@ namespace BusinessLogic
             IEnumerable<Phrase> phrases;
 
             using (Context context = new Context())
-            {
-                phrases = context.Phrases.Include(p => p.Entity).ToList();
+            {                
+                phrases = new List<Phrase>(context.Phrases);
             }
-
+            
             return phrases;
         }
 
@@ -172,7 +144,6 @@ namespace BusinessLogic
         {
             using (Context context = new Context())
             {
-                context.Entities.Attach(alarm.Entity);
                 context.Alarms.Add(alarm);
                 context.SaveChanges();
             }
@@ -184,7 +155,7 @@ namespace BusinessLogic
 
             using (Context context = new Context())
             {
-                alarms = context.Alarms.Include(a => a.Entity).ToList();
+                alarms = new List<TimeLapseAlarm>(context.Alarms);
             }
 
             return alarms;
