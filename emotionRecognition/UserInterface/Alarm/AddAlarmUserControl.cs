@@ -6,7 +6,7 @@ namespace UserInterface
 {
     public partial class AddAlarmUserControl : UserControl
     {
-        private readonly BusinessLogicController controller;  
+        private readonly BusinessLogicController controller;
 
         public AddAlarmUserControl(Repository repository)
         {
@@ -45,7 +45,7 @@ namespace UserInterface
 
         private bool CheckData()
         {
-            if(CboEntity.SelectedItem != null)
+            if (CboEntity.SelectedItem != null)
             {
                 return true;
             }

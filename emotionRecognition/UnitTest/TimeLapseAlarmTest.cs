@@ -19,7 +19,7 @@ namespace Tests
             uint quantityOfSentimentsNeeded = 5;
 
             new TimeLapseAlarm(
-                entity, 
+                entity,
                 timeSearchMethodType,
                 quantityOfTimeToSearchBack,
                 alarmPosibleState,
@@ -84,7 +84,7 @@ namespace Tests
             List<Phrase> phrases = new List<Phrase>();
             HashSet<Sentiment> sentiments = new HashSet<Sentiment>();
             HashSet<Entity> entities = new HashSet<Entity>();
-            
+
             Entity entity = new Entity("Netflix");
             entities.Add(entity);
 
@@ -139,7 +139,6 @@ namespace Tests
             Assert.IsTrue(alarm.CheckIfAlarmIsActivated(phrases));
             Assert.IsTrue(alarm.IsActivated);
         }
-
 
         [TestMethod]
         public void CheckIfAlarmInDaysIsNotActivated()
@@ -203,7 +202,7 @@ namespace Tests
             Assert.IsTrue(alarm.CheckIfAlarmIsActivated(phrases));
             Assert.IsTrue(alarm.IsActivated);
         }
-        
+
         [TestMethod]
         public void CheckIfAlarmInHoursIsNotActivated()
         {

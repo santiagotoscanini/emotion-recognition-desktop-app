@@ -47,7 +47,6 @@ namespace BusinessLogic
             return Repository.GetEntities();
         }
 
-
         public void AddAlarm(string entityName, bool searchInDays, uint sentimentsNeeded, bool detectPositiveSentiments, uint timeToSearchBack)
         {
             Entity entity = Repository.GetEntityFromName(entityName);

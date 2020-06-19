@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace BusinessLogic
 {
-    public class Repository 
+    public class Repository
     {
         public Repository()
         {
@@ -125,7 +125,7 @@ namespace BusinessLogic
 
             using (Context context = new Context())
             {
-                foreach(Phrase phrase in context.Phrases)
+                foreach (Phrase phrase in context.Phrases)
                 {
                     if (phrase.Text.Contains(sentiment.Text)) return false;
                 }
@@ -146,8 +146,8 @@ namespace BusinessLogic
         public void AddPhrase(Phrase phrase)
         {
             using (Context context = new Context())
-             {
-                if(phrase.Entity != null)
+            {
+                if (phrase.Entity != null)
                 {
                     context.Entities.Attach(phrase.Entity);
                 }
@@ -164,7 +164,7 @@ namespace BusinessLogic
             {
                 phrases = context.Phrases.Include(p => p.Entity).ToList();
             }
-            
+
             return phrases;
         }
 
@@ -184,7 +184,7 @@ namespace BusinessLogic
 
             using (Context context = new Context())
             {
-                alarms = context.Alarms.Include(a=>a.Entity).ToList();
+                alarms = context.Alarms.Include(a => a.Entity).ToList();
             }
 
             return alarms;

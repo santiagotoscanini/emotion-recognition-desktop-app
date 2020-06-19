@@ -17,16 +17,16 @@ namespace UserInterface
 
         private void LoadAlarms()
         {
-            foreach(TimeLapseAlarm alarm in controller.GetAlarmsChecked())
+            foreach (TimeLapseAlarm alarm in controller.GetAlarmsChecked())
             {
-                           AddRow(
-                    alarm.Entity.Name, 
-                    alarm.TimeSearchMethodType.Equals(TimeSearchMethodType.DAYS),
-                    alarm.QuantityOfTimeToSearchBack,
-                    alarm.AlarmPosibleState.Equals(AlarmPosibleState.POSITIVE),
-                    alarm.QuantityOfSentimentsNeeded,
-                    alarm.IsActivated
-                    );
+                AddRow(
+                 alarm.Entity.Name,
+                 alarm.TimeSearchMethodType.Equals(TimeSearchMethodType.DAYS),
+                 alarm.QuantityOfTimeToSearchBack,
+                 alarm.AlarmPosibleState.Equals(AlarmPosibleState.POSITIVE),
+                 alarm.QuantityOfSentimentsNeeded,
+                 alarm.IsActivated
+                 );
             }
         }
 

@@ -87,7 +87,8 @@ namespace emotionRecognition
             return false;
         }
 
-        private void ActualizeEntityList(bool WasCreated) {
+        private void ActualizeEntityList(bool WasCreated)
+        {
             if (WasCreated)
             {
                 LoadEntityList();

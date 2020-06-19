@@ -56,7 +56,7 @@ namespace Tests
             businessLogicController.AddEntity("cocacola");
             Assert.IsFalse(businessLogicController.AddEntity("coca"));
         }
-        
+
         [TestMethod]
         public void AddAlarmSearchInDays()
         {
@@ -114,7 +114,7 @@ namespace Tests
         public void GetPhrasesReAnalize()
         {
             businessLogicController.AddPhrase("The moon is great", DateTime.Now);
-            foreach(Phrase phrase in businessLogicController.GetPhrases())
+            foreach (Phrase phrase in businessLogicController.GetPhrases())
             {
                 Assert.IsNull(phrase.Entity);
                 Assert.AreEqual(PhraseState.NEUTRAL, phrase.PhraseState);
@@ -137,7 +137,7 @@ namespace Tests
             businessLogicController.AddEntity("Titanic");
             businessLogicController.AddPhrase("I love Titanic", DateTime.Now);
             Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).Text, "I love Titanic");
-            Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).PhraseState, PhraseState.NEUTRAL);      
+            Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).PhraseState, PhraseState.NEUTRAL);
 
             businessLogicController.AddPositiveSentiment("love");
             Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).PhraseState, PhraseState.LOW_POSITIVE);
@@ -160,7 +160,7 @@ namespace Tests
             Assert.IsFalse(businessLogicController.AddPositiveSentiment("good"));
             Assert.IsFalse(businessLogicController.AddNegativeSentiment("good"));
         }
-       
+
         [TestMethod]
         public void ValidateAddingDulpicatedPositiveSentiment()
         {

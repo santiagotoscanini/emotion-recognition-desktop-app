@@ -59,7 +59,7 @@ namespace Tests
             Sentiment sentiment = new Sentiment("Good", SentimentState.POSITIVE);
 
             repository.AddSentiment(sentiment);
-            
+
             Assert.IsTrue(repository.RemoveUnusedSentiment(sentiment));
         }
 
@@ -87,7 +87,7 @@ namespace Tests
             DateTime actualDateTime = DateTime.Now;
 
             Phrase phrase = new Phrase("This is a phrase", sentiments, entities, actualDateTime);
-            
+
             repository.AddPhrase(phrase);
         }
 
@@ -103,7 +103,7 @@ namespace Tests
             uint quantityOfSentimentsNeeded = 1;
 
             TimeLapseAlarm alarm = new TimeLapseAlarm(entity, timeSearchMethodType, quantityOfTimeToSearchBack, alarmPosibleState, quantityOfSentimentsNeeded);
-            
+
             repository.AddAlarm(alarm);
         }
 
@@ -126,7 +126,7 @@ namespace Tests
             repository.AddEntity(entity);
 
             TimeLapseAlarm alarm = new TimeLapseAlarm(
-                entity, 
+                entity,
                 TimeSearchMethodType.DAYS,
                 3,
                 AlarmPosibleState.NEGATIVE,
@@ -135,18 +135,18 @@ namespace Tests
 
             Assert.AreEqual(1, repository.GetAlarms().ToList().Count);
         }
-        
+
         [TestMethod]
         public void GetPhrases()
         {
-            Phrase phrase = new Phrase("Test", repository.GetSentiments(),repository.GetEntities(), DateTime.Now);
+            Phrase phrase = new Phrase("Test", repository.GetSentiments(), repository.GetEntities(), DateTime.Now);
             repository.AddPhrase(phrase);
 
             IEnumerable<Phrase> phrases = repository.GetPhrases();
 
             Assert.AreEqual(1, phrases.ToList().Count);
         }
-        
+
         [TestMethod]
         public void GetPositiveSentiments()
         {
