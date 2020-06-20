@@ -7,9 +7,6 @@ namespace BusinessLogic.FluentApiConfiguration
         public PhraseTypeConfiguration()
         {
             HasKey(x => x.Id);
-
-            HasOptional(p => p.Entity)
-                .WithMany(e => e.Phrases);
         }
     }
 }

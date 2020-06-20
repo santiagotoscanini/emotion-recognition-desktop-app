@@ -7,9 +7,6 @@ namespace BusinessLogic.FluentApiConfiguration
         public TimeLapseAlarmTypeConfiguration()
         {
             HasKey(x => x.Id);
-
-            HasRequired(a => a.Entity)
-                .WithMany(e => e.Alarms);
         }
     }
 }

@@ -6,8 +6,6 @@ namespace BusinessLogic
     public class Entity
     {
         public string Name { get; set; }
-        public ICollection<Phrase> Phrases { get; set; }
-        public ICollection<TimeLapseAlarm> Alarms { get; set; }
 
         public Entity() { }
 

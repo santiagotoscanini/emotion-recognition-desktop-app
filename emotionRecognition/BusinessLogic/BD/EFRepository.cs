@@ -38,7 +38,7 @@ namespace BusinessLogic
 
             using (Context context = new Context())
             {
-                entities = context.Entities.Include(p => p.Alarms).Include(p => p.Phrases).ToList();
+                entities = context.Entities.ToList();
             }
 
             return entities;
@@ -107,7 +107,7 @@ namespace BusinessLogic
 
             using (Context context = new Context())
             {
-                foreach (Phrase phrase in context.Phrases)
+                foreach (Phrase phrase in context.Phrases.ToList())
                 {
                     if (phrase.Text.Contains(sentiment.Text)) return false;
                 }
@@ -154,12 +154,14 @@ namespace BusinessLogic
         {
             using (Context context = new Context())
             {
-                foreach (Phrase phrase in GetPhrases())
-                {
-                    context.Phrases.Attach(phrase);
+                IEnumerable<Sentiment> sentiments = context.Sentiments.ToList();
+                IEnumerable<Entity> entities = context.Entities.ToList();
 
-                    phrase.Analyze(context.Sentiments.ToList(), context.Entities.ToList());
+                foreach (Phrase phrase in context.Phrases.ToList())
+                {
+                    phrase.Analyze(sentiments, entities);
                 }
+
                 context.SaveChanges();
             }
         }
@@ -190,9 +192,11 @@ namespace BusinessLogic
         {
             using (Context context = new Context())
             {
-                foreach (TimeLapseAlarm alarm in GetAlarms())
+                IEnumerable<Phrase> phrases = context.Phrases.ToList();
+
+                foreach (TimeLapseAlarm alarm in context.Alarms.ToList())
                 {
-                    alarm.CheckIfAlarmIsActivated(GetPhrases());
+                    alarm.CheckIfAlarmIsActivated(phrases);
                     context.Alarms.AddOrUpdate(alarm);
                 }
                 context.SaveChanges();
@@ -205,7 +209,7 @@ namespace BusinessLogic
 
             using (Context context = new Context())
             {
-                foreach (Sentiment sentiment in new List<Sentiment>(context.Sentiments))
+                foreach (Sentiment sentiment in context.Sentiments.ToList())
                 {
                     if (sentiment.State == state)
                     {
