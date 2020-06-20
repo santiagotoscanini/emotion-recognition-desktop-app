@@ -7,10 +7,10 @@ namespace UserInterface
     {
         private readonly BusinessLogicController controller;
 
-        public PhraseReportUserControl(IRepository repository)
+        public PhraseReportUserControl(BusinessLogicController controller)
         {
             InitializeComponent();
-            controller = new BusinessLogicController(repository);
+            this.controller = controller;
             LoadPhrasesReport();
         }
 

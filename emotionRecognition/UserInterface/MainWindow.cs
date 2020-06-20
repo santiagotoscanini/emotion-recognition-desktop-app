@@ -8,10 +8,10 @@ namespace emotionRecognition
     {
         private readonly BusinessLogicController controller;
 
-        public MainWindow(IRepository repository)
+        public MainWindow(BusinessLogicController controller)
         {
             InitializeComponent();
-            controller = new BusinessLogicController(repository);
+            this.controller = controller;
         }
 
         public void OnRefresh(ApplicationState applicationState)
@@ -21,16 +21,16 @@ namespace emotionRecognition
             switch (applicationState)
             {
                 case ApplicationState.ADDING_AN_ALARM:
-                    this.PnlMain.Controls.Add(new AlarmUserControl(controller.Repository));
+                    this.PnlMain.Controls.Add(new AlarmUserControl(controller));
                     break;
                 case ApplicationState.ADDING_A_ENTITY:
-                    this.PnlMain.Controls.Add(new AddEntityUserControl(controller.Repository));
+                    this.PnlMain.Controls.Add(new AddEntityUserControl(controller));
                     break;
                 case ApplicationState.ADDING_A_PHRASE:
-                    this.PnlMain.Controls.Add(new AddPhraseUserControl(controller.Repository));
+                    this.PnlMain.Controls.Add(new AddPhraseUserControl(controller));
                     break;
                 case ApplicationState.ADDING_A_SENTIMENT:
-                    this.PnlMain.Controls.Add(new AddSentimentUserControl(controller.Repository));
+                    this.PnlMain.Controls.Add(new AddSentimentUserControl(controller));
                     break;
             }
         }

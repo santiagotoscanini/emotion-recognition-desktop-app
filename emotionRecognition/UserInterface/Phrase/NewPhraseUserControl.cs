@@ -12,10 +12,10 @@ namespace UserInterface
 
         private readonly BusinessLogicController controller;
 
-        public NewPhraseUserControl(IRepository repository)
+        public NewPhraseUserControl(BusinessLogicController controller)
         {
             InitializeComponent();
-            controller = new BusinessLogicController(repository);
+            this.controller = controller;
         }
 
         private void BtnAccept_Click(object sender, EventArgs e)

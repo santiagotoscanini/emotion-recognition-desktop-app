@@ -8,10 +8,10 @@ namespace UserInterface
     {
         private readonly BusinessLogicController controller;
 
-        public AddAlarmUserControl(IRepository repository)
+        public AddAlarmUserControl(BusinessLogicController controller)
         {
             InitializeComponent();
-            controller = new BusinessLogicController(repository);
+            this.controller = controller;
             LoadEntities();
         }
 

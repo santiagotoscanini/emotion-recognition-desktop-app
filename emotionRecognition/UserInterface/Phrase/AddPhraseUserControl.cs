@@ -9,10 +9,10 @@ namespace emotionRecognition
     {
         private readonly BusinessLogicController controller;
 
-        public AddPhraseUserControl(IRepository repository)
+        public AddPhraseUserControl(BusinessLogicController controller)
         {
             InitializeComponent();
-            controller = new BusinessLogicController(repository);
+            this.controller = controller;
             OnRefresh(ApplicationState.REGISTER_A_PHRASE);
         }
 
@@ -23,10 +23,10 @@ namespace emotionRecognition
             switch (applicationState)
             {
                 case ApplicationState.REGISTER_A_PHRASE:
-                    PnlPhrases.Controls.Add(new NewPhraseUserControl(controller.Repository));
+                    PnlPhrases.Controls.Add(new NewPhraseUserControl(controller));
                     break;
                 case ApplicationState.PHRASE_REPORT:
-                    PnlPhrases.Controls.Add(new PhraseReportUserControl(controller.Repository));
+                    PnlPhrases.Controls.Add(new PhraseReportUserControl(controller));
                     break;
             }
 

@@ -11,7 +11,7 @@ namespace emotionRecognition
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MainWindow(new EFRepository()));
+            Application.Run(new MainWindow(new BusinessLogicController(new EFRepository())));
         }
     }
 }
