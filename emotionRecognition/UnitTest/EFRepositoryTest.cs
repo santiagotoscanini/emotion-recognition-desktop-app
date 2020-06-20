@@ -1,30 +1,28 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BusinessLogic;
+﻿using BusinessLogic;
 using BusinessLogic.Enums;
-using System.Collections.Generic;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnitTest;
 
 namespace Tests
 {
     [TestClass]
-    public class RepositoryTest : TestUtils
+    public class EFRepositoryTest : TestUtils
     {
-        private Repository repository;
+        private IRepository repository;
 
         [TestInitialize]
-        public void Initialize()
+        public void InitializeTests()
         {
-            repository = new Repository();
-            cleanDB();
+            repository = new EFRepository();
         }
 
         [TestCleanup]
-        public void Cleanup()
+        public void CleanupTests()
         {
-            repository = new Repository();
-            cleanDB();
+            CleanDB();
         }
 
         [TestMethod]
@@ -162,11 +160,10 @@ namespace Tests
         public void GetNegativeSentiments()
         {
             Sentiment negativeSentiment = new Sentiment("hate", SentimentState.NEGATIVE);
-            repository.AddSentiment(negativeSentiment);
+            bool sentimentWasAdded = repository.AddSentiment(negativeSentiment);
 
-            IEnumerable<Sentiment> negativeSentiments = repository.GetNegativeSentiments();
-
-            Assert.AreEqual(1, negativeSentiments.ToList().Count);
+            Assert.AreEqual(true, sentimentWasAdded);
+            Assert.AreEqual(1, repository.GetNegativeSentiments().ToList().Count);
         }
 
         [TestMethod]

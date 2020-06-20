@@ -9,10 +9,10 @@ namespace emotionRecognition
     {
         private readonly BusinessLogicController controller;
 
-        public AddSentimentUserControl(Repository repository)
+        public AddSentimentUserControl(BusinessLogicController controller)
         {
             InitializeComponent();
-            controller = new BusinessLogicController(repository);
+            this.controller = controller;
             OnRefresh(ApplicationState.ADDING_POSITIVE_SENTIMENT);
         }
 
@@ -23,10 +23,10 @@ namespace emotionRecognition
             switch (applicationState)
             {
                 case ApplicationState.ADDING_POSITIVE_SENTIMENT:
-                    PnlSentiments.Controls.Add(new PositiveSentimentUserControl(controller.Repository));
+                    PnlSentiments.Controls.Add(new PositiveSentimentUserControl(controller));
                     break;
                 case ApplicationState.ADDING_NEGATIVE_SENTIMENT:
-                    PnlSentiments.Controls.Add(new NegativeSentimentUserControl(controller.Repository));
+                    PnlSentiments.Controls.Add(new NegativeSentimentUserControl(controller));
                     break;
             }
 

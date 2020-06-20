@@ -9,11 +9,11 @@ namespace emotionRecognition
     {
         private readonly BusinessLogicController controller;
 
-        public AlarmUserControl(Repository repository)
+        public AlarmUserControl(BusinessLogicController controller)
         {
             InitializeComponent();
-            controller = new BusinessLogicController(repository);
-            this.OnRefresh(ApplicationState.CONFIG_AN_ALARM);
+            this.controller = controller;
+            OnRefresh(ApplicationState.CONFIG_AN_ALARM);
         }
 
         public void OnRefresh(ApplicationState applicationState)
@@ -23,10 +23,10 @@ namespace emotionRecognition
             switch (applicationState)
             {
                 case ApplicationState.CONFIG_AN_ALARM:
-                    PnlAlarm.Controls.Add(new AddAlarmUserControl(controller.Repository));
+                    PnlAlarm.Controls.Add(new AddAlarmUserControl(controller));
                     break;
                 case ApplicationState.ALARMS_REPORT:
-                    PnlAlarm.Controls.Add(new AlarmReportUserControl(controller.Repository));
+                    PnlAlarm.Controls.Add(new AlarmReportUserControl(controller));
                     break;
             }
 

@@ -1,17 +1,14 @@
 using BusinessLogic.Enums;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
-using System.Data.Entity.Migrations;
-using System.Linq;
 
 namespace BusinessLogic
 {
     public class BusinessLogicController
     {
-        public Repository Repository { get; private set; }
+        private IRepository Repository { get; set; }
 
-        public BusinessLogicController(Repository repository)
+        public BusinessLogicController(IRepository repository)
         {
             Repository = repository;
         }
@@ -25,24 +22,11 @@ namespace BusinessLogic
                 entityWasAdded = Repository.AddEntity(entityToAdd);
                 AnalyzePhrases();
             }
+
             return entityWasAdded;
         }
 
-        private bool IsEntityContainedIntoAnother(string name)
-        {
-            bool isContained = false;
-            foreach (Entity entity in Repository.GetEntities())
-            {
-                isContained |= entity.Name.Contains(name);
-                if (isContained)
-                {
-                    break;
-                }
-            }
-            return isContained;
-        }
-
-        public IEnumerable<Entity> GetEntities()
+        public IEnumerable<Entity> GetEntities()           
         {
             return Repository.GetEntities();
         }
@@ -56,29 +40,14 @@ namespace BusinessLogic
             TimeLapseAlarm alarm = new TimeLapseAlarm(entity, searchMethodType, timeToSearchBack, alarmPosibleState, sentimentsNeeded);
 
             Repository.AddAlarm(alarm);
-            AnalyzeAlarms();
+            Repository.AnalyzeAlarms();
         }
 
         public IEnumerable<TimeLapseAlarm> GetAlarmsChecked()
         {
-            AnalyzeAlarms();
+            Repository.AnalyzeAlarms();
+
             return Repository.GetAlarms();
-        }
-
-        private void AnalyzeAlarms()
-        {
-            List<TimeLapseAlarm> alarms = Repository.GetAlarms().ToList();
-
-            using (Context context = new Context())
-            {
-                foreach (TimeLapseAlarm alarm in alarms)
-                {
-                    alarm.CheckIfAlarmIsActivated(Repository.GetPhrases());
-
-                    context.Alarms.AddOrUpdate(alarm);
-                }
-                context.SaveChanges();
-            }
         }
 
         public void AddPhrase(string phraseText, DateTime dateTime)
@@ -86,7 +55,7 @@ namespace BusinessLogic
             Phrase phraseToAdd = new Phrase(phraseText, Repository.GetSentiments(), Repository.GetEntities(), dateTime);
             Repository.AddPhrase(phraseToAdd);
 
-            AnalyzeAlarms();
+            Repository.AnalyzeAlarms();
         }
 
         public IEnumerable<Phrase> GetPhrases()
@@ -96,16 +65,7 @@ namespace BusinessLogic
 
         public void AnalyzePhrases()
         {
-            using (Context context = new Context())
-            {
-                foreach (Phrase phrase in context.Phrases.ToList())
-                {
-                    context.Phrases.Attach(phrase);
-
-                    phrase.Analyze(context.Sentiments.ToList(), context.Entities.ToList());
-                }
-                context.SaveChanges();
-            }
+            Repository.AnalyzePhrases();
         }
 
         public bool AddPositiveSentiment(string text)
@@ -120,22 +80,10 @@ namespace BusinessLogic
                     AnalyzePhrases();
                 }
             }
+
             return wasAdded;
         }
 
-        private bool IsSentimentContainedIntoAnother(string text)
-        {
-            bool isContained = false;
-            foreach (Sentiment sentiment in Repository.GetSentiments())
-            {
-                isContained |= sentiment.Text.Contains(text);
-                if (isContained)
-                {
-                    break;
-                }
-            }
-            return isContained;
-        }
 
         public IEnumerable<Sentiment> GetPositiveSentiments()
         {
@@ -159,6 +107,7 @@ namespace BusinessLogic
                     AnalyzePhrases();
                 }
             }
+
             return wasAdded;
         }
 
@@ -170,6 +119,33 @@ namespace BusinessLogic
         public bool DeleteNegativeSentiment(string text)
         {
             return Repository.RemoveUnusedSentiment(new Sentiment(text, SentimentState.NEGATIVE));
+        }
+
+        private bool IsEntityContainedIntoAnother(string name)
+        {
+            bool isContained = false;
+            foreach (Entity entity in Repository.GetEntities())
+            {
+                isContained |= entity.Name.Contains(name);
+                if (isContained) break;
+            }
+
+            return isContained;
+        }
+
+        private bool IsSentimentContainedIntoAnother(string text)
+        {
+            bool isContained = false;
+            foreach (Sentiment sentiment in Repository.GetSentiments())
+            {
+                isContained |= sentiment.Text.Contains(text);
+                if (isContained)
+                {
+                    break;
+                }
+            }
+
+            return isContained;
         }
     }
 }

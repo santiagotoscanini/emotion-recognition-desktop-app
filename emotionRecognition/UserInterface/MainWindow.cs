@@ -6,31 +6,31 @@ namespace emotionRecognition
 {
     public partial class MainWindow : Form
     {
-        private BusinessLogicController controller;
+        private readonly BusinessLogicController controller;
 
-        public MainWindow(Repository repository)
+        public MainWindow(BusinessLogicController controller)
         {
             InitializeComponent();
-            this.controller = new BusinessLogicController(repository);
+            this.controller = controller;
         }
 
         public void OnRefresh(ApplicationState applicationState)
         {
-            this.PnlMain.Controls.Clear();
+            PnlMain.Controls.Clear();
 
             switch (applicationState)
             {
                 case ApplicationState.ADDING_AN_ALARM:
-                    this.PnlMain.Controls.Add(new AlarmUserControl(controller.Repository));
+                    this.PnlMain.Controls.Add(new AlarmUserControl(controller));
                     break;
                 case ApplicationState.ADDING_A_ENTITY:
-                    this.PnlMain.Controls.Add(new AddEntityUserControl(controller.Repository));
+                    this.PnlMain.Controls.Add(new AddEntityUserControl(controller));
                     break;
                 case ApplicationState.ADDING_A_PHRASE:
-                    this.PnlMain.Controls.Add(new AddPhraseUserControl(controller.Repository));
+                    this.PnlMain.Controls.Add(new AddPhraseUserControl(controller));
                     break;
                 case ApplicationState.ADDING_A_SENTIMENT:
-                    this.PnlMain.Controls.Add(new AddSentimentUserControl(controller.Repository));
+                    this.PnlMain.Controls.Add(new AddSentimentUserControl(controller));
                     break;
             }
         }

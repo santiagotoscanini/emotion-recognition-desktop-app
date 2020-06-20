@@ -2,14 +2,14 @@ using BusinessLogic.Enums;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Core;
+using System.Data.Entity.Migrations;
 using System.Linq;
 
 namespace BusinessLogic
 {
-    public class Repository
+    public class EFRepository : IRepository
     {
-        public Repository()
+        public EFRepository()
         {
         }
 
@@ -23,7 +23,7 @@ namespace BusinessLogic
                     context.Entities.Add(entity);
                     context.SaveChanges();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     result = false;
                 }
@@ -38,10 +38,26 @@ namespace BusinessLogic
 
             using (Context context = new Context())
             {
-                entities = context.Entities.Include(p => p.Alarms).Include(p => p.Phrases).ToList();
+                entities = context.Entities.ToList();
             }
 
             return entities;
+        }
+
+        public Entity GetEntityFromName(string entityName)
+        {
+            Entity entity;
+            using (Context context = new Context())
+            {
+                entity = context.Entities.Find(entityName);
+
+                if (entity == null)
+                {
+                    throw new ArgumentException("Entity name is not loaded", "entityName");
+                }
+            }
+
+            return entity;
         }
 
         public bool AddSentiment(Sentiment sentiment)
@@ -54,7 +70,7 @@ namespace BusinessLogic
                     context.Sentiments.Add(sentiment);
                     context.SaveChanges();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     result = false;
                 }
@@ -75,43 +91,9 @@ namespace BusinessLogic
             return sentiments;
         }
 
-        public Entity GetEntityFromName(string entityName)
-        {
-            Entity entity;
-            using (Context context = new Context())
-            {
-                entity = context.Entities.Find(entityName);
-
-                if (entity == null)
-                {
-                    throw new ArgumentException("Entity name is not loaded", "entityName");
-                }
-            }
-
-            return entity;
-        }
-
         public IEnumerable<Sentiment> GetPositiveSentiments()
         {
             return FilterBySentiment(SentimentState.POSITIVE);
-        }
-
-        private IEnumerable<Sentiment> FilterBySentiment(SentimentState state)
-        {
-            List<Sentiment> filterSentiments = new List<Sentiment>();
-
-            using (Context context = new Context())
-            {
-                foreach (Sentiment sentiment in new List<Sentiment>(context.Sentiments))
-                {
-                    if (sentiment.State == state)
-                    {
-                        filterSentiments.Add(sentiment);
-                    }
-                }
-            }
-
-            return filterSentiments;
         }
 
         public IEnumerable<Sentiment> GetNegativeSentiments()
@@ -125,7 +107,7 @@ namespace BusinessLogic
 
             using (Context context = new Context())
             {
-                foreach (Phrase phrase in context.Phrases)
+                foreach (Phrase phrase in context.Phrases.ToList())
                 {
                     if (phrase.Text.Contains(sentiment.Text)) return false;
                 }
@@ -135,7 +117,7 @@ namespace BusinessLogic
                     context.Sentiments.Remove(sentimentFound);
                     context.SaveChanges();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     canDeleteSentiment = false;
                 }
@@ -168,6 +150,22 @@ namespace BusinessLogic
             return phrases;
         }
 
+        public void AnalyzePhrases()
+        {
+            using (Context context = new Context())
+            {
+                IEnumerable<Sentiment> sentiments = context.Sentiments.ToList();
+                IEnumerable<Entity> entities = context.Entities.ToList();
+
+                foreach (Phrase phrase in context.Phrases.ToList())
+                {
+                    phrase.Analyze(sentiments, entities);
+                }
+
+                context.SaveChanges();
+            }
+        }
+
         public void AddAlarm(TimeLapseAlarm alarm)
         {
             using (Context context = new Context())
@@ -188,6 +186,39 @@ namespace BusinessLogic
             }
 
             return alarms;
+        }
+
+        public void AnalyzeAlarms()
+        {
+            using (Context context = new Context())
+            {
+                IEnumerable<Phrase> phrases = context.Phrases.ToList();
+
+                foreach (TimeLapseAlarm alarm in context.Alarms.ToList())
+                {
+                    alarm.CheckIfAlarmIsActivated(phrases);
+                    context.Alarms.AddOrUpdate(alarm);
+                }
+                context.SaveChanges();
+            }
+        }
+
+        private IEnumerable<Sentiment> FilterBySentiment(SentimentState state)
+        {
+            List<Sentiment> filterSentiments = new List<Sentiment>();
+
+            using (Context context = new Context())
+            {
+                foreach (Sentiment sentiment in context.Sentiments.ToList())
+                {
+                    if (sentiment.State == state)
+                    {
+                        filterSentiments.Add(sentiment);
+                    }
+                }
+            }
+
+            return filterSentiments;
         }
     }
 }

@@ -108,6 +108,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Date;
         private System.Windows.Forms.DataGridViewTextBoxColumn Entity;
         private System.Windows.Forms.DataGridViewTextBoxColumn State;
-        private System.Windows.Forms.Label LblNoPhrases;
     }
 }
