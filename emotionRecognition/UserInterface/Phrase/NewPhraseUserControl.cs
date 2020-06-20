@@ -12,7 +12,7 @@ namespace UserInterface
 
         private readonly BusinessLogicController controller;
 
-        public NewPhraseUserControl(Repository repository)
+        public NewPhraseUserControl(IRepository repository)
         {
             InitializeComponent();
             controller = new BusinessLogicController(repository);

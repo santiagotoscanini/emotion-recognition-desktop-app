@@ -19,10 +19,12 @@ namespace BusinessLogic
 
         public TimeLapseAlarm(Entity entity, TimeSearchMethodType timeSearchMethodType, uint quantityOfTimeToSearchBack, AlarmPosibleState alarmPosibleState, uint quantityOfSentimentsNeeded)
         {
-            if(quantityOfTimeToSearchBack == 0 ) {
+            if (quantityOfTimeToSearchBack == 0)
+            {
                 throw new ArgumentException("Cannot create an alarm with quantity of time to search back equals to zero", "quantityOfTimeToSearchBack");
             }
-            if(quantityOfSentimentsNeeded == 0) {
+            if (quantityOfSentimentsNeeded == 0)
+            {
                 throw new ArgumentException("Cannot create an alarm with quantity of sentiments needed equals to zero", "quantityOfSentimentsNeeded");
             }
 
@@ -70,7 +72,7 @@ namespace BusinessLogic
                         phrase.CreationDate.Ticks <= DateTime.Now.Ticks
                     );
         }
-        
+
         private uint GetNumberOfPhrases(List<Phrase> phrasesToBeChecked)
         {
             uint alarmCounter = 0;
@@ -81,6 +83,7 @@ namespace BusinessLogic
                 bool negative = AlarmPosibleState.Equals(AlarmPosibleState.NEGATIVE) && phrase.PhraseState < 0;
                 if (positive || negative) alarmCounter++;
             }
+
             return alarmCounter;
         }
     }

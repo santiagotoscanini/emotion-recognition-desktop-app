@@ -1,6 +1,5 @@
 ﻿using BusinessLogic.Enums;
 using System;
-using System.Collections.Generic;
 
 namespace BusinessLogic
 {
@@ -28,8 +27,8 @@ namespace BusinessLogic
                 return false;
             }
             Sentiment sentiment = obj as Sentiment;
-            return Text.Equals(sentiment.Text);
 
+            return Text.Equals(sentiment.Text);
         }
 
         public override int GetHashCode()

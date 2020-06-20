@@ -9,7 +9,7 @@ namespace emotionRecognition
     {
         private readonly BusinessLogicController controller;
 
-        public AddPhraseUserControl(Repository repository)
+        public AddPhraseUserControl(IRepository repository)
         {
             InitializeComponent();
             controller = new BusinessLogicController(repository);

@@ -7,7 +7,7 @@ namespace UserInterface
     {
         private readonly BusinessLogicController controller;
 
-        public PhraseReportUserControl(Repository repository)
+        public PhraseReportUserControl(IRepository repository)
         {
             InitializeComponent();
             controller = new BusinessLogicController(repository);
@@ -22,7 +22,7 @@ namespace UserInterface
                 GrdReport.Rows.Add(
                     phrase.Text,
                     phrase.CreationDate,
-                    phrase.Entity == null ? null : phrase.Entity.ToString(),
+                     phrase.Entity.ToString() ?? null,
                     phrase.GetStringFromPhraseState());
             }
         }

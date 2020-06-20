@@ -15,7 +15,7 @@ namespace UserInterface
 
         private readonly BusinessLogicController controller;
 
-        public PositiveSentimentUserControl(Repository repository)
+        public PositiveSentimentUserControl(IRepository repository)
         {
             InitializeComponent();
             controller = new BusinessLogicController(repository);

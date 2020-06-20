@@ -6,17 +6,17 @@ namespace emotionRecognition
 {
     public partial class MainWindow : Form
     {
-        private BusinessLogicController controller;
+        private readonly BusinessLogicController controller;
 
-        public MainWindow(Repository repository)
+        public MainWindow(IRepository repository)
         {
             InitializeComponent();
-            this.controller = new BusinessLogicController(repository);
+            controller = new BusinessLogicController(repository);
         }
 
         public void OnRefresh(ApplicationState applicationState)
         {
-            this.PnlMain.Controls.Clear();
+            PnlMain.Controls.Clear();
 
             switch (applicationState)
             {

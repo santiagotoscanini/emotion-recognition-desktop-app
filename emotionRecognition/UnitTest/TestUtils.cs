@@ -6,7 +6,7 @@ namespace UnitTest
     [TestClass]
     public class TestUtils
     {
-        protected void cleanDB()
+        protected void CleanDB()
         {
             using (Context context = new Context())
             {

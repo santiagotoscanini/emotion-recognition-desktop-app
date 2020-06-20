@@ -14,16 +14,15 @@ namespace Tests
         private BusinessLogicController businessLogicController;
 
         [TestInitialize]
-        public void initializeTests()
+        public void InitializeTests()
         {
-            businessLogicController = new BusinessLogicController(new Repository());
-            cleanDB();
+            businessLogicController = new BusinessLogicController(new EFRepository());
         }
 
         [TestCleanup]
-        public void cleanupTests()
+        public void CleanupTests()
         {
-            cleanDB();
+            CleanDB();
         }
 
         [TestMethod]
