@@ -1,3 +1,4 @@
+using BusinessLogic.Entities;
 using BusinessLogic.Enums;
 using System;
 using System.Collections.Generic;
@@ -26,7 +27,7 @@ namespace BusinessLogic
             return entityWasAdded;
         }
 
-        public IEnumerable<Entity> GetEntities()           
+        public IEnumerable<Entity> GetEntities()
         {
             return Repository.GetEntities();
         }
@@ -50,11 +51,14 @@ namespace BusinessLogic
             return Repository.GetAlarms();
         }
 
-        public void AddPhrase(string phraseText, DateTime dateTime)
+        public void AddPhrase(string phraseText, DateTime dateTime, string username)
         {
-            Phrase phraseToAdd = new Phrase(phraseText, Repository.GetSentiments(), Repository.GetEntities(), dateTime);
+            Author authorOfPhrase = GetAuthorByUsername(username);
+            Phrase phraseToAdd = new Phrase(phraseText, Repository.GetSentiments(), Repository.GetEntities(), dateTime, authorOfPhrase);
             Repository.AddPhrase(phraseToAdd);
 
+            Repository.AnalyzePhrases();
+            Repository.AnalyzeAuthors();
             Repository.AnalyzeAlarms();
         }
 
@@ -119,6 +123,33 @@ namespace BusinessLogic
         public bool DeleteNegativeSentiment(string text)
         {
             return Repository.RemoveUnusedSentiment(new Sentiment(text, SentimentState.NEGATIVE));
+        }
+
+        public IEnumerable<Author> GetAuthors()
+        {
+            return Repository.GetAuthors();
+        }
+
+        public bool AddAuthor(string username, string name, string surname, DateTime birthdate)
+        {
+            Author authorToAdd = new Author() { Username = username, Name = name, Surname = surname, Birthdate = birthdate };
+            bool wasAdded = Repository.AddAuthor(authorToAdd);
+            if (wasAdded)
+            {
+                AnalyzeAuthors();
+            }
+
+            return wasAdded;
+        }
+
+        public Author GetAuthorByUsername(string username)
+        {
+            return Repository.GetAuthorFromUsername(username);
+        }
+
+        public void AnalyzeAuthors()
+        {
+            Repository.AnalyzeAuthors();
         }
 
         private bool IsEntityContainedIntoAnother(string name)

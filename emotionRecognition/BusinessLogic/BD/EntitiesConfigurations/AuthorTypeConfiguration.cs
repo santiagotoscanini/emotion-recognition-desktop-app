@@ -3,11 +3,11 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace BusinessLogic.BD.FluentApiConfiguration
 {
-    public class EntityTypeConfiguration : EntityTypeConfiguration<Entity>
+    public class AuthorTypeConfiguration : EntityTypeConfiguration<Author>
     {
-        public EntityTypeConfiguration()
+        public AuthorTypeConfiguration()
         {
-            HasKey(x => x.Name);
+            HasKey(x => x.Username);
         }
     }
 }

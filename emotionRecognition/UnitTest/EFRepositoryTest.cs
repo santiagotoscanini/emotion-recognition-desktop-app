@@ -1,5 +1,7 @@
-﻿using BusinessLogic;
+﻿using BusinessLogic.Entities;
+using BusinessLogic.BD;
 using BusinessLogic.Enums;
+using BusinessLogic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
@@ -67,8 +69,24 @@ namespace Tests
             Sentiment sentiment = new Sentiment("Good", SentimentState.POSITIVE);
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase1 = new Phrase("The sun is bad.", new List<Sentiment>(), new List<Entity>(), actualDateTime);
-            Phrase phrase2 = new Phrase("The sun is good.", new List<Sentiment>(), new List<Entity>(), actualDateTime);
+            repository.AddAuthor(new Author() { Username = "test", Birthdate = DateTime.Now });
+            repository.AddAuthor(new Author() { Username = "test2", Birthdate = DateTime.Now });
+
+            Phrase phrase1 = new Phrase(
+                "The sun is bad.", 
+                new List<Sentiment>(), 
+                new List<Entity>(), 
+                actualDateTime, 
+                new Author() { Username = "test", Birthdate = DateTime.Now }
+                );
+
+            Phrase phrase2 = new Phrase(
+                "The sun is good.", 
+                new List<Sentiment>(), 
+                new List<Entity>(), 
+                actualDateTime, 
+                new Author() { Username = "test2", Birthdate = DateTime.Now }
+                );
 
             repository.AddSentiment(sentiment);
             repository.AddPhrase(phrase1);
@@ -80,11 +98,13 @@ namespace Tests
         [TestMethod]
         public void AddPhrase()
         {
+            repository.AddAuthor(new Author() { Username = "test", Birthdate = DateTime.Now });
+
             IEnumerable<Sentiment> sentiments = new List<Sentiment>();
             IEnumerable<Entity> entities = new List<Entity>();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("This is a phrase", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("This is a phrase", sentiments, entities, actualDateTime, new Author() { Username = "test", Birthdate = DateTime.Now });
 
             repository.AddPhrase(phrase);
         }
@@ -137,7 +157,15 @@ namespace Tests
         [TestMethod]
         public void GetPhrases()
         {
-            Phrase phrase = new Phrase("Test", repository.GetSentiments(), repository.GetEntities(), DateTime.Now);
+            repository.AddAuthor(new Author() { Username = "test", Birthdate = DateTime.Now });
+
+            Phrase phrase = new Phrase(
+                "Test", 
+                repository.GetSentiments(), 
+                repository.GetEntities(), 
+                DateTime.Now, 
+                new Author() { Username = "test", Birthdate = DateTime.Now }
+                );
             repository.AddPhrase(phrase);
 
             IEnumerable<Phrase> phrases = repository.GetPhrases();

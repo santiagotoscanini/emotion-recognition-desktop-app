@@ -54,10 +54,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BD\Context.cs" />
+    <Compile Include="BD\EntitiesConfigurations\AuthorTypeConfiguration.cs" />
     <Compile Include="BD\EntitiesConfigurations\EntityTypeConfiguration.cs" />
     <Compile Include="BD\EntitiesConfigurations\PhraseTypeConfiguration.cs" />
     <Compile Include="BD\EntitiesConfigurations\SentimentTypeConfiguration.cs" />
     <Compile Include="BD\EntitiesConfigurations\TimeLapseAlarmTypeConfiguration.cs" />
+    <Compile Include="Entities\Author.cs" />
     <Compile Include="Entities\Entity.cs" />
     <Compile Include="Entities\Enums\AlarmPosibleState.cs" />
     <Compile Include="Entities\Enums\PhraseState.cs" />
