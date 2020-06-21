@@ -19,30 +19,28 @@ namespace BusinessLogic.Entities
 
         public Author() { }
 
-        public void Analyze(IEnumerable<Phrase> phrases, IEnumerable<Entity> entities)
+        public void AnalyzeAuthorMetrics(IEnumerable<Phrase> phrases)
         {
             int numberOfPhrases = 0;
             int numberOfPositivePhrases = 0;
             int numberOfNegativePhrases = 0;
-
-            DateTime dateOfFirstPhrase = DateTime.Today;
+            DateTime dateOfFirstPhrase = DateTime.Now;
             HashSet<Entity> distinctEntitiesUsed = new HashSet<Entity>();
 
             foreach (Phrase phrase in phrases)
             {
                 if (phrase.Author.Username.Equals(Username))
                 {
-                    distinctEntitiesUsed.Add(phrase.Entity);
                     numberOfPhrases++;
+                    if (phrase.Entity != null) distinctEntitiesUsed.Add(phrase.Entity);
+                    if (phrase.CreationDate < dateOfFirstPhrase) dateOfFirstPhrase = phrase.CreationDate;
                     if (phrase.PhraseState > 0) numberOfPositivePhrases++;
                     else if (phrase.PhraseState < 0) numberOfNegativePhrases++;
-
-                    if (phrase.CreationDate < dateOfFirstPhrase) dateOfFirstPhrase= phrase.CreationDate;
                 }
             }
 
             NumberOfDistinctEntitiesMentioned = distinctEntitiesUsed.Count;
-            NumberOfDaysFromFirstPublication = (DateTime.Today - dateOfFirstPhrase).Days;
+            NumberOfDaysFromFirstPublication = (DateTime.Now - dateOfFirstPhrase).Days;
             NumberOfPhrases = numberOfPhrases;
             NumberOfPositivePhrases = numberOfPositivePhrases;
             NumberOfNegativePhrases = numberOfNegativePhrases;

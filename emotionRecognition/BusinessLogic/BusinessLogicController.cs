@@ -27,7 +27,7 @@ namespace BusinessLogic
             return entityWasAdded;
         }
 
-        public IEnumerable<Entity> GetEntities()           
+        public IEnumerable<Entity> GetEntities()
         {
             return Repository.GetEntities();
         }
@@ -132,7 +132,7 @@ namespace BusinessLogic
 
         public bool AddAuthor(string username, string name, string surname, DateTime birthdate)
         {
-            Author authorToAdd = new Author () { Username = username, Name = name, Surname = surname, Birthdate = birthdate };
+            Author authorToAdd = new Author() { Username = username, Name = name, Surname = surname, Birthdate = birthdate };
             bool wasAdded = Repository.AddAuthor(authorToAdd);
             if (wasAdded)
             {

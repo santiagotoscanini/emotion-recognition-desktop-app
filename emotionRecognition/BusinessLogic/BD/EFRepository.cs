@@ -247,12 +247,11 @@ namespace BusinessLogic.BD
         {
             using (Context context = new Context())
             {
-                IEnumerable<Phrase> phrases = context.Phrases.ToList();
-                IEnumerable<Entity> entities = context.Entities.ToList();
+                IEnumerable<Phrase> phrases = context.Phrases.Include(p => p.Entity).ToList();
 
-                foreach (Author author in context.Authors.ToList())
+                foreach (Author author in context.Authors)
                 {
-                    author.Analyze(phrases, entities);
+                    author.AnalyzeAuthorMetrics(phrases);
                 }
 
                 context.SaveChanges();

@@ -72,8 +72,21 @@ namespace Tests
             repository.AddAuthor(new Author() { Username = "test", Birthdate = DateTime.Now });
             repository.AddAuthor(new Author() { Username = "test2", Birthdate = DateTime.Now });
 
-            Phrase phrase1 = new Phrase("The sun is bad.", new List<Sentiment>(), new List<Entity>(), actualDateTime, new Author() { Username = "test", Birthdate = DateTime.Now });
-            Phrase phrase2 = new Phrase("The sun is good.", new List<Sentiment>(), new List<Entity>(), actualDateTime, new Author() { Username = "test2", Birthdate = DateTime.Now });
+            Phrase phrase1 = new Phrase(
+                "The sun is bad.", 
+                new List<Sentiment>(), 
+                new List<Entity>(), 
+                actualDateTime, 
+                new Author() { Username = "test", Birthdate = DateTime.Now }
+                );
+
+            Phrase phrase2 = new Phrase(
+                "The sun is good.", 
+                new List<Sentiment>(), 
+                new List<Entity>(), 
+                actualDateTime, 
+                new Author() { Username = "test2", Birthdate = DateTime.Now }
+                );
 
             repository.AddSentiment(sentiment);
             repository.AddPhrase(phrase1);

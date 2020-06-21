@@ -19,11 +19,6 @@ namespace Tests
         public void InitializeTests()
         {
             businessLogicController = new BusinessLogicController(new EFRepository());
-        }
-
-        [TestCleanup]
-        public void CleanupTests()
-        {
             CleanDB();
         }
 
@@ -254,6 +249,7 @@ namespace Tests
         }
 
         [TestMethod]
+
         public void AnalyzeAuthor()
         {
             Assert.AreEqual(0, businessLogicController.GetAuthors().ToList().Count);
@@ -269,18 +265,19 @@ namespace Tests
             Assert.AreEqual(0, authorSaved.NumberOfDistinctEntitiesMentioned);
             Assert.AreEqual(0, authorSaved.NumberOfDaysFromFirstPublication);
 
-            businessLogicController.AddPhrase("Muy rica la mostaza", DateTime.Now, "stos");
+            businessLogicController.AddPhrase("Muy rica la mostaza", DateTime.Now.AddDays(-1).AddSeconds(-20), "stos");
             businessLogicController.AddEntity("mostaza");
             businessLogicController.AddPositiveSentiment("RicA");
             
             businessLogicController.AnalyzePhrases();
             businessLogicController.AnalyzeAuthors();
 
-            Author authorSavedAfterAnalyze = businessLogicController.GetAuthors().ToList().First();
+            Author authorSavedAfterAnalyze = businessLogicController.GetAuthorByUsername("stos");
             Assert.AreEqual(1, authorSavedAfterAnalyze.NumberOfPhrases);
             Assert.AreEqual(1, authorSavedAfterAnalyze.NumberOfPositivePhrases);
             Assert.AreEqual(0, authorSavedAfterAnalyze.NumberOfNegativePhrases);
             Assert.AreEqual(1, authorSavedAfterAnalyze.NumberOfDistinctEntitiesMentioned);
+            Assert.AreEqual(1, authorSavedAfterAnalyze.NumberOfDaysFromFirstPublication);
         }
     }
 }
