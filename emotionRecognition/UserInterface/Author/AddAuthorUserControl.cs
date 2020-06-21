@@ -46,7 +46,7 @@ namespace UserInterface
         private void BtnCreateAuthor_Click(object sender, EventArgs e)
         {
             HideErrorMessage();
-            if (CheckData())
+            if (!DataIsIncorrect())
             {
                 CreateOrUpdateAuthor();
                 ShowSucessfullMessage();
@@ -78,12 +78,7 @@ namespace UserInterface
             LblNoUsername.Text = EmptyText;
         }
 
-        private bool CheckData()
-        {
-            return !ShowErrorMessage();
-        }
-
-        private bool ShowErrorMessage()
+        private bool DataIsIncorrect()
         {
             bool areAtLeastOneFieldEmpty = false;
             if (string.IsNullOrWhiteSpace(TxtName.Text))

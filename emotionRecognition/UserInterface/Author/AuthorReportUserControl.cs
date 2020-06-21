@@ -29,7 +29,7 @@ namespace UserInterface
         {
             ClearFields();
 
-            if (CheckData())
+            if (!DataIsIncorrect())
             {
                 String authorUsername = (string)GrdAuthors.CurrentRow.Cells["UserName"].Value;
                 //TODO
@@ -46,7 +46,7 @@ namespace UserInterface
         {
             ClearFields();
 
-            if (CheckData())
+            if (!DataIsIncorrect())
             {
                 String authorUsername = (string)GrdAuthors.CurrentRow.Cells["UserName"].Value;
 
@@ -54,12 +54,7 @@ namespace UserInterface
             }
         }
 
-        private bool CheckData()
-        {
-            return !ShowErrorMessage();
-        }
-
-        private bool ShowErrorMessage()
+        private bool DataIsIncorrect()
         {
             bool areAtLeastOneFieldEmpty = false;
             if (GrdAuthors.CurrentCell == null)
