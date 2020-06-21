@@ -10,6 +10,8 @@ namespace UserInterface
         private const string SuccessMessage = "Frase agregada satisfactoriamente";
         private const string EmptyText = "";
 
+        private const int MaxDateOfBirth = -100;
+
         private readonly BusinessLogicController controller;
 
         public NewPhraseUserControl(BusinessLogicController controller)
@@ -17,6 +19,14 @@ namespace UserInterface
             InitializeComponent();
             this.controller = controller;
             LoadAuthor();
+            SetCalendarLimits();
+        }
+
+        private void SetCalendarLimits()
+        {
+            DtpCalendar.MaxDate = DateTime.Now;
+            DtpCalendar.MinDate = DateTime.Now.AddYears(MaxDateOfBirth);
+            DtpCalendar.Text = DateTime.Now.ToString();
         }
 
         private void LoadAuthor()
