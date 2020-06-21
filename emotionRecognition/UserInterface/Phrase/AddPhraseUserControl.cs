@@ -1,45 +1,93 @@
 ﻿using BusinessLogic;
 using System;
 using System.Windows.Forms;
-using UserInterface;
 
-namespace emotionRecognition
+namespace UserInterface
 {
-    public partial class AddPhraseUserControl : UserControl
+    public partial class NewPhraseUserControl : UserControl
     {
+        private const string CanNotSaveEmptyData = "El texto de la frase no puede estar vacio o ser unicamente espacios";
+        private const string SuccessMessage = "Frase agregada satisfactoriamente";
+        private const string EmptyText = "";
+
         private readonly BusinessLogicController controller;
 
-        public AddPhraseUserControl(BusinessLogicController controller)
+        public NewPhraseUserControl(BusinessLogicController controller)
         {
             InitializeComponent();
             this.controller = controller;
-            OnRefresh(ApplicationState.REGISTER_A_PHRASE);
+            LoadAuthor();
         }
 
-        public void OnRefresh(ApplicationState applicationState)
+        private void LoadAuthor()
         {
-            PnlPhrases.Controls.Clear();
-
-            switch (applicationState)
+            //TODO
+            //foreach (Entity author in controller.GetAuthors())
+            //{
+            //    LbxAuthors.Items.Add(entity.Name);
+            //}
+            if (LbxAuthors.Items.Count == 0)
             {
-                case ApplicationState.REGISTER_A_PHRASE:
-                    PnlPhrases.Controls.Add(new NewPhraseUserControl(controller));
-                    break;
-                case ApplicationState.PHRASE_REPORT:
-                    PnlPhrases.Controls.Add(new PhraseReportUserControl(controller));
-                    break;
+                LblNoAuthorError.Visible = true;
+                LbxAuthors.Enabled = false;
+                BtnAccept.Enabled = false;
+            }
+            else
+            {
+                LbxAuthors.SelectedIndex = 0;
+            }
+        }
+
+        private void BtnAccept_Click(object sender, EventArgs e)
+        {
+            HideErrorMessage();
+            if (CheckData())
+            {
+                CreatePhrase();
+                ShowSucessfullMessage();
+                ClearFields();
+            }
+        }
+        private void ShowSucessfullMessage()
+        {
+            LblSucessful.Text = SuccessMessage;
+        }
+
+        private void HideErrorMessage()
+        {
+            LblErrorMessageEmptyData.Text = EmptyText;
+            LblSucessful.Text = EmptyText;
+        }
+
+        private bool CheckData()
+        {
+            if (!string.IsNullOrWhiteSpace(TxtPhrase.Text))
+            {
+                return true;
             }
 
+            ShowErrorMessage();
+            return false;
         }
 
-        private void BtnAddPhrase_Click(object sender, EventArgs e)
+        private void ShowErrorMessage()
         {
-            OnRefresh(ApplicationState.REGISTER_A_PHRASE);
+            LblErrorMessageEmptyData.Text = CanNotSaveEmptyData;
         }
 
-        private void BtnPhraseReport_Click(object sender, EventArgs e)
+        private void CreatePhrase()
         {
-            OnRefresh(ApplicationState.PHRASE_REPORT);
+            string phraseText = TxtPhrase.Text;
+            DateTime calendar = DtpCalendar.Value;
+            DateTime hours = DtpTime.Value;
+
+            DateTime dateTime = new DateTime(calendar.Year, calendar.Month, calendar.Day, hours.Hour, hours.Minute, hours.Second);
+            controller.AddPhrase(phraseText, dateTime);
+        }
+
+        private void ClearFields()
+        {
+            TxtPhrase.Text = EmptyText;
         }
     }
 }

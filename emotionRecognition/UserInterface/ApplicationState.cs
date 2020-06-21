@@ -12,5 +12,8 @@
         ADDING_NEGATIVE_SENTIMENT,
         REGISTER_A_PHRASE,
         PHRASE_REPORT,
+        ADDING_AN_AUTHOR,
+        AUTHOR_REPORT,
+        AUTHORS
     }
 }

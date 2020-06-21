@@ -38,6 +38,7 @@ namespace emotionRecognition
             this.BtnEntities = new System.Windows.Forms.Button();
             this.BtnPhrases = new System.Windows.Forms.Button();
             this.BtnSentiments = new System.Windows.Forms.Button();
+            this.BtnAuthors = new System.Windows.Forms.Button();
             this.PnlMain.SuspendLayout();
             this.PnlOptions.SuspendLayout();
             this.SuspendLayout();
@@ -61,6 +62,7 @@ namespace emotionRecognition
             // 
             // PnlOptions
             // 
+            this.PnlOptions.Controls.Add(this.BtnAuthors);
             this.PnlOptions.Controls.Add(this.BtnAlarms);
             this.PnlOptions.Controls.Add(this.BtnEntities);
             this.PnlOptions.Controls.Add(this.BtnPhrases);
@@ -73,10 +75,10 @@ namespace emotionRecognition
             // 
             // BtnAlarms
             // 
-            this.BtnAlarms.Location = new System.Drawing.Point(0, 323);
+            this.BtnAlarms.Location = new System.Drawing.Point(0, 351);
             this.BtnAlarms.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnAlarms.Name = "BtnAlarms";
-            this.BtnAlarms.Size = new System.Drawing.Size(269, 110);
+            this.BtnAlarms.Size = new System.Drawing.Size(269, 86);
             this.BtnAlarms.TabIndex = 3;
             this.BtnAlarms.Text = "Alarmas";
             this.BtnAlarms.UseVisualStyleBackColor = true;
@@ -84,10 +86,10 @@ namespace emotionRecognition
             // 
             // BtnEntities
             // 
-            this.BtnEntities.Location = new System.Drawing.Point(0, 215);
+            this.BtnEntities.Location = new System.Drawing.Point(0, 0);
             this.BtnEntities.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnEntities.Name = "BtnEntities";
-            this.BtnEntities.Size = new System.Drawing.Size(269, 110);
+            this.BtnEntities.Size = new System.Drawing.Size(269, 76);
             this.BtnEntities.TabIndex = 2;
             this.BtnEntities.Text = "Entidades";
             this.BtnEntities.UseVisualStyleBackColor = true;
@@ -95,10 +97,10 @@ namespace emotionRecognition
             // 
             // BtnPhrases
             // 
-            this.BtnPhrases.Location = new System.Drawing.Point(0, 108);
+            this.BtnPhrases.Location = new System.Drawing.Point(0, 261);
             this.BtnPhrases.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnPhrases.Name = "BtnPhrases";
-            this.BtnPhrases.Size = new System.Drawing.Size(269, 110);
+            this.BtnPhrases.Size = new System.Drawing.Size(269, 86);
             this.BtnPhrases.TabIndex = 1;
             this.BtnPhrases.Text = "Frases";
             this.BtnPhrases.UseVisualStyleBackColor = true;
@@ -106,14 +108,25 @@ namespace emotionRecognition
             // 
             // BtnSentiments
             // 
-            this.BtnSentiments.Location = new System.Drawing.Point(0, 0);
+            this.BtnSentiments.Location = new System.Drawing.Point(0, 81);
             this.BtnSentiments.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnSentiments.Name = "BtnSentiments";
-            this.BtnSentiments.Size = new System.Drawing.Size(269, 110);
+            this.BtnSentiments.Size = new System.Drawing.Size(269, 86);
             this.BtnSentiments.TabIndex = 0;
             this.BtnSentiments.Text = "Sentimientos";
             this.BtnSentiments.UseVisualStyleBackColor = true;
             this.BtnSentiments.Click += new System.EventHandler(this.BtnSentiments_Click);
+            // 
+            // BtnAuthors
+            // 
+            this.BtnAuthors.Location = new System.Drawing.Point(0, 171);
+            this.BtnAuthors.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.BtnAuthors.Name = "BtnAuthors";
+            this.BtnAuthors.Size = new System.Drawing.Size(269, 86);
+            this.BtnAuthors.TabIndex = 4;
+            this.BtnAuthors.Text = "Autores";
+            this.BtnAuthors.UseVisualStyleBackColor = true;
+            this.BtnAuthors.Click += new System.EventHandler(this.BtnAuthors_Click);
             // 
             // MainWindow
             // 
@@ -144,6 +157,7 @@ namespace emotionRecognition
         private System.Windows.Forms.Button BtnPhrases;
         private System.Windows.Forms.Button BtnSentiments;
         private System.Windows.Forms.Label LblMessage;
+        private System.Windows.Forms.Button BtnAuthors;
     }
 }
 

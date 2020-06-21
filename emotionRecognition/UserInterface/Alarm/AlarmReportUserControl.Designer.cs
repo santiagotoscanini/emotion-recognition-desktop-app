@@ -42,10 +42,9 @@
             // LblAlarms
             // 
             this.LblAlarms.AutoSize = true;
-            this.LblAlarms.Location = new System.Drawing.Point(26, 13);
-            this.LblAlarms.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LblAlarms.Location = new System.Drawing.Point(35, 16);
             this.LblAlarms.Name = "LblAlarms";
-            this.LblAlarms.Size = new System.Drawing.Size(100, 13);
+            this.LblAlarms.Size = new System.Drawing.Size(135, 17);
             this.LblAlarms.TabIndex = 1;
             this.LblAlarms.Text = "Alarmas generadas:";
             // 
@@ -62,58 +61,72 @@
             this.SentimentToDetect,
             this.NumberOfSentimentsNeeded,
             this.IsActivated});
-            this.GrdAlarms.Location = new System.Drawing.Point(14, 46);
+            this.GrdAlarms.Location = new System.Drawing.Point(19, 57);
+            this.GrdAlarms.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.GrdAlarms.Name = "GrdAlarms";
             this.GrdAlarms.ReadOnly = true;
             this.GrdAlarms.RowHeadersVisible = false;
-            this.GrdAlarms.Size = new System.Drawing.Size(503, 206);
+            this.GrdAlarms.RowHeadersWidth = 51;
+            this.GrdAlarms.Size = new System.Drawing.Size(671, 254);
             this.GrdAlarms.TabIndex = 2;
             // 
             // Entidad
             // 
-            this.Entidad.HeaderText = "Entidadas";
+            this.Entidad.HeaderText = "Entidades";
+            this.Entidad.MinimumWidth = 6;
             this.Entidad.Name = "Entidad";
             this.Entidad.ReadOnly = true;
+            this.Entidad.Width = 125;
             // 
             // SearchType
             // 
             this.SearchType.HeaderText = "Tipo de busqueda";
+            this.SearchType.MinimumWidth = 6;
             this.SearchType.Name = "SearchType";
             this.SearchType.ReadOnly = true;
+            this.SearchType.Width = 125;
             // 
             // Time
             // 
             this.Time.HeaderText = "Tiempo";
+            this.Time.MinimumWidth = 6;
             this.Time.Name = "Time";
             this.Time.ReadOnly = true;
+            this.Time.Width = 125;
             // 
             // SentimentToDetect
             // 
             this.SentimentToDetect.HeaderText = "Sentimiento a detectar";
+            this.SentimentToDetect.MinimumWidth = 6;
             this.SentimentToDetect.Name = "SentimentToDetect";
             this.SentimentToDetect.ReadOnly = true;
+            this.SentimentToDetect.Width = 125;
             // 
             // NumberOfSentimentsNeeded
             // 
             this.NumberOfSentimentsNeeded.HeaderText = "Cantidad de sentimientos";
+            this.NumberOfSentimentsNeeded.MinimumWidth = 6;
             this.NumberOfSentimentsNeeded.Name = "NumberOfSentimentsNeeded";
             this.NumberOfSentimentsNeeded.ReadOnly = true;
+            this.NumberOfSentimentsNeeded.Width = 125;
             // 
             // IsActivated
             // 
             this.IsActivated.HeaderText = "Activada";
+            this.IsActivated.MinimumWidth = 6;
             this.IsActivated.Name = "IsActivated";
             this.IsActivated.ReadOnly = true;
+            this.IsActivated.Width = 125;
             // 
             // AlarmReportUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.GrdAlarms);
             this.Controls.Add(this.LblAlarms);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AlarmReportUserControl";
-            this.Size = new System.Drawing.Size(532, 309);
+            this.Size = new System.Drawing.Size(709, 380);
             ((System.ComponentModel.ISupportInitialize)(this.GrdAlarms)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

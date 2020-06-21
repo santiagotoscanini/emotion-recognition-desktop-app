@@ -29,7 +29,6 @@ namespace emotionRecognition
                     PnlAlarm.Controls.Add(new AlarmReportUserControl(controller));
                     break;
             }
-
         }
 
         private void AlarmConfigButton_Click(object sender, EventArgs e)
