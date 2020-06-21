@@ -1,7 +1,8 @@
-﻿using BusinessLogic.FluentApiConfiguration;
+﻿using BusinessLogic.Entities;
+using BusinessLogic.BD.FluentApiConfiguration;
 using System.Data.Entity;
 
-namespace BusinessLogic
+namespace BusinessLogic.BD
 {
     public class Context : DbContext
     {
@@ -9,6 +10,7 @@ namespace BusinessLogic
         public DbSet<Sentiment> Sentiments { get; set; }
         public DbSet<Phrase> Phrases { get; set; }
         public DbSet<TimeLapseAlarm> Alarms { get; set; }
+        public DbSet<Author> Authors { get; set; }
 
         public Context() : base()
         {
@@ -21,6 +23,7 @@ namespace BusinessLogic
             modelBuilder.Configurations.Add(new SentimentTypeConfiguration());
             modelBuilder.Configurations.Add(new PhraseTypeConfiguration());
             modelBuilder.Configurations.Add(new TimeLapseAlarmTypeConfiguration());
+            modelBuilder.Configurations.Add(new AuthorTypeConfiguration());
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using BusinessLogic;
+﻿using BusinessLogic.Entities;
 using BusinessLogic.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
