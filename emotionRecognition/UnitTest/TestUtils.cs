@@ -1,4 +1,4 @@
-﻿using BusinessLogic;
+﻿using BusinessLogic.BD;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTest
@@ -14,6 +14,7 @@ namespace UnitTest
                 context.Sentiments.RemoveRange(context.Sentiments);
                 context.Alarms.RemoveRange(context.Alarms);
                 context.Phrases.RemoveRange(context.Phrases);
+                context.Authors.RemoveRange(context.Authors);
                 context.SaveChanges();
             };
         }

@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 
-namespace BusinessLogic
+namespace BusinessLogic.Entities
 {
     public class Entity
     {

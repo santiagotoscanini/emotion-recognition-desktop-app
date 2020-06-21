@@ -1,6 +1,7 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿using BusinessLogic.Entities;
+using System.Data.Entity.ModelConfiguration;
 
-namespace BusinessLogic.FluentApiConfiguration
+namespace BusinessLogic.BD.FluentApiConfiguration
 {
     public class PhraseTypeConfiguration : EntityTypeConfiguration<Phrase>
     {

@@ -1,3 +1,4 @@
+using BusinessLogic.Entities;
 using BusinessLogic.Enums;
 using System;
 using System.Collections.Generic;
@@ -5,7 +6,7 @@ using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
 
-namespace BusinessLogic
+namespace BusinessLogic.BD
 {
     public class EFRepository : IRepository
     {
@@ -133,6 +134,8 @@ namespace BusinessLogic
                 {
                     context.Entities.Attach(phrase.Entity);
                 }
+
+                context.Authors.Attach(phrase.Author);
                 context.Phrases.Add(phrase);
                 context.SaveChanges();
             }
@@ -199,6 +202,59 @@ namespace BusinessLogic
                     alarm.CheckIfAlarmIsActivated(phrases);
                     context.Alarms.AddOrUpdate(alarm);
                 }
+                context.SaveChanges();
+            }
+        }
+
+        public bool AddAuthor(Author author)
+        {
+            bool wasAdded = true;
+            using (Context context = new Context())
+            {
+                try { 
+                    context.Authors.Add(author);
+                    context.SaveChanges();
+                } catch (Exception)
+                {
+                    wasAdded = false;
+                }
+            }
+            return wasAdded;
+        }
+
+        public IEnumerable<Author> GetAuthors()
+        {
+            using (Context context = new Context())
+            {
+                return context.Authors.ToList();
+            }
+        }
+
+        public Author GetAuthorFromUsername(string username)
+        {
+            using (Context context = new Context())
+            {
+                if (!context.Authors.Any(a => a.Username.Equals(username)))
+                {
+                    throw new ArgumentException("username not found");
+                }
+
+                return context.Authors.FirstOrDefault(a => a.Username.Equals(username));
+            }
+        }
+
+        public void AnalyzeAuthors()
+        {
+            using (Context context = new Context())
+            {
+                IEnumerable<Phrase> phrases = context.Phrases.ToList();
+                IEnumerable<Entity> entities = context.Entities.ToList();
+
+                foreach (Author author in context.Authors.ToList())
+                {
+                    author.Analyze(phrases, entities);
+                }
+
                 context.SaveChanges();
             }
         }

@@ -1,4 +1,4 @@
-﻿using BusinessLogic;
+﻿using BusinessLogic.Entities;
 using BusinessLogic.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
@@ -16,7 +16,7 @@ namespace Tests
             HashSet<Entity> entities = new HashSet<Entity>();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("The sun is great", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("The sun is great", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual("The sun is great", phrase.Text);
         }
@@ -29,7 +29,7 @@ namespace Tests
             HashSet<Entity> entities = new HashSet<Entity>();
             DateTime actualDateTime = DateTime.Now;
 
-            new Phrase("", sentiments, entities, actualDateTime);
+            new Phrase("", sentiments, entities, actualDateTime, new Author());
         }
 
         [TestMethod]
@@ -40,7 +40,7 @@ namespace Tests
             HashSet<Entity> entities = new HashSet<Entity>();
             DateTime actualDateTime = DateTime.Now;
 
-            new Phrase("      ", sentiments, entities, actualDateTime);
+            new Phrase("      ", sentiments, entities, actualDateTime, new Author());
         }
 
         [TestMethod]
@@ -51,7 +51,7 @@ namespace Tests
             HashSet<Entity> entities = new HashSet<Entity>();
             DateTime actualDateTime = DateTime.Now;
 
-            new Phrase(null, sentiments, entities, actualDateTime);
+            new Phrase(null, sentiments, entities, actualDateTime, new Author());
         }
 
         [TestMethod]
@@ -62,7 +62,7 @@ namespace Tests
             HashSet<Entity> entities = new HashSet<Entity>();
             DateTime actualDateTime = DateTime.Now;
 
-            new Phrase("test", sentiments, entities, actualDateTime);
+            new Phrase("test", sentiments, entities, actualDateTime, new Author());
         }
 
         [TestMethod]
@@ -73,7 +73,7 @@ namespace Tests
             HashSet<Entity> entities = null;
             DateTime actualDateTime = DateTime.Now;
 
-            new Phrase("test", sentiments, entities, actualDateTime);
+            new Phrase("test", sentiments, entities, actualDateTime, new Author());
         }
 
         [TestMethod]
@@ -83,7 +83,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("The sun is great", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("The sun is great", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual("The sun", phrase.Entity.Name);
         }
@@ -95,7 +95,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("The moon and The sun are great", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("The moon and The sun are great", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual("The moon", phrase.Entity.Name);
         }
@@ -107,7 +107,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("This is a test without any entity", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("This is a test without any entity", sentiments, entities, actualDateTime, new Author());
 
             Assert.IsNull(phrase.Entity);
         }
@@ -119,7 +119,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("The moon is ok, great and awesome, cool", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("The moon is ok, great and awesome, cool", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual(PhraseState.HIGH_POSITIVE, phrase.PhraseState);
         }
@@ -132,7 +132,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("The moon is ok, great and awesome", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("The moon is ok, great and awesome", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual(PhraseState.HIGH_POSITIVE, phrase.PhraseState);
         }
@@ -144,7 +144,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("The moon is ok and great", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("The moon is ok and great", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual(PhraseState.MEDIUM_POSITIVE, phrase.PhraseState);
         }
@@ -156,7 +156,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("The moon is ok", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("The moon is ok", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual(PhraseState.LOW_POSITIVE, phrase.PhraseState);
         }
@@ -168,7 +168,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("The moon is great and bad", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("The moon is great and bad", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual(PhraseState.NEUTRAL, phrase.PhraseState);
         }
@@ -180,7 +180,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("The moon is x and y", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("The moon is x and y", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual(PhraseState.NEUTRAL, phrase.PhraseState);
         }
@@ -192,7 +192,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("The moon is bad", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("The moon is bad", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual(PhraseState.LOW_NEGATIVE, phrase.PhraseState);
 
@@ -205,7 +205,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("The moon is gross and bad", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("The moon is gross and bad", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual(PhraseState.MEDIUM_NEGATIVE, phrase.PhraseState);
         }
@@ -217,7 +217,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("The moon is gross, bad and horrendous", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("The moon is gross, bad and horrendous", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual(PhraseState.HIGH_NEGATIVE, phrase.PhraseState);
         }
@@ -229,7 +229,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("The moon is gross, not nice, bad and average", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("The moon is gross, not nice, bad and average", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual(PhraseState.HIGH_NEGATIVE, phrase.PhraseState);
         }
@@ -241,7 +241,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("The moon is Ok, gReAt and AwesOmE", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("The moon is Ok, gReAt and AwesOmE", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual(PhraseState.HIGH_POSITIVE, phrase.PhraseState);
         }
@@ -253,7 +253,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("The sun is ok", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("The sun is ok", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual(phrase.GetStringFromPhraseState(), "Poco Positivo");
         }
@@ -265,7 +265,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("The sun is ok and cool", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("The sun is ok and cool", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual(phrase.GetStringFromPhraseState(), "Medianamente Positivo");
         }
@@ -277,7 +277,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("Great, The sun is ok and cool", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("Great, The sun is ok and cool", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual(phrase.GetStringFromPhraseState(), "Altamente Positivo");
         }
@@ -289,7 +289,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("The sun is not nice", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("The sun is not nice", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual(phrase.GetStringFromPhraseState(), "Poco Negativo");
         }
@@ -301,7 +301,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("The sun is not nice and horrendous", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("The sun is not nice and horrendous", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual(phrase.GetStringFromPhraseState(), "Medianamente Negativo");
         }
@@ -313,7 +313,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("The moon is bad, not nice and gross", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("The moon is bad, not nice and gross", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual(phrase.GetStringFromPhraseState(), "Altamente Negativo");
         }
@@ -325,7 +325,7 @@ namespace Tests
             HashSet<Entity> entities = PopulateEntities();
             DateTime actualDateTime = DateTime.Now;
 
-            Phrase phrase = new Phrase("Great, The sun is not nice and ok", sentiments, entities, actualDateTime);
+            Phrase phrase = new Phrase("Great, The sun is not nice and ok", sentiments, entities, actualDateTime, new Author());
 
             Assert.AreEqual(phrase.GetStringFromPhraseState(), "Neutral");
         }

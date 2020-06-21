@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using BusinessLogic.Enums;
 
-namespace BusinessLogic
+namespace BusinessLogic.Entities
 {
     public class Phrase
     {
@@ -11,10 +11,11 @@ namespace BusinessLogic
         public DateTime CreationDate { get; set; }
         public Entity Entity { get; set; }
         public PhraseState PhraseState { get; set; }
+        public Author Author { get; set; }
 
         public Phrase() { }
 
-        public Phrase(string text, IEnumerable<Sentiment> sentiments, IEnumerable<Entity> entities, DateTime creationDate)
+        public Phrase(string text, IEnumerable<Sentiment> sentiments, IEnumerable<Entity> entities, DateTime creationDate, Author author)
         {
             if (string.IsNullOrWhiteSpace(text))
             {
@@ -29,6 +30,7 @@ namespace BusinessLogic
                 throw new ArgumentNullException("entities", "Entities cannot be null");
             }
 
+            Author = author;          
             Text = text;
             CreationDate = creationDate;
             Analyze(sentiments, entities);
