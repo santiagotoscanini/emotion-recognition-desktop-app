@@ -6,8 +6,8 @@ namespace UserInterface
 {
     public partial class AddAuthorUserControl : UserControl
     {
-        private const string TxtNameEmptyError = "El nombre no puede ser vacio";
-        private const string TxtSurnameEmptyError = "El apellido no puede ser vacio";
+        private const string NameEmptyErrorMessage = "El nombre no puede ser vacio";
+        private const string SurnameEmptyErrorMessage = "El apellido no puede ser vacio";
         private const string TxtUsernameEmptyError = "El nombre de usuario no puede ser vacio";
 
         private const string SuccessMessage = "Autor agregado satisfactoriamente";
@@ -83,12 +83,12 @@ namespace UserInterface
             bool areAtLeastOneFieldEmpty = false;
             if (string.IsNullOrWhiteSpace(TxtName.Text))
             {
-                LblNoName.Text = TxtNameEmptyError;
+                LblNoName.Text = NameEmptyErrorMessage;
                 areAtLeastOneFieldEmpty = true;
             }
             if (string.IsNullOrWhiteSpace(TxtSurname.Text))
             {
-                LblNoSurname.Text = TxtSurnameEmptyError;
+                LblNoSurname.Text = SurnameEmptyErrorMessage;
                 areAtLeastOneFieldEmpty = true;
             }
             if (string.IsNullOrWhiteSpace(TxtUserName.Text))

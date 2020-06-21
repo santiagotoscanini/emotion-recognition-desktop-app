@@ -31,21 +31,31 @@ namespace UserInterface
 
         private void LoadAuthor()
         {
-            //TODO
-            //foreach (Entity author in controller.GetAuthors())
-            //{
-            //    LbxAuthors.Items.Add(entity.Name);
-            //}
+            LoadAuthorList();
             if (LbxAuthors.Items.Count == 0)
             {
-                LblNoAuthorError.Visible = true;
-                LbxAuthors.Enabled = false;
-                BtnAccept.Enabled = false;
+                NoAuthorOnSystem();
             }
             else
             {
                 LbxAuthors.SelectedIndex = 0;
             }
+        }
+
+        private void LoadAuthorList()
+        {
+            //TODO
+            //foreach (Entity author in controller.GetAuthors())
+            //{
+            //    LbxAuthors.Items.Add(entity.Name);
+            //}
+        }
+
+        private void NoAuthorOnSystem()
+        {
+            LblNoAuthorError.Visible = true;
+            LbxAuthors.Enabled = false;
+            BtnAccept.Enabled = false;
         }
 
         private void BtnAccept_Click(object sender, EventArgs e)

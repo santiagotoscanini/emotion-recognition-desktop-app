@@ -37,7 +37,7 @@ namespace UserInterface
             }
         }
 
-        private void BtnAlarmConfig_Click(object sender, EventArgs e)
+        private void BtnAuthorAdd_Click(object sender, EventArgs e)
         {
             OnRefresh(ApplicationState.ADDING_AN_AUTHOR);
         }

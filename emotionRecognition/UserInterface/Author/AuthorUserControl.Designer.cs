@@ -42,7 +42,7 @@
             this.BtnAuthorAdd.TabIndex = 3;
             this.BtnAuthorAdd.Text = "Agregar autor";
             this.BtnAuthorAdd.UseVisualStyleBackColor = true;
-            this.BtnAuthorAdd.Click += new System.EventHandler(this.BtnAlarmConfig_Click);
+            this.BtnAuthorAdd.Click += new System.EventHandler(this.BtnAuthorAdd_Click);
             // 
             // PnlAlarm
             // 

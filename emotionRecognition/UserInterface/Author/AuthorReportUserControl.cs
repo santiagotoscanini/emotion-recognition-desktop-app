@@ -6,8 +6,8 @@ namespace UserInterface
 {
     public partial class AuthorReportUserControl : UserControl
     {
-        private const string TxtNoSelectionError = "Debe elegir un autor";
-        private const string TxtEmpty = "";
+        private const string NoSelectionErrorMessage = "Debe elegir un autor";
+        private const string EmptyMessage = "";
 
         private BusinessLogicController controller;
         private AuthorUserControl authorUserControl;
@@ -39,7 +39,7 @@ namespace UserInterface
 
         private void ClearFields()
         {
-            LblNoAuthor.Text = TxtEmpty;
+            LblNoAuthor.Text = EmptyMessage;
         }
 
         private void BtnModify_Click(object sender, EventArgs e)
@@ -59,7 +59,7 @@ namespace UserInterface
             bool areAtLeastOneFieldEmpty = false;
             if (GrdAuthors.CurrentCell == null)
             {
-                LblNoAuthor.Text = TxtNoSelectionError;
+                LblNoAuthor.Text = NoSelectionErrorMessage;
                 areAtLeastOneFieldEmpty = true;
             }
 
