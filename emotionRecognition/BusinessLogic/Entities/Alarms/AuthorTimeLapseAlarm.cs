@@ -2,11 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 
 namespace BusinessLogic.Entities
 {
     public class AuthorTimeLapseAlarm : IAlarm
     {
+        public HashSet<Author> ActivatingAuthors { get; set; }
         public int Id { get; set; }
         public TimeSearchMethodType TimeSearchMethodType { get; set; }
         public uint QuantityOfTimeToSearchBack { get; set; }
@@ -32,6 +34,7 @@ namespace BusinessLogic.Entities
             AlarmPosibleState = alarmPosibleState;
             QuantityOfSentimentsNeeded = quantityOfSentimentsNeeded;
             IsActivated = false;
+            ActivatingAuthors = new HashSet<Author>();
         }
 
         public bool CheckIfAlarmIsActivated(IEnumerable<Phrase> allPhrases)
@@ -40,6 +43,7 @@ namespace BusinessLogic.Entities
             List<Phrase> phrasesToBeChecked = FilterPhrasesToBeChecked(allPhrases, beginDateToSearch);
             uint alarmCounter = GetNumberOfPhrases(phrasesToBeChecked);
             IsActivated = alarmCounter >= QuantityOfSentimentsNeeded;
+            SetActivatingAuthors(phrasesToBeChecked);
             return IsActivated;
         }
 
@@ -81,6 +85,18 @@ namespace BusinessLogic.Entities
             }
 
             return alarmCounter;
+        }
+
+        private void SetActivatingAuthors(List<Phrase> ActivatingPhrases)
+        {
+            ActivatingAuthors.Clear();
+            if (IsActivated)
+            {
+                foreach(Phrase phrase in ActivatingPhrases)
+                {
+                    ActivatingAuthors.Add(phrase.Author);
+                }
+            }
         }
     }
 }
