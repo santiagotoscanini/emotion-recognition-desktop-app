@@ -247,7 +247,7 @@ namespace BusinessLogic.BD
         {
             using (Context context = new Context())
             {
-                IEnumerable<Phrase> phrases = context.Phrases.Include(p => p.Entity).ToList();
+                IEnumerable<Phrase> phrases = context.Phrases.Include(p => p.Entity).Include(a => a.Author).ToList();
 
                 foreach (Author author in context.Authors)
                 {

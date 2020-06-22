@@ -102,7 +102,7 @@ namespace UserInterface
             DateTime hours = DtpTime.Value;
 
             DateTime dateTime = new DateTime(calendar.Year, calendar.Month, calendar.Day, hours.Hour, hours.Minute, hours.Second);
-            controller.AddPhrase(phraseText, dateTime);
+            //TODO: Change add phrase
         }
 
         private void ClearFields()

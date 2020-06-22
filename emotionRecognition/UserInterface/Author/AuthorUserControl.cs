@@ -34,6 +34,10 @@ namespace UserInterface
                 case ApplicationState.AUTHOR_REPORT:
                     PnlAlarm.Controls.Add(new AuthorReportUserControl(controller, this));
                     break;
+                case ApplicationState.AUTHOR_STATISTICS:
+                    PnlAlarm.Controls.Add(new AuthorStatisticsUserControl(controller));
+                    break;
+
             }
         }
 
@@ -51,6 +55,11 @@ namespace UserInterface
         {
             this.authorUsername = authorUsername;
             OnRefresh(ApplicationState.ADDING_AN_AUTHOR);
+        }
+
+        private void BtnStatistics_Click(object sender, EventArgs e)
+        {
+            OnRefresh(ApplicationState.AUTHOR_STATISTICS);
         }
     }
 }
