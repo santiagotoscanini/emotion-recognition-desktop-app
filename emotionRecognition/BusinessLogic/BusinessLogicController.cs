@@ -38,17 +38,17 @@ namespace BusinessLogic
             TimeSearchMethodType searchMethodType = searchInDays ? TimeSearchMethodType.DAYS : TimeSearchMethodType.HOURS;
             AlarmPosibleState alarmPosibleState = detectPositiveSentiments ? AlarmPosibleState.POSITIVE : AlarmPosibleState.NEGATIVE;
 
-            TimeLapseAlarm alarm = new TimeLapseAlarm(entity, searchMethodType, timeToSearchBack, alarmPosibleState, sentimentsNeeded);
+            EntityTimeLapseAlarm alarm = new EntityTimeLapseAlarm(entity, searchMethodType, timeToSearchBack, alarmPosibleState, sentimentsNeeded);
 
-            Repository.AddAlarm(alarm);
-            Repository.AnalyzeAlarms();
+            Repository.AddEntityAlarm(alarm);
+            Repository.AnalyzeEntityAlarms();
         }
 
-        public IEnumerable<TimeLapseAlarm> GetAlarmsChecked()
+        public IEnumerable<EntityTimeLapseAlarm> GetAlarmsChecked()
         {
-            Repository.AnalyzeAlarms();
+            Repository.AnalyzeEntityAlarms();
 
-            return Repository.GetAlarms();
+            return Repository.GetEntityAlarms();
         }
 
         public void AddPhrase(string phraseText, DateTime dateTime, string username)
@@ -59,7 +59,7 @@ namespace BusinessLogic
 
             Repository.AnalyzePhrases();
             Repository.AnalyzeAuthors();
-            Repository.AnalyzeAlarms();
+            Repository.AnalyzeEntityAlarms();
         }
 
         public IEnumerable<Phrase> GetPhrases()

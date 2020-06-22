@@ -7,19 +7,17 @@ using System.Collections.Generic;
 namespace Tests
 {
     [TestClass]
-    public class TimeLapseAlarmTest
+    public class AuthorTimeLapseAlarmTest
     {
         [TestMethod]
         public void CreateAlarm()
         {
-            Entity entity = new Entity("Netflix");
             TimeSearchMethodType timeSearchMethodType = TimeSearchMethodType.DAYS;
             uint quantityOfTimeToSearchBack = 10;
             AlarmPosibleState alarmPosibleState = AlarmPosibleState.POSITIVE;
             uint quantityOfSentimentsNeeded = 5;
 
-            new TimeLapseAlarm(
-                entity,
+            new AuthorTimeLapseAlarm(
                 timeSearchMethodType,
                 quantityOfTimeToSearchBack,
                 alarmPosibleState,
@@ -30,14 +28,12 @@ namespace Tests
         [ExpectedException(typeof(ArgumentException))]
         public void CreateAlarmWithZeroSentimentsNeeded()
         {
-            Entity entity = new Entity("Netflix");
             TimeSearchMethodType timeSearchMethodType = TimeSearchMethodType.DAYS;
             uint quantityOfTimeToSearchBack = 0;
             AlarmPosibleState alarmPosibleState = AlarmPosibleState.POSITIVE;
             uint quantityOfSentimentsNeeded = 5;
 
-            new TimeLapseAlarm(
-                entity,
+            new AuthorTimeLapseAlarm(
                 timeSearchMethodType,
                 quantityOfTimeToSearchBack,
                 alarmPosibleState,
@@ -48,33 +44,15 @@ namespace Tests
         [ExpectedException(typeof(ArgumentException))]
         public void CreateAlarmWithZeroTimeToLookBack()
         {
-            Entity entity = new Entity("Netflix");
             TimeSearchMethodType timeSearchMethodType = TimeSearchMethodType.DAYS;
             uint quantityOfTimeToSearchBack = 10;
             AlarmPosibleState alarmPosibleState = AlarmPosibleState.POSITIVE;
             uint quantityOfSentimentsNeeded = 0;
 
-            new TimeLapseAlarm(
-                entity,
+            new AuthorTimeLapseAlarm(
                 timeSearchMethodType,
                 quantityOfTimeToSearchBack,
                 alarmPosibleState,
-                quantityOfSentimentsNeeded);
-        }
-
-        [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void CreateAlarmWithNullEntity()
-        {
-            Entity entity = null;
-            uint quantityOfTimeToSearchBack = 10;
-            uint quantityOfSentimentsNeeded = 3;
-
-            new TimeLapseAlarm(
-                entity,
-                TimeSearchMethodType.DAYS,
-                quantityOfTimeToSearchBack,
-                AlarmPosibleState.POSITIVE,
                 quantityOfSentimentsNeeded);
         }
 
@@ -98,8 +76,7 @@ namespace Tests
             uint quantityOfTimeToSearchBack = 10;
             uint quantityOfSentimentsNeeded = 2;
 
-            TimeLapseAlarm alarm = new TimeLapseAlarm(
-                entity,
+            AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(
                 TimeSearchMethodType.DAYS,
                 quantityOfTimeToSearchBack,
                 AlarmPosibleState.POSITIVE,
@@ -129,8 +106,7 @@ namespace Tests
             uint quantityOfTimeToSearchBack = 10;
             uint quantityOfSentimentsNeeded = 2;
 
-            TimeLapseAlarm alarm = new TimeLapseAlarm(
-                entity,
+            AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(
                 TimeSearchMethodType.DAYS,
                 quantityOfTimeToSearchBack,
                 AlarmPosibleState.NEGATIVE,
@@ -160,8 +136,7 @@ namespace Tests
             uint quantityOfTimeToSearchBack = 10;
             uint quantityOfSentimentsNeeded = 2;
 
-            TimeLapseAlarm alarm = new TimeLapseAlarm(
-                entity,
+            AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(
                 TimeSearchMethodType.DAYS,
                 quantityOfTimeToSearchBack,
                 AlarmPosibleState.POSITIVE,
@@ -192,8 +167,7 @@ namespace Tests
             uint quantityOfTimeToSearchBack = 5;
             uint quantityOfSentimentsNeeded = 2;
 
-            TimeLapseAlarm alarm = new TimeLapseAlarm(
-                entity,
+            AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(
                 TimeSearchMethodType.HOURS,
                 quantityOfTimeToSearchBack,
                 AlarmPosibleState.POSITIVE,
@@ -222,40 +196,8 @@ namespace Tests
             uint quantityOfTimeToSearchBack = 5;
             uint quantityOfSentimentsNeeded = 2;
 
-            TimeLapseAlarm alarm = new TimeLapseAlarm(
-                entity,
+            AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(
                 TimeSearchMethodType.HOURS,
-                quantityOfTimeToSearchBack,
-                AlarmPosibleState.POSITIVE,
-                quantityOfSentimentsNeeded);
-
-            Assert.IsFalse(alarm.CheckIfAlarmIsActivated(phrases));
-            Assert.IsFalse(alarm.IsActivated);
-        }
-
-        [TestMethod]
-        public void CheckIfAlarmIsActivatedWithIncorrectEntity()
-        {
-            List<Phrase> phrases = new List<Phrase>();
-            HashSet<Sentiment> sentiments = new HashSet<Sentiment>();
-            HashSet<Entity> entities = new HashSet<Entity>();
-
-            Entity entity = new Entity("Amazon");
-            entities.Add(entity);
-
-            sentiments.Add(new Sentiment("good", SentimentState.POSITIVE));
-            sentiments.Add(new Sentiment("awesome", SentimentState.POSITIVE));
-            DateTime actualDateTime = DateTime.Now;
-
-            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, actualDateTime, new Author()));
-            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, actualDateTime, new Author()));
-
-            uint quantityOfTimeToSearchBack = 10;
-            uint quantityOfSentimentsNeeded = 2;
-
-            TimeLapseAlarm alarm = new TimeLapseAlarm(
-                entity,
-                TimeSearchMethodType.DAYS,
                 quantityOfTimeToSearchBack,
                 AlarmPosibleState.POSITIVE,
                 quantityOfSentimentsNeeded);

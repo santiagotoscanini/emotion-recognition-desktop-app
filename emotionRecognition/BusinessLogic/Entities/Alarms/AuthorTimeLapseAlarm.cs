@@ -1,23 +1,22 @@
-﻿using System;
+﻿using BusinessLogic.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
-using BusinessLogic.Enums;
 
 namespace BusinessLogic.Entities
 {
-    public class TimeLapseAlarm
+    public class AuthorTimeLapseAlarm : IAlarm
     {
         public int Id { get; set; }
-        public Entity Entity { get; set; }
         public TimeSearchMethodType TimeSearchMethodType { get; set; }
         public uint QuantityOfTimeToSearchBack { get; set; }
         public AlarmPosibleState AlarmPosibleState { get; set; }
         public uint QuantityOfSentimentsNeeded { get; set; }
         public bool IsActivated { get; set; }
 
-        public TimeLapseAlarm() { }
+        public AuthorTimeLapseAlarm() { }
 
-        public TimeLapseAlarm(Entity entity, TimeSearchMethodType timeSearchMethodType, uint quantityOfTimeToSearchBack, AlarmPosibleState alarmPosibleState, uint quantityOfSentimentsNeeded)
+        public AuthorTimeLapseAlarm(TimeSearchMethodType timeSearchMethodType, uint quantityOfTimeToSearchBack, AlarmPosibleState alarmPosibleState, uint quantityOfSentimentsNeeded)
         {
             if (quantityOfTimeToSearchBack == 0)
             {
@@ -28,7 +27,6 @@ namespace BusinessLogic.Entities
                 throw new ArgumentException("Cannot create an alarm with quantity of sentiments needed equals to zero", "quantityOfSentimentsNeeded");
             }
 
-            Entity = entity ?? throw new ArgumentNullException("Cannot create an alarm with null entity", "entity");
             TimeSearchMethodType = timeSearchMethodType;
             QuantityOfTimeToSearchBack = quantityOfTimeToSearchBack;
             AlarmPosibleState = alarmPosibleState;
@@ -66,8 +64,6 @@ namespace BusinessLogic.Entities
         {
             List<Phrase> phrases = allPhrases.ToList();
             return phrases.FindAll(phrase =>
-                        phrase.Entity != null &&
-                        phrase.Entity.Equals(Entity) &&
                         phrase.CreationDate.Ticks >= beginDateToSearch.Ticks &&
                         phrase.CreationDate.Ticks <= DateTime.Now.Ticks
                     );

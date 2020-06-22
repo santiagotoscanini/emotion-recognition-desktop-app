@@ -18,7 +18,7 @@ namespace UserInterface
 
         private void LoadAlarms()
         {
-            foreach (TimeLapseAlarm alarm in controller.GetAlarmsChecked())
+            foreach (EntityTimeLapseAlarm alarm in controller.GetAlarmsChecked())
             {
                 AddRow(
                  alarm.Entity.Name,

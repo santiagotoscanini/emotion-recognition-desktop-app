@@ -25,11 +25,11 @@ namespace BusinessLogic
 
         IEnumerable<Phrase> GetPhrases();
 
-        void AddAlarm(TimeLapseAlarm alarm);
+        void AddEntityAlarm(EntityTimeLapseAlarm alarm);
 
-        IEnumerable<TimeLapseAlarm> GetAlarms();
+        IEnumerable<EntityTimeLapseAlarm> GetEntityAlarms();
 
-        void AnalyzeAlarms();
+        void AnalyzeEntityAlarms();
 
         void AnalyzePhrases();
 
@@ -40,5 +40,12 @@ namespace BusinessLogic
         void AnalyzeAuthors();
 
         Author GetAuthorFromUsername(string username);
+
+        void AddAuthorAlarm(AuthorTimeLapseAlarm alarm);
+
+        IEnumerable<AuthorTimeLapseAlarm> GetAuthorAlarms();
+
+        void AnalyzeAuthorAlarms();
+
     }
 }

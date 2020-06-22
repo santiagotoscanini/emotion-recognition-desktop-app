@@ -12,7 +12,7 @@ namespace UnitTest
             {
                 context.Entities.RemoveRange(context.Entities);
                 context.Sentiments.RemoveRange(context.Sentiments);
-                context.Alarms.RemoveRange(context.Alarms);
+                context.EntityAlarms.RemoveRange(context.EntityAlarms);
                 context.Phrases.RemoveRange(context.Phrases);
                 context.Authors.RemoveRange(context.Authors);
                 context.SaveChanges();

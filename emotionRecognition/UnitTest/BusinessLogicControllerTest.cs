@@ -86,7 +86,7 @@ namespace Tests
             businessLogicController.AddPhrase("Valorant is good", DateTime.Now, "test");
             businessLogicController.AddPositiveSentiment("Good");
 
-            IEnumerable<TimeLapseAlarm> alarms = businessLogicController.GetAlarmsChecked();
+            IEnumerable<EntityTimeLapseAlarm> alarms = businessLogicController.GetAlarmsChecked();
 
             Assert.AreEqual(true, alarms.ToList()[0].IsActivated);
         }
