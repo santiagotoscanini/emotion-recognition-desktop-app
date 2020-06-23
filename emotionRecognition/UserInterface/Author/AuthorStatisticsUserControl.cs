@@ -9,10 +9,10 @@ namespace UserInterface
     public partial class AuthorStatisticsUserControl : UserControl
     {
 
-        BusinessLogicController BusinessLogicController;
-        public AuthorStatisticsUserControl(BusinessLogicController BusinessLogicController)
+        BusinessLogicController businessLogicController;
+        public AuthorStatisticsUserControl(BusinessLogicController businessLogicController)
         {
-            this.BusinessLogicController = BusinessLogicController;
+            this.businessLogicController = businessLogicController;
             InitializeComponent();
             LoadChart();
         }
@@ -30,7 +30,7 @@ namespace UserInterface
         {
             LoadChartSeries();
 
-            foreach(Author author in BusinessLogicController.GetAuthors().Take(10))
+            foreach(Author author in businessLogicController.GetAuthors().Take(10))
             {
                 string userName = author.Username;
                 ChtStatisticsAuthors.Series[0].Points.AddXY(userName,author.NumberOfPositivePhrases);
