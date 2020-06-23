@@ -8,7 +8,7 @@ namespace UserInterface
     public partial class AuthorUserControl : UserControl
     {
         private BusinessLogicController controller;
-        private string authorUsername;
+        private string username;
 
         public AuthorUserControl(BusinessLogicController controller)
         {
@@ -19,17 +19,18 @@ namespace UserInterface
 
         public void ClearPanel()
         {
-            this.PnlAlarm.Controls.Clear();
+            PnlAlarm.Controls.Clear();
         }
 
         public void OnRefresh(ApplicationState applicationState)
         {
-            this.ClearPanel();
+            ClearPanel();
 
             switch (applicationState)
             {
                 case ApplicationState.ADDING_AN_AUTHOR:
-                    PnlAlarm.Controls.Add(new AddAuthorUserControl(controller, authorUsername));
+                    PnlAlarm.Controls.Add(new AddAuthorUserControl(controller, username));
+                    this.username = null;
                     break;
                 case ApplicationState.AUTHOR_REPORT:
                     PnlAlarm.Controls.Add(new AuthorReportUserControl(controller, this));
@@ -47,9 +48,9 @@ namespace UserInterface
             OnRefresh(ApplicationState.AUTHOR_REPORT);
         }
 
-        internal void ModifiyAuthor(string authorUsername)
+        public void OnModify(string username)
         {
-            this.authorUsername = authorUsername;
+            this.username = username;
             OnRefresh(ApplicationState.ADDING_AN_AUTHOR);
         }
     }

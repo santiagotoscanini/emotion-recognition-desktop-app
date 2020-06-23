@@ -11,51 +11,12 @@ namespace UserInterface
         private const string SuccessMessage = "Frase agregada satisfactoriamente";
         private const string EmptyText = "";
 
-        private const int MaxDateOfBirth = -100;
-
         private readonly BusinessLogicController controller;
 
         public NewPhraseUserControl(BusinessLogicController controller)
         {
             InitializeComponent();
             this.controller = controller;
-            LoadAuthor();
-            SetCalendarLimits();
-        }
-
-        private void SetCalendarLimits()
-        {
-            DtpCalendar.MaxDate = DateTime.Now;
-            DtpCalendar.MinDate = DateTime.Now.AddYears(MaxDateOfBirth);
-            DtpCalendar.Text = DateTime.Now.ToString();
-        }
-
-        private void LoadAuthor()
-        {
-            LoadAuthorList();
-            if (LbxAuthors.Items.Count == 0)
-            {
-                NoAuthorOnSystem();
-            }
-            else
-            {
-                LbxAuthors.SelectedIndex = 0;
-            }
-        }
-
-        private void LoadAuthorList()
-        {
-            foreach (Author author in controller.GetAuthors())
-            {
-                LbxAuthors.Items.Add(author.Username);
-            }
-        }
-
-        private void NoAuthorOnSystem()
-        {
-            LblNoAuthorError.Visible = true;
-            LbxAuthors.Enabled = false;
-            BtnAccept.Enabled = false;
         }
 
         private void BtnAccept_Click(object sender, EventArgs e)
@@ -86,13 +47,13 @@ namespace UserInterface
                 return true;
             }
 
-            ShowErrorMessage();
+            ShowErrorMessage(CanNotSaveEmptyData);
             return false;
         }
 
-        private void ShowErrorMessage()
+        private void ShowErrorMessage(string ErrorMessage)
         {
-            LblErrorMessageEmptyData.Text = CanNotSaveEmptyData;
+            LblErrorMessageEmptyData.Text = ErrorMessage;
         }
 
         private void CreatePhrase()
@@ -102,7 +63,7 @@ namespace UserInterface
             DateTime hours = DtpTime.Value;
 
             DateTime dateTime = new DateTime(calendar.Year, calendar.Month, calendar.Day, hours.Hour, hours.Minute, hours.Second);
-            controller.AddPhrase(phraseText, dateTime, LbxAuthors.SelectedItem.ToString());
+            controller.AddPhrase(phraseText, dateTime);
         }
 
         private void ClearFields()

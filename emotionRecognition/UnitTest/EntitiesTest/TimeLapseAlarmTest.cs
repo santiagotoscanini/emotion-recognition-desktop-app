@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using BusinessLogic;
+using BusinessLogic.Entities;
 using BusinessLogic.Enums;
 using System;
 using System.Collections.Generic;
@@ -92,8 +92,8 @@ namespace Tests
             sentiments.Add(new Sentiment("awesome", SentimentState.POSITIVE));
             DateTime phraseDateTime = DateTime.Now.AddDays(-9);
 
-            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, phraseDateTime));
-            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, phraseDateTime));
+            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, phraseDateTime, new Author()));
+            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, phraseDateTime, new Author()));
 
             uint quantityOfTimeToSearchBack = 10;
             uint quantityOfSentimentsNeeded = 2;
@@ -123,8 +123,8 @@ namespace Tests
             sentiments.Add(new Sentiment("hate", SentimentState.NEGATIVE));
             DateTime phraseDateTime = DateTime.Now.AddDays(-9);
 
-            phrases.Add(new Phrase("Netflix is bad", sentiments, entities, phraseDateTime));
-            phrases.Add(new Phrase("Netflix is bad and i hate it", sentiments, entities, phraseDateTime));
+            phrases.Add(new Phrase("Netflix is bad", sentiments, entities, phraseDateTime, new Author()));
+            phrases.Add(new Phrase("Netflix is bad and i hate it", sentiments, entities, phraseDateTime, new Author()));
 
             uint quantityOfTimeToSearchBack = 10;
             uint quantityOfSentimentsNeeded = 2;
@@ -154,8 +154,8 @@ namespace Tests
             sentiments.Add(new Sentiment("awesome", SentimentState.POSITIVE));
             DateTime phraseDateTime = DateTime.Now.AddDays(-11);
 
-            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, phraseDateTime));
-            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, phraseDateTime));
+            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, phraseDateTime, new Author()));
+            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, phraseDateTime, new Author()));
 
             uint quantityOfTimeToSearchBack = 10;
             uint quantityOfSentimentsNeeded = 2;
@@ -186,8 +186,8 @@ namespace Tests
 
             DateTime phraseDateTime = DateTime.Now.AddHours(-4);
 
-            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, phraseDateTime));
-            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, phraseDateTime));
+            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, phraseDateTime, new Author()));
+            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, phraseDateTime, new Author()));
 
             uint quantityOfTimeToSearchBack = 5;
             uint quantityOfSentimentsNeeded = 2;
@@ -216,8 +216,8 @@ namespace Tests
             sentiments.Add(new Sentiment("good", SentimentState.POSITIVE));
             sentiments.Add(new Sentiment("awesome", SentimentState.POSITIVE));
 
-            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, DateTime.Now.AddHours(-4)));
-            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, DateTime.Now.AddHours(-6)));
+            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, DateTime.Now.AddHours(-4), new Author()));
+            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, DateTime.Now.AddHours(-6), new Author()));
 
             uint quantityOfTimeToSearchBack = 5;
             uint quantityOfSentimentsNeeded = 2;
@@ -247,8 +247,8 @@ namespace Tests
             sentiments.Add(new Sentiment("awesome", SentimentState.POSITIVE));
             DateTime actualDateTime = DateTime.Now;
 
-            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, actualDateTime));
-            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, actualDateTime));
+            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, actualDateTime, new Author()));
+            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, actualDateTime, new Author()));
 
             uint quantityOfTimeToSearchBack = 10;
             uint quantityOfSentimentsNeeded = 2;

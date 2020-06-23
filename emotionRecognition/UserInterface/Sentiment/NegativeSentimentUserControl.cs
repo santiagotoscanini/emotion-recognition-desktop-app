@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using BusinessLogic.Entities;
 using System;
 using System.Windows.Forms;
 

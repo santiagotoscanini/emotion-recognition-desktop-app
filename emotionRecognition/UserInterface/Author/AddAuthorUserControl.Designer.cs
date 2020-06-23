@@ -42,94 +42,102 @@
             this.LblNoSurname = new System.Windows.Forms.Label();
             this.LblNoUsername = new System.Windows.Forms.Label();
             this.TxtSuccess = new System.Windows.Forms.Label();
+            this.LblUserAlreadyExist = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // TxtName
             // 
-            this.TxtName.Location = new System.Drawing.Point(86, 80);
-            this.TxtName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TxtName.Location = new System.Drawing.Point(64, 65);
+            this.TxtName.Margin = new System.Windows.Forms.Padding(2);
             this.TxtName.MaxLength = 15;
             this.TxtName.Name = "TxtName";
-            this.TxtName.Size = new System.Drawing.Size(473, 22);
+            this.TxtName.Size = new System.Drawing.Size(356, 20);
             this.TxtName.TabIndex = 2;
             // 
             // LblPhrase
             // 
             this.LblPhrase.AutoSize = true;
-            this.LblPhrase.Location = new System.Drawing.Point(84, 53);
+            this.LblPhrase.Location = new System.Drawing.Point(63, 43);
+            this.LblPhrase.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LblPhrase.Name = "LblPhrase";
-            this.LblPhrase.Size = new System.Drawing.Size(62, 17);
+            this.LblPhrase.Size = new System.Drawing.Size(47, 13);
             this.LblPhrase.TabIndex = 4;
             this.LblPhrase.Text = "Nombre:";
             // 
             // LblNewPhrase
             // 
             this.LblNewPhrase.AutoSize = true;
-            this.LblNewPhrase.Location = new System.Drawing.Point(272, 17);
+            this.LblNewPhrase.Location = new System.Drawing.Point(204, 14);
+            this.LblNewPhrase.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LblNewPhrase.Name = "LblNewPhrase";
-            this.LblNewPhrase.Size = new System.Drawing.Size(146, 17);
+            this.LblNewPhrase.Size = new System.Drawing.Size(133, 13);
             this.LblNewPhrase.TabIndex = 3;
-            this.LblNewPhrase.Text = "Registrar nuevo autor";
+            this.LblNewPhrase.Text = "Registrar o actualizar autor";
             // 
             // TxtSurname
             // 
-            this.TxtSurname.Location = new System.Drawing.Point(86, 146);
-            this.TxtSurname.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TxtSurname.Location = new System.Drawing.Point(64, 119);
+            this.TxtSurname.Margin = new System.Windows.Forms.Padding(2);
             this.TxtSurname.MaxLength = 15;
             this.TxtSurname.Name = "TxtSurname";
-            this.TxtSurname.Size = new System.Drawing.Size(473, 22);
+            this.TxtSurname.Size = new System.Drawing.Size(356, 20);
             this.TxtSurname.TabIndex = 5;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(84, 119);
+            this.label1.Location = new System.Drawing.Point(63, 97);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(62, 17);
+            this.label1.Size = new System.Drawing.Size(47, 13);
             this.label1.TabIndex = 6;
             this.label1.Text = "Apellido:";
             // 
             // BtnCreateAuthor
             // 
-            this.BtnCreateAuthor.Location = new System.Drawing.Point(432, 324);
+            this.BtnCreateAuthor.Location = new System.Drawing.Point(286, 263);
+            this.BtnCreateAuthor.Margin = new System.Windows.Forms.Padding(2);
             this.BtnCreateAuthor.Name = "BtnCreateAuthor";
-            this.BtnCreateAuthor.Size = new System.Drawing.Size(127, 30);
+            this.BtnCreateAuthor.Size = new System.Drawing.Size(134, 24);
             this.BtnCreateAuthor.TabIndex = 7;
-            this.BtnCreateAuthor.Text = "Crear Autor";
+            this.BtnCreateAuthor.Text = "Crear o actualizar autor";
             this.BtnCreateAuthor.UseVisualStyleBackColor = true;
             this.BtnCreateAuthor.Click += new System.EventHandler(this.BtnCreateAuthor_Click);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(84, 184);
+            this.label2.Location = new System.Drawing.Point(63, 150);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(133, 17);
+            this.label2.Size = new System.Drawing.Size(99, 13);
             this.label2.TabIndex = 8;
             this.label2.Text = "Nombre de usuario:";
             // 
             // TxtUserName
             // 
-            this.TxtUserName.Location = new System.Drawing.Point(86, 214);
-            this.TxtUserName.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.TxtUserName.Location = new System.Drawing.Point(64, 174);
+            this.TxtUserName.Margin = new System.Windows.Forms.Padding(2);
             this.TxtUserName.MaxLength = 10;
             this.TxtUserName.Name = "TxtUserName";
-            this.TxtUserName.Size = new System.Drawing.Size(473, 22);
+            this.TxtUserName.Size = new System.Drawing.Size(356, 20);
             this.TxtUserName.TabIndex = 9;
             // 
             // DtpDateOfBirth
             // 
-            this.DtpDateOfBirth.Location = new System.Drawing.Point(86, 282);
+            this.DtpDateOfBirth.Location = new System.Drawing.Point(64, 229);
+            this.DtpDateOfBirth.Margin = new System.Windows.Forms.Padding(2);
             this.DtpDateOfBirth.Name = "DtpDateOfBirth";
-            this.DtpDateOfBirth.Size = new System.Drawing.Size(200, 22);
+            this.DtpDateOfBirth.Size = new System.Drawing.Size(151, 20);
             this.DtpDateOfBirth.TabIndex = 10;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(84, 253);
+            this.label3.Location = new System.Drawing.Point(63, 206);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(143, 17);
+            this.label3.Size = new System.Drawing.Size(109, 13);
             this.label3.TabIndex = 11;
             this.label3.Text = "Fecha de nacimiento:";
             // 
@@ -137,42 +145,59 @@
             // 
             this.LblNoName.AutoSize = true;
             this.LblNoName.ForeColor = System.Drawing.Color.Red;
-            this.LblNoName.Location = new System.Drawing.Point(565, 80);
+            this.LblNoName.Location = new System.Drawing.Point(172, 43);
+            this.LblNoName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LblNoName.Name = "LblNoName";
-            this.LblNoName.Size = new System.Drawing.Size(0, 17);
+            this.LblNoName.Size = new System.Drawing.Size(0, 13);
             this.LblNoName.TabIndex = 33;
             // 
             // LblNoSurname
             // 
             this.LblNoSurname.AutoSize = true;
             this.LblNoSurname.ForeColor = System.Drawing.Color.Red;
-            this.LblNoSurname.Location = new System.Drawing.Point(565, 149);
+            this.LblNoSurname.Location = new System.Drawing.Point(183, 97);
+            this.LblNoSurname.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LblNoSurname.Name = "LblNoSurname";
-            this.LblNoSurname.Size = new System.Drawing.Size(0, 17);
+            this.LblNoSurname.Size = new System.Drawing.Size(0, 13);
             this.LblNoSurname.TabIndex = 34;
             // 
             // LblNoUsername
             // 
             this.LblNoUsername.AutoSize = true;
             this.LblNoUsername.ForeColor = System.Drawing.Color.Red;
-            this.LblNoUsername.Location = new System.Drawing.Point(565, 217);
+            this.LblNoUsername.Location = new System.Drawing.Point(183, 150);
+            this.LblNoUsername.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.LblNoUsername.Name = "LblNoUsername";
-            this.LblNoUsername.Size = new System.Drawing.Size(0, 17);
+            this.LblNoUsername.Size = new System.Drawing.Size(0, 13);
             this.LblNoUsername.TabIndex = 35;
             // 
             // TxtSuccess
             // 
             this.TxtSuccess.AutoSize = true;
-            this.TxtSuccess.ForeColor = System.Drawing.Color.Red;
-            this.TxtSuccess.Location = new System.Drawing.Point(84, 331);
+            this.TxtSuccess.ForeColor = System.Drawing.Color.GreenYellow;
+            this.TxtSuccess.Location = new System.Drawing.Point(63, 274);
+            this.TxtSuccess.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.TxtSuccess.Name = "TxtSuccess";
-            this.TxtSuccess.Size = new System.Drawing.Size(0, 17);
+            this.TxtSuccess.Size = new System.Drawing.Size(0, 13);
             this.TxtSuccess.TabIndex = 36;
+            // 
+            // LblUserAlreadyExist
+            // 
+            this.LblUserAlreadyExist.AutoSize = true;
+            this.LblUserAlreadyExist.ForeColor = System.Drawing.Color.Red;
+            this.LblUserAlreadyExist.Location = new System.Drawing.Point(283, 229);
+            this.LblUserAlreadyExist.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.LblUserAlreadyExist.Name = "LblUserAlreadyExist";
+            this.LblUserAlreadyExist.Size = new System.Drawing.Size(114, 13);
+            this.LblUserAlreadyExist.TabIndex = 37;
+            this.LblUserAlreadyExist.Text = "Error, el autor ya existe";
+            this.LblUserAlreadyExist.Visible = false;
             // 
             // AddAuthorUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.LblUserAlreadyExist);
             this.Controls.Add(this.LblNoUsername);
             this.Controls.Add(this.TxtSuccess);
             this.Controls.Add(this.LblNoSurname);
@@ -187,8 +212,9 @@
             this.Controls.Add(this.TxtName);
             this.Controls.Add(this.LblPhrase);
             this.Controls.Add(this.LblNewPhrase);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "AddAuthorUserControl";
-            this.Size = new System.Drawing.Size(709, 380);
+            this.Size = new System.Drawing.Size(532, 309);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -210,5 +236,6 @@
         private System.Windows.Forms.Label LblNoSurname;
         private System.Windows.Forms.Label LblNoUsername;
         private System.Windows.Forms.Label TxtSuccess;
+        private System.Windows.Forms.Label LblUserAlreadyExist;
     }
 }

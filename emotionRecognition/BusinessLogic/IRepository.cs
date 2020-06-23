@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using BusinessLogic.Entities;
+using System.Collections.Generic;
 
 namespace BusinessLogic
 {
@@ -31,5 +32,15 @@ namespace BusinessLogic
         void AnalyzeAlarms();
 
         void AnalyzePhrases();
+
+        bool AddOrUpdateAuthor(Author author);
+
+        void DeleteAuthorByUsername(string username);
+
+        IEnumerable<Author> GetAuthors();
+
+        void AnalyzeAuthors();
+
+        Author GetAuthorFromUsername(string username);
     }
 }

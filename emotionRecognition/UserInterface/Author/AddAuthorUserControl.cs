@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using BusinessLogic;
+using BusinessLogic.Entities;
 
 namespace UserInterface
 {
@@ -9,21 +10,26 @@ namespace UserInterface
         private const string NameEmptyErrorMessage = "El nombre no puede ser vacio";
         private const string SurnameEmptyErrorMessage = "El apellido no puede ser vacio";
         private const string TxtUsernameEmptyError = "El nombre de usuario no puede ser vacio";
-
-        private const string SuccessMessage = "Autor agregado satisfactoriamente";
         private const string EmptyText = "";
+        private const string AddButtonText = "Agregar";
+        private const string ModifyButtonText = "Modificar";
+        private const string AddTitleText = "Agregar autor";
+        private const string ModifyTitleText = "Modificar autor";
+        private const string AddSuccessText = "Autor agregado satisfactoriamente";
+        private const string ModifySuccessText = "Autor modificado satisfactoriamente";
 
         private const int MaxDateOfBirth = -100;
         private const int MinDateOfBirth = -13;
         private string authorUsername;
 
-        private BusinessLogicController business { get; set; }
+        private BusinessLogicController businessLogicController { get; set; }
 
-        public AddAuthorUserControl(BusinessLogicController business, string authorUsername)
+        public AddAuthorUserControl(BusinessLogicController businessLogicController, string authorUsername)
         {
             this.authorUsername = authorUsername;
-            this.business = business;
+            this.businessLogicController = businessLogicController;
             InitializeComponent();
+            setValuesForModifyOrAdd();
             SetRangeOfDateOfBirth();
             if (this.authorUsername != null)
             {
@@ -31,9 +37,29 @@ namespace UserInterface
             }
         }
 
+        private void setValuesForModifyOrAdd()
+        {
+            LblUserAlreadyExist.Visible = false;
+            if (authorUsername == null)
+            {
+                LblNewPhrase.Text = AddTitleText;
+                BtnCreateAuthor.Text = AddButtonText;
+            }
+            else
+            {
+                LblNewPhrase.Text = ModifyTitleText;
+                BtnCreateAuthor.Text = ModifyButtonText;
+            }
+        }
+
         private void LoadAuthorData()
         {
-            //TODO            
+            Author authorFromDB = businessLogicController.GetAuthorByUsername(authorUsername);
+            TxtName.Text = authorFromDB.Name;
+            TxtSurname.Text = authorFromDB.Surname;
+            TxtUserName.Text = authorFromDB.Username;
+            TxtUserName.Enabled = false;
+            DtpDateOfBirth.Value = authorFromDB.Birthdate;
         }
 
         private void SetRangeOfDateOfBirth()
@@ -49,19 +75,26 @@ namespace UserInterface
             if (!DataIsIncorrect())
             {
                 CreateOrUpdateAuthor();
-                ShowSucessfullMessage();
+                showSuccessMessage();
                 ClearFields();
             }
         }
 
         private void CreateOrUpdateAuthor()
         {
-            //TODO
+            businessLogicController.AddOrUpdateAuthor(TxtUserName.Text, TxtName.Text, TxtSurname.Text, DtpDateOfBirth.Value);
         }
 
-        private void ShowSucessfullMessage()
+        private void showSuccessMessage()
         {
-            TxtSuccess.Text = SuccessMessage;
+            if (authorUsername == null)
+            {
+                TxtSuccess.Text = AddSuccessText;
+            }
+            else
+            {
+                TxtSuccess.Text = ModifySuccessText;
+            }
         }
 
         private void ClearFields()
@@ -96,6 +129,15 @@ namespace UserInterface
                 LblNoUsername.Text = TxtUsernameEmptyError;
                 areAtLeastOneFieldEmpty = true;
             }
+            
+            try
+            {
+                if(TxtUserName.Text != "" && authorUsername == null)  businessLogicController.GetAuthorByUsername(TxtUserName.Text);
+            }
+            catch (ArgumentException) { 
+                LblUserAlreadyExist.Visible = true;
+            }
+
             return areAtLeastOneFieldEmpty;
         }
     }

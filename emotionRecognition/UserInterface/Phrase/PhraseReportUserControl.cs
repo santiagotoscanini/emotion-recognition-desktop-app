@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using BusinessLogic.Entities;
 using System.Windows.Forms;
 
 namespace UserInterface
@@ -21,8 +22,9 @@ namespace UserInterface
             {
                 GrdReport.Rows.Add(
                     phrase.Text,
+                    phrase.Author.Username,
                     phrase.CreationDate,
-                     phrase.Entity.ToString() ?? null,
+                    phrase.Entity != null ? phrase.Entity.ToString() : "",
                     phrase.GetStringFromPhraseState());
             }
         }
