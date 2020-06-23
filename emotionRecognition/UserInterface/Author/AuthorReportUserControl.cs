@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 using BusinessLogic;
+using BusinessLogic.Entities;
 
 namespace UserInterface
 {
@@ -9,12 +10,12 @@ namespace UserInterface
         private const string NoSelectionErrorMessage = "Debe elegir un autor";
         private const string EmptyMessage = "";
 
-        private BusinessLogicController controller;
+        private BusinessLogicController businessLogicController;
         private AuthorUserControl authorUserControl;
 
-        public AuthorReportUserControl(BusinessLogicController controller, AuthorUserControl authorUserControl)
+        public AuthorReportUserControl(BusinessLogicController businessLogicController, AuthorUserControl authorUserControl)
         {
-            this.controller = controller;
+            this.businessLogicController = businessLogicController;
             this.authorUserControl = authorUserControl;
             InitializeComponent();
             LoadAuthorsReport();
@@ -22,7 +23,21 @@ namespace UserInterface
 
         private void LoadAuthorsReport()
         {
-            //TODO
+            businessLogicController.AnalyzePhrases();
+            GrdAuthors.Rows.Clear();
+            foreach (Author author in businessLogicController.GetAuthors())
+            {
+                GrdAuthors.Rows.Add(
+                    author.Name,
+                    author.Surname,
+                    author.Username,
+                    author.Birthdate.ToString("dd/MM/yyyy"),
+                    author.NumberOfPhrases != 0 ? author.NumberOfPositivePhrases / author.NumberOfPhrases : 0,
+                    author.NumberOfPhrases != 0 ? author.NumberOfNegativePhrases / author.NumberOfPhrases : 0,
+                    author.NumberOfDistinctEntitiesMentioned,
+                    author.NumberOfDaysFromFirstPublication != 0 ? author.NumberOfPhrases / author.NumberOfDaysFromFirstPublication : author.NumberOfPhrases
+                    );
+            }
         }
 
         private void BtnDelete_Click(object sender, EventArgs e)
@@ -32,7 +47,7 @@ namespace UserInterface
             if (!DataIsIncorrect())
             {
                 String authorUsername = (string)GrdAuthors.CurrentRow.Cells["UserName"].Value;
-                //TODO
+                businessLogicController.DeleteAuthorByUsername(authorUsername);
                 LoadAuthorsReport();
             }
         }
@@ -48,9 +63,9 @@ namespace UserInterface
 
             if (!DataIsIncorrect())
             {
-                String authorUsername = (string)GrdAuthors.CurrentRow.Cells["UserName"].Value;
+                string authorUsername = (string)GrdAuthors.CurrentRow.Cells["UserName"].Value;
 
-                authorUserControl.ModifiyAuthor(authorUsername);
+                authorUserControl.OnModify(authorUsername);
             }
         }
 

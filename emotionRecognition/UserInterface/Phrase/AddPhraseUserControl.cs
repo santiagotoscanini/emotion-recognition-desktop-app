@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using BusinessLogic.Entities;
 using System;
 using System.Windows.Forms;
 
@@ -44,11 +45,10 @@ namespace UserInterface
 
         private void LoadAuthorList()
         {
-            //TODO
-            //foreach (Entity author in controller.GetAuthors())
-            //{
-            //    LbxAuthors.Items.Add(entity.Name);
-            //}
+            foreach (Author author in controller.GetAuthors())
+            {
+                LbxAuthors.Items.Add(author.Username);
+            }
         }
 
         private void NoAuthorOnSystem()
@@ -102,7 +102,7 @@ namespace UserInterface
             DateTime hours = DtpTime.Value;
 
             DateTime dateTime = new DateTime(calendar.Year, calendar.Month, calendar.Day, hours.Hour, hours.Minute, hours.Second);
-            //TODO: Change add phrase
+            controller.AddPhrase(phraseText, dateTime, LbxAuthors.SelectedItem.ToString());
         }
 
         private void ClearFields()

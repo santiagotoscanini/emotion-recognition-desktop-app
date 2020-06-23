@@ -30,6 +30,7 @@
         {
             this.GrdReport = new System.Windows.Forms.DataGridView();
             this.Phrase = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Autor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Entity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -44,11 +45,12 @@
             this.GrdReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GrdReport.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Phrase,
+            this.Autor,
             this.Date,
             this.Entity,
             this.State});
             this.GrdReport.Location = new System.Drawing.Point(62, 43);
-            this.GrdReport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GrdReport.Margin = new System.Windows.Forms.Padding(2);
             this.GrdReport.Name = "GrdReport";
             this.GrdReport.ReadOnly = true;
             this.GrdReport.RowHeadersVisible = false;
@@ -64,6 +66,12 @@
             this.Phrase.Name = "Phrase";
             this.Phrase.ReadOnly = true;
             this.Phrase.Width = 125;
+            // 
+            // Autor
+            // 
+            this.Autor.HeaderText = "Autor";
+            this.Autor.Name = "Autor";
+            this.Autor.ReadOnly = true;
             // 
             // Date
             // 
@@ -94,7 +102,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.GrdReport);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "PhraseReportUserControl";
             this.Size = new System.Drawing.Size(532, 310);
             ((System.ComponentModel.ISupportInitialize)(this.GrdReport)).EndInit();
@@ -105,6 +113,7 @@
         #endregion
         private System.Windows.Forms.DataGridView GrdReport;
         private System.Windows.Forms.DataGridViewTextBoxColumn Phrase;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Autor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Date;
         private System.Windows.Forms.DataGridViewTextBoxColumn Entity;
         private System.Windows.Forms.DataGridViewTextBoxColumn State;

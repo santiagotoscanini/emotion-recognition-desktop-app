@@ -147,7 +147,7 @@ namespace BusinessLogic.BD
 
             using (Context context = new Context())
             {
-                phrases = context.Phrases.Include(p => p.Entity).ToList();
+                phrases = context.Phrases.Include(p => p.Entity).Include(p => p.Author).ToList();
             }
 
             return phrases;
@@ -206,13 +206,13 @@ namespace BusinessLogic.BD
             }
         }
 
-        public bool AddAuthor(Author author)
+        public bool AddOrUpdateAuthor(Author author)
         {
             bool wasAdded = true;
             using (Context context = new Context())
             {
                 try { 
-                    context.Authors.Add(author);
+                    context.Authors.AddOrUpdate(author);
                     context.SaveChanges();
                 } catch (Exception)
                 {
@@ -243,11 +243,21 @@ namespace BusinessLogic.BD
             }
         }
 
+        public void DeleteAuthorByUsername(string username)
+        {
+            using (Context context = new Context())
+            {
+                Author authorToDelete = context.Authors.FirstOrDefault(a => a.Username.Equals(username));
+                context.Authors.Remove(authorToDelete);
+                context.SaveChanges();
+            }
+        }
+
         public void AnalyzeAuthors()
         {
             using (Context context = new Context())
             {
-                IEnumerable<Phrase> phrases = context.Phrases.Include(p => p.Entity).Include(a => a.Author).ToList();
+                IEnumerable<Phrase> phrases = context.Phrases.Include(p => p.Entity).Include(p => p.Author).ToList();
 
                 foreach (Author author in context.Authors)
                 {

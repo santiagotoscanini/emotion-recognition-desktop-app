@@ -130,10 +130,10 @@ namespace BusinessLogic
             return Repository.GetAuthors();
         }
 
-        public bool AddAuthor(string username, string name, string surname, DateTime birthdate)
+        public bool AddOrUpdateAuthor(string username, string name, string surname, DateTime birthdate)
         {
             Author authorToAdd = new Author() { Username = username, Name = name, Surname = surname, Birthdate = birthdate };
-            bool wasAdded = Repository.AddAuthor(authorToAdd);
+            bool wasAdded = Repository.AddOrUpdateAuthor(authorToAdd);
             if (wasAdded)
             {
                 AnalyzeAuthors();
@@ -145,6 +145,11 @@ namespace BusinessLogic
         public Author GetAuthorByUsername(string username)
         {
             return Repository.GetAuthorFromUsername(username);
+        }
+
+        public void DeleteAuthorByUsername(string username)
+        {
+            Repository.DeleteAuthorByUsername(username);
         }
 
         public void AnalyzeAuthors()
