@@ -1,6 +1,7 @@
 ﻿using BusinessLogic;
 using System;
 using System.Windows.Forms;
+using UserInterface;
 
 namespace emotionRecognition
 {
@@ -32,6 +33,9 @@ namespace emotionRecognition
                 case ApplicationState.ADDING_A_SENTIMENT:
                     this.PnlMain.Controls.Add(new AddSentimentUserControl(controller));
                     break;
+                case ApplicationState.AUTHORS:
+                    this.PnlMain.Controls.Add(new AuthorUserControl(controller));
+                    break;
             }
         }
 
@@ -53,6 +57,11 @@ namespace emotionRecognition
         private void BtnAlarms_Click(object sender, EventArgs e)
         {
             this.OnRefresh(ApplicationState.ADDING_AN_ALARM);
+        }
+
+        private void BtnAuthors_Click(object sender, EventArgs e)
+        {
+            this.OnRefresh(ApplicationState.AUTHORS);
         }
     }
 }
