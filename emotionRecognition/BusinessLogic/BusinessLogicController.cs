@@ -32,7 +32,7 @@ namespace BusinessLogic
             return Repository.GetEntities();
         }
 
-        public void AddEntityAlarm(string entityName, bool searchInDays, uint sentimentsNeeded, bool detectPositiveSentiments, uint timeToSearchBack)
+        public void AddEntityAlarm(string entityName, bool searchInDays, int sentimentsNeeded, bool detectPositiveSentiments, int timeToSearchBack)
         {
             Entity entity = Repository.GetEntityFromName(entityName);
             TimeSearchMethodType searchMethodType = searchInDays ? TimeSearchMethodType.DAYS : TimeSearchMethodType.HOURS;

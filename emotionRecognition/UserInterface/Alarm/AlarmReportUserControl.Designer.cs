@@ -36,7 +36,11 @@
             this.SentimentToDetect = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NumberOfSentimentsNeeded = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IsActivated = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.RdoAlarmAutores = new System.Windows.Forms.RadioButton();
+            this.RdoAlarmEntities = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.GrdAlarms)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // LblAlarms
@@ -62,7 +66,7 @@
             this.NumberOfSentimentsNeeded,
             this.IsActivated});
             this.GrdAlarms.Location = new System.Drawing.Point(19, 57);
-            this.GrdAlarms.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.GrdAlarms.Margin = new System.Windows.Forms.Padding(4);
             this.GrdAlarms.Name = "GrdAlarms";
             this.GrdAlarms.ReadOnly = true;
             this.GrdAlarms.RowHeadersVisible = false;
@@ -74,7 +78,7 @@
             // 
             this.Entidad.HeaderText = "Entidades";
             this.Entidad.MinimumWidth = 6;
-            this.Entidad.Name = "Entidad";
+            this.Entidad.Name = "entity";
             this.Entidad.ReadOnly = true;
             this.Entidad.Width = 125;
             // 
@@ -118,16 +122,54 @@
             this.IsActivated.ReadOnly = true;
             this.IsActivated.Width = 125;
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.RdoAlarmAutores);
+            this.groupBox2.Controls.Add(this.RdoAlarmEntities);
+            this.groupBox2.Location = new System.Drawing.Point(203, 318);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(292, 53);
+            this.groupBox2.TabIndex = 38;
+            this.groupBox2.TabStop = false;
+            // 
+            // RdoAlarmAutores
+            // 
+            this.RdoAlarmAutores.AutoSize = true;
+            this.RdoAlarmAutores.Location = new System.Drawing.Point(152, 21);
+            this.RdoAlarmAutores.Name = "RdoAlarmAutores";
+            this.RdoAlarmAutores.Size = new System.Drawing.Size(126, 21);
+            this.RdoAlarmAutores.TabIndex = 36;
+            this.RdoAlarmAutores.TabStop = true;
+            this.RdoAlarmAutores.Text = "Alarma Autores";
+            this.RdoAlarmAutores.UseVisualStyleBackColor = true;
+            this.RdoAlarmAutores.CheckedChanged += new System.EventHandler(this.RdoAlarmAutores_CheckedChanged);
+            // 
+            // RdoAlarmEntities
+            // 
+            this.RdoAlarmEntities.AutoSize = true;
+            this.RdoAlarmEntities.Checked = true;
+            this.RdoAlarmEntities.Location = new System.Drawing.Point(6, 21);
+            this.RdoAlarmEntities.Name = "RdoAlarmEntities";
+            this.RdoAlarmEntities.Size = new System.Drawing.Size(140, 21);
+            this.RdoAlarmEntities.TabIndex = 35;
+            this.RdoAlarmEntities.TabStop = true;
+            this.RdoAlarmEntities.Text = "Alarma Entidades";
+            this.RdoAlarmEntities.UseVisualStyleBackColor = true;
+            this.RdoAlarmEntities.CheckedChanged += new System.EventHandler(this.RdoAlarmEntities_CheckedChanged);
+            // 
             // AlarmReportUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.GrdAlarms);
             this.Controls.Add(this.LblAlarms);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AlarmReportUserControl";
             this.Size = new System.Drawing.Size(709, 380);
             ((System.ComponentModel.ISupportInitialize)(this.GrdAlarms)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -142,5 +184,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn SentimentToDetect;
         private System.Windows.Forms.DataGridViewTextBoxColumn NumberOfSentimentsNeeded;
         private System.Windows.Forms.DataGridViewTextBoxColumn IsActivated;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton RdoAlarmAutores;
+        private System.Windows.Forms.RadioButton RdoAlarmEntities;
     }
 }

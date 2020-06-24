@@ -195,7 +195,7 @@ namespace BusinessLogic.BD
         {
             using (Context context = new Context())
             {
-                IEnumerable<Phrase> phrases = context.Phrases.ToList();
+                IEnumerable<Phrase> phrases = context.Phrases.Include(p => p.Entity).ToList();
 
                 foreach (EntityTimeLapseAlarm alarm in context.EntityAlarms.ToList())
                 {

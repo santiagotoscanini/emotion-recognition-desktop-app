@@ -116,9 +116,9 @@ namespace Tests
             repository.AddEntity(entity);
 
             TimeSearchMethodType timeSearchMethodType = TimeSearchMethodType.DAYS;
-            uint quantityOfTimeToSearchBack = 1;
+            int quantityOfTimeToSearchBack = 1;
             AlarmPosibleState alarmPosibleState = AlarmPosibleState.POSITIVE;
-            uint quantityOfSentimentsNeeded = 1;
+            int quantityOfSentimentsNeeded = 1;
 
             EntityTimeLapseAlarm alarm = new EntityTimeLapseAlarm(entity, timeSearchMethodType, quantityOfTimeToSearchBack, alarmPosibleState, quantityOfSentimentsNeeded);
 
