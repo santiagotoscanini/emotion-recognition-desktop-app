@@ -211,9 +211,9 @@ namespace Tests
         public void AddAuthorAlarm()
         {
             TimeSearchMethodType timeSearchMethodType = TimeSearchMethodType.DAYS;
-            uint quantityOfTimeToSearchBack = 1;
+            int quantityOfTimeToSearchBack = 1;
             AlarmPosibleState alarmPosibleState = AlarmPosibleState.POSITIVE;
-            uint quantityOfSentimentsNeeded = 1;
+            int quantityOfSentimentsNeeded = 1;
 
             AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(timeSearchMethodType, quantityOfTimeToSearchBack, alarmPosibleState, quantityOfSentimentsNeeded);
 

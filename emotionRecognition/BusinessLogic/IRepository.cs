@@ -46,6 +46,5 @@ namespace BusinessLogic
         IEnumerable<AuthorTimeLapseAlarm> GetAuthorAlarms();
 
         void AnalyzeAuthorAlarms();
-
     }
 }

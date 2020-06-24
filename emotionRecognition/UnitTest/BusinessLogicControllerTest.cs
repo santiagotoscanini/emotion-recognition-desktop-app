@@ -317,5 +317,19 @@ namespace Tests
 
             Assert.AreEqual(true, alarms.ToList()[0].IsActivated);
         }
+
+        [TestMethod]
+        public void GetAuthorsOfAuthorAlarmsChecked()
+        {
+            businessLogicController.AddAuthor("test", "s", "t", DateTime.Now);
+            businessLogicController.AddEntity("Valorant");
+            businessLogicController.AddAuthorAlarm(true, 1, true, 2);
+            businessLogicController.AddPhrase("Valorant is good", DateTime.Now, "test");
+            businessLogicController.AddPositiveSentiment("Good");
+
+            IEnumerable<AuthorTimeLapseAlarm> alarms = businessLogicController.GetAuthorAlarmsChecked();
+
+            Assert.AreEqual(1, alarms.ElementAt(0).ActivatingAuthors.Count());
+        }
     }
 }

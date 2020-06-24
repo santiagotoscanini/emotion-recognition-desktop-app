@@ -32,7 +32,7 @@ namespace BusinessLogic
             return Repository.GetEntities();
         }
 
-        public void AddAlarm(string entityName, bool searchInDays, uint sentimentsNeeded, bool detectPositiveSentiments, uint timeToSearchBack)
+        public void AddEntityAlarm(string entityName, bool searchInDays, uint sentimentsNeeded, bool detectPositiveSentiments, uint timeToSearchBack)
         {
             Entity entity = Repository.GetEntityFromName(entityName);
             TimeSearchMethodType searchMethodType = searchInDays ? TimeSearchMethodType.DAYS : TimeSearchMethodType.HOURS;
@@ -44,7 +44,7 @@ namespace BusinessLogic
             Repository.AnalyzeEntityAlarms();
         }
 
-        public IEnumerable<EntityTimeLapseAlarm> GetAlarmsChecked()
+        public IEnumerable<EntityTimeLapseAlarm> GetEntityAlarmsChecked()
         {
             Repository.AnalyzeEntityAlarms();
 
@@ -177,6 +177,24 @@ namespace BusinessLogic
             }
 
             return isContained;
+        }
+
+        public void AddAuthorAlarm(bool searchInDays, int sentimentsNeeded, bool detectPositiveSentiments, int timeToSearchBack)
+        {
+            TimeSearchMethodType searchMethodType = searchInDays ? TimeSearchMethodType.DAYS : TimeSearchMethodType.HOURS;
+            AlarmPosibleState alarmPosibleState = detectPositiveSentiments ? AlarmPosibleState.POSITIVE : AlarmPosibleState.NEGATIVE;
+
+            AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(searchMethodType, timeToSearchBack, alarmPosibleState, sentimentsNeeded);
+
+            Repository.AddAuthorAlarm(alarm);
+            Repository.AnalyzeAuthorAlarms();
+        }
+
+        public IEnumerable<AuthorTimeLapseAlarm> GetAuthorAlarmsChecked()
+        {
+            Repository.AnalyzeAuthorAlarms();
+
+            return Repository.GetAuthorAlarms();
         }
     }
 }

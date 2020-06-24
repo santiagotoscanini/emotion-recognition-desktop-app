@@ -16,6 +16,8 @@ namespace BusinessLogic.Entities
         public int NumberOfDistinctEntitiesMentioned { get; set; }
         public int NumberOfDaysFromFirstPublication { get; set; }
 
+        public ICollection<AuthorTimeLapseAlarm> AuthorTimeLapseAlarms { get; set; }
+
 
         public Author() { }
 
@@ -44,6 +46,7 @@ namespace BusinessLogic.Entities
             NumberOfPhrases = numberOfPhrases;
             NumberOfPositivePhrases = numberOfPositivePhrases;
             NumberOfNegativePhrases = numberOfNegativePhrases;
+            AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>();
         }
     }
 }

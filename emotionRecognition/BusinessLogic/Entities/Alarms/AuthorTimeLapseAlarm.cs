@@ -8,17 +8,17 @@ namespace BusinessLogic.Entities
 {
     public class AuthorTimeLapseAlarm : IAlarm
     {
-        public HashSet<Author> ActivatingAuthors { get; set; }
+        public ICollection<Author> ActivatingAuthors { get; set; }
         public int Id { get; set; }
         public TimeSearchMethodType TimeSearchMethodType { get; set; }
-        public uint QuantityOfTimeToSearchBack { get; set; }
+        public int QuantityOfTimeToSearchBack { get; set; }
         public AlarmPosibleState AlarmPosibleState { get; set; }
-        public uint QuantityOfSentimentsNeeded { get; set; }
+        public int QuantityOfSentimentsNeeded { get; set; }
         public bool IsActivated { get; set; }
 
         public AuthorTimeLapseAlarm() { }
 
-        public AuthorTimeLapseAlarm(TimeSearchMethodType timeSearchMethodType, uint quantityOfTimeToSearchBack, AlarmPosibleState alarmPosibleState, uint quantityOfSentimentsNeeded)
+        public AuthorTimeLapseAlarm(TimeSearchMethodType timeSearchMethodType, int quantityOfTimeToSearchBack, AlarmPosibleState alarmPosibleState, int quantityOfSentimentsNeeded)
         {
             if (quantityOfTimeToSearchBack == 0)
             {
@@ -89,14 +89,24 @@ namespace BusinessLogic.Entities
 
         private void SetActivatingAuthors(List<Phrase> ActivatingPhrases)
         {
-            ActivatingAuthors.Clear();
+            ClearActivatingAuthors();
             if (IsActivated)
             {
                 foreach(Phrase phrase in ActivatingPhrases)
                 {
                     ActivatingAuthors.Add(phrase.Author);
+                    phrase.Author.AuthorTimeLapseAlarms.Add(this);
                 }
             }
+        }
+
+        private void ClearActivatingAuthors()
+        {
+            foreach(Author author in ActivatingAuthors)
+            {
+                author.AuthorTimeLapseAlarms.Remove(this);
+            }
+            ActivatingAuthors.Clear();
         }
     }
 }

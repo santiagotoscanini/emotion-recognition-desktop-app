@@ -13,9 +13,9 @@ namespace Tests
         public void CreateAlarm()
         {
             TimeSearchMethodType timeSearchMethodType = TimeSearchMethodType.DAYS;
-            uint quantityOfTimeToSearchBack = 10;
+            int quantityOfTimeToSearchBack = 10;
             AlarmPosibleState alarmPosibleState = AlarmPosibleState.POSITIVE;
-            uint quantityOfSentimentsNeeded = 5;
+            int quantityOfSentimentsNeeded = 5;
 
             new AuthorTimeLapseAlarm(
                 timeSearchMethodType,
@@ -29,9 +29,9 @@ namespace Tests
         public void CreateAlarmWithZeroSentimentsNeeded()
         {
             TimeSearchMethodType timeSearchMethodType = TimeSearchMethodType.DAYS;
-            uint quantityOfTimeToSearchBack = 0;
+            int quantityOfTimeToSearchBack = 0;
             AlarmPosibleState alarmPosibleState = AlarmPosibleState.POSITIVE;
-            uint quantityOfSentimentsNeeded = 5;
+            int quantityOfSentimentsNeeded = 5;
 
             new AuthorTimeLapseAlarm(
                 timeSearchMethodType,
@@ -45,9 +45,9 @@ namespace Tests
         public void CreateAlarmWithZeroTimeToLookBack()
         {
             TimeSearchMethodType timeSearchMethodType = TimeSearchMethodType.DAYS;
-            uint quantityOfTimeToSearchBack = 10;
+            int quantityOfTimeToSearchBack = 10;
             AlarmPosibleState alarmPosibleState = AlarmPosibleState.POSITIVE;
-            uint quantityOfSentimentsNeeded = 0;
+            int quantityOfSentimentsNeeded = 0;
 
             new AuthorTimeLapseAlarm(
                 timeSearchMethodType,
@@ -66,15 +66,17 @@ namespace Tests
             Entity entity = new Entity("Netflix");
             entities.Add(entity);
 
+            Author author1 = new Author() { Username = "Harry", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
+
             sentiments.Add(new Sentiment("good", SentimentState.POSITIVE));
             sentiments.Add(new Sentiment("awesome", SentimentState.POSITIVE));
             DateTime phraseDateTime = DateTime.Now.AddDays(-9);
 
-            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, phraseDateTime, new Author()));
-            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, phraseDateTime, new Author()));
+            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, phraseDateTime, author1));
+            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, phraseDateTime, author1));
 
-            uint quantityOfTimeToSearchBack = 10;
-            uint quantityOfSentimentsNeeded = 2;
+            int quantityOfTimeToSearchBack = 10;
+            int quantityOfSentimentsNeeded = 2;
 
             AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(
                 TimeSearchMethodType.DAYS,
@@ -96,15 +98,17 @@ namespace Tests
             Entity entity = new Entity("Netflix");
             entities.Add(entity);
 
+            Author author1 = new Author() { Username = "Harry", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
+
             sentiments.Add(new Sentiment("bad", SentimentState.NEGATIVE));
             sentiments.Add(new Sentiment("hate", SentimentState.NEGATIVE));
             DateTime phraseDateTime = DateTime.Now.AddDays(-9);
 
-            phrases.Add(new Phrase("Netflix is bad", sentiments, entities, phraseDateTime, new Author()));
-            phrases.Add(new Phrase("Netflix is bad and i hate it", sentiments, entities, phraseDateTime, new Author()));
+            phrases.Add(new Phrase("Netflix is bad", sentiments, entities, phraseDateTime, author1));
+            phrases.Add(new Phrase("Netflix is bad and i hate it", sentiments, entities, phraseDateTime, author1));
 
-            uint quantityOfTimeToSearchBack = 10;
-            uint quantityOfSentimentsNeeded = 2;
+            int quantityOfTimeToSearchBack = 10;
+            int quantityOfSentimentsNeeded = 2;
 
             AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(
                 TimeSearchMethodType.DAYS,
@@ -126,15 +130,18 @@ namespace Tests
             Entity entity = new Entity("Netflix");
             entities.Add(entity);
 
+            Author author1 = new Author() { Username = "Harry", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
+            Author author2 = new Author() { Username = "Sonia", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
+
             sentiments.Add(new Sentiment("good", SentimentState.POSITIVE));
             sentiments.Add(new Sentiment("awesome", SentimentState.POSITIVE));
             DateTime phraseDateTime = DateTime.Now.AddDays(-11);
 
-            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, phraseDateTime, new Author()));
-            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, phraseDateTime, new Author()));
+            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, phraseDateTime, author2));
+            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, phraseDateTime, author1));
 
-            uint quantityOfTimeToSearchBack = 10;
-            uint quantityOfSentimentsNeeded = 2;
+            int quantityOfTimeToSearchBack = 10;
+            int quantityOfSentimentsNeeded = 2;
 
             AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(
                 TimeSearchMethodType.DAYS,
@@ -156,16 +163,19 @@ namespace Tests
             Entity entity = new Entity("Netflix");
             entities.Add(entity);
 
+            Author author1 = new Author() { Username = "Harry", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
+            Author author2 = new Author() { Username = "Sonia", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
+
             sentiments.Add(new Sentiment("good", SentimentState.POSITIVE));
             sentiments.Add(new Sentiment("awesome", SentimentState.POSITIVE));
 
             DateTime phraseDateTime = DateTime.Now.AddHours(-4);
 
-            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, phraseDateTime, new Author()));
-            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, phraseDateTime, new Author()));
+            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, phraseDateTime, author2));
+            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, phraseDateTime, author1));
 
-            uint quantityOfTimeToSearchBack = 5;
-            uint quantityOfSentimentsNeeded = 2;
+            int quantityOfTimeToSearchBack = 5;
+            int quantityOfSentimentsNeeded = 2;
 
             AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(
                 TimeSearchMethodType.HOURS,
@@ -187,14 +197,17 @@ namespace Tests
             Entity entity = new Entity("Netflix");
             entities.Add(entity);
 
+            Author author1 = new Author() { Username = "Harry", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
+            Author author2 = new Author() { Username = "Sonia", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
+
             sentiments.Add(new Sentiment("good", SentimentState.POSITIVE));
             sentiments.Add(new Sentiment("awesome", SentimentState.POSITIVE));
 
-            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, DateTime.Now.AddHours(-4), new Author()));
-            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, DateTime.Now.AddHours(-6), new Author()));
+            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, DateTime.Now.AddHours(-4), author1));
+            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, DateTime.Now.AddHours(-6), author2));
 
-            uint quantityOfTimeToSearchBack = 5;
-            uint quantityOfSentimentsNeeded = 2;
+            int quantityOfTimeToSearchBack = 5;
+            int quantityOfSentimentsNeeded = 2;
 
             AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(
                 TimeSearchMethodType.HOURS,
@@ -216,14 +229,17 @@ namespace Tests
             Entity entity = new Entity("Netflix");
             entities.Add(entity);
 
+            Author author1 = new Author() { Username = "Harry", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
+            Author author2 = new Author() { Username = "Sonia", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
+
             sentiments.Add(new Sentiment("good", SentimentState.POSITIVE));
             sentiments.Add(new Sentiment("awesome", SentimentState.POSITIVE));
 
-            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, DateTime.Now.AddHours(-4), new Author()));
-            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, DateTime.Now.AddHours(-6), new Author()));
+            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, DateTime.Now.AddHours(-4), author2));
+            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, DateTime.Now.AddHours(-6), author1));
 
-            uint quantityOfTimeToSearchBack = 5;
-            uint quantityOfSentimentsNeeded = 2;
+            int quantityOfTimeToSearchBack = 5;
+            int quantityOfSentimentsNeeded = 2;
 
             AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(
                 TimeSearchMethodType.HOURS,
@@ -243,8 +259,8 @@ namespace Tests
             HashSet<Sentiment> sentiments = new HashSet<Sentiment>();
             HashSet<Entity> entities = new HashSet<Entity>();
 
-            Author author1 = new Author() { Username = "Harry", Birthdate = DateTime.Now };
-            Author author2 = new Author() { Username = "Sonia", Birthdate = DateTime.Now };
+            Author author1 = new Author() { Username = "Harry", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
+            Author author2 = new Author() { Username = "Sonia", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
 
             Entity entity = new Entity("Netflix");
             entities.Add(entity);
@@ -257,8 +273,8 @@ namespace Tests
             phrases.Add(new Phrase("Netflix is Good", sentiments, entities, phraseDateTime, author1));
             phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, phraseDateTime, author2));
 
-            uint quantityOfTimeToSearchBack = 5;
-            uint quantityOfSentimentsNeeded = 2;
+            int quantityOfTimeToSearchBack = 5;
+            int quantityOfSentimentsNeeded = 2;
 
             AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(
                 TimeSearchMethodType.HOURS,
@@ -278,7 +294,7 @@ namespace Tests
             HashSet<Sentiment> sentiments = new HashSet<Sentiment>();
             HashSet<Entity> entities = new HashSet<Entity>();
 
-            Author author1 = new Author() { Username = "Harry", Birthdate = DateTime.Now };
+            Author author1 = new Author() { Username = "Harry", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
 
             Entity entity = new Entity("Netflix");
             entities.Add(entity);
@@ -291,8 +307,8 @@ namespace Tests
             phrases.Add(new Phrase("Netflix is Good", sentiments, entities, phraseDateTime, author1));
             phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, phraseDateTime, author1));
 
-            uint quantityOfTimeToSearchBack = 5;
-            uint quantityOfSentimentsNeeded = 2;
+            int quantityOfTimeToSearchBack = 5;
+            int quantityOfSentimentsNeeded = 2;
 
             AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(
                 TimeSearchMethodType.HOURS,
@@ -315,15 +331,19 @@ namespace Tests
             Entity entity = new Entity("Netflix");
             entities.Add(entity);
 
+            Author author1 = new Author() { Username = "Harry", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
+            Author author2 = new Author() { Username = "Sonia", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
+
+
             sentiments.Add(new Sentiment("good", SentimentState.POSITIVE));
             sentiments.Add(new Sentiment("awesome", SentimentState.POSITIVE));
             DateTime phraseDateTime = DateTime.Now.AddDays(-11);
 
-            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, phraseDateTime, new Author()));
-            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, phraseDateTime, new Author()));
+            phrases.Add(new Phrase("Netflix is Good", sentiments, entities, phraseDateTime, author1));
+            phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, phraseDateTime, author2));
 
-            uint quantityOfTimeToSearchBack = 10;
-            uint quantityOfSentimentsNeeded = 2;
+            int quantityOfTimeToSearchBack = 10;
+            int quantityOfSentimentsNeeded = 2;
 
             AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(
                 TimeSearchMethodType.DAYS,
@@ -343,8 +363,8 @@ namespace Tests
             HashSet<Sentiment> sentiments = new HashSet<Sentiment>();
             HashSet<Entity> entities = new HashSet<Entity>();
 
-            Author author1 = new Author() { Username = "Harry", Birthdate = DateTime.Now };
-            Author author2 = new Author() { Username = "Sonia", Birthdate = DateTime.Now };
+            Author author1 = new Author() { Username = "Harry", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
+            Author author2 = new Author() { Username = "Sonia", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
 
             Entity entity = new Entity("Netflix");
             entities.Add(entity);
@@ -356,8 +376,8 @@ namespace Tests
             phrases.Add(new Phrase("Netflix is bad", sentiments, entities, phraseDateTime, author1));
             phrases.Add(new Phrase("Netflix is bad and i hate it", sentiments, entities, phraseDateTime, author2));
 
-            uint quantityOfTimeToSearchBack = 10;
-            uint quantityOfSentimentsNeeded = 2;
+            int quantityOfTimeToSearchBack = 10;
+            int quantityOfSentimentsNeeded = 2;
 
             AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(
                 TimeSearchMethodType.DAYS,
@@ -377,7 +397,7 @@ namespace Tests
             HashSet<Sentiment> sentiments = new HashSet<Sentiment>();
             HashSet<Entity> entities = new HashSet<Entity>();
 
-            Author author1 = new Author() { Username = "Harry", Birthdate = DateTime.Now };
+            Author author1 = new Author() { Username = "Harry", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
 
             Entity entity = new Entity("Netflix");
             entities.Add(entity);
@@ -389,8 +409,8 @@ namespace Tests
             phrases.Add(new Phrase("Netflix is bad", sentiments, entities, phraseDateTime, author1));
             phrases.Add(new Phrase("Netflix is bad and i hate it", sentiments, entities, phraseDateTime, author1));
 
-            uint quantityOfTimeToSearchBack = 10;
-            uint quantityOfSentimentsNeeded = 2;
+            int quantityOfTimeToSearchBack = 10;
+            int quantityOfSentimentsNeeded = 2;
 
             AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(
                 TimeSearchMethodType.DAYS,

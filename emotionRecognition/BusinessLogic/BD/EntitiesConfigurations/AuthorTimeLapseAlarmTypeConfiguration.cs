@@ -8,6 +8,7 @@ namespace BusinessLogic.BD.FluentApiConfiguration
         public AuthorTimeLapseAlarmTypeConfiguration()
         {
             HasKey(x => x.Id);
+            HasMany(a => a.ActivatingAuthors).WithMany(a => a.AuthorTimeLapseAlarms);
         }
     }
 }

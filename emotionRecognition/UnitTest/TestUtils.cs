@@ -15,6 +15,8 @@ namespace UnitTest
                 context.EntityAlarms.RemoveRange(context.EntityAlarms);
                 context.Phrases.RemoveRange(context.Phrases);
                 context.Authors.RemoveRange(context.Authors);
+                context.AuthorAlarms.RemoveRange(context.AuthorAlarms);
+
                 context.SaveChanges();
             };
         }

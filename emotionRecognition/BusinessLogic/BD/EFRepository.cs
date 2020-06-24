@@ -247,7 +247,7 @@ namespace BusinessLogic.BD
         {
             using (Context context = new Context())
             {
-                IEnumerable<Phrase> phrases = context.Phrases.Include(p => p.Entity).ToList();
+                IEnumerable<Phrase> phrases = context.Phrases.Include(p => p.Entity).Include(p => p.Entity).ToList();
 
                 foreach (Author author in context.Authors)
                 {
@@ -291,7 +291,7 @@ namespace BusinessLogic.BD
 
             using (Context context = new Context())
             {
-                alarms = context.AuthorAlarms.ToList();
+                alarms = context.AuthorAlarms.Include(a => a.ActivatingAuthors).ToList();
             }
 
             return alarms;
@@ -301,12 +301,11 @@ namespace BusinessLogic.BD
         {
             using (Context context = new Context())
             {
-                IEnumerable<Phrase> phrases = context.Phrases.ToList();
+                IEnumerable<Phrase> phrases = context.Phrases.Include(p => p.Author).Include(p => p.Entity).ToList();
 
-                foreach (AuthorTimeLapseAlarm alarm in context.AuthorAlarms.ToList())
+                foreach (AuthorTimeLapseAlarm alarm in context.AuthorAlarms.Include(a => a.ActivatingAuthors).ToList())
                 {
                     alarm.CheckIfAlarmIsActivated(phrases);
-                    context.AuthorAlarms.AddOrUpdate(alarm);
                 }
                 context.SaveChanges();
             }
