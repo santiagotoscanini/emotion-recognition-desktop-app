@@ -69,8 +69,8 @@ namespace Tests
             Sentiment sentiment = new Sentiment("Good", SentimentState.POSITIVE);
             DateTime actualDateTime = DateTime.Now;
 
-            repository.AddAuthor(new Author() { Username = "test", Birthdate = DateTime.Now });
-            repository.AddAuthor(new Author() { Username = "test2", Birthdate = DateTime.Now });
+            repository.AddOrUpdateAuthor(new Author() { Username = "test", Birthdate = DateTime.Now });
+            repository.AddOrUpdateAuthor(new Author() { Username = "test2", Birthdate = DateTime.Now });
 
             Phrase phrase1 = new Phrase(
                 "The sun is bad.", 
@@ -98,7 +98,7 @@ namespace Tests
         [TestMethod]
         public void AddPhrase()
         {
-            repository.AddAuthor(new Author() { Username = "test", Birthdate = DateTime.Now });
+            repository.AddOrUpdateAuthor(new Author() { Username = "test", Birthdate = DateTime.Now });
 
             IEnumerable<Sentiment> sentiments = new List<Sentiment>();
             IEnumerable<Entity> entities = new List<Entity>();
@@ -157,7 +157,7 @@ namespace Tests
         [TestMethod]
         public void GetPhrases()
         {
-            repository.AddAuthor(new Author() { Username = "test", Birthdate = DateTime.Now });
+            repository.AddOrUpdateAuthor(new Author() { Username = "test", Birthdate = DateTime.Now });
 
             Phrase phrase = new Phrase(
                 "Test", 
@@ -195,7 +195,7 @@ namespace Tests
         }
 
         [TestMethod]
-        public void GetSentimenst()
+        public void GetSentiments()
         {
             Sentiment positiveSentiment = new Sentiment("love", SentimentState.POSITIVE);
             Sentiment negativeSentiment = new Sentiment("hate", SentimentState.NEGATIVE);

@@ -33,7 +33,9 @@ namespace BusinessLogic
 
         void AnalyzePhrases();
 
-        bool AddAuthor(Author author);
+        bool AddOrUpdateAuthor(Author author);
+
+        void DeleteAuthorByUsername(string username);
 
         IEnumerable<Author> GetAuthors();
 

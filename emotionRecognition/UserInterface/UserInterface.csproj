@@ -45,6 +45,7 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.4\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -57,6 +58,7 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alarm\AlarmUserControl.cs">
@@ -65,17 +67,35 @@
     <Compile Include="Alarm\AlarmUserControl.Designer.cs">
       <DependentUpon>AlarmUserControl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Author\AddAuthorUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Author\AddAuthorUserControl.Designer.cs">
+      <DependentUpon>AddAuthorUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Author\AuthorReportUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Author\AuthorReportUserControl.Designer.cs">
+      <DependentUpon>AuthorReportUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Author\AuthorUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Author\AuthorUserControl.Designer.cs">
+      <DependentUpon>AuthorUserControl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Entity\AddEntityUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="Entity\AddEntityUserControl.Designer.cs">
       <DependentUpon>AddEntityUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Phrase\AddPhraseUserControl.cs">
+    <Compile Include="Phrase\PhraseUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Phrase\AddPhraseUserControl.Designer.cs">
-      <DependentUpon>AddPhraseUserControl.cs</DependentUpon>
+    <Compile Include="Phrase\PhraseUserControl.Designer.cs">
+      <DependentUpon>PhraseUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Sentiment\AddSentimentUserControl.cs">
       <SubType>UserControl</SubType>
@@ -108,11 +128,11 @@
     <Compile Include="Sentiment\NegativeSentimentUserControl.Designer.cs">
       <DependentUpon>NegativeSentimentUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Phrase\NewPhraseUserControl.cs">
+    <Compile Include="Phrase\AddPhraseUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Phrase\NewPhraseUserControl.Designer.cs">
-      <DependentUpon>NewPhraseUserControl.cs</DependentUpon>
+    <Compile Include="Phrase\AddPhraseUserControl.Designer.cs">
+      <DependentUpon>AddPhraseUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Phrase\PhraseReportUserControl.cs">
       <SubType>UserControl</SubType>
@@ -131,11 +151,20 @@
     <EmbeddedResource Include="Alarm\AlarmUserControl.resx">
       <DependentUpon>AlarmUserControl.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Author\AddAuthorUserControl.resx">
+      <DependentUpon>AddAuthorUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Author\AuthorReportUserControl.resx">
+      <DependentUpon>AuthorReportUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Author\AuthorUserControl.resx">
+      <DependentUpon>AuthorUserControl.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Entity\AddEntityUserControl.resx">
       <DependentUpon>AddEntityUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Phrase\AddPhraseUserControl.resx">
-      <DependentUpon>AddPhraseUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="Phrase\PhraseUserControl.resx">
+      <DependentUpon>PhraseUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Sentiment\AddSentimentUserControl.resx">
       <DependentUpon>AddSentimentUserControl.cs</DependentUpon>
@@ -152,8 +181,8 @@
     <EmbeddedResource Include="Sentiment\NegativeSentimentUserControl.resx">
       <DependentUpon>NegativeSentimentUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Phrase\NewPhraseUserControl.resx">
-      <DependentUpon>NewPhraseUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="Phrase\AddPhraseUserControl.resx">
+      <DependentUpon>AddPhraseUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Phrase\PhraseReportUserControl.resx">
       <DependentUpon>PhraseReportUserControl.cs</DependentUpon>

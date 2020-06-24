@@ -80,7 +80,7 @@ namespace Tests
         [TestMethod]
         public void GetEntityAlarmsChecked()
         {
-            businessLogicController.AddAuthor("test", "s", "t", DateTime.Now);
+            businessLogicController.AddOrUpdateAuthor("test", "s", "t", DateTime.Now);
             businessLogicController.AddEntity("Valorant");
             businessLogicController.AddEntityAlarm("Valorant", true, 1, true, 2);
             businessLogicController.AddPhrase("Valorant is good", DateTime.Now, "test");
@@ -94,7 +94,7 @@ namespace Tests
         [TestMethod]
         public void AddPhrase()
         {
-            businessLogicController.AddAuthor("test", "s", "t", DateTime.Now);
+            businessLogicController.AddOrUpdateAuthor("test", "s", "t", DateTime.Now);
             Assert.AreEqual(0, businessLogicController.GetPhrases().ToList().Count);
             businessLogicController.AddPhrase("test01", DateTime.Now, "test");
             Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).Text, "test01");
@@ -103,7 +103,7 @@ namespace Tests
         [TestMethod]
         public void GetPhrases()
         {
-            businessLogicController.AddAuthor("test", "s", "t", DateTime.Now);
+            businessLogicController.AddOrUpdateAuthor("test", "s", "t", DateTime.Now);
             Assert.AreEqual(0, businessLogicController.GetPhrases().ToList().Count);
             businessLogicController.AddPhrase("test1", DateTime.Now, "test");
             Assert.AreEqual(1, businessLogicController.GetPhrases().ToList().Count);
@@ -112,7 +112,7 @@ namespace Tests
         [TestMethod]
         public void GetPhrasesReAnalize()
         {
-            businessLogicController.AddAuthor("test", "s", "t", DateTime.Now);
+            businessLogicController.AddOrUpdateAuthor("test", "s", "t", DateTime.Now);
             businessLogicController.AddPhrase("The moon is great", DateTime.Now, "test");
             foreach (Phrase phrase in businessLogicController.GetPhrases())
             {
@@ -133,7 +133,7 @@ namespace Tests
         [TestMethod]
         public void GetPhrasesAfterAddNewPositiveSentiment()
         {
-            businessLogicController.AddAuthor("test", "s", "t", DateTime.Now);
+            businessLogicController.AddOrUpdateAuthor("test", "s", "t", DateTime.Now);
             Assert.AreEqual(businessLogicController.GetPhrases().ToList().Count, 0);
             businessLogicController.AddEntity("Titanic");
             businessLogicController.AddPhrase("I love Titanic", DateTime.Now, "test");
@@ -204,7 +204,7 @@ namespace Tests
         [TestMethod]
         public void GetPhrasesAfterAddNewNegativeSentiment()
         {
-            businessLogicController.AddAuthor("test", "s", "t", DateTime.Now);
+            businessLogicController.AddOrUpdateAuthor("test", "s", "t", DateTime.Now);
             Assert.AreEqual(businessLogicController.GetPhrases().ToList().Count, 0);
             businessLogicController.AddEntity("Titanic");
             businessLogicController.AddPhrase("I hate Titanic", DateTime.Today, "test");
@@ -243,7 +243,7 @@ namespace Tests
         public void AddAuthor()
         {
             Assert.AreEqual(0, businessLogicController.GetAuthors().ToList().Count);
-            bool wasAdded = businessLogicController.AddAuthor("stos", "Elsa", "Pallito", DateTime.Now);
+            bool wasAdded = businessLogicController.AddOrUpdateAuthor("stos", "Elsa", "Pallito", DateTime.Now);
             Assert.AreEqual(true, wasAdded);
             Assert.AreEqual(1, businessLogicController.GetAuthors().ToList().Count);
         }
@@ -253,7 +253,7 @@ namespace Tests
         public void AnalyzeAuthor()
         {
             Assert.AreEqual(0, businessLogicController.GetAuthors().ToList().Count);
-            bool wasAdded = businessLogicController.AddAuthor("stos", "Elsa", "Pallito", DateTime.Now);
+            bool wasAdded = businessLogicController.AddOrUpdateAuthor("stos", "Elsa", "Pallito", DateTime.Now);
             Assert.AreEqual(true, wasAdded);
 
             businessLogicController.AnalyzeAuthors();
@@ -268,7 +268,7 @@ namespace Tests
             businessLogicController.AddPhrase("Muy rica la mostaza", DateTime.Now.AddDays(-1).AddSeconds(-20), "stos");
             businessLogicController.AddEntity("mostaza");
             businessLogicController.AddPositiveSentiment("RicA");
-            
+
             businessLogicController.AnalyzePhrases();
             businessLogicController.AnalyzeAuthors();
 
@@ -283,7 +283,7 @@ namespace Tests
         [TestMethod]
         public void AddAuthorAlarmSearchInDays()
         {
-            businessLogicController.AddAuthor("stej", "Harry", "Armas", DateTime.Now);
+            businessLogicController.AddOrUpdateAuthor("stej", "Harry", "Armas", DateTime.Now);
 
             Assert.AreEqual(0, businessLogicController.GetEntityAlarmsChecked().ToList().Count);
 
@@ -295,7 +295,7 @@ namespace Tests
         [TestMethod]
         public void AddAuthorAlarmSearchInHours()
         {
-            businessLogicController.AddAuthor("stej", "Harry", "Armas", DateTime.Now);
+            businessLogicController.AddOrUpdateAuthor("stej", "Harry", "Armas", DateTime.Now);
 
             Assert.AreEqual(0, businessLogicController.GetAuthorAlarmsChecked().ToList().Count);
 
@@ -307,7 +307,7 @@ namespace Tests
         [TestMethod]
         public void GetAuthorAlarmsChecked()
         {
-            businessLogicController.AddAuthor("test", "s", "t", DateTime.Now);
+            businessLogicController.AddOrUpdateAuthor("test", "s", "t", DateTime.Now);
             businessLogicController.AddEntity("Valorant");
             businessLogicController.AddAuthorAlarm(true, 1, true, 2);
             businessLogicController.AddPhrase("Valorant is good", DateTime.Now, "test");
@@ -321,7 +321,7 @@ namespace Tests
         [TestMethod]
         public void GetAuthorsOfAuthorAlarmsChecked()
         {
-            businessLogicController.AddAuthor("test", "s", "t", DateTime.Now);
+            businessLogicController.AddOrUpdateAuthor("test", "s", "t", DateTime.Now);
             businessLogicController.AddEntity("Valorant");
             businessLogicController.AddAuthorAlarm(true, 1, true, 2);
             businessLogicController.AddPhrase("Valorant is good", DateTime.Now, "test");
