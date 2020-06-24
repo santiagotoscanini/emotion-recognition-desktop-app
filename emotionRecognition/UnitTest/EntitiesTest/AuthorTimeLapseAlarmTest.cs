@@ -334,7 +334,6 @@ namespace Tests
             Author author1 = new Author() { Username = "Harry", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
             Author author2 = new Author() { Username = "Sonia", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
 
-
             sentiments.Add(new Sentiment("good", SentimentState.POSITIVE));
             sentiments.Add(new Sentiment("awesome", SentimentState.POSITIVE));
             DateTime phraseDateTime = DateTime.Now.AddDays(-11);
