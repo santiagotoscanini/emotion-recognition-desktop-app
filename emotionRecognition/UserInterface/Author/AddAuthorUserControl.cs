@@ -71,7 +71,7 @@ namespace UserInterface
 
         private void BtnCreateAuthor_Click(object sender, EventArgs e)
         {
-            HideErrorMessage();
+            HideMessages();
             if (!DataIsIncorrect())
             {
                 CreateOrUpdateAuthor();
@@ -95,6 +95,7 @@ namespace UserInterface
             {
                 TxtSuccess.Text = ModifySuccessText;
             }
+            TxtSuccess.Visible = true;
         }
 
         private void ClearFields()
@@ -104,11 +105,13 @@ namespace UserInterface
             TxtUserName.Text = EmptyText;
         }
 
-        private void HideErrorMessage()
+        private void HideMessages()
         {
             LblNoName.Text = EmptyText;
             LblNoSurname.Text = EmptyText;
             LblNoUsername.Text = EmptyText;
+            LblUserAlreadyExist.Visible = false;
+            TxtSuccess.Visible = false;
         }
 
         private bool DataIsIncorrect()
@@ -132,10 +135,15 @@ namespace UserInterface
             
             try
             {
-                if(TxtUserName.Text != "" && authorUsername == null)  businessLogicController.GetAuthorByUsername(TxtUserName.Text);
+                if (TxtUserName.Text != "" && authorUsername == null)
+                {
+                    businessLogicController.GetAuthorByUsername(TxtUserName.Text);
+                    LblUserAlreadyExist.Visible = true;
+                    areAtLeastOneFieldEmpty = true;
+                }
             }
-            catch (ArgumentException) { 
-                LblUserAlreadyExist.Visible = true;
+            catch (ArgumentException) {
+                LblUserAlreadyExist.Visible = false;
             }
 
             return areAtLeastOneFieldEmpty;
