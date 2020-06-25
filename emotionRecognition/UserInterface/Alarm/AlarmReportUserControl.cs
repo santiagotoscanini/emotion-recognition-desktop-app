@@ -56,22 +56,6 @@ namespace UserInterface
 
                     break;
             }
-
-            //    this.Entidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            //    this.SearchType = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            //    this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            //    this.SentimentToDetect = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            //    this.NumberOfSentimentsNeeded = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            //    this.IsActivated = new System.Windows.Forms.DataGridViewTextBoxColumn();
-
-            //    this.GrdAlarms.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            //this.Entidad,
-            //this.SearchType,
-            //this.Time,
-            //this.SentimentToDetect,
-            //this.NumberOfSentimentsNeeded,
-            //this.IsActivated});
-
         }
 
         private void AddAuthorAlarmRow(ICollection<Author> authors, bool searchMethodDays, int timeToSearch, bool detectPositives, int sentimentsNeeded, bool isActivated)

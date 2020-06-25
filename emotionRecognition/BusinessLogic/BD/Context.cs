@@ -26,9 +26,6 @@ namespace BusinessLogic.BD
             modelBuilder.Configurations.Add(new EntityTimeLapseAlarmTypeConfiguration());
             modelBuilder.Configurations.Add(new AuthorTypeConfiguration());
             modelBuilder.Configurations.Add(new AuthorTimeLapseAlarmTypeConfiguration());
-            //modelBuilder.Entity<Author>()
-            //    .HasMany<AuthorTimeLapseAlarm>(author => author.AuthorTimeLapseAlarms)
-            //    .WithMany(alarm => alarm.ActivatingAuthors);
         }
     }
 }

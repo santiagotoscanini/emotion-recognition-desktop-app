@@ -25,7 +25,6 @@ namespace UserInterface
             switch (alarmCreateState)
             {
                 case AlarmCreateState.ADD_ALARM_ENTITIES:
-                    //LblNoEntities.Visible = true;
                     CboEntity.Visible = true;
                     LoadEntities();
                     break;
