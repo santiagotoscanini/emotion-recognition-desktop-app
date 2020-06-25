@@ -262,6 +262,9 @@ namespace Tests
             Assert.AreEqual(0, authorSaved.NumberOfNegativePhrases);
             Assert.AreEqual(0, authorSaved.NumberOfDistinctEntitiesMentioned);
             Assert.AreEqual(0, authorSaved.NumberOfDaysFromFirstPublication);
+            Assert.AreEqual(0, authorSaved.GetAvgOfPhrasesPerDay());
+            Assert.AreEqual(0, authorSaved.GetPercentageOfNegativePhrases());
+            Assert.AreEqual(0, authorSaved.GetPercentageOfPositivePhrases());
 
             businessLogicController.AddPhrase("Muy rica la mostaza", DateTime.Now.AddDays(-1).AddSeconds(-20), "stos");
             businessLogicController.AddEntity("mostaza");

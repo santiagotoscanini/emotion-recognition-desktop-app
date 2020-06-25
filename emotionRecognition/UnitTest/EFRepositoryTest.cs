@@ -19,11 +19,6 @@ namespace Tests
         public void InitializeTests()
         {
             repository = new EFRepository();
-        }
-
-        [TestCleanup]
-        public void CleanupTests()
-        {
             CleanDB();
         }
 
@@ -233,6 +228,105 @@ namespace Tests
             repository.AddAuthorAlarm(alarm);
 
             Assert.AreEqual(1, repository.GetAuthorAlarms().ToList().Count);
+        }
+
+        [TestMethod]
+        public void AddAlreadyExistEntity()
+        {
+            Entity entity = new Entity("ST");
+            repository.AddEntity(entity);
+            Assert.IsFalse( repository.AddEntity(entity));
+        }
+
+        [TestMethod]
+        public void AddAlreadyExistAuthor()
+        {
+            Author author = new Author()
+            {
+                Username = "Pepe",
+                Name = "PP",
+                Surname = "PP",
+                Birthdate = new DateTime(),
+            };
+            repository.AddOrUpdateAuthor(author);
+            Assert.IsFalse(repository.AddOrUpdateAuthor(author));
+        }
+
+        [TestMethod]
+        public void AddAlreadyExistSentiment()
+        {
+            Sentiment sentiment = new Sentiment("Love", SentimentState.POSITIVE);
+            repository.AddSentiment(sentiment);
+            Assert.IsFalse(repository.AddSentiment(sentiment));
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetNonExistAuthorFromUserName()
+        {
+            Author author = new Author()
+            {
+                Username = "Pepe",
+                Name = "PP",
+                Surname = "PP",
+                Birthdate = new DateTime(),
+            };
+            repository.AddOrUpdateAuthor(author);
+            repository.GetAuthorFromUsername("Juan");
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void GetNonExistEntityFromUserName()
+        {
+            Entity entity = new Entity("ST");
+            repository.AddEntity(entity);
+            repository.GetEntityFromName("Pepsi");
+        }
+
+        [TestMethod]
+        public void CheckActiveAndDeactiveAlarmInHours()
+        {
+            Author author1 = new Author() { Username = "Harry", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
+            Author author2 = new Author() { Username = "Sonia", Birthdate = DateTime.Now, AuthorTimeLapseAlarms = new HashSet<AuthorTimeLapseAlarm>() };
+
+            Entity entity = new Entity("Netflix");
+            repository.AddEntity(entity);
+
+            Sentiment sentiment1 = new Sentiment("good", SentimentState.POSITIVE);
+            repository.AddSentiment(sentiment1);
+
+            DateTime phraseDateTime = DateTime.Now.AddHours(-4);
+
+            repository.AddOrUpdateAuthor(author1);
+            repository.AddOrUpdateAuthor(author2);
+
+            IEnumerable<Sentiment> sentiments = new List<Sentiment>();
+            ((List<Sentiment>)sentiments).Add(sentiment1);
+            
+            IEnumerable<Entity> entities = new List<Entity>();
+            ((List<Entity>)entities).Add(entity);
+
+            Phrase phrase = new Phrase("Netflix is good", sentiments, entities, phraseDateTime, author1);
+            Phrase phrase2 = new Phrase("Netflix is good", sentiments, entities, phraseDateTime, author2);
+
+            repository.AddPhrase(phrase);
+            repository.AddPhrase(phrase2);
+
+            int quantityOfTimeToSearchBack = 5;
+            int quantityOfSentimentsNeeded = 2;
+
+            AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(
+                TimeSearchMethodType.DAYS,
+                quantityOfTimeToSearchBack,
+                AlarmPosibleState.POSITIVE,
+                quantityOfSentimentsNeeded);
+
+            repository.AddAuthorAlarm(alarm);
+            Assert.IsTrue(repository.GetAuthorAlarms().First().IsActivated);
+            repository.DeleteAuthorByUsername("Harry");
+
+            Assert.IsFalse(repository.GetAuthorAlarms().First().IsActivated);
         }
     }
 }

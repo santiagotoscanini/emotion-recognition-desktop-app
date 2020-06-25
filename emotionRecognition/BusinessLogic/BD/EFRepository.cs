@@ -22,15 +22,8 @@ namespace BusinessLogic.BD
             {
                 using (Context context = new Context())
                 {
-                    try
-                    {
-                        context.Entities.Add(entity);
-                        context.SaveChanges();
-                    }
-                    catch (Exception)
-                    {
-                        result = false;
-                    }
+                    context.Entities.Add(entity);
+                    context.SaveChanges();
                 }
             }
             else
@@ -78,15 +71,8 @@ namespace BusinessLogic.BD
             {
                 using (Context context = new Context())
                 {
-                    try
-                    {
-                        context.Sentiments.Add(sentiment);
-                        context.SaveChanges();
-                    }
-                    catch (Exception)
-                    {
-                        result = false;
-                    }
+                    context.Sentiments.Add(sentiment);
+                    context.SaveChanges(); 
                 }
             }
             else
@@ -315,7 +301,7 @@ namespace BusinessLogic.BD
                     context.Authors.Remove(authorToDelete);
                     context.SaveChanges();
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     throw new ArgumentException("Author non existant", "username");
                 }
