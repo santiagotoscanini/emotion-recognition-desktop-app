@@ -17,17 +17,25 @@ namespace BusinessLogic.BD
         public bool AddEntity(Entity entity)
         {
             bool result = true;
-            using (Context context = new Context())
+
+            if (!IsEntityContainedIntoAnother(entity.Name))
             {
-                try
+                using (Context context = new Context())
                 {
-                    context.Entities.Add(entity);
-                    context.SaveChanges();
+                    try
+                    {
+                        context.Entities.Add(entity);
+                        context.SaveChanges();
+                    }
+                    catch (Exception)
+                    {
+                        result = false;
+                    }
                 }
-                catch (Exception)
-                {
-                    result = false;
-                }
+            }
+            else
+            {
+                result = false;
             }
 
             return result;
@@ -48,6 +56,7 @@ namespace BusinessLogic.BD
         public Entity GetEntityFromName(string entityName)
         {
             Entity entity;
+
             using (Context context = new Context())
             {
                 entity = context.Entities.Find(entityName);
@@ -64,17 +73,25 @@ namespace BusinessLogic.BD
         public bool AddSentiment(Sentiment sentiment)
         {
             bool result = true;
-            using (Context context = new Context())
+
+            if (!IsSentimentContainedIntoAnother(sentiment.Text))
             {
-                try
+                using (Context context = new Context())
                 {
-                    context.Sentiments.Add(sentiment);
-                    context.SaveChanges();
+                    try
+                    {
+                        context.Sentiments.Add(sentiment);
+                        context.SaveChanges();
+                    }
+                    catch (Exception)
+                    {
+                        result = false;
+                    }
                 }
-                catch (Exception)
-                {
-                    result = false;
-                }
+            }
+            else
+            {
+                result = false;
             }
 
             return result;
@@ -83,6 +100,8 @@ namespace BusinessLogic.BD
         public IEnumerable<Sentiment> GetSentiments()
         {
             IEnumerable<Sentiment> sentiments;
+
+            AnalizeData();
 
             using (Context context = new Context())
             {
@@ -94,11 +113,15 @@ namespace BusinessLogic.BD
 
         public IEnumerable<Sentiment> GetPositiveSentiments()
         {
+            AnalizeData();
+
             return FilterBySentiment(SentimentState.POSITIVE);
         }
 
         public IEnumerable<Sentiment> GetNegativeSentiments()
         {
+            AnalizeData();
+
             return FilterBySentiment(SentimentState.NEGATIVE);
         }
 
@@ -106,24 +129,40 @@ namespace BusinessLogic.BD
         {
             bool canDeleteSentiment = true;
 
+            if (!IsSentimentContainInAPhrase(sentiment))
+            {
+                using (Context context = new Context())
+                {
+                    try
+                    {
+                        Sentiment sentimentFound = context.Sentiments.FirstOrDefault(s => s.Text.Equals(sentiment.Text));
+                        context.Sentiments.Remove(sentimentFound);
+                        context.SaveChanges();
+                    }
+                    catch (Exception)
+                    {
+                        canDeleteSentiment = false;
+                    }
+                }
+            }
+            else
+            {
+                canDeleteSentiment = false;
+            }
+
+            return canDeleteSentiment;
+        }
+
+        private bool IsSentimentContainInAPhrase(Sentiment sentiment)
+        {
             using (Context context = new Context())
             {
                 foreach (Phrase phrase in context.Phrases.ToList())
                 {
-                    if (phrase.Text.Contains(sentiment.Text)) return false;
-                }
-                try
-                {
-                    Sentiment sentimentFound = context.Sentiments.FirstOrDefault(s => s.Text.Equals(sentiment.Text));
-                    context.Sentiments.Remove(sentimentFound);
-                    context.SaveChanges();
-                }
-                catch (Exception)
-                {
-                    canDeleteSentiment = false;
+                    if (phrase.Text.Contains(sentiment.Text)) return true;
                 }
             }
-            return canDeleteSentiment;
+            return false;
         }
 
         public void AddPhrase(Phrase phrase)
@@ -145,6 +184,8 @@ namespace BusinessLogic.BD
         {
             IEnumerable<Phrase> phrases;
 
+            AnalizeData();
+
             using (Context context = new Context())
             {
                 phrases = context.Phrases.Include(p => p.Entity).Include(p => p.Author).ToList();
@@ -153,7 +194,7 @@ namespace BusinessLogic.BD
             return phrases;
         }
 
-        public void AnalyzePhrases()
+        private void AnalizePhrases()
         {
             using (Context context = new Context())
             {
@@ -167,6 +208,14 @@ namespace BusinessLogic.BD
 
                 context.SaveChanges();
             }
+        }
+
+        private void AnalizeData()
+        {
+            AnalizePhrases();
+            AnalizeAuthors();
+            AnalizeAuthorAlarms();
+            AnalizeEntityAlarms();
         }
 
         public void AddEntityAlarm(EntityTimeLapseAlarm alarm)
@@ -183,6 +232,8 @@ namespace BusinessLogic.BD
         {
             IEnumerable<EntityTimeLapseAlarm> alarms;
 
+            AnalizeData();
+
             using (Context context = new Context())
             {
                 alarms = context.EntityAlarms.Include(a => a.Entity).ToList();
@@ -191,7 +242,7 @@ namespace BusinessLogic.BD
             return alarms;
         }
 
-        public void AnalyzeEntityAlarms()
+        private void AnalizeEntityAlarms()
         {
             using (Context context = new Context())
             {
@@ -202,6 +253,7 @@ namespace BusinessLogic.BD
                     alarm.CheckIfAlarmIsActivated(phrases);
                     context.EntityAlarms.AddOrUpdate(alarm);
                 }
+
                 context.SaveChanges();
             }
         }
@@ -211,10 +263,12 @@ namespace BusinessLogic.BD
             bool wasAdded = true;
             using (Context context = new Context())
             {
-                try {
+                try
+                {
                     context.Authors.AddOrUpdate(author);
                     context.SaveChanges();
-                } catch (Exception)
+                }
+                catch (Exception)
                 {
                     wasAdded = false;
                 }
@@ -224,6 +278,8 @@ namespace BusinessLogic.BD
 
         public IEnumerable<Author> GetAuthors()
         {
+            AnalizeData();
+
             using (Context context = new Context())
             {
                 return context.Authors.ToList();
@@ -232,6 +288,8 @@ namespace BusinessLogic.BD
 
         public Author GetAuthorFromUsername(string username)
         {
+            AnalizeData();
+
             using (Context context = new Context())
             {
                 if (!context.Authors.Any(a => a.Username.Equals(username)))
@@ -245,6 +303,8 @@ namespace BusinessLogic.BD
 
         public void DeleteAuthorByUsername(string username)
         {
+            AnalizeData();
+
             using (Context context = new Context())
             {
                 Author authorToDelete = context.Authors.FirstOrDefault(a => a.Username.Equals(username));
@@ -253,7 +313,7 @@ namespace BusinessLogic.BD
             }
         }
 
-        public void AnalyzeAuthors()
+        private void AnalizeAuthors()
         {
             using (Context context = new Context())
             {
@@ -271,6 +331,8 @@ namespace BusinessLogic.BD
         private IEnumerable<Sentiment> FilterBySentiment(SentimentState state)
         {
             List<Sentiment> filterSentiments = new List<Sentiment>();
+
+            AnalizeData();
 
             using (Context context = new Context())
             {
@@ -299,6 +361,8 @@ namespace BusinessLogic.BD
         {
             IEnumerable<AuthorTimeLapseAlarm> alarms;
 
+            AnalizeData();
+
             using (Context context = new Context())
             {
                 alarms = context.AuthorAlarms.Include(a => a.ActivatingAuthors).ToList();
@@ -307,7 +371,7 @@ namespace BusinessLogic.BD
             return alarms;
         }
 
-        public void AnalyzeAuthorAlarms()
+        private void AnalizeAuthorAlarms()
         {
             using (Context context = new Context())
             {
@@ -317,8 +381,36 @@ namespace BusinessLogic.BD
                 {
                     alarm.CheckIfAlarmIsActivated(phrases);
                 }
+
                 context.SaveChanges();
             }
+        }
+
+        private bool IsEntityContainedIntoAnother(string name)
+        {
+            bool isContained = false;
+            foreach (Entity entity in GetEntities())
+            {
+                isContained |= entity.Name.Contains(name);
+                if (isContained) break;
+            }
+
+            return isContained;
+        }
+
+        private bool IsSentimentContainedIntoAnother(string text)
+        {
+            bool isContained = false;
+            foreach (Sentiment sentiment in GetSentiments())
+            {
+                isContained |= sentiment.Text.Contains(text);
+                if (isContained)
+                {
+                    break;
+                }
+            }
+
+            return isContained;
         }
     }
 }

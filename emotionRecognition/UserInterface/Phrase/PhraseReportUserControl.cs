@@ -17,7 +17,6 @@ namespace UserInterface
 
         private void LoadPhrasesReport()
         {
-            controller.AnalyzePhrases();
             foreach (Phrase phrase in controller.GetPhrases())
             {
                 GrdReport.Rows.Add(
