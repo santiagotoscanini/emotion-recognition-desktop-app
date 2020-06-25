@@ -29,24 +29,16 @@ namespace BusinessLogic
 
         IEnumerable<EntityTimeLapseAlarm> GetEntityAlarms();
 
-        void AnalyzeEntityAlarms();
-
-        void AnalyzePhrases();
-
         bool AddOrUpdateAuthor(Author author);
 
         void DeleteAuthorByUsername(string username);
 
         IEnumerable<Author> GetAuthors();
 
-        void AnalyzeAuthors();
-
         Author GetAuthorFromUsername(string username);
 
         void AddAuthorAlarm(AuthorTimeLapseAlarm alarm);
 
         IEnumerable<AuthorTimeLapseAlarm> GetAuthorAlarms();
-
-        void AnalyzeAuthorAlarms();
     }
 }

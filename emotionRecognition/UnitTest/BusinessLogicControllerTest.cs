@@ -256,8 +256,6 @@ namespace Tests
             bool wasAdded = businessLogicController.AddOrUpdateAuthor("stos", "Elsa", "Pallito", DateTime.Now);
             Assert.AreEqual(true, wasAdded);
 
-            businessLogicController.AnalyzeAuthors();
-
             Author authorSaved = businessLogicController.GetAuthorByUsername("stos");
             Assert.AreEqual(0, authorSaved.NumberOfPhrases);
             Assert.AreEqual(0, authorSaved.NumberOfPositivePhrases);
@@ -268,9 +266,6 @@ namespace Tests
             businessLogicController.AddPhrase("Muy rica la mostaza", DateTime.Now.AddDays(-1).AddSeconds(-20), "stos");
             businessLogicController.AddEntity("mostaza");
             businessLogicController.AddPositiveSentiment("RicA");
-
-            businessLogicController.AnalyzePhrases();
-            businessLogicController.AnalyzeAuthors();
 
             Author authorSavedAfterAnalyze = businessLogicController.GetAuthorByUsername("stos");
 

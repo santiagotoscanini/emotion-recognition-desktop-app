@@ -23,7 +23,6 @@ namespace UserInterface
 
         private void LoadAuthorsReport()
         {
-            businessLogicController.AnalyzePhrases();
             GrdAuthors.Rows.Clear();
             foreach (Author author in businessLogicController.GetAuthors())
             {

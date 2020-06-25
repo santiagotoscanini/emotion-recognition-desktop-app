@@ -16,13 +16,9 @@ namespace BusinessLogic
 
         public bool AddEntity(string name)
         {
-            bool entityWasAdded = false;
-            if (!IsEntityContainedIntoAnother(name))
-            {
-                Entity entityToAdd = new Entity(name);
-                entityWasAdded = Repository.AddEntity(entityToAdd);
-                AnalyzePhrases();
-            }
+            bool entityWasAdded;
+            Entity entityToAdd = new Entity(name);
+            entityWasAdded = Repository.AddEntity(entityToAdd);
 
             return entityWasAdded;
         }
@@ -41,13 +37,10 @@ namespace BusinessLogic
             EntityTimeLapseAlarm alarm = new EntityTimeLapseAlarm(entity, searchMethodType, timeToSearchBack, alarmPosibleState, sentimentsNeeded);
 
             Repository.AddEntityAlarm(alarm);
-            Repository.AnalyzeEntityAlarms();
         }
 
         public IEnumerable<EntityTimeLapseAlarm> GetEntityAlarmsChecked()
         {
-            Repository.AnalyzeEntityAlarms();
-
             return Repository.GetEntityAlarms();
         }
 
@@ -56,10 +49,6 @@ namespace BusinessLogic
             Author authorOfPhrase = GetAuthorByUsername(username);
             Phrase phraseToAdd = new Phrase(phraseText, Repository.GetSentiments(), Repository.GetEntities(), dateTime, authorOfPhrase);
             Repository.AddPhrase(phraseToAdd);
-
-            Repository.AnalyzePhrases();
-            Repository.AnalyzeAuthors();
-            Repository.AnalyzeEntityAlarms();
         }
 
         public IEnumerable<Phrase> GetPhrases()
@@ -67,25 +56,11 @@ namespace BusinessLogic
             return Repository.GetPhrases();
         }
 
-        public void AnalyzePhrases()
-        {
-            Repository.AnalyzePhrases();
-        }
-
         public bool AddPositiveSentiment(string text)
         {
-            bool wasAdded = false;
-            if (!IsSentimentContainedIntoAnother(text))
-            {
-                Sentiment positiveSentimentToAdd = new Sentiment(text, SentimentState.POSITIVE);
-                wasAdded = Repository.AddSentiment(positiveSentimentToAdd);
-                if (wasAdded)
-                {
-                    AnalyzePhrases();
-                }
-            }
+            Sentiment positiveSentimentToAdd = new Sentiment(text, SentimentState.POSITIVE);
 
-            return wasAdded;
+            return Repository.AddSentiment(positiveSentimentToAdd);
         }
 
 
@@ -101,18 +76,9 @@ namespace BusinessLogic
 
         public bool AddNegativeSentiment(string text)
         {
-            bool wasAdded = false;
-            if (!IsSentimentContainedIntoAnother(text))
-            {
-                Sentiment negativeSentimentToAdd = new Sentiment(text, SentimentState.NEGATIVE);
-                wasAdded = Repository.AddSentiment(negativeSentimentToAdd);
-                if (wasAdded)
-                {
-                    AnalyzePhrases();
-                }
-            }
+            Sentiment negativeSentimentToAdd = new Sentiment(text, SentimentState.NEGATIVE);
 
-            return wasAdded;
+            return Repository.AddSentiment(negativeSentimentToAdd);
         }
 
         public IEnumerable<Sentiment> GetNegativeSentiments()
@@ -132,14 +98,8 @@ namespace BusinessLogic
 
         public bool AddOrUpdateAuthor(string username, string name, string surname, DateTime birthdate)
         {
-            Author authorToAdd = new Author() { Username = username, Name = name, Surname = surname, Birthdate = birthdate };
-            bool wasAdded = Repository.AddOrUpdateAuthor(authorToAdd);
-            if (wasAdded)
-            {
-                AnalyzeAuthors();
-            }
-
-            return wasAdded;
+            Author authorToAdd = new Author() { Username = username, Name = name, Surname = surname, Birthdate = birthdate };            
+            return Repository.AddOrUpdateAuthor(authorToAdd);
         }
 
         public Author GetAuthorByUsername(string username)
@@ -152,38 +112,6 @@ namespace BusinessLogic
             Repository.DeleteAuthorByUsername(username);
         }
 
-        public void AnalyzeAuthors()
-        {
-            Repository.AnalyzeAuthors();
-        }
-
-        private bool IsEntityContainedIntoAnother(string name)
-        {
-            bool isContained = false;
-            foreach (Entity entity in Repository.GetEntities())
-            {
-                isContained |= entity.Name.Contains(name);
-                if (isContained) break;
-            }
-
-            return isContained;
-        }
-
-        private bool IsSentimentContainedIntoAnother(string text)
-        {
-            bool isContained = false;
-            foreach (Sentiment sentiment in Repository.GetSentiments())
-            {
-                isContained |= sentiment.Text.Contains(text);
-                if (isContained)
-                {
-                    break;
-                }
-            }
-
-            return isContained;
-        }
-
         public void AddAuthorAlarm(bool searchInDays, int sentimentsNeeded, bool detectPositiveSentiments, int timeToSearchBack)
         {
             TimeSearchMethodType searchMethodType = searchInDays ? TimeSearchMethodType.DAYS : TimeSearchMethodType.HOURS;
@@ -192,13 +120,10 @@ namespace BusinessLogic
             AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(searchMethodType, timeToSearchBack, alarmPosibleState, sentimentsNeeded);
 
             Repository.AddAuthorAlarm(alarm);
-            Repository.AnalyzeAuthorAlarms();
         }
 
         public IEnumerable<AuthorTimeLapseAlarm> GetAuthorAlarmsChecked()
         {
-            Repository.AnalyzeAuthorAlarms();
-
             return Repository.GetAuthorAlarms();
         }
     }
