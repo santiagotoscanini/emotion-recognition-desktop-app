@@ -53,7 +53,7 @@ namespace UserInterface
 
         private void NoAuthorOnSystem()
         {
-            LblNoAuthorError.Visible = true;
+            LblNoAuthors.Visible = true;
             LbxAuthors.Enabled = false;
             BtnAccept.Enabled = false;
         }

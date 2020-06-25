@@ -26,10 +26,12 @@ namespace UserInterface
             {
                 case AlarmCreateState.ADD_ALARM_ENTITIES:
                     CboEntity.Visible = true;
+                    LblAlarmEntity.Visible = true;
                     LoadEntities();
                     break;
                 case AlarmCreateState.ADD_ALARM_AUTHORS:
                     LblNoEntities.Visible = false;
+                    LblAlarmEntity.Visible = false;
                     CboEntity.Visible = false;
                     BtnSave.Enabled = true;
                     break;

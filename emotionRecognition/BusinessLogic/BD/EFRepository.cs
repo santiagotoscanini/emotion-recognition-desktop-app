@@ -247,9 +247,18 @@ namespace BusinessLogic.BD
         {
             using (Context context = new Context())
             {
-                Author authorToDelete = context.Authors.FirstOrDefault(a => a.Username.Equals(username));
-                context.Authors.Remove(authorToDelete);
-                context.SaveChanges();
+                try
+                {
+                    Author authorToDelete = context.Authors.FirstOrDefault(a => a.Username.Equals(username));
+                    IEnumerable<Phrase> phrasesToDelete = context.Phrases.Where(p => p.Author.Username.Equals(username)).ToList();
+                    context.Phrases.RemoveRange(phrasesToDelete);
+                    context.Authors.Remove(authorToDelete);
+                    context.SaveChanges();
+                }
+                catch (Exception e)
+                {
+                    throw new ArgumentException("Author non existant", "username");
+                }
             }
         }
 

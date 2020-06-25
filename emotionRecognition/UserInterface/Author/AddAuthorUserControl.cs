@@ -23,11 +23,13 @@ namespace UserInterface
         private string authorUsername;
 
         private BusinessLogicController businessLogicController { get; set; }
+        private AuthorUserControl authorUserControl;
 
-        public AddAuthorUserControl(BusinessLogicController businessLogicController, string authorUsername)
+        public AddAuthorUserControl(BusinessLogicController businessLogicController, string authorUsername, AuthorUserControl authorUserControl)
         {
             this.authorUsername = authorUsername;
             this.businessLogicController = businessLogicController;
+            this.authorUserControl = authorUserControl;
             InitializeComponent();
             setValuesForModifyOrAdd();
             SetRangeOfDateOfBirth();
@@ -71,12 +73,12 @@ namespace UserInterface
 
         private void BtnCreateAuthor_Click(object sender, EventArgs e)
         {
-            HideErrorMessage();
+            HideMessages();
             if (!DataIsIncorrect())
             {
                 CreateOrUpdateAuthor();
-                showSuccessMessage();
                 ClearFields();
+                authorUserControl.getBackToReport();
             }
         }
 
@@ -95,6 +97,7 @@ namespace UserInterface
             {
                 TxtSuccess.Text = ModifySuccessText;
             }
+            TxtSuccess.Visible = true;
         }
 
         private void ClearFields()
@@ -104,11 +107,13 @@ namespace UserInterface
             TxtUserName.Text = EmptyText;
         }
 
-        private void HideErrorMessage()
+        private void HideMessages()
         {
             LblNoName.Text = EmptyText;
             LblNoSurname.Text = EmptyText;
             LblNoUsername.Text = EmptyText;
+            LblUserAlreadyExist.Visible = false;
+            TxtSuccess.Visible = false;
         }
 
         private bool DataIsIncorrect()
@@ -132,10 +137,15 @@ namespace UserInterface
             
             try
             {
-                if(TxtUserName.Text != "" && authorUsername == null)  businessLogicController.GetAuthorByUsername(TxtUserName.Text);
+                if (TxtUserName.Text != "" && authorUsername == null)
+                {
+                    businessLogicController.GetAuthorByUsername(TxtUserName.Text);
+                    LblUserAlreadyExist.Visible = true;
+                    areAtLeastOneFieldEmpty = true;
+                }
             }
-            catch (ArgumentException) { 
-                LblUserAlreadyExist.Visible = true;
+            catch (ArgumentException) {
+                LblUserAlreadyExist.Visible = false;
             }
 
             return areAtLeastOneFieldEmpty;
