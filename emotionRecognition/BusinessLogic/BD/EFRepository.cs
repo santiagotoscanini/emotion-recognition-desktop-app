@@ -169,38 +169,38 @@ namespace BusinessLogic.BD
             }
         }
 
-        public void AddAlarm(TimeLapseAlarm alarm)
+        public void AddEntityAlarm(EntityTimeLapseAlarm alarm)
         {
             using (Context context = new Context())
             {
                 context.Entities.Attach(alarm.Entity);
-                context.Alarms.Add(alarm);
+                context.EntityAlarms.Add(alarm);
                 context.SaveChanges();
             }
         }
 
-        public IEnumerable<TimeLapseAlarm> GetAlarms()
+        public IEnumerable<EntityTimeLapseAlarm> GetEntityAlarms()
         {
-            IEnumerable<TimeLapseAlarm> alarms;
+            IEnumerable<EntityTimeLapseAlarm> alarms;
 
             using (Context context = new Context())
             {
-                alarms = context.Alarms.Include(a => a.Entity).ToList();
+                alarms = context.EntityAlarms.Include(a => a.Entity).ToList();
             }
 
             return alarms;
         }
 
-        public void AnalyzeAlarms()
+        public void AnalyzeEntityAlarms()
         {
             using (Context context = new Context())
             {
-                IEnumerable<Phrase> phrases = context.Phrases.ToList();
+                IEnumerable<Phrase> phrases = context.Phrases.Include(p => p.Entity).ToList();
 
-                foreach (TimeLapseAlarm alarm in context.Alarms.ToList())
+                foreach (EntityTimeLapseAlarm alarm in context.EntityAlarms.ToList())
                 {
                     alarm.CheckIfAlarmIsActivated(phrases);
-                    context.Alarms.AddOrUpdate(alarm);
+                    context.EntityAlarms.AddOrUpdate(alarm);
                 }
                 context.SaveChanges();
             }
@@ -211,7 +211,7 @@ namespace BusinessLogic.BD
             bool wasAdded = true;
             using (Context context = new Context())
             {
-                try { 
+                try {
                     context.Authors.AddOrUpdate(author);
                     context.SaveChanges();
                 } catch (Exception)
@@ -284,6 +284,41 @@ namespace BusinessLogic.BD
             }
 
             return filterSentiments;
+        }
+
+        public void AddAuthorAlarm(AuthorTimeLapseAlarm alarm)
+        {
+            using (Context context = new Context())
+            {
+                context.AuthorAlarms.Add(alarm);
+                context.SaveChanges();
+            }
+        }
+
+        public IEnumerable<AuthorTimeLapseAlarm> GetAuthorAlarms()
+        {
+            IEnumerable<AuthorTimeLapseAlarm> alarms;
+
+            using (Context context = new Context())
+            {
+                alarms = context.AuthorAlarms.Include(a => a.ActivatingAuthors).ToList();
+            }
+
+            return alarms;
+        }
+
+        public void AnalyzeAuthorAlarms()
+        {
+            using (Context context = new Context())
+            {
+                IEnumerable<Phrase> phrases = context.Phrases.Include(p => p.Author.AuthorTimeLapseAlarms).Include(p => p.Entity).ToList();
+
+                foreach (AuthorTimeLapseAlarm alarm in context.AuthorAlarms.Include(a => a.ActivatingAuthors).ToList())
+                {
+                    alarm.CheckIfAlarmIsActivated(phrases);
+                }
+                context.SaveChanges();
+            }
         }
     }
 }

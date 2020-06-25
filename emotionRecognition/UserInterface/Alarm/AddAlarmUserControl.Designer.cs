@@ -44,10 +44,14 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.NudPostQuantity = new System.Windows.Forms.NumericUpDown();
             this.NudTimeLapse = new System.Windows.Forms.NumericUpDown();
+            this.RdoAlarmEntities = new System.Windows.Forms.RadioButton();
+            this.RdoAlarmAutores = new System.Windows.Forms.RadioButton();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.s.SuspendLayout();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NudPostQuantity)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NudTimeLapse)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // BtnSave
@@ -142,7 +146,7 @@
             // 
             this.CboEntity.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.CboEntity.FormattingEnabled = true;
-            this.CboEntity.Location = new System.Drawing.Point(52, 47);
+            this.CboEntity.Location = new System.Drawing.Point(52, 74);
             this.CboEntity.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.CboEntity.Name = "CboEntity";
             this.CboEntity.Size = new System.Drawing.Size(400, 24);
@@ -154,16 +158,16 @@
             this.LblDoneMessage.ForeColor = System.Drawing.Color.Green;
             this.LblDoneMessage.Location = new System.Drawing.Point(48, 342);
             this.LblDoneMessage.Name = "LblDoneMessage";
-            this.LblDoneMessage.Size = new System.Drawing.Size(196, 17);
+            this.LblDoneMessage.Size = new System.Drawing.Size(204, 17);
             this.LblDoneMessage.TabIndex = 30;
-            this.LblDoneMessage.Text = "Frase agregada exitosamente";
+            this.LblDoneMessage.Text = "Alarma agregada exitosamente";
             this.LblDoneMessage.Visible = false;
             // 
             // LblNoEntities
             // 
             this.LblNoEntities.AutoSize = true;
             this.LblNoEntities.ForeColor = System.Drawing.Color.Red;
-            this.LblNoEntities.Location = new System.Drawing.Point(471, 50);
+            this.LblNoEntities.Location = new System.Drawing.Point(471, 77);
             this.LblNoEntities.Name = "LblNoEntities";
             this.LblNoEntities.Size = new System.Drawing.Size(150, 17);
             this.LblNoEntities.TabIndex = 32;
@@ -186,9 +190,9 @@
             this.s.Controls.Add(this.RdoNegative);
             this.s.Controls.Add(this.RdoPositive);
             this.s.Location = new System.Drawing.Point(52, 132);
-            this.s.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.s.Margin = new System.Windows.Forms.Padding(4);
             this.s.Name = "s";
-            this.s.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.s.Padding = new System.Windows.Forms.Padding(4);
             this.s.Size = new System.Drawing.Size(260, 50);
             this.s.TabIndex = 1;
             this.s.TabStop = false;
@@ -198,9 +202,9 @@
             this.groupBox1.Controls.Add(this.RdoDays);
             this.groupBox1.Controls.Add(this.RdoHours);
             this.groupBox1.Location = new System.Drawing.Point(280, 308);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(217, 50);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
@@ -249,10 +253,46 @@
             0,
             0});
             // 
+            // RdoAlarmEntities
+            // 
+            this.RdoAlarmEntities.AutoSize = true;
+            this.RdoAlarmEntities.Checked = true;
+            this.RdoAlarmEntities.Location = new System.Drawing.Point(6, 21);
+            this.RdoAlarmEntities.Name = "RdoAlarmEntities";
+            this.RdoAlarmEntities.Size = new System.Drawing.Size(140, 21);
+            this.RdoAlarmEntities.TabIndex = 35;
+            this.RdoAlarmEntities.TabStop = true;
+            this.RdoAlarmEntities.Text = "Alarma Entidades";
+            this.RdoAlarmEntities.UseVisualStyleBackColor = true;
+            this.RdoAlarmEntities.CheckedChanged += new System.EventHandler(this.RdoAlarmEntities_CheckedChanged);
+            // 
+            // RdoAlarmAutores
+            // 
+            this.RdoAlarmAutores.AutoSize = true;
+            this.RdoAlarmAutores.Location = new System.Drawing.Point(152, 21);
+            this.RdoAlarmAutores.Name = "RdoAlarmAutores";
+            this.RdoAlarmAutores.Size = new System.Drawing.Size(126, 21);
+            this.RdoAlarmAutores.TabIndex = 36;
+            this.RdoAlarmAutores.TabStop = true;
+            this.RdoAlarmAutores.Text = "Alarma Autores";
+            this.RdoAlarmAutores.UseVisualStyleBackColor = true;
+            this.RdoAlarmAutores.CheckedChanged += new System.EventHandler(this.RdoAlarmAutores_CheckedChanged);
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.RdoAlarmAutores);
+            this.groupBox2.Controls.Add(this.RdoAlarmEntities);
+            this.groupBox2.Location = new System.Drawing.Point(51, 3);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(292, 53);
+            this.groupBox2.TabIndex = 37;
+            this.groupBox2.TabStop = false;
+            // 
             // AddAlarmUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.NudTimeLapse);
             this.Controls.Add(this.NudPostQuantity);
             this.Controls.Add(this.groupBox1);
@@ -274,6 +314,8 @@
             this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NudPostQuantity)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NudTimeLapse)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -296,5 +338,8 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.NumericUpDown NudPostQuantity;
         private System.Windows.Forms.NumericUpDown NudTimeLapse;
+        private System.Windows.Forms.RadioButton RdoAlarmEntities;
+        private System.Windows.Forms.RadioButton RdoAlarmAutores;
+        private System.Windows.Forms.GroupBox groupBox2;
     }
 }

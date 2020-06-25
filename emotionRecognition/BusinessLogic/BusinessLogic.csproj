@@ -55,19 +55,22 @@
   <ItemGroup>
     <Compile Include="BD\Context.cs" />
     <Compile Include="BD\EntitiesConfigurations\AuthorTypeConfiguration.cs" />
+    <Compile Include="BD\EntitiesConfigurations\AuthorTimeLapseAlarmTypeConfiguration.cs" />
     <Compile Include="BD\EntitiesConfigurations\EntityTypeConfiguration.cs" />
     <Compile Include="BD\EntitiesConfigurations\PhraseTypeConfiguration.cs" />
     <Compile Include="BD\EntitiesConfigurations\SentimentTypeConfiguration.cs" />
-    <Compile Include="BD\EntitiesConfigurations\TimeLapseAlarmTypeConfiguration.cs" />
+    <Compile Include="BD\EntitiesConfigurations\EntityTimeLapseAlarmTypeConfiguration.cs" />
     <Compile Include="Entities\Author.cs" />
     <Compile Include="Entities\Entity.cs" />
+    <Compile Include="Entities\Alarms\AuthorTimeLapseAlarm.cs" />
+    <Compile Include="Entities\Alarms\EntityTimeLapseAlarm.cs" />
     <Compile Include="Entities\Enums\AlarmPosibleState.cs" />
     <Compile Include="Entities\Enums\PhraseState.cs" />
     <Compile Include="Entities\Enums\SentimentState.cs" />
     <Compile Include="Entities\Enums\TimeSearchMethodType.cs" />
     <Compile Include="Entities\Phrase.cs" />
     <Compile Include="Entities\Sentiment.cs" />
-    <Compile Include="Entities\TimeLapseAlarm.cs" />
+    <Compile Include="Entities\Alarms\IAlarm.cs" />
     <Compile Include="BD\EFRepository.cs" />
     <Compile Include="BusinessLogicController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -7,18 +7,18 @@ using System.Collections.Generic;
 namespace Tests
 {
     [TestClass]
-    public class TimeLapseAlarmTest
+    public class EntityTimeLapseAlarmTest
     {
         [TestMethod]
         public void CreateAlarm()
         {
             Entity entity = new Entity("Netflix");
             TimeSearchMethodType timeSearchMethodType = TimeSearchMethodType.DAYS;
-            uint quantityOfTimeToSearchBack = 10;
+            int quantityOfTimeToSearchBack = 10;
             AlarmPosibleState alarmPosibleState = AlarmPosibleState.POSITIVE;
-            uint quantityOfSentimentsNeeded = 5;
+            int quantityOfSentimentsNeeded = 5;
 
-            new TimeLapseAlarm(
+            new EntityTimeLapseAlarm(
                 entity,
                 timeSearchMethodType,
                 quantityOfTimeToSearchBack,
@@ -32,11 +32,11 @@ namespace Tests
         {
             Entity entity = new Entity("Netflix");
             TimeSearchMethodType timeSearchMethodType = TimeSearchMethodType.DAYS;
-            uint quantityOfTimeToSearchBack = 0;
+            int quantityOfTimeToSearchBack = 0;
             AlarmPosibleState alarmPosibleState = AlarmPosibleState.POSITIVE;
-            uint quantityOfSentimentsNeeded = 5;
+            int quantityOfSentimentsNeeded = 5;
 
-            new TimeLapseAlarm(
+            new EntityTimeLapseAlarm(
                 entity,
                 timeSearchMethodType,
                 quantityOfTimeToSearchBack,
@@ -50,11 +50,11 @@ namespace Tests
         {
             Entity entity = new Entity("Netflix");
             TimeSearchMethodType timeSearchMethodType = TimeSearchMethodType.DAYS;
-            uint quantityOfTimeToSearchBack = 10;
+            int quantityOfTimeToSearchBack = 10;
             AlarmPosibleState alarmPosibleState = AlarmPosibleState.POSITIVE;
-            uint quantityOfSentimentsNeeded = 0;
+            int quantityOfSentimentsNeeded = 0;
 
-            new TimeLapseAlarm(
+            new EntityTimeLapseAlarm(
                 entity,
                 timeSearchMethodType,
                 quantityOfTimeToSearchBack,
@@ -67,10 +67,10 @@ namespace Tests
         public void CreateAlarmWithNullEntity()
         {
             Entity entity = null;
-            uint quantityOfTimeToSearchBack = 10;
-            uint quantityOfSentimentsNeeded = 3;
+            int quantityOfTimeToSearchBack = 10;
+            int quantityOfSentimentsNeeded = 3;
 
-            new TimeLapseAlarm(
+            new EntityTimeLapseAlarm(
                 entity,
                 TimeSearchMethodType.DAYS,
                 quantityOfTimeToSearchBack,
@@ -95,10 +95,10 @@ namespace Tests
             phrases.Add(new Phrase("Netflix is Good", sentiments, entities, phraseDateTime, new Author()));
             phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, phraseDateTime, new Author()));
 
-            uint quantityOfTimeToSearchBack = 10;
-            uint quantityOfSentimentsNeeded = 2;
+            int quantityOfTimeToSearchBack = 10;
+            int quantityOfSentimentsNeeded = 2;
 
-            TimeLapseAlarm alarm = new TimeLapseAlarm(
+            EntityTimeLapseAlarm alarm = new EntityTimeLapseAlarm(
                 entity,
                 TimeSearchMethodType.DAYS,
                 quantityOfTimeToSearchBack,
@@ -126,10 +126,10 @@ namespace Tests
             phrases.Add(new Phrase("Netflix is bad", sentiments, entities, phraseDateTime, new Author()));
             phrases.Add(new Phrase("Netflix is bad and i hate it", sentiments, entities, phraseDateTime, new Author()));
 
-            uint quantityOfTimeToSearchBack = 10;
-            uint quantityOfSentimentsNeeded = 2;
+            int quantityOfTimeToSearchBack = 10;
+            int quantityOfSentimentsNeeded = 2;
 
-            TimeLapseAlarm alarm = new TimeLapseAlarm(
+            EntityTimeLapseAlarm alarm = new EntityTimeLapseAlarm(
                 entity,
                 TimeSearchMethodType.DAYS,
                 quantityOfTimeToSearchBack,
@@ -157,10 +157,10 @@ namespace Tests
             phrases.Add(new Phrase("Netflix is Good", sentiments, entities, phraseDateTime, new Author()));
             phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, phraseDateTime, new Author()));
 
-            uint quantityOfTimeToSearchBack = 10;
-            uint quantityOfSentimentsNeeded = 2;
+            int quantityOfTimeToSearchBack = 10;
+            int quantityOfSentimentsNeeded = 2;
 
-            TimeLapseAlarm alarm = new TimeLapseAlarm(
+            EntityTimeLapseAlarm alarm = new EntityTimeLapseAlarm(
                 entity,
                 TimeSearchMethodType.DAYS,
                 quantityOfTimeToSearchBack,
@@ -189,10 +189,10 @@ namespace Tests
             phrases.Add(new Phrase("Netflix is Good", sentiments, entities, phraseDateTime, new Author()));
             phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, phraseDateTime, new Author()));
 
-            uint quantityOfTimeToSearchBack = 5;
-            uint quantityOfSentimentsNeeded = 2;
+            int quantityOfTimeToSearchBack = 5;
+            int quantityOfSentimentsNeeded = 2;
 
-            TimeLapseAlarm alarm = new TimeLapseAlarm(
+            EntityTimeLapseAlarm alarm = new EntityTimeLapseAlarm(
                 entity,
                 TimeSearchMethodType.HOURS,
                 quantityOfTimeToSearchBack,
@@ -219,10 +219,10 @@ namespace Tests
             phrases.Add(new Phrase("Netflix is Good", sentiments, entities, DateTime.Now.AddHours(-4), new Author()));
             phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, DateTime.Now.AddHours(-6), new Author()));
 
-            uint quantityOfTimeToSearchBack = 5;
-            uint quantityOfSentimentsNeeded = 2;
+            int quantityOfTimeToSearchBack = 5;
+            int quantityOfSentimentsNeeded = 2;
 
-            TimeLapseAlarm alarm = new TimeLapseAlarm(
+            EntityTimeLapseAlarm alarm = new EntityTimeLapseAlarm(
                 entity,
                 TimeSearchMethodType.HOURS,
                 quantityOfTimeToSearchBack,
@@ -250,10 +250,10 @@ namespace Tests
             phrases.Add(new Phrase("Netflix is Good", sentiments, entities, actualDateTime, new Author()));
             phrases.Add(new Phrase("Netflix is awesome", sentiments, entities, actualDateTime, new Author()));
 
-            uint quantityOfTimeToSearchBack = 10;
-            uint quantityOfSentimentsNeeded = 2;
+            int quantityOfTimeToSearchBack = 10;
+            int quantityOfSentimentsNeeded = 2;
 
-            TimeLapseAlarm alarm = new TimeLapseAlarm(
+            EntityTimeLapseAlarm alarm = new EntityTimeLapseAlarm(
                 entity,
                 TimeSearchMethodType.DAYS,
                 quantityOfTimeToSearchBack,

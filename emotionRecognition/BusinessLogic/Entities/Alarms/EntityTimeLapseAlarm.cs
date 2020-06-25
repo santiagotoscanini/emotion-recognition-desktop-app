@@ -5,19 +5,19 @@ using BusinessLogic.Enums;
 
 namespace BusinessLogic.Entities
 {
-    public class TimeLapseAlarm
+    public class EntityTimeLapseAlarm : IAlarm
     {
         public int Id { get; set; }
         public Entity Entity { get; set; }
         public TimeSearchMethodType TimeSearchMethodType { get; set; }
-        public uint QuantityOfTimeToSearchBack { get; set; }
+        public int QuantityOfTimeToSearchBack { get; set; }
         public AlarmPosibleState AlarmPosibleState { get; set; }
-        public uint QuantityOfSentimentsNeeded { get; set; }
+        public int QuantityOfSentimentsNeeded { get; set; }
         public bool IsActivated { get; set; }
 
-        public TimeLapseAlarm() { }
+        public EntityTimeLapseAlarm() { }
 
-        public TimeLapseAlarm(Entity entity, TimeSearchMethodType timeSearchMethodType, uint quantityOfTimeToSearchBack, AlarmPosibleState alarmPosibleState, uint quantityOfSentimentsNeeded)
+        public EntityTimeLapseAlarm(Entity entity, TimeSearchMethodType timeSearchMethodType, int quantityOfTimeToSearchBack, AlarmPosibleState alarmPosibleState, int quantityOfSentimentsNeeded)
         {
             if (quantityOfTimeToSearchBack == 0)
             {
