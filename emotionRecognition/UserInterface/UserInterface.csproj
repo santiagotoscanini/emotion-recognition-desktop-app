@@ -49,6 +49,8 @@
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Windows.Forms.DataVisualization" />
+    <Reference Include="System.Windows.Forms.DataVisualization.Design" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -80,6 +82,12 @@
     </Compile>
     <Compile Include="Author\AuthorReportUserControl.Designer.cs">
       <DependentUpon>AuthorReportUserControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Author\AuthorStatisticsUserControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Author\AuthorStatisticsUserControl.Designer.cs">
+      <DependentUpon>AuthorStatisticsUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Author\AuthorUserControl.cs">
       <SubType>UserControl</SubType>
@@ -158,6 +166,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Author\AuthorReportUserControl.resx">
       <DependentUpon>AuthorReportUserControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Author\AuthorStatisticsUserControl.resx">
+      <DependentUpon>AuthorStatisticsUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Author\AuthorUserControl.resx">
       <DependentUpon>AuthorUserControl.cs</DependentUpon>

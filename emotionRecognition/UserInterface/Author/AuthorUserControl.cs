@@ -29,11 +29,14 @@ namespace UserInterface
             switch (applicationState)
             {
                 case ApplicationState.ADDING_AN_AUTHOR:
-                    PnlAlarm.Controls.Add(new AddAuthorUserControl(controller, username));
+                    PnlAlarm.Controls.Add(new AddAuthorUserControl(controller, username, this));
                     this.username = null;
                     break;
                 case ApplicationState.AUTHOR_REPORT:
                     PnlAlarm.Controls.Add(new AuthorReportUserControl(controller, this));
+                    break;
+                case ApplicationState.AUTHOR_STATISTICS:
+                    PnlAlarm.Controls.Add(new AuthorStatisticsUserControl(controller));
                     break;
             }
         }
@@ -48,10 +51,20 @@ namespace UserInterface
             OnRefresh(ApplicationState.AUTHOR_REPORT);
         }
 
+        private void BtnStatistics_Click(object sender, EventArgs e)
+        {
+            OnRefresh(ApplicationState.AUTHOR_STATISTICS);
+        }
+        
         public void OnModify(string username)
         {
             this.username = username;
             OnRefresh(ApplicationState.ADDING_AN_AUTHOR);
+        }
+
+        public void getBackToReport()
+        {
+            OnRefresh(ApplicationState.AUTHOR_REPORT);
         }
     }
 }

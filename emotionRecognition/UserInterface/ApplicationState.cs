@@ -14,6 +14,7 @@
         PHRASE_REPORT,
         ADDING_AN_AUTHOR,
         AUTHOR_REPORT,
-        AUTHORS
+        AUTHORS,
+        AUTHOR_STATISTICS
     }
 }

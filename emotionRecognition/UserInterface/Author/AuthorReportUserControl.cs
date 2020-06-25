@@ -31,10 +31,10 @@ namespace UserInterface
                     author.Surname,
                     author.Username,
                     author.Birthdate.ToString("dd/MM/yyyy"),
-                    author.NumberOfPhrases != 0 ? author.NumberOfPositivePhrases / author.NumberOfPhrases : 0,
-                    author.NumberOfPhrases != 0 ? author.NumberOfNegativePhrases / author.NumberOfPhrases : 0,
+                    author.GetPercentageOfPositivePhrases(),
+                    author.GetPercentageOfNegativePhrases(),
                     author.NumberOfDistinctEntitiesMentioned,
-                    author.NumberOfDaysFromFirstPublication != 0 ? author.NumberOfPhrases / author.NumberOfDaysFromFirstPublication : author.NumberOfPhrases
+                    author.GetAvgOfPhrasesPerDay()
                     );
             }
         }
@@ -65,7 +65,6 @@ namespace UserInterface
                 string authorUsername = (string)GrdAuthors.CurrentRow.Cells["UserName"].Value;
 
                 authorUserControl.OnModify(authorUsername);
-
             }
         }
 

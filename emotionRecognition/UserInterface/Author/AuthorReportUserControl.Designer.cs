@@ -159,7 +159,7 @@
             // 
             // Entities
             // 
-            this.Entities.HeaderText = "entidades distintas mencionadas";
+            this.Entities.HeaderText = "Entidades distintas mencionadas";
             this.Entities.MinimumWidth = 6;
             this.Entities.Name = "Entities";
             this.Entities.ReadOnly = true;
@@ -167,7 +167,7 @@
             // 
             // PromedioDiario
             // 
-            this.PromedioDiario.HeaderText = "promedio de frases por dia";
+            this.PromedioDiario.HeaderText = "Promedio de frases por dia";
             this.PromedioDiario.MinimumWidth = 6;
             this.PromedioDiario.Name = "PromedioDiario";
             this.PromedioDiario.ReadOnly = true;

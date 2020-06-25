@@ -63,7 +63,7 @@ namespace UserInterface
             string authorsToString = "";
 
             foreach (Author author in authors){
-                authorsToString += author.Username.ToString() + "\n";
+                authorsToString += author.Username.ToString() + " ";
             }
             
             GrdAlarms.Rows.Add(
