@@ -1,27 +1,31 @@
 ﻿using BusinessLogic;
+using BusinessLogic.BD;
 using BusinessLogic.Enums;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System;
 using System.Linq;
+using UnitTest;
+using BusinessLogic.Entities;
 
 namespace Tests
 {
     [TestClass]
-    public class BusinessLogicControllerTest
+    public class BusinessLogicControllerTest : TestUtils
     {
         private BusinessLogicController businessLogicController;
 
         [TestInitialize]
-        public void initializeTests()
+        public void InitializeTests()
         {
-            businessLogicController = new BusinessLogicController(new Repository());
+            businessLogicController = new BusinessLogicController(new EFRepository());
+            CleanDB();
         }
 
         [TestMethod]
         public void AddEntity()
         {
-            Assert.AreEqual(0, businessLogicController.GetEntities().Count);
+            Assert.AreEqual(0, businessLogicController.GetEntities().ToList().Count);
             Assert.IsTrue(businessLogicController.AddEntity("Chocolate"));
             Assert.AreEqual(businessLogicController.GetEntities().ElementAt(0).Name, "Chocolate");
         }
@@ -36,9 +40,9 @@ namespace Tests
         [TestMethod]
         public void GetEntities()
         {
-            Assert.AreEqual(0, businessLogicController.GetEntities().Count);
+            Assert.AreEqual(0, businessLogicController.GetEntities().ToList().Count);
             businessLogicController.AddEntity("test1");
-            Assert.AreEqual(1, businessLogicController.GetEntities().Count);
+            Assert.AreEqual(1, businessLogicController.GetEntities().ToList().Count);
         }
 
         [TestMethod]
@@ -48,94 +52,93 @@ namespace Tests
             businessLogicController.AddEntity("cocacola");
             Assert.IsFalse(businessLogicController.AddEntity("coca"));
         }
-        
+
         [TestMethod]
-        public void AddAlarmSearchInDays()
+        public void AddEntityAlarmSearchInDays()
         {
-            Assert.AreEqual(0, businessLogicController.GetAlarmsChecked().Count);
+            businessLogicController.AddEntity("1");
 
-            businessLogicController.AddAlarm("1", true, 2, false, 3);
+            Assert.AreEqual(0, businessLogicController.GetEntityAlarmsChecked().ToList().Count);
 
-            Assert.AreEqual(1, businessLogicController.GetAlarmsChecked().Count);
+            businessLogicController.AddEntityAlarm("1", true, 2, false, 3);
+
+            Assert.AreEqual(1, businessLogicController.GetEntityAlarmsChecked().ToList().Count);
         }
 
         [TestMethod]
-        public void AddAlarmSearchInHours()
+        public void AddEntityAlarmSearchInHours()
         {
-            Assert.AreEqual(0, businessLogicController.GetAlarmsChecked().Count);
+            businessLogicController.AddEntity("1");
 
-            businessLogicController.AddAlarm("1", false, 2, false, 3);
+            Assert.AreEqual(0, businessLogicController.GetEntityAlarmsChecked().ToList().Count);
 
-            Assert.AreEqual(1, businessLogicController.GetAlarmsChecked().Count);
+            businessLogicController.AddEntityAlarm("1", false, 2, false, 3);
+
+            Assert.AreEqual(1, businessLogicController.GetEntityAlarmsChecked().ToList().Count);
         }
 
         [TestMethod]
-        public void GetAlarmsChecked()
+        public void GetEntityAlarmsChecked()
         {
-            businessLogicController.AddAlarm("Valorant", true, 1, true, 2);
-            businessLogicController.AddPhrase("Valorant is good", DateTime.Now);
-            businessLogicController.AddPositiveSentiment("Good");
+            businessLogicController.AddOrUpdateAuthor("test", "s", "t", DateTime.Now);
             businessLogicController.AddEntity("Valorant");
+            businessLogicController.AddEntityAlarm("Valorant", true, 1, true, 2);
+            businessLogicController.AddPhrase("Valorant is good", DateTime.Now, "test");
+            businessLogicController.AddPositiveSentiment("Good");
 
-            List<TimeLapseAlarm> alarms = businessLogicController.GetAlarmsChecked();
+            IEnumerable<EntityTimeLapseAlarm> alarms = businessLogicController.GetEntityAlarmsChecked();
 
-            Assert.AreEqual(true, alarms[0].IsActivated);
+            Assert.AreEqual(true, alarms.ToList()[0].IsActivated);
         }
 
         [TestMethod]
         public void AddPhrase()
         {
-            Assert.AreEqual(0, businessLogicController.GetPhrases().Count);
-            businessLogicController.AddPhrase("test01", new DateTime());
+            businessLogicController.AddOrUpdateAuthor("test", "s", "t", DateTime.Now);
+            Assert.AreEqual(0, businessLogicController.GetPhrases().ToList().Count);
+            businessLogicController.AddPhrase("test01", DateTime.Now, "test");
             Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).Text, "test01");
-        }
-
-        [TestMethod]
-        public void AnalizePhraseWithoutEntity()
-        {
-            Assert.AreEqual(0, businessLogicController.GetPhrases().Count);
-            Assert.AreEqual(0, businessLogicController.GetEntities().Count);
-            Assert.IsTrue(businessLogicController.AddPositiveSentiment("nice"));
-            businessLogicController.AddPhrase("The sun is nice", new DateTime());
-            Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).PhraseState, PhraseState.NEUTRAL);
         }
 
         [TestMethod]
         public void GetPhrases()
         {
-            Assert.AreEqual(0, businessLogicController.GetPhrases().Count);
-            businessLogicController.AddPhrase("test1", new DateTime());
-            Assert.AreEqual(1, businessLogicController.GetPhrases().Count);
+            businessLogicController.AddOrUpdateAuthor("test", "s", "t", DateTime.Now);
+            Assert.AreEqual(0, businessLogicController.GetPhrases().ToList().Count);
+            businessLogicController.AddPhrase("test1", DateTime.Now, "test");
+            Assert.AreEqual(1, businessLogicController.GetPhrases().ToList().Count);
         }
 
         [TestMethod]
         public void GetPhrasesReAnalize()
         {
-            businessLogicController.AddPhrase("The moon is great", new DateTime());
-            foreach(Phrase e in businessLogicController.GetPhrases())
+            businessLogicController.AddOrUpdateAuthor("test", "s", "t", DateTime.Now);
+            businessLogicController.AddPhrase("The moon is great", DateTime.Now, "test");
+            foreach (Phrase phrase in businessLogicController.GetPhrases())
             {
-                Assert.IsNull(e.Entity);
-                Assert.AreEqual(PhraseState.NEUTRAL, e.PhraseState);
+                Assert.IsNull(phrase.Entity);
+                Assert.AreEqual(PhraseState.NEUTRAL, phrase.PhraseState);
             }
 
             businessLogicController.AddEntity("The moon");
             businessLogicController.AddPositiveSentiment("great");
 
-            foreach (Phrase e in businessLogicController.GetPhrases())
+            foreach (Phrase phrase in businessLogicController.GetPhrases())
             {
-                Assert.AreEqual("The moon",e.Entity.Name);
-                Assert.AreEqual(PhraseState.LOW_POSITIVE, e.PhraseState);
+                Assert.AreEqual("The moon", phrase.Entity.Name);
+                Assert.AreEqual(PhraseState.LOW_POSITIVE, phrase.PhraseState);
             }
         }
 
         [TestMethod]
         public void GetPhrasesAfterAddNewPositiveSentiment()
         {
-            Assert.AreEqual(businessLogicController.GetPhrases().Count, 0);
+            businessLogicController.AddOrUpdateAuthor("test", "s", "t", DateTime.Now);
+            Assert.AreEqual(businessLogicController.GetPhrases().ToList().Count, 0);
             businessLogicController.AddEntity("Titanic");
-            businessLogicController.AddPhrase("I love Titanic", new DateTime());
+            businessLogicController.AddPhrase("I love Titanic", DateTime.Now, "test");
             Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).Text, "I love Titanic");
-            Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).PhraseState, PhraseState.NEUTRAL);      
+            Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).PhraseState, PhraseState.NEUTRAL);
 
             businessLogicController.AddPositiveSentiment("love");
             Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).PhraseState, PhraseState.LOW_POSITIVE);
@@ -145,7 +148,7 @@ namespace Tests
         [TestMethod]
         public void AddPositiveSentiment()
         {
-            Assert.AreEqual(businessLogicController.GetPositiveSentiments().Count, 0);
+            Assert.AreEqual(businessLogicController.GetPositiveSentiments().ToList().Count, 0);
             Assert.IsTrue(businessLogicController.AddPositiveSentiment("love"));
             Assert.AreEqual(businessLogicController.GetPositiveSentiments().ElementAt(0).Text, "love");
         }
@@ -158,7 +161,6 @@ namespace Tests
             Assert.IsFalse(businessLogicController.AddPositiveSentiment("good"));
             Assert.IsFalse(businessLogicController.AddNegativeSentiment("good"));
         }
-       
         [TestMethod]
         public void ValidateAddingDulpicatedPositiveSentiment()
         {
@@ -169,9 +171,9 @@ namespace Tests
         [TestMethod]
         public void GetPositiveSentiments()
         {
-            Assert.AreEqual(0, businessLogicController.GetPositiveSentiments().Count);
+            Assert.AreEqual(0, businessLogicController.GetPositiveSentiments().ToList().Count);
             businessLogicController.AddPositiveSentiment("test3");
-            Assert.AreEqual(1, businessLogicController.GetPositiveSentiments().Count);
+            Assert.AreEqual(1, businessLogicController.GetPositiveSentiments().ToList().Count);
         }
 
         [TestMethod]
@@ -179,13 +181,13 @@ namespace Tests
         {
             businessLogicController.AddPositiveSentiment("test4");
             businessLogicController.DeletePositiveSentiment("test4");
-            Assert.AreEqual(0, businessLogicController.GetPositiveSentiments().Count);
+            Assert.AreEqual(0, businessLogicController.GetPositiveSentiments().ToList().Count);
         }
 
         [TestMethod]
         public void AddNegativeSentiment()
         {
-            Assert.AreEqual(businessLogicController.GetNegativeSentiments().Count, 0);
+            Assert.AreEqual(businessLogicController.GetNegativeSentiments().ToList().Count, 0);
             Assert.IsTrue(businessLogicController.AddNegativeSentiment("odio"));
             Assert.AreEqual(businessLogicController.GetNegativeSentiments().ElementAt(0).Text, "odio");
         }
@@ -201,14 +203,15 @@ namespace Tests
         [TestMethod]
         public void GetPhrasesAfterAddNewNegativeSentiment()
         {
-            Assert.AreEqual(businessLogicController.GetPhrases().Count, 0);
+            businessLogicController.AddOrUpdateAuthor("test", "s", "t", DateTime.Now);
+            Assert.AreEqual(businessLogicController.GetPhrases().ToList().Count, 0);
             businessLogicController.AddEntity("Titanic");
-            businessLogicController.AddPhrase("I hate Titanic", new DateTime());
+            businessLogicController.AddPhrase("I hate Titanic", DateTime.Today, "test");
             Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).Text, "I hate Titanic");
-            Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).PhraseState, PhraseState.NEUTRAL);
+            Assert.AreEqual(PhraseState.NEUTRAL, businessLogicController.GetPhrases().ElementAt(0).PhraseState);
 
             businessLogicController.AddNegativeSentiment("hate");
-            Assert.AreEqual(businessLogicController.GetPhrases().ElementAt(0).PhraseState, PhraseState.LOW_NEGATIVE);
+            Assert.AreEqual(PhraseState.LOW_NEGATIVE, businessLogicController.GetPhrases().ElementAt(0).PhraseState);
         }
 
 
@@ -222,9 +225,9 @@ namespace Tests
         [TestMethod]
         public void GetNegativentiments()
         {
-            Assert.AreEqual(0, businessLogicController.GetNegativeSentiments().Count);
+            Assert.AreEqual(0, businessLogicController.GetNegativeSentiments().ToList().Count);
             businessLogicController.AddNegativeSentiment("test6");
-            Assert.AreEqual(1, businessLogicController.GetNegativeSentiments().Count);
+            Assert.AreEqual(1, businessLogicController.GetNegativeSentiments().ToList().Count);
         }
 
         [TestMethod]
@@ -232,7 +235,123 @@ namespace Tests
         {
             businessLogicController.AddNegativeSentiment("test7");
             businessLogicController.DeleteNegativeSentiment("test7");
-            Assert.AreEqual(0, businessLogicController.GetNegativeSentiments().Count);
+            Assert.AreEqual(0, businessLogicController.GetNegativeSentiments().ToList().Count);
+        }
+
+        [TestMethod]
+        public void AddAuthor()
+        {
+            Assert.AreEqual(0, businessLogicController.GetAuthors().ToList().Count);
+            bool wasAdded = businessLogicController.AddOrUpdateAuthor("stos", "Elsa", "Pallito", DateTime.Now);
+            Assert.AreEqual(true, wasAdded);
+            Assert.AreEqual(1, businessLogicController.GetAuthors().ToList().Count);
+        }
+
+        [TestMethod]
+
+        public void AnalyzeAuthor()
+        {
+            Assert.AreEqual(0, businessLogicController.GetAuthors().ToList().Count);
+            bool wasAdded = businessLogicController.AddOrUpdateAuthor("stos", "Elsa", "Pallito", DateTime.Now);
+            Assert.AreEqual(true, wasAdded);
+
+            Author authorSaved = businessLogicController.GetAuthorByUsername("stos");
+            Assert.AreEqual(0, authorSaved.NumberOfPhrases);
+            Assert.AreEqual(0, authorSaved.NumberOfPositivePhrases);
+            Assert.AreEqual(0, authorSaved.NumberOfNegativePhrases);
+            Assert.AreEqual(0, authorSaved.NumberOfDistinctEntitiesMentioned);
+            Assert.AreEqual(0, authorSaved.NumberOfDaysFromFirstPublication);
+            Assert.AreEqual(0, authorSaved.GetAvgOfPhrasesPerDay());
+            Assert.AreEqual(0, authorSaved.GetPercentageOfNegativePhrases());
+            Assert.AreEqual(0, authorSaved.GetPercentageOfPositivePhrases());
+
+            businessLogicController.AddPhrase("Muy rica la mostaza", DateTime.Now.AddDays(-1).AddSeconds(-20), "stos");
+            businessLogicController.AddEntity("mostaza");
+            businessLogicController.AddPositiveSentiment("RicA");
+
+            Author authorSavedAfterAnalyze = businessLogicController.GetAuthorByUsername("stos");
+
+            Assert.AreEqual(1, authorSavedAfterAnalyze.NumberOfPhrases);
+            Assert.AreEqual(1, authorSavedAfterAnalyze.NumberOfPositivePhrases);
+            Assert.AreEqual(0, authorSavedAfterAnalyze.NumberOfNegativePhrases);
+            Assert.AreEqual(1, authorSavedAfterAnalyze.NumberOfDistinctEntitiesMentioned);
+            Assert.AreEqual(1, authorSavedAfterAnalyze.NumberOfDaysFromFirstPublication);
+            Assert.AreEqual(0, authorSavedAfterAnalyze.GetPercentageOfNegativePhrases());
+            Assert.AreEqual(100, authorSavedAfterAnalyze.GetPercentageOfPositivePhrases());
+            Assert.AreEqual(1, authorSavedAfterAnalyze.GetAvgOfPhrasesPerDay());
+        }
+
+        [TestMethod]
+        public void AddAuthorAlarmSearchInDays()
+        {
+            businessLogicController.AddOrUpdateAuthor("stej", "Harry", "Armas", DateTime.Now);
+
+            Assert.AreEqual(0, businessLogicController.GetEntityAlarmsChecked().ToList().Count);
+
+            businessLogicController.AddAuthorAlarm(true, 2, false, 3);
+
+            Assert.AreEqual(1, businessLogicController.GetAuthorAlarmsChecked().ToList().Count);
+        }
+
+        [TestMethod]
+        public void AddAuthorAlarmSearchInHours()
+        {
+            businessLogicController.AddOrUpdateAuthor("stej", "Harry", "Armas", DateTime.Now);
+
+            Assert.AreEqual(0, businessLogicController.GetAuthorAlarmsChecked().ToList().Count);
+
+            businessLogicController.AddAuthorAlarm(false, 2, false, 3);
+
+            Assert.AreEqual(1, businessLogicController.GetAuthorAlarmsChecked().ToList().Count);
+        }
+
+        [TestMethod]
+        public void GetAuthorAlarmsChecked()
+        {
+            businessLogicController.AddOrUpdateAuthor("test", "s", "t", DateTime.Now);
+            businessLogicController.AddEntity("Valorant");
+            businessLogicController.AddAuthorAlarm(true, 1, true, 2);
+            businessLogicController.AddPhrase("Valorant is good", DateTime.Now, "test");
+            businessLogicController.AddPositiveSentiment("Good");
+
+            IEnumerable<AuthorTimeLapseAlarm> alarms = businessLogicController.GetAuthorAlarmsChecked();
+
+            Assert.AreEqual(true, alarms.ToList()[0].IsActivated);
+        }
+
+        [TestMethod]
+        public void GetAuthorsOfAuthorAlarmsChecked()
+        {
+            businessLogicController.AddOrUpdateAuthor("test", "s", "t", DateTime.Now);
+            businessLogicController.AddEntity("Valorant");
+            businessLogicController.AddAuthorAlarm(true, 1, true, 2);
+            businessLogicController.AddPhrase("Valorant is good", DateTime.Now, "test");
+            businessLogicController.AddPositiveSentiment("Good");
+
+            IEnumerable<AuthorTimeLapseAlarm> alarms = businessLogicController.GetAuthorAlarmsChecked();
+
+            Assert.AreEqual(1, alarms.ElementAt(0).ActivatingAuthors.Count());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void DeleteAuthorNonExistant()
+        {
+            businessLogicController.DeleteAuthorByUsername("NoExiste");
+        }
+
+        [TestMethod]
+        public void DeleteAuthorExistant()
+        {
+            businessLogicController.AddOrUpdateAuthor("carlos", "carlos", "men", DateTime.Today.AddYears(-20));
+            businessLogicController.AddPhrase("me gusta la coca cola", DateTime.Today, "carlos");
+            Assert.AreEqual(1, businessLogicController.GetAuthors().Count());
+            Assert.AreEqual(1, businessLogicController.GetPhrases().Count());
+
+            businessLogicController.DeleteAuthorByUsername("carlos");
+
+            Assert.AreEqual(0, businessLogicController.GetAuthors().Count());
+            Assert.AreEqual(0, businessLogicController.GetPhrases().Count());
         }
     }
 }

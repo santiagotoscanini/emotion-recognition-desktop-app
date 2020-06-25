@@ -1,3 +1,4 @@
+using BusinessLogic.Entities;
 using BusinessLogic.Enums;
 using System;
 using System.Collections.Generic;
@@ -6,123 +7,64 @@ namespace BusinessLogic
 {
     public class BusinessLogicController
     {
-        public Repository Repository { get; private set; }
+        private IRepository Repository { get; set; }
 
-        public BusinessLogicController(Repository repository)
+        public BusinessLogicController(IRepository repository)
         {
             Repository = repository;
         }
 
         public bool AddEntity(string name)
         {
-            bool entityWasAdded = false;
-            if (!IsEntityContainedIntoAnother(name))
-            {
-                Entity entityToAdd = new Entity(name);
-                entityWasAdded = Repository.AddEntity(entityToAdd);
-                AnalyzePhrases();
-            }
+            bool entityWasAdded;
+            Entity entityToAdd = new Entity(name);
+            entityWasAdded = Repository.AddEntity(entityToAdd);
+
             return entityWasAdded;
         }
 
-        private bool IsEntityContainedIntoAnother(string name)
-        {
-            bool isContained = false;
-            foreach (Entity entity in Repository.GetEntities())
-            {
-                isContained |= entity.Name.Contains(name);
-                if (isContained)
-                {
-                    break;
-                }
-            }
-            return isContained;
-        }
-
-        public HashSet<Entity> GetEntities()
+        public IEnumerable<Entity> GetEntities()
         {
             return Repository.GetEntities();
         }
 
-        public void AddAlarm(string entityName, bool searchInDays, uint sentimentsNeeded, bool detectPositiveSentiments, uint timeToSearchBack)
+        public void AddEntityAlarm(string entityName, bool searchInDays, int sentimentsNeeded, bool detectPositiveSentiments, int timeToSearchBack)
         {
-            Entity entity = new Entity(entityName);
+            Entity entity = Repository.GetEntityFromName(entityName);
             TimeSearchMethodType searchMethodType = searchInDays ? TimeSearchMethodType.DAYS : TimeSearchMethodType.HOURS;
             AlarmPosibleState alarmPosibleState = detectPositiveSentiments ? AlarmPosibleState.POSITIVE : AlarmPosibleState.NEGATIVE;
 
-            TimeLapseAlarm alarm = new TimeLapseAlarm(entity, searchMethodType, timeToSearchBack, alarmPosibleState, sentimentsNeeded);
+            EntityTimeLapseAlarm alarm = new EntityTimeLapseAlarm(entity, searchMethodType, timeToSearchBack, alarmPosibleState, sentimentsNeeded);
 
-            Repository.AddAlarm(alarm);
-            AnalyzeAlarms();
+            Repository.AddEntityAlarm(alarm);
         }
 
-        public List<TimeLapseAlarm> GetAlarmsChecked()
+        public IEnumerable<EntityTimeLapseAlarm> GetEntityAlarmsChecked()
         {
-            AnalyzeAlarms();
-            return Repository.GetAlarms();
+            return Repository.GetEntityAlarms();
         }
 
-        private void AnalyzeAlarms()
+        public void AddPhrase(string phraseText, DateTime dateTime, string username)
         {
-            List<TimeLapseAlarm> alarms = Repository.GetAlarms();
-
-            foreach (TimeLapseAlarm alarm in alarms)
-            {
-                alarm.CheckIfAlarmIsActivated(Repository.GetPhrases());
-            }
-        }
-
-        public void AddPhrase(string phraseText, DateTime dateTime)
-        {
-            Phrase phraseToAdd = new Phrase(phraseText, Repository.GetSentiments(), Repository.GetEntities(), dateTime);
+            Author authorOfPhrase = GetAuthorByUsername(username);
+            Phrase phraseToAdd = new Phrase(phraseText, Repository.GetSentiments(), Repository.GetEntities(), dateTime, authorOfPhrase);
             Repository.AddPhrase(phraseToAdd);
-
-            AnalyzeAlarms();
         }
 
-        public List<Phrase> GetPhrases()
+        public IEnumerable<Phrase> GetPhrases()
         {
             return Repository.GetPhrases();
         }
 
-        public void AnalyzePhrases()
-        {
-            foreach (Phrase phrase in Repository.GetPhrases())
-            {
-                phrase.Analyze(Repository.GetSentiments(), Repository.GetEntities());
-            }
-        }
-
         public bool AddPositiveSentiment(string text)
         {
-            bool wasAdded = false;
-            if (!IsSentimentContainedIntoAnother(text))
-            {
-                Sentiment positiveSentimentToAdd = new Sentiment(text, SentimentState.POSITIVE);
-                wasAdded = Repository.AddSentiment(positiveSentimentToAdd);
-                if (wasAdded)
-                {
-                    AnalyzePhrases();
-                }
-            }
-            return wasAdded;
+            Sentiment positiveSentimentToAdd = new Sentiment(text, SentimentState.POSITIVE);
+
+            return Repository.AddSentiment(positiveSentimentToAdd);
         }
 
-        private bool IsSentimentContainedIntoAnother(string text)
-        {
-            bool isContained = false;
-            foreach (Sentiment sentiment in Repository.GetSentiments())
-            {
-                isContained |= sentiment.Text.Contains(text);
-                if (isContained)
-                {
-                    break;
-                }
-            }
-            return isContained;
-        }
 
-        public HashSet<Sentiment> GetPositiveSentiments()
+        public IEnumerable<Sentiment> GetPositiveSentiments()
         {
             return Repository.GetPositiveSentiments();
         }
@@ -134,20 +76,12 @@ namespace BusinessLogic
 
         public bool AddNegativeSentiment(string text)
         {
-            bool wasAdded = false;
-            if (!IsSentimentContainedIntoAnother(text))
-            {
-                Sentiment negativeSentimentToAdd = new Sentiment(text, SentimentState.NEGATIVE);
-                wasAdded = Repository.AddSentiment(negativeSentimentToAdd);
-                if (wasAdded)
-                {
-                    AnalyzePhrases();
-                }
-            }
-            return wasAdded;
+            Sentiment negativeSentimentToAdd = new Sentiment(text, SentimentState.NEGATIVE);
+
+            return Repository.AddSentiment(negativeSentimentToAdd);
         }
 
-        public HashSet<Sentiment> GetNegativeSentiments()
+        public IEnumerable<Sentiment> GetNegativeSentiments()
         {
             return Repository.GetNegativeSentiments();
         }
@@ -155,6 +89,42 @@ namespace BusinessLogic
         public bool DeleteNegativeSentiment(string text)
         {
             return Repository.RemoveUnusedSentiment(new Sentiment(text, SentimentState.NEGATIVE));
+        }
+
+        public IEnumerable<Author> GetAuthors()
+        {
+            return Repository.GetAuthors();
+        }
+
+        public bool AddOrUpdateAuthor(string username, string name, string surname, DateTime birthdate)
+        {
+            Author authorToAdd = new Author() { Username = username, Name = name, Surname = surname, Birthdate = birthdate };            
+            return Repository.AddOrUpdateAuthor(authorToAdd);
+        }
+
+        public Author GetAuthorByUsername(string username)
+        {
+            return Repository.GetAuthorFromUsername(username);
+        }
+
+        public void DeleteAuthorByUsername(string username)
+        {
+            Repository.DeleteAuthorByUsername(username);
+        }
+
+        public void AddAuthorAlarm(bool searchInDays, int sentimentsNeeded, bool detectPositiveSentiments, int timeToSearchBack)
+        {
+            TimeSearchMethodType searchMethodType = searchInDays ? TimeSearchMethodType.DAYS : TimeSearchMethodType.HOURS;
+            AlarmPosibleState alarmPosibleState = detectPositiveSentiments ? AlarmPosibleState.POSITIVE : AlarmPosibleState.NEGATIVE;
+
+            AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(searchMethodType, timeToSearchBack, alarmPosibleState, sentimentsNeeded);
+
+            Repository.AddAuthorAlarm(alarm);
+        }
+
+        public IEnumerable<AuthorTimeLapseAlarm> GetAuthorAlarmsChecked()
+        {
+            return Repository.GetAuthorAlarms();
         }
     }
 }

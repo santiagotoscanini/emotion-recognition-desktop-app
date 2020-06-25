@@ -1,45 +1,113 @@
 ﻿using BusinessLogic;
+using BusinessLogic.Entities;
 using System;
 using System.Windows.Forms;
-using UserInterface;
 
-namespace emotionRecognition
+namespace UserInterface
 {
-    public partial class AddPhraseUserControl : UserControl
+    public partial class NewPhraseUserControl : UserControl
     {
+        private const string CanNotSaveEmptyData = "El texto de la frase no puede estar vacio o ser unicamente espacios";
+        private const string SuccessMessage = "Frase agregada satisfactoriamente";
+        private const string EmptyText = "";
+
+        private const int MaxDateOfBirth = -100;
+
         private readonly BusinessLogicController controller;
 
-        public AddPhraseUserControl(Repository repository)
+        public NewPhraseUserControl(BusinessLogicController controller)
         {
             InitializeComponent();
-            controller = new BusinessLogicController(repository);
-            OnRefresh(ApplicationState.REGISTER_A_PHRASE);
+            this.controller = controller;
+            LoadAuthor();
+            SetCalendarLimits();
         }
 
-        public void OnRefresh(ApplicationState applicationState)
+        private void SetCalendarLimits()
         {
-            PnlPhrases.Controls.Clear();
+            DtpCalendar.MaxDate = DateTime.Now;
+            DtpCalendar.MinDate = DateTime.Now.AddYears(MaxDateOfBirth);
+            DtpCalendar.Text = DateTime.Now.ToString();
+        }
 
-            switch (applicationState)
+        private void LoadAuthor()
+        {
+            LoadAuthorList();
+            if (LbxAuthors.Items.Count == 0)
             {
-                case ApplicationState.REGISTER_A_PHRASE:
-                    PnlPhrases.Controls.Add(new NewPhraseUserControl(controller.Repository));
-                    break;
-                case ApplicationState.PHRASE_REPORT:
-                    PnlPhrases.Controls.Add(new PhraseReportUserControl(controller.Repository));
-                    break;
+                NoAuthorOnSystem();
+            }
+            else
+            {
+                LbxAuthors.SelectedIndex = 0;
+            }
+        }
+
+        private void LoadAuthorList()
+        {
+            foreach (Author author in controller.GetAuthors())
+            {
+                LbxAuthors.Items.Add(author.Username);
+            }
+        }
+
+        private void NoAuthorOnSystem()
+        {
+            LblNoAuthors.Visible = true;
+            LbxAuthors.Enabled = false;
+            BtnAccept.Enabled = false;
+        }
+
+        private void BtnAccept_Click(object sender, EventArgs e)
+        {
+            HideErrorMessage();
+            if (CheckData())
+            {
+                CreatePhrase();
+                ShowSucessfullMessage();
+                ClearFields();
+            }
+        }
+        private void ShowSucessfullMessage()
+        {
+            LblSucessful.Text = SuccessMessage;
+        }
+
+        private void HideErrorMessage()
+        {
+            LblErrorMessageEmptyData.Text = EmptyText;
+            LblSucessful.Text = EmptyText;
+        }
+
+        private bool CheckData()
+        {
+            if (!string.IsNullOrWhiteSpace(TxtPhrase.Text))
+            {
+                return true;
             }
 
+            ShowErrorMessage();
+            return false;
         }
 
-        private void BtnAddPhrase_Click(object sender, EventArgs e)
+        private void ShowErrorMessage()
         {
-            OnRefresh(ApplicationState.REGISTER_A_PHRASE);
+            LblErrorMessageEmptyData.Text = CanNotSaveEmptyData;
         }
 
-        private void BtnPhraseReport_Click(object sender, EventArgs e)
+        private void CreatePhrase()
         {
-            OnRefresh(ApplicationState.PHRASE_REPORT);
+            string phraseText = TxtPhrase.Text;
+            DateTime calendar = DtpCalendar.Value;
+            DateTime hours = DtpTime.Value;
+
+            DateTime dateTime = new DateTime(calendar.Year, calendar.Month, calendar.Day, hours.Hour, hours.Minute, hours.Second);
+            controller.AddPhrase(phraseText, dateTime, LbxAuthors.SelectedItem.ToString());
+        }
+
+        private void ClearFields()
+        {
+            TxtPhrase.Text = EmptyText;
         }
     }
 }

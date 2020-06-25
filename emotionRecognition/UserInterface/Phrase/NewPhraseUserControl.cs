@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using BusinessLogic.Entities;
 using System;
 using System.Windows.Forms;
 
@@ -12,10 +13,10 @@ namespace UserInterface
 
         private readonly BusinessLogicController controller;
 
-        public NewPhraseUserControl(Repository repository)
+        public NewPhraseUserControl(BusinessLogicController controller)
         {
             InitializeComponent();
-            controller = new BusinessLogicController(repository);
+            this.controller = controller;
         }
 
         private void BtnAccept_Click(object sender, EventArgs e)
@@ -61,8 +62,8 @@ namespace UserInterface
             DateTime calendar = DtpCalendar.Value;
             DateTime hours = DtpTime.Value;
 
-            DateTime dateTime = new DateTime(calendar.Year,calendar.Month,calendar.Day,hours.Hour,hours.Minute,hours.Second);
-            controller.AddPhrase(phraseText, dateTime);
+            DateTime dateTime = new DateTime(calendar.Year, calendar.Month, calendar.Day, hours.Hour, hours.Minute, hours.Second);
+            controller.AddPhrase(phraseText, dateTime, "");
         }
 
         private void ClearFields()

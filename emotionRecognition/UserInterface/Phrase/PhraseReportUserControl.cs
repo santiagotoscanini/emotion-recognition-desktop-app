@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using BusinessLogic.Entities;
 using System.Windows.Forms;
 
 namespace UserInterface
@@ -7,22 +8,22 @@ namespace UserInterface
     {
         private readonly BusinessLogicController controller;
 
-        public PhraseReportUserControl(Repository repository)
+        public PhraseReportUserControl(BusinessLogicController controller)
         {
             InitializeComponent();
-            controller = new BusinessLogicController(repository);
+            this.controller = controller;
             LoadPhrasesReport();
         }
 
         private void LoadPhrasesReport()
         {
-            controller.AnalyzePhrases();
             foreach (Phrase phrase in controller.GetPhrases())
             {
                 GrdReport.Rows.Add(
                     phrase.Text,
+                    phrase.Author.Username,
                     phrase.CreationDate,
-                    phrase.Entity == null ? null : phrase.Entity.ToString(),
+                    phrase.Entity != null ? phrase.Entity.ToString() : "",
                     phrase.GetStringFromPhraseState());
             }
         }

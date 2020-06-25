@@ -1,36 +1,40 @@
 ﻿using BusinessLogic;
 using System;
 using System.Windows.Forms;
+using UserInterface;
 
 namespace emotionRecognition
 {
     public partial class MainWindow : Form
     {
-        private BusinessLogicController controller;
+        private readonly BusinessLogicController controller;
 
-        public MainWindow(Repository repository)
+        public MainWindow(BusinessLogicController controller)
         {
             InitializeComponent();
-            this.controller = new BusinessLogicController(repository);
+            this.controller = controller;
         }
 
         public void OnRefresh(ApplicationState applicationState)
         {
-            this.PnlMain.Controls.Clear();
+            PnlMain.Controls.Clear();
 
             switch (applicationState)
             {
                 case ApplicationState.ADDING_AN_ALARM:
-                    this.PnlMain.Controls.Add(new AlarmUserControl(controller.Repository));
+                    this.PnlMain.Controls.Add(new AlarmUserControl(controller));
                     break;
                 case ApplicationState.ADDING_A_ENTITY:
-                    this.PnlMain.Controls.Add(new AddEntityUserControl(controller.Repository));
+                    this.PnlMain.Controls.Add(new AddEntityUserControl(controller));
                     break;
                 case ApplicationState.ADDING_A_PHRASE:
-                    this.PnlMain.Controls.Add(new AddPhraseUserControl(controller.Repository));
+                    this.PnlMain.Controls.Add(new AddPhraseUserControl(controller));
                     break;
                 case ApplicationState.ADDING_A_SENTIMENT:
-                    this.PnlMain.Controls.Add(new AddSentimentUserControl(controller.Repository));
+                    this.PnlMain.Controls.Add(new AddSentimentUserControl(controller));
+                    break;
+                case ApplicationState.AUTHORS:
+                    this.PnlMain.Controls.Add(new AuthorUserControl(controller));
                     break;
             }
         }
@@ -53,6 +57,11 @@ namespace emotionRecognition
         private void BtnAlarms_Click(object sender, EventArgs e)
         {
             this.OnRefresh(ApplicationState.ADDING_AN_ALARM);
+        }
+
+        private void BtnAuthors_Click(object sender, EventArgs e)
+        {
+            this.OnRefresh(ApplicationState.AUTHORS);
         }
     }
 }

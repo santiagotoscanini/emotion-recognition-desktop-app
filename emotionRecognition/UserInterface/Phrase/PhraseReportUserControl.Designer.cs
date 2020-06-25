@@ -30,9 +30,11 @@
         {
             this.GrdReport = new System.Windows.Forms.DataGridView();
             this.Phrase = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Autor = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Entity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.State = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LblReportPhraseHeader = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.GrdReport)).BeginInit();
             this.SuspendLayout();
             // 
@@ -44,17 +46,17 @@
             this.GrdReport.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GrdReport.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Phrase,
+            this.Autor,
             this.Date,
             this.Entity,
             this.State});
-            this.GrdReport.Location = new System.Drawing.Point(62, 43);
-            this.GrdReport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.GrdReport.Location = new System.Drawing.Point(93, 66);
             this.GrdReport.Name = "GrdReport";
             this.GrdReport.ReadOnly = true;
             this.GrdReport.RowHeadersVisible = false;
             this.GrdReport.RowHeadersWidth = 51;
             this.GrdReport.RowTemplate.Height = 24;
-            this.GrdReport.Size = new System.Drawing.Size(415, 245);
+            this.GrdReport.Size = new System.Drawing.Size(622, 377);
             this.GrdReport.TabIndex = 4;
             // 
             // Phrase
@@ -64,6 +66,14 @@
             this.Phrase.Name = "Phrase";
             this.Phrase.ReadOnly = true;
             this.Phrase.Width = 125;
+            // 
+            // Autor
+            // 
+            this.Autor.HeaderText = "Autor";
+            this.Autor.MinimumWidth = 8;
+            this.Autor.Name = "Autor";
+            this.Autor.ReadOnly = true;
+            this.Autor.Width = 150;
             // 
             // Date
             // 
@@ -89,25 +99,36 @@
             this.State.ReadOnly = true;
             this.State.Width = 125;
             // 
+            // LblReportPhraseHeader
+            // 
+            this.LblReportPhraseHeader.AutoSize = true;
+            this.LblReportPhraseHeader.Location = new System.Drawing.Point(89, 25);
+            this.LblReportPhraseHeader.Name = "LblReportPhraseHeader";
+            this.LblReportPhraseHeader.Size = new System.Drawing.Size(58, 20);
+            this.LblReportPhraseHeader.TabIndex = 5;
+            this.LblReportPhraseHeader.Text = "Frases";
+            // 
             // PhraseReportUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.LblReportPhraseHeader);
             this.Controls.Add(this.GrdReport);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "PhraseReportUserControl";
-            this.Size = new System.Drawing.Size(532, 310);
+            this.Size = new System.Drawing.Size(798, 477);
             ((System.ComponentModel.ISupportInitialize)(this.GrdReport)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.DataGridView GrdReport;
         private System.Windows.Forms.DataGridViewTextBoxColumn Phrase;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Autor;
         private System.Windows.Forms.DataGridViewTextBoxColumn Date;
         private System.Windows.Forms.DataGridViewTextBoxColumn Entity;
         private System.Windows.Forms.DataGridViewTextBoxColumn State;
-        private System.Windows.Forms.Label LblNoPhrases;
+        private System.Windows.Forms.Label LblReportPhraseHeader;
     }
 }

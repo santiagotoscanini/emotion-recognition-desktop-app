@@ -37,10 +37,10 @@
             // 
             // BtnAlarmReport
             // 
-            this.BtnAlarmReport.Location = new System.Drawing.Point(293, 8);
-            this.BtnAlarmReport.Margin = new System.Windows.Forms.Padding(2);
+            this.BtnAlarmReport.Location = new System.Drawing.Point(391, 10);
+            this.BtnAlarmReport.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnAlarmReport.Name = "BtnAlarmReport";
-            this.BtnAlarmReport.Size = new System.Drawing.Size(97, 29);
+            this.BtnAlarmReport.Size = new System.Drawing.Size(129, 36);
             this.BtnAlarmReport.TabIndex = 1;
             this.BtnAlarmReport.Text = "Reporte alarmas";
             this.BtnAlarmReport.UseVisualStyleBackColor = true;
@@ -54,18 +54,18 @@
             // 
             // PnlAlarm
             // 
-            this.PnlAlarm.Location = new System.Drawing.Point(2, 40);
-            this.PnlAlarm.Margin = new System.Windows.Forms.Padding(2);
+            this.PnlAlarm.Location = new System.Drawing.Point(3, 49);
+            this.PnlAlarm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.PnlAlarm.Name = "PnlAlarm";
-            this.PnlAlarm.Size = new System.Drawing.Size(532, 309);
+            this.PnlAlarm.Size = new System.Drawing.Size(709, 380);
             this.PnlAlarm.TabIndex = 2;
             // 
             // BtnAlarmConfig
             // 
-            this.BtnAlarmConfig.Location = new System.Drawing.Point(146, 8);
-            this.BtnAlarmConfig.Margin = new System.Windows.Forms.Padding(2);
+            this.BtnAlarmConfig.Location = new System.Drawing.Point(195, 10);
+            this.BtnAlarmConfig.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.BtnAlarmConfig.Name = "BtnAlarmConfig";
-            this.BtnAlarmConfig.Size = new System.Drawing.Size(97, 29);
+            this.BtnAlarmConfig.Size = new System.Drawing.Size(129, 36);
             this.BtnAlarmConfig.TabIndex = 1;
             this.BtnAlarmConfig.Text = "Configurar alarma";
             this.BtnAlarmConfig.UseVisualStyleBackColor = true;
@@ -73,14 +73,14 @@
             // 
             // AlarmUserControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.BtnAlarmConfig);
             this.Controls.Add(this.PnlAlarm);
             this.Controls.Add(this.BtnAlarmReport);
-            this.Margin = new System.Windows.Forms.Padding(2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AlarmUserControl";
-            this.Size = new System.Drawing.Size(536, 352);
+            this.Size = new System.Drawing.Size(715, 433);
             this.ResumeLayout(false);
 
         }

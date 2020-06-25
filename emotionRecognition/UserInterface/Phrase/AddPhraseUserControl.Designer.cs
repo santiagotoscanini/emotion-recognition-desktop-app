@@ -1,16 +1,18 @@
-﻿namespace emotionRecognition
+﻿﻿using System.Windows.Forms;
+
+namespace UserInterface
 {
-    partial class AddPhraseUserControl
+    partial class NewPhraseUserControl
     {
         /// <summary> 
-        /// Required designer variable.
+        /// Variable del diseñador necesaria.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary> 
-        /// Clean up any resources being used.
+        /// Limpiar los recursos que se estén usando.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        /// <param name="disposing">true si los recursos administrados se deben desechar; false en caso contrario.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -20,67 +22,190 @@
             base.Dispose(disposing);
         }
 
-        #region Component Designer generated code
+        #region Código generado por el Diseñador de componentes
 
         /// <summary> 
-        /// Required method for Designer support - do not modify 
-        /// the contents of this method with the code editor.
+        /// Método necesario para admitir el Diseñador. No se puede modificar
+        /// el contenido de este método con el editor de código.
         /// </summary>
         private void InitializeComponent()
         {
-            this.BtnAddPhrase = new System.Windows.Forms.Button();
-            this.PnlPhrases = new System.Windows.Forms.Panel();
-            this.BtnPhraseReport = new System.Windows.Forms.Button();
+            this.LblNewPhrase = new System.Windows.Forms.Label();
+            this.LblPhrase = new System.Windows.Forms.Label();
+            this.LblDate = new System.Windows.Forms.Label();
+            this.LblHour = new System.Windows.Forms.Label();
+            this.TxtPhrase = new System.Windows.Forms.TextBox();
+            this.BtnAccept = new System.Windows.Forms.Button();
+            this.LblErrorMessageEmptyData = new System.Windows.Forms.Label();
+            this.DtpTime = new System.Windows.Forms.DateTimePicker();
+            this.DtpCalendar = new System.Windows.Forms.DateTimePicker();
+            this.LblSucessful = new System.Windows.Forms.Label();
+            this.LbxAuthors = new System.Windows.Forms.ListBox();
+            this.LblNoAuthors = new System.Windows.Forms.Label();
+            this.LblSelectAuthor = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
-            // BtnAddPhrase
+            // LblNewPhrase
             // 
-            this.BtnAddPhrase.Location = new System.Drawing.Point(150, 5);
-            this.BtnAddPhrase.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.BtnAddPhrase.Name = "BtnAddPhrase";
-            this.BtnAddPhrase.Size = new System.Drawing.Size(97, 29);
-            this.BtnAddPhrase.TabIndex = 3;
-            this.BtnAddPhrase.Text = "Registrar Frase";
-            this.BtnAddPhrase.UseVisualStyleBackColor = true;
-            this.BtnAddPhrase.Click += new System.EventHandler(this.BtnAddPhrase_Click);
+            this.LblNewPhrase.AutoSize = true;
+            this.LblNewPhrase.Location = new System.Drawing.Point(334, 29);
+            this.LblNewPhrase.Name = "LblNewPhrase";
+            this.LblNewPhrase.Size = new System.Drawing.Size(161, 20);
+            this.LblNewPhrase.TabIndex = 0;
+            this.LblNewPhrase.Text = "Registrar nueva frase";
             // 
-            // PnlPhrases
+            // LblPhrase
             // 
-            this.PnlPhrases.Location = new System.Drawing.Point(2, 37);
-            this.PnlPhrases.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.PnlPhrases.Name = "PnlPhrases";
-            this.PnlPhrases.Size = new System.Drawing.Size(532, 309);
-            this.PnlPhrases.TabIndex = 5;
+            this.LblPhrase.AutoSize = true;
+            this.LblPhrase.Location = new System.Drawing.Point(94, 61);
+            this.LblPhrase.Name = "LblPhrase";
+            this.LblPhrase.Size = new System.Drawing.Size(54, 20);
+            this.LblPhrase.TabIndex = 1;
+            this.LblPhrase.Text = "Frase:";
             // 
-            // BtnPhraseReport
+            // LblDate
             // 
-            this.BtnPhraseReport.Location = new System.Drawing.Point(287, 5);
-            this.BtnPhraseReport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.BtnPhraseReport.Name = "BtnPhraseReport";
-            this.BtnPhraseReport.Size = new System.Drawing.Size(97, 29);
-            this.BtnPhraseReport.TabIndex = 4;
-            this.BtnPhraseReport.Text = "Reporte";
-            this.BtnPhraseReport.UseVisualStyleBackColor = true;
-            this.BtnPhraseReport.Click += new System.EventHandler(this.BtnPhraseReport_Click);
+            this.LblDate.AutoSize = true;
+            this.LblDate.Location = new System.Drawing.Point(313, 151);
+            this.LblDate.Name = "LblDate";
+            this.LblDate.Size = new System.Drawing.Size(58, 20);
+            this.LblDate.TabIndex = 2;
+            this.LblDate.Text = "Fecha:";
             // 
-            // AddPhraseUserControl
+            // LblHour
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.LblHour.AutoSize = true;
+            this.LblHour.Location = new System.Drawing.Point(315, 244);
+            this.LblHour.Name = "LblHour";
+            this.LblHour.Size = new System.Drawing.Size(48, 20);
+            this.LblHour.TabIndex = 3;
+            this.LblHour.Text = "Hora:";
+            // 
+            // TxtPhrase
+            // 
+            this.TxtPhrase.Location = new System.Drawing.Point(98, 101);
+            this.TxtPhrase.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.TxtPhrase.Name = "TxtPhrase";
+            this.TxtPhrase.Size = new System.Drawing.Size(598, 26);
+            this.TxtPhrase.TabIndex = 0;
+            // 
+            // BtnAccept
+            // 
+            this.BtnAccept.Location = new System.Drawing.Point(654, 388);
+            this.BtnAccept.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.BtnAccept.Name = "BtnAccept";
+            this.BtnAccept.Size = new System.Drawing.Size(108, 54);
+            this.BtnAccept.TabIndex = 3;
+            this.BtnAccept.Text = "Aceptar";
+            this.BtnAccept.UseVisualStyleBackColor = true;
+            this.BtnAccept.Click += new System.EventHandler(this.BtnAccept_Click);
+            // 
+            // LblErrorMessageEmptyData
+            // 
+            this.LblErrorMessageEmptyData.AutoSize = true;
+            this.LblErrorMessageEmptyData.ForeColor = System.Drawing.Color.Red;
+            this.LblErrorMessageEmptyData.Location = new System.Drawing.Point(163, 63);
+            this.LblErrorMessageEmptyData.Name = "LblErrorMessageEmptyData";
+            this.LblErrorMessageEmptyData.Size = new System.Drawing.Size(0, 20);
+            this.LblErrorMessageEmptyData.TabIndex = 8;
+            // 
+            // DtpTime
+            // 
+            this.DtpTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.DtpTime.Location = new System.Drawing.Point(317, 281);
+            this.DtpTime.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.DtpTime.Name = "DtpTime";
+            this.DtpTime.ShowUpDown = true;
+            this.DtpTime.Size = new System.Drawing.Size(290, 26);
+            this.DtpTime.TabIndex = 2;
+            // 
+            // DtpCalendar
+            // 
+            this.DtpCalendar.Location = new System.Drawing.Point(315, 187);
+            this.DtpCalendar.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.DtpCalendar.Name = "DtpCalendar";
+            this.DtpCalendar.Size = new System.Drawing.Size(252, 26);
+            this.DtpCalendar.TabIndex = 1;
+            // 
+            // LblSucessful
+            // 
+            this.LblSucessful.AutoSize = true;
+            this.LblSucessful.BackColor = System.Drawing.Color.Transparent;
+            this.LblSucessful.ForeColor = System.Drawing.Color.Green;
+            this.LblSucessful.Location = new System.Drawing.Point(484, 521);
+            this.LblSucessful.Name = "LblSucessful";
+            this.LblSucessful.Size = new System.Drawing.Size(0, 20);
+            this.LblSucessful.TabIndex = 11;
+            // 
+            // LbxAuthors
+            // 
+            this.LbxAuthors.FormattingEnabled = true;
+            this.LbxAuthors.ItemHeight = 20;
+            this.LbxAuthors.Location = new System.Drawing.Point(98, 191);
+            this.LbxAuthors.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.LbxAuthors.Name = "LbxAuthors";
+            this.LbxAuthors.Size = new System.Drawing.Size(191, 224);
+            this.LbxAuthors.TabIndex = 12;
+            // 
+            // LblNoAuthors
+            // 
+            this.LblNoAuthors.AutoSize = true;
+            this.LblNoAuthors.ForeColor = System.Drawing.Color.Red;
+            this.LblNoAuthors.Location = new System.Drawing.Point(97, 422);
+            this.LblNoAuthors.Name = "LblNoAuthors";
+            this.LblNoAuthors.Size = new System.Drawing.Size(151, 20);
+            this.LblNoAuthors.TabIndex = 33;
+            this.LblNoAuthors.Text = "Aún no hay autores.";
+            this.LblNoAuthors.Visible = false;
+            // 
+            // LblSelectAuthor
+            // 
+            this.LblSelectAuthor.AutoSize = true;
+            this.LblSelectAuthor.Location = new System.Drawing.Point(97, 151);
+            this.LblSelectAuthor.Name = "LblSelectAuthor";
+            this.LblSelectAuthor.Size = new System.Drawing.Size(150, 20);
+            this.LblSelectAuthor.TabIndex = 34;
+            this.LblSelectAuthor.Text = "Seleccione un autor";
+            // 
+            // NewPhraseUserControl
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.BtnAddPhrase);
-            this.Controls.Add(this.PnlPhrases);
-            this.Controls.Add(this.BtnPhraseReport);
-            this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
-            this.Name = "AddPhraseUserControl";
-            this.Size = new System.Drawing.Size(536, 352);
+            this.Controls.Add(this.LblSelectAuthor);
+            this.Controls.Add(this.LblNoAuthors);
+            this.Controls.Add(this.LbxAuthors);
+            this.Controls.Add(this.LblSucessful);
+            this.Controls.Add(this.DtpCalendar);
+            this.Controls.Add(this.DtpTime);
+            this.Controls.Add(this.LblErrorMessageEmptyData);
+            this.Controls.Add(this.BtnAccept);
+            this.Controls.Add(this.TxtPhrase);
+            this.Controls.Add(this.LblHour);
+            this.Controls.Add(this.LblDate);
+            this.Controls.Add(this.LblPhrase);
+            this.Controls.Add(this.LblNewPhrase);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Name = "NewPhraseUserControl";
+            this.Size = new System.Drawing.Size(798, 475);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Button BtnAddPhrase;
-        private System.Windows.Forms.Panel PnlPhrases;
-        private System.Windows.Forms.Button BtnPhraseReport;
+        private System.Windows.Forms.Label LblNewPhrase;
+        private System.Windows.Forms.Label LblPhrase;
+        private System.Windows.Forms.Label LblDate;
+        private System.Windows.Forms.Label LblHour;
+        private System.Windows.Forms.TextBox TxtPhrase;
+        private System.Windows.Forms.Button BtnAccept;
+        private System.Windows.Forms.Label LblErrorMessageEmptyData;
+        private System.Windows.Forms.DateTimePicker DtpTime;
+        private DateTimePicker DtpCalendar;
+        private Label LblSucessful;
+        private ListBox LbxAuthors;
+        private Label LblNoAuthors;
+        private Label LblSelectAuthor;
     }
 }

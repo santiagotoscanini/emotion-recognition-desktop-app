@@ -1,4 +1,5 @@
 ﻿using BusinessLogic;
+using BusinessLogic.Entities;
 using System;
 using System.Windows.Forms;
 
@@ -13,10 +14,10 @@ namespace emotionRecognition
 
         private readonly BusinessLogicController controller;
 
-        public AddEntityUserControl(Repository repository)
+        public AddEntityUserControl(BusinessLogicController controller)
         {
             InitializeComponent();
-            controller = new BusinessLogicController(repository);
+            this.controller = controller;
             LoadEntityList();
         }
 
@@ -87,7 +88,8 @@ namespace emotionRecognition
             return false;
         }
 
-        private void ActualizeEntityList(bool WasCreated) {
+        private void ActualizeEntityList(bool WasCreated)
+        {
             if (WasCreated)
             {
                 LoadEntityList();
