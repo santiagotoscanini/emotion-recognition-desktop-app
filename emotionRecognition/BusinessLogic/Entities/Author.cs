@@ -10,7 +10,7 @@ namespace BusinessLogic.Entities
         public string Surname { get; set; }
         public DateTime Birthdate { get; set; }
 
-        public int NumberOfPhrases { get;  set; }
+        public int NumberOfPhrases { get; set; }
         public int NumberOfPositivePhrases { get; set; }
         public int NumberOfNegativePhrases { get; set; }
         public int NumberOfDistinctEntitiesMentioned { get; set; }
@@ -20,6 +20,27 @@ namespace BusinessLogic.Entities
 
 
         public Author() { }
+
+        public int PercentageOfNegativePhrases()
+        {
+            float percentage = NumberOfPhrases != 0 ? (float)NumberOfNegativePhrases / (float)NumberOfPhrases : 0;
+            int PercentageOfNegativeSentiments = (int)(percentage * 100);
+            return PercentageOfNegativeSentiments;
+        }
+
+        public int PercentageOfPositivePhrases()
+        {
+            float percentage = NumberOfPhrases != 0 ? (float)NumberOfPositivePhrases / (float)NumberOfPhrases : 0;
+            int PercentageOfPositiveSentiments = (int)(percentage * 100);
+            return PercentageOfPositiveSentiments;
+        }
+
+        public int AvgOfPhrasesPerDay()
+        {
+            int AverageOfPhrases = NumberOfDaysFromFirstPublication != 0 ?
+                NumberOfPhrases / NumberOfDaysFromFirstPublication : NumberOfPhrases;
+            return AverageOfPhrases;
+        }
 
         public void AnalyzeAuthorMetrics(IEnumerable<Phrase> phrases)
         {

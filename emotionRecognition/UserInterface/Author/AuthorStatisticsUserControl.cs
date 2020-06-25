@@ -26,6 +26,7 @@ namespace UserInterface
 
         private void SetDefaultValues()
         {
+            ChtStatisticsAuthors.ChartAreas[0].AxisX.Interval = 1;
             RboPositiveSentiment.Checked = true;
             SetPositiveSentimentsData();
         }
@@ -40,12 +41,14 @@ namespace UserInterface
             {
                 ShowAuthorPercentageOfPositiveSentiments(author);
             }
+
+            ChtStatisticsAuthors.ChartAreas[0].RecalculateAxesScale();
         }
 
         private void ShowAuthorPercentageOfPositiveSentiments(Author author)
         {
-            int PercentageOfPositiveSentiments = author.NumberOfPhrases != 0 ? (author.NumberOfPositivePhrases / author.NumberOfPhrases) * 100 : 0;
-            ChtStatisticsAuthors.Series[0].Points.AddXY(author.Username, PercentageOfPositiveSentiments);
+            int PercentageOfPositivePhrases = author.PercentageOfPositivePhrases();
+            ChtStatisticsAuthors.Series[0].Points.AddXY(author.Username, PercentageOfPositivePhrases);
         }
 
         private void RboPositiveSentiment_CheckedChanged(object sender, System.EventArgs e)
@@ -69,12 +72,14 @@ namespace UserInterface
             {
                 ShowAuthorPercentageOfNegativeSentiments(author);
             }
+
+            ChtStatisticsAuthors.ChartAreas[0].RecalculateAxesScale();
         }
 
         private void ShowAuthorPercentageOfNegativeSentiments(Author author)
         {
-            int PercentageOfNegativeSentiments = author.NumberOfPhrases != 0 ? (author.NumberOfNegativePhrases / author.NumberOfPhrases) * 100 : 0;
-            ChtStatisticsAuthors.Series[0].Points.AddXY(author.Username, PercentageOfNegativeSentiments);
+            int PercentageOfNegativePhrases = author.PercentageOfNegativePhrases();
+            ChtStatisticsAuthors.Series[0].Points.AddXY(author.Username, PercentageOfNegativePhrases);
         }
 
         private void RboNamedEntities_CheckedChanged(object sender, System.EventArgs e)
@@ -92,6 +97,8 @@ namespace UserInterface
             {
                 ShowAuthorNumberOfMentionedEntities(author);
             }
+
+            ChtStatisticsAuthors.ChartAreas[0].RecalculateAxesScale();
         }
 
         private void ShowAuthorNumberOfMentionedEntities(Author author)
@@ -116,12 +123,13 @@ namespace UserInterface
             {
                 ShowAuthorAverageOfPhrases(author);
             }
+
+            ChtStatisticsAuthors.ChartAreas[0].RecalculateAxesScale();
         }
 
         private void ShowAuthorAverageOfPhrases(Author author)
         {
-            int AverageOfPhrases = author.NumberOfDaysFromFirstPublication != 0 ? 
-                author.NumberOfPhrases / author.NumberOfDaysFromFirstPublication : author.NumberOfPhrases;     
+            int AverageOfPhrases = author.AvgOfPhrasesPerDay();
            ChtStatisticsAuthors.Series[0].Points.AddXY(author.Username, AverageOfPhrases);
         }
     }

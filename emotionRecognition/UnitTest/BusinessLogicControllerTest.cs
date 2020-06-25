@@ -273,11 +273,15 @@ namespace Tests
             businessLogicController.AnalyzeAuthors();
 
             Author authorSavedAfterAnalyze = businessLogicController.GetAuthorByUsername("stos");
+
             Assert.AreEqual(1, authorSavedAfterAnalyze.NumberOfPhrases);
             Assert.AreEqual(1, authorSavedAfterAnalyze.NumberOfPositivePhrases);
             Assert.AreEqual(0, authorSavedAfterAnalyze.NumberOfNegativePhrases);
             Assert.AreEqual(1, authorSavedAfterAnalyze.NumberOfDistinctEntitiesMentioned);
             Assert.AreEqual(1, authorSavedAfterAnalyze.NumberOfDaysFromFirstPublication);
+            Assert.AreEqual(0, authorSavedAfterAnalyze.PercentageOfNegativePhrases());
+            Assert.AreEqual(100, authorSavedAfterAnalyze.PercentageOfPositivePhrases());
+            Assert.AreEqual(1, authorSavedAfterAnalyze.AvgOfPhrasesPerDay());
         }
 
         [TestMethod]
@@ -330,6 +334,27 @@ namespace Tests
             IEnumerable<AuthorTimeLapseAlarm> alarms = businessLogicController.GetAuthorAlarmsChecked();
 
             Assert.AreEqual(1, alarms.ElementAt(0).ActivatingAuthors.Count());
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void DeleteAuthorNonExistant()
+        {
+            businessLogicController.DeleteAuthorByUsername("NoExiste");
+        }
+
+        [TestMethod]
+        public void DeleteAuthorExistant()
+        {
+            businessLogicController.AddOrUpdateAuthor("carlos", "carlos", "men", DateTime.Today.AddYears(-20));
+            businessLogicController.AddPhrase("me gusta la coca cola", DateTime.Today, "carlos");
+            Assert.AreEqual(1, businessLogicController.GetAuthors().Count());
+            Assert.AreEqual(1, businessLogicController.GetPhrases().Count());
+
+            businessLogicController.DeleteAuthorByUsername("carlos");
+
+            Assert.AreEqual(0, businessLogicController.GetAuthors().Count());
+            Assert.AreEqual(0, businessLogicController.GetPhrases().Count());
         }
     }
 }
