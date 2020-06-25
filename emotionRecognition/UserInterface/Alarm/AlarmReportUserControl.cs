@@ -24,7 +24,7 @@ namespace UserInterface
             switch (reportState)
             {
                 case AlarmReportState.VIEW_REPORT_ENTITIES:
-                    Entidad.HeaderText = "Entidad";
+                    entity.HeaderText = "Entidad";
 
                     foreach (EntityTimeLapseAlarm alarm in controller.GetEntityAlarmsChecked())
                     {
@@ -40,7 +40,7 @@ namespace UserInterface
 
                     break;
                 case AlarmReportState.VIEW_REPORT_AUTHORS:
-                    Entidad.HeaderText = "Autores";
+                    entity.HeaderText = "Autores";
 
                     foreach (AuthorTimeLapseAlarm alarm in controller.GetAuthorAlarmsChecked())
                     {

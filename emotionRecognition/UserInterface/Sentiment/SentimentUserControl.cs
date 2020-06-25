@@ -11,7 +11,7 @@ namespace UserInterface
     public partial class SentimentUserControl : UserControl
     {
         private const string SentimentAlreadyExistErrorMessage = "Ese sentimiento ya existe";
-        private const string NoPositiveSentimentsRegisteredErrorMessage = "No hay sentimientos registrados";
+        private const string NoSentimentsRegisteredErrorMessage = "No hay sentimientos registrados";
         private const string SelectSentimentToDeleteErrorMessage = "Debes seleccionar un sentimiento para poder eliminarlo";
         private const string CanNotSaveEmptyData = "El texto del sentimiento no puede ser vacío";
         private const string CanNotDeleteUsingSentiment = "Ese sentimiento esta siendo utilizado por al menos una frase, no puede ser eliminado";
@@ -47,7 +47,7 @@ namespace UserInterface
         {
             if (LstSentiments.Items.Count == 0)
             {
-                ShowErrorMessageInList(NoPositiveSentimentsRegisteredErrorMessage);
+                ShowErrorMessageInList(NoSentimentsRegisteredErrorMessage);
             }
             else
             {
