@@ -30,7 +30,7 @@
         {
             this.LblAlarms = new System.Windows.Forms.Label();
             this.GrdAlarms = new System.Windows.Forms.DataGridView();
-            this.Entidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.entity = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SearchType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Time = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SentimentToDetect = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,7 +59,7 @@
             this.GrdAlarms.AllowUserToOrderColumns = true;
             this.GrdAlarms.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.GrdAlarms.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Entidad,
+            this.entity,
             this.SearchType,
             this.Time,
             this.SentimentToDetect,
@@ -74,13 +74,13 @@
             this.GrdAlarms.Size = new System.Drawing.Size(671, 254);
             this.GrdAlarms.TabIndex = 2;
             // 
-            // Entidad
+            // entity
             // 
-            this.Entidad.HeaderText = "Entidades";
-            this.Entidad.MinimumWidth = 6;
-            this.Entidad.Name = "entity";
-            this.Entidad.ReadOnly = true;
-            this.Entidad.Width = 125;
+            this.entity.HeaderText = "Entidades";
+            this.entity.MinimumWidth = 6;
+            this.entity.Name = "entity";
+            this.entity.ReadOnly = true;
+            this.entity.Width = 125;
             // 
             // SearchType
             // 
@@ -187,5 +187,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.RadioButton RdoAlarmAutores;
         private System.Windows.Forms.RadioButton RdoAlarmEntities;
+        private System.Windows.Forms.DataGridViewTextBoxColumn entity;
     }
 }

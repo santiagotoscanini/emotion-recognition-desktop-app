@@ -1,32 +1,37 @@
 ﻿using BusinessLogic;
 using BusinessLogic.Entities;
+using BusinessLogic.Enums;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Windows.Forms;
 
 namespace UserInterface
 {
-    public partial class NegativeSentimentUserControl : UserControl
+    public partial class SentimentUserControl : UserControl
     {
-        private const string SentimentAlreadyExist = "Ese sentimiento ya existe";
-        private const string NoSentimentsRegister = "No hay sentimientos negativos registrados";
+        private const string SentimentAlreadyExistErrorMessage = "Ese sentimiento ya existe";
+        private const string NoPositiveSentimentsRegisteredErrorMessage = "No hay sentimientos registrados";
+        private const string SelectSentimentToDeleteErrorMessage = "Debes seleccionar un sentimiento para poder eliminarlo";
         private const string CanNotSaveEmptyData = "El texto del sentimiento no puede ser vacío";
         private const string CanNotDeleteUsingSentiment = "Ese sentimiento esta siendo utilizado por al menos una frase, no puede ser eliminado";
-        private const string SelectDataToDelete = "Debes seleccionar un sentimiento para poder eliminarlo";
         private const string EmptyText = "";
 
         private readonly BusinessLogicController controller;
+        private SentimentState state;
 
-        public NegativeSentimentUserControl(BusinessLogicController controller)
+        public SentimentUserControl(BusinessLogicController controller)
         {
             InitializeComponent();
             this.controller = controller;
-            LoadSentimentsList();
+            state = SentimentState.POSITIVE;
+            OnRefresh();
         }
 
-        private void LoadSentimentsList()
+        private void LoadSentimentsList(IEnumerable<Sentiment> sentimentList)
         {
             ClearList();
-            foreach (Sentiment sentiment in controller.GetNegativeSentiments())
+            foreach (Sentiment sentiment in sentimentList)
             {
                 LstSentiments.Items.Add(sentiment.Text);
             }
@@ -42,7 +47,7 @@ namespace UserInterface
         {
             if (LstSentiments.Items.Count == 0)
             {
-                ShowErrorMessageInList(NoSentimentsRegister);
+                ShowErrorMessageInList(NoPositiveSentimentsRegisteredErrorMessage);
             }
             else
             {
@@ -65,27 +70,31 @@ namespace UserInterface
         private void BtnAccept_Click(object sender, EventArgs e)
         {
             HideErrorMessages();
-            AddNegativeSentimentInTheList();
+            AddSentimentInTheList();
             ClearFields();
         }
 
         private void HideErrorMessages()
         {
             LblErrorMessageEmptyData.Text = EmptyText;
-            LblErrorMessageNotSelectedItem.Text = EmptyText;
+            LblErrorMessageNotSelectedSentiment.Text = EmptyText;
         }
 
-        private void AddNegativeSentimentInTheList()
+        private void AddSentimentInTheList()
         {
-            if (CheckData())
+            if (CheckDataToCreate())
             {
                 string sentimentText = TxtNewSentiment.Text;
-                bool wasCreated = controller.AddNegativeSentiment(sentimentText);
+                
+                bool wasCreated = state == SentimentState.POSITIVE ?
+                    controller.AddPositiveSentiment(sentimentText):
+                    controller.AddNegativeSentiment(sentimentText);
+
                 ActualizeSentimentsList(wasCreated, true);
             }
         }
 
-        private bool CheckData()
+        private bool CheckDataToCreate()
         {
             if (!string.IsNullOrWhiteSpace(TxtNewSentiment.Text))
             {
@@ -105,17 +114,16 @@ namespace UserInterface
         {
             if (WasModified)
             {
-                LoadSentimentsList();
+               OnRefresh();
             }
             else if (wasCreating)
             {
-                ShowErrorMessageInCreate(SentimentAlreadyExist);
+                ShowErrorMessageInCreate(SentimentAlreadyExistErrorMessage);
             }
             else
             {
                 ShowErrorMessageInDelete(CanNotDeleteUsingSentiment);
             }
-
         }
 
         private void ClearFields()
@@ -126,15 +134,15 @@ namespace UserInterface
         private void BtnDelete_Click(object sender, EventArgs e)
         {
             HideErrorMessages();
-            DeleteNegativeSentiment();
+            DeletePositiveSentiment();
         }
 
-        private void DeleteNegativeSentiment()
+        private void DeletePositiveSentiment()
         {
             if (CheckDataToDelete())
             {
                 string deletedSentiment = LstSentiments.SelectedItem.ToString();
-                bool wasDeleted = controller.DeleteNegativeSentiment(deletedSentiment);
+                bool wasDeleted = controller.DeletePositiveSentiment(deletedSentiment);
                 ActualizeSentimentsList(wasDeleted, false);
             }
         }
@@ -146,13 +154,38 @@ namespace UserInterface
                 return true;
             }
 
-            ShowErrorMessageInDelete(SelectDataToDelete);
+            ShowErrorMessageInDelete(SelectSentimentToDeleteErrorMessage);
             return false;
         }
 
         private void ShowErrorMessageInDelete(string ErrorMessage)
         {
-            LblErrorMessageNotSelectedItem.Text = ErrorMessage;
+            LblErrorMessageNotSelectedSentiment.Text = ErrorMessage;
+        }
+
+        private void RdoPositive_CheckedChanged(object sender, EventArgs e)
+        {
+            state = SentimentState.POSITIVE;
+            OnRefresh();
+        }
+
+        private void RdoNegative_CheckedChanged(object sender, EventArgs e)
+        {
+            state = SentimentState.NEGATIVE;
+            OnRefresh();
+        }
+
+        private void OnRefresh()
+        {
+            switch (state)
+            {
+                case SentimentState.POSITIVE:
+                    LoadSentimentsList(controller.GetPositiveSentiments());
+                    break;
+                case SentimentState.NEGATIVE:
+                    LoadSentimentsList(controller.GetNegativeSentiments());
+                    break;
+            }
         }
     }
 }
