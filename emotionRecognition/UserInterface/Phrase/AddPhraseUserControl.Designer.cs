@@ -42,6 +42,7 @@ namespace UserInterface
             this.LblSucessful = new System.Windows.Forms.Label();
             this.LbxAuthors = new System.Windows.Forms.ListBox();
             this.LblNoAuthors = new System.Windows.Forms.Label();
+            this.LblSelectAuthor = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // LblNewPhrase
@@ -140,10 +141,10 @@ namespace UserInterface
             // 
             this.LbxAuthors.FormattingEnabled = true;
             this.LbxAuthors.ItemHeight = 20;
-            this.LbxAuthors.Location = new System.Drawing.Point(98, 151);
+            this.LbxAuthors.Location = new System.Drawing.Point(98, 191);
             this.LbxAuthors.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.LbxAuthors.Name = "LbxAuthors";
-            this.LbxAuthors.Size = new System.Drawing.Size(191, 264);
+            this.LbxAuthors.Size = new System.Drawing.Size(191, 224);
             this.LbxAuthors.TabIndex = 12;
             // 
             // LblNoAuthors
@@ -157,10 +158,20 @@ namespace UserInterface
             this.LblNoAuthors.Text = "Aún no hay autores.";
             this.LblNoAuthors.Visible = false;
             // 
+            // LblSelectAuthor
+            // 
+            this.LblSelectAuthor.AutoSize = true;
+            this.LblSelectAuthor.Location = new System.Drawing.Point(97, 151);
+            this.LblSelectAuthor.Name = "LblSelectAuthor";
+            this.LblSelectAuthor.Size = new System.Drawing.Size(150, 20);
+            this.LblSelectAuthor.TabIndex = 34;
+            this.LblSelectAuthor.Text = "Seleccione un autor";
+            // 
             // NewPhraseUserControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.LblSelectAuthor);
             this.Controls.Add(this.LblNoAuthors);
             this.Controls.Add(this.LbxAuthors);
             this.Controls.Add(this.LblSucessful);
@@ -195,5 +206,6 @@ namespace UserInterface
         private Label LblSucessful;
         private ListBox LbxAuthors;
         private Label LblNoAuthors;
+        private Label LblSelectAuthor;
     }
 }

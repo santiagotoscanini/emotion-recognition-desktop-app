@@ -279,9 +279,9 @@ namespace Tests
             Assert.AreEqual(0, authorSavedAfterAnalyze.NumberOfNegativePhrases);
             Assert.AreEqual(1, authorSavedAfterAnalyze.NumberOfDistinctEntitiesMentioned);
             Assert.AreEqual(1, authorSavedAfterAnalyze.NumberOfDaysFromFirstPublication);
-            Assert.AreEqual(0, authorSavedAfterAnalyze.PercentageOfNegativePhrases());
-            Assert.AreEqual(100, authorSavedAfterAnalyze.PercentageOfPositivePhrases());
-            Assert.AreEqual(1, authorSavedAfterAnalyze.AvgOfPhrasesPerDay());
+            Assert.AreEqual(0, authorSavedAfterAnalyze.GetPercentageOfNegativePhrases());
+            Assert.AreEqual(100, authorSavedAfterAnalyze.GetPercentageOfPositivePhrases());
+            Assert.AreEqual(1, authorSavedAfterAnalyze.GetAvgOfPhrasesPerDay());
         }
 
         [TestMethod]

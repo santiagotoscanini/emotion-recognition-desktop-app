@@ -1,8 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
 using BusinessLogic;
 using BusinessLogic.Entities;
 
@@ -14,12 +12,12 @@ namespace UserInterface
         BusinessLogicController BusinessLogicController;
         private const string PositivePhrases = "Porcentaje de frases Positivas";
         private const string NegativePhrases = "Porcentaje de frases Negativas";
-        private const string EntitiesMentioned = "Entidades mencionadas";
-        private const string PercentagePhrases = "Promedio frases diario";
+        private const string EntitiesMentioned = "Cantidad de distintas entidades mencionadas";
+        private const string PercentagePhrases = "Promedio de frases por día";
 
         public AuthorStatisticsUserControl(BusinessLogicController businessLogicController)
         {
-            this.BusinessLogicController = businessLogicController;
+            BusinessLogicController = businessLogicController;
             InitializeComponent();
             SetDefaultValues();
         }
@@ -35,8 +33,7 @@ namespace UserInterface
         {
             ChtStatisticsAuthors.Series.Clear();
             ChtStatisticsAuthors.Series.Add(PositivePhrases);
-            List<Author> authors = BusinessLogicController.GetAuthors().OrderBy(author => author.NumberOfPhrases != 0 ?
-                (author.NumberOfPositivePhrases / author.NumberOfPhrases) * 100 : 0).ToList();
+            List<Author> authors = BusinessLogicController.GetAuthors().OrderBy(author => author.GetPercentageOfPositivePhrases()).ToList();
             foreach (Author author in authors.Take(10).Reverse())
             {
                 ShowAuthorPercentageOfPositiveSentiments(author);
@@ -47,7 +44,7 @@ namespace UserInterface
 
         private void ShowAuthorPercentageOfPositiveSentiments(Author author)
         {
-            int PercentageOfPositivePhrases = author.PercentageOfPositivePhrases();
+            int PercentageOfPositivePhrases = author.GetPercentageOfPositivePhrases();
             ChtStatisticsAuthors.Series[0].Points.AddXY(author.Username, PercentageOfPositivePhrases);
         }
 
@@ -66,8 +63,7 @@ namespace UserInterface
             ChtStatisticsAuthors.Series.Clear();
             ChtStatisticsAuthors.Series.Add(NegativePhrases);
 
-            List<Author> authors = BusinessLogicController.GetAuthors().OrderBy(author => author.NumberOfPhrases != 0 ?
-                (author.NumberOfNegativePhrases / author.NumberOfPhrases) * 100 : 0).ToList();
+            List<Author> authors = BusinessLogicController.GetAuthors().OrderBy(author => author.GetPercentageOfNegativePhrases()).ToList();
             foreach (Author author in authors.Take(10).Reverse())
             {
                 ShowAuthorPercentageOfNegativeSentiments(author);
@@ -78,7 +74,7 @@ namespace UserInterface
 
         private void ShowAuthorPercentageOfNegativeSentiments(Author author)
         {
-            int PercentageOfNegativePhrases = author.PercentageOfNegativePhrases();
+            int PercentageOfNegativePhrases = author.GetPercentageOfNegativePhrases();
             ChtStatisticsAuthors.Series[0].Points.AddXY(author.Username, PercentageOfNegativePhrases);
         }
 
@@ -117,8 +113,7 @@ namespace UserInterface
             ChtStatisticsAuthors.Series.Add(PercentagePhrases);
 
             List<Author> authors = BusinessLogicController.GetAuthors()
-                .OrderBy(author => (author.NumberOfDaysFromFirstPublication != 0 ?
-                author.NumberOfPhrases / author.NumberOfDaysFromFirstPublication : author.NumberOfPhrases)).ToList();
+                .OrderBy(author => author.GetAvgOfPhrasesPerDay()).ToList();
             foreach (Author author in BusinessLogicController.GetAuthors().Take(10).Reverse())
             {
                 ShowAuthorAverageOfPhrases(author);
@@ -129,7 +124,7 @@ namespace UserInterface
 
         private void ShowAuthorAverageOfPhrases(Author author)
         {
-            int AverageOfPhrases = author.AvgOfPhrasesPerDay();
+            int AverageOfPhrases = author.GetAvgOfPhrasesPerDay();
            ChtStatisticsAuthors.Series[0].Points.AddXY(author.Username, AverageOfPhrases);
         }
     }

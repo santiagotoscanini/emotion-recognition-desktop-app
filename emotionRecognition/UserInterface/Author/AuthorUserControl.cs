@@ -29,7 +29,7 @@ namespace UserInterface
             switch (applicationState)
             {
                 case ApplicationState.ADDING_AN_AUTHOR:
-                    PnlAlarm.Controls.Add(new AddAuthorUserControl(controller, username));
+                    PnlAlarm.Controls.Add(new AddAuthorUserControl(controller, username, this));
                     this.username = null;
                     break;
                 case ApplicationState.AUTHOR_REPORT:
@@ -60,6 +60,11 @@ namespace UserInterface
         {
             this.username = username;
             OnRefresh(ApplicationState.ADDING_AN_AUTHOR);
+        }
+
+        public void getBackToReport()
+        {
+            OnRefresh(ApplicationState.AUTHOR_REPORT);
         }
     }
 }

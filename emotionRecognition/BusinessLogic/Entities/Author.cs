@@ -21,25 +21,25 @@ namespace BusinessLogic.Entities
 
         public Author() { }
 
-        public int PercentageOfNegativePhrases()
+        public int GetPercentageOfNegativePhrases()
         {
-            float percentage = NumberOfPhrases != 0 ? (float)NumberOfNegativePhrases / (float)NumberOfPhrases : 0;
-            int PercentageOfNegativeSentiments = (int)(percentage * 100);
-            return PercentageOfNegativeSentiments;
+            float ratioOfNegativePhrases = NumberOfPhrases != 0 ? (float)NumberOfNegativePhrases / (float)NumberOfPhrases : 0;
+            int PercentageOfNegativePhrases = (int)(ratioOfNegativePhrases * 100);
+            return PercentageOfNegativePhrases;
         }
 
-        public int PercentageOfPositivePhrases()
+        public int GetPercentageOfPositivePhrases()
         {
-            float percentage = NumberOfPhrases != 0 ? (float)NumberOfPositivePhrases / (float)NumberOfPhrases : 0;
-            int PercentageOfPositiveSentiments = (int)(percentage * 100);
-            return PercentageOfPositiveSentiments;
+            float ratioOfPositivePhrases = NumberOfPhrases != 0 ? (float)NumberOfPositivePhrases / (float)NumberOfPhrases : 0;
+            int PercentageOfPositivePhrases = (int)(ratioOfPositivePhrases * 100);
+            return PercentageOfPositivePhrases;
         }
 
-        public int AvgOfPhrasesPerDay()
+        public int GetAvgOfPhrasesPerDay()
         {
-            int AverageOfPhrases = NumberOfDaysFromFirstPublication != 0 ?
+            int AvgOfPhrasesPerDay = NumberOfDaysFromFirstPublication != 0 ?
                 NumberOfPhrases / NumberOfDaysFromFirstPublication : NumberOfPhrases;
-            return AverageOfPhrases;
+            return AvgOfPhrasesPerDay;
         }
 
         public void AnalyzeAuthorMetrics(IEnumerable<Phrase> phrases)

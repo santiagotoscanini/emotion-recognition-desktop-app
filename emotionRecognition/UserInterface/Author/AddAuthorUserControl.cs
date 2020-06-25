@@ -23,11 +23,13 @@ namespace UserInterface
         private string authorUsername;
 
         private BusinessLogicController businessLogicController { get; set; }
+        private AuthorUserControl authorUserControl;
 
-        public AddAuthorUserControl(BusinessLogicController businessLogicController, string authorUsername)
+        public AddAuthorUserControl(BusinessLogicController businessLogicController, string authorUsername, AuthorUserControl authorUserControl)
         {
             this.authorUsername = authorUsername;
             this.businessLogicController = businessLogicController;
+            this.authorUserControl = authorUserControl;
             InitializeComponent();
             setValuesForModifyOrAdd();
             SetRangeOfDateOfBirth();
@@ -75,8 +77,8 @@ namespace UserInterface
             if (!DataIsIncorrect())
             {
                 CreateOrUpdateAuthor();
-                showSuccessMessage();
                 ClearFields();
+                authorUserControl.getBackToReport();
             }
         }
 
