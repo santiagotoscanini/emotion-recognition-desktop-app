@@ -132,12 +132,6 @@
     <Compile Include="MainWindow.Designer.cs">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sentiment\NegativeSentimentUserControl.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="Sentiment\NegativeSentimentUserControl.Designer.cs">
-      <DependentUpon>NegativeSentimentUserControl.cs</DependentUpon>
-    </Compile>
     <Compile Include="Phrase\AddPhraseUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -150,11 +144,12 @@
     <Compile Include="Phrase\PhraseReportUserControl.Designer.cs">
       <DependentUpon>PhraseReportUserControl.cs</DependentUpon>
     </Compile>
-    <Compile Include="Sentiment\PositiveSentimentUserControl.cs">
+    <Compile Include="Sentiment\SentimentState.cs" />
+    <Compile Include="Sentiment\SentimentUserControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="Sentiment\PositiveSentimentUserControl.Designer.cs">
-      <DependentUpon>PositiveSentimentUserControl.cs</DependentUpon>
+    <Compile Include="Sentiment\SentimentUserControl.Designer.cs">
+      <DependentUpon>SentimentUserControl.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -191,17 +186,14 @@
     <EmbeddedResource Include="MainWindow.resx">
       <DependentUpon>MainWindow.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sentiment\NegativeSentimentUserControl.resx">
-      <DependentUpon>NegativeSentimentUserControl.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Phrase\AddPhraseUserControl.resx">
       <DependentUpon>AddPhraseUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Phrase\PhraseReportUserControl.resx">
       <DependentUpon>PhraseReportUserControl.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Sentiment\PositiveSentimentUserControl.resx">
-      <DependentUpon>PositiveSentimentUserControl.cs</DependentUpon>
+    <EmbeddedResource Include="Sentiment\SentimentUserControl.resx">
+      <DependentUpon>SentimentUserControl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
