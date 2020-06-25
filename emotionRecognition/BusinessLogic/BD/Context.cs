@@ -9,8 +9,9 @@ namespace BusinessLogic.BD
         public DbSet<Entity> Entities { get; set; }
         public DbSet<Sentiment> Sentiments { get; set; }
         public DbSet<Phrase> Phrases { get; set; }
-        public DbSet<TimeLapseAlarm> Alarms { get; set; }
+        public DbSet<EntityTimeLapseAlarm> EntityAlarms { get; set; }
         public DbSet<Author> Authors { get; set; }
+        public DbSet<AuthorTimeLapseAlarm> AuthorAlarms { get; set; }
 
         public Context() : base()
         {
@@ -22,8 +23,9 @@ namespace BusinessLogic.BD
             modelBuilder.Configurations.Add(new EntityTypeConfiguration());
             modelBuilder.Configurations.Add(new SentimentTypeConfiguration());
             modelBuilder.Configurations.Add(new PhraseTypeConfiguration());
-            modelBuilder.Configurations.Add(new TimeLapseAlarmTypeConfiguration());
+            modelBuilder.Configurations.Add(new EntityTimeLapseAlarmTypeConfiguration());
             modelBuilder.Configurations.Add(new AuthorTypeConfiguration());
+            modelBuilder.Configurations.Add(new AuthorTimeLapseAlarmTypeConfiguration());
         }
     }
 }

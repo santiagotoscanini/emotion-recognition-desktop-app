@@ -110,19 +110,19 @@ namespace Tests
         }
 
         [TestMethod]
-        public void AddAlarm()
+        public void AddEntityAlarm()
         {
             Entity entity = new Entity("C#");
             repository.AddEntity(entity);
 
             TimeSearchMethodType timeSearchMethodType = TimeSearchMethodType.DAYS;
-            uint quantityOfTimeToSearchBack = 1;
+            int quantityOfTimeToSearchBack = 1;
             AlarmPosibleState alarmPosibleState = AlarmPosibleState.POSITIVE;
-            uint quantityOfSentimentsNeeded = 1;
+            int quantityOfSentimentsNeeded = 1;
 
-            TimeLapseAlarm alarm = new TimeLapseAlarm(entity, timeSearchMethodType, quantityOfTimeToSearchBack, alarmPosibleState, quantityOfSentimentsNeeded);
+            EntityTimeLapseAlarm alarm = new EntityTimeLapseAlarm(entity, timeSearchMethodType, quantityOfTimeToSearchBack, alarmPosibleState, quantityOfSentimentsNeeded);
 
-            repository.AddAlarm(alarm);
+            repository.AddEntityAlarm(alarm);
         }
 
         [TestMethod]
@@ -137,21 +137,21 @@ namespace Tests
         }
 
         [TestMethod]
-        public void GetAlarms()
+        public void GetEntityAlarms()
         {
-            Assert.AreEqual(0, repository.GetAlarms().ToList().Count);
+            Assert.AreEqual(0, repository.GetEntityAlarms().ToList().Count);
             Entity entity = new Entity("C#");
             repository.AddEntity(entity);
 
-            TimeLapseAlarm alarm = new TimeLapseAlarm(
+            EntityTimeLapseAlarm alarm = new EntityTimeLapseAlarm(
                 entity,
                 TimeSearchMethodType.DAYS,
                 3,
                 AlarmPosibleState.NEGATIVE,
                 4);
-            repository.AddAlarm(alarm);
+            repository.AddEntityAlarm(alarm);
 
-            Assert.AreEqual(1, repository.GetAlarms().ToList().Count);
+            Assert.AreEqual(1, repository.GetEntityAlarms().ToList().Count);
         }
 
         [TestMethod]
@@ -205,6 +205,34 @@ namespace Tests
             IEnumerable<Sentiment> sentiments = repository.GetSentiments();
 
             Assert.AreEqual(2, sentiments.ToList().Count);
+        }
+
+        [TestMethod]
+        public void AddAuthorAlarm()
+        {
+            TimeSearchMethodType timeSearchMethodType = TimeSearchMethodType.DAYS;
+            int quantityOfTimeToSearchBack = 1;
+            AlarmPosibleState alarmPosibleState = AlarmPosibleState.POSITIVE;
+            int quantityOfSentimentsNeeded = 1;
+
+            AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(timeSearchMethodType, quantityOfTimeToSearchBack, alarmPosibleState, quantityOfSentimentsNeeded);
+
+            repository.AddAuthorAlarm(alarm);
+        }
+
+        [TestMethod]
+        public void GetAuthorAlarms()
+        {
+            Assert.AreEqual(0, repository.GetAuthorAlarms().ToList().Count);
+
+            AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(
+                TimeSearchMethodType.DAYS,
+                3,
+                AlarmPosibleState.NEGATIVE,
+                4);
+            repository.AddAuthorAlarm(alarm);
+
+            Assert.AreEqual(1, repository.GetAuthorAlarms().ToList().Count);
         }
     }
 }

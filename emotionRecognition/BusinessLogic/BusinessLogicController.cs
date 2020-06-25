@@ -32,23 +32,23 @@ namespace BusinessLogic
             return Repository.GetEntities();
         }
 
-        public void AddAlarm(string entityName, bool searchInDays, uint sentimentsNeeded, bool detectPositiveSentiments, uint timeToSearchBack)
+        public void AddEntityAlarm(string entityName, bool searchInDays, int sentimentsNeeded, bool detectPositiveSentiments, int timeToSearchBack)
         {
             Entity entity = Repository.GetEntityFromName(entityName);
             TimeSearchMethodType searchMethodType = searchInDays ? TimeSearchMethodType.DAYS : TimeSearchMethodType.HOURS;
             AlarmPosibleState alarmPosibleState = detectPositiveSentiments ? AlarmPosibleState.POSITIVE : AlarmPosibleState.NEGATIVE;
 
-            TimeLapseAlarm alarm = new TimeLapseAlarm(entity, searchMethodType, timeToSearchBack, alarmPosibleState, sentimentsNeeded);
+            EntityTimeLapseAlarm alarm = new EntityTimeLapseAlarm(entity, searchMethodType, timeToSearchBack, alarmPosibleState, sentimentsNeeded);
 
-            Repository.AddAlarm(alarm);
-            Repository.AnalyzeAlarms();
+            Repository.AddEntityAlarm(alarm);
+            Repository.AnalyzeEntityAlarms();
         }
 
-        public IEnumerable<TimeLapseAlarm> GetAlarmsChecked()
+        public IEnumerable<EntityTimeLapseAlarm> GetEntityAlarmsChecked()
         {
-            Repository.AnalyzeAlarms();
+            Repository.AnalyzeEntityAlarms();
 
-            return Repository.GetAlarms();
+            return Repository.GetEntityAlarms();
         }
 
         public void AddPhrase(string phraseText, DateTime dateTime, string username)
@@ -59,7 +59,7 @@ namespace BusinessLogic
 
             Repository.AnalyzePhrases();
             Repository.AnalyzeAuthors();
-            Repository.AnalyzeAlarms();
+            Repository.AnalyzeEntityAlarms();
         }
 
         public IEnumerable<Phrase> GetPhrases()
@@ -182,6 +182,24 @@ namespace BusinessLogic
             }
 
             return isContained;
+        }
+
+        public void AddAuthorAlarm(bool searchInDays, int sentimentsNeeded, bool detectPositiveSentiments, int timeToSearchBack)
+        {
+            TimeSearchMethodType searchMethodType = searchInDays ? TimeSearchMethodType.DAYS : TimeSearchMethodType.HOURS;
+            AlarmPosibleState alarmPosibleState = detectPositiveSentiments ? AlarmPosibleState.POSITIVE : AlarmPosibleState.NEGATIVE;
+
+            AuthorTimeLapseAlarm alarm = new AuthorTimeLapseAlarm(searchMethodType, timeToSearchBack, alarmPosibleState, sentimentsNeeded);
+
+            Repository.AddAuthorAlarm(alarm);
+            Repository.AnalyzeAuthorAlarms();
+        }
+
+        public IEnumerable<AuthorTimeLapseAlarm> GetAuthorAlarmsChecked()
+        {
+            Repository.AnalyzeAuthorAlarms();
+
+            return Repository.GetAuthorAlarms();
         }
     }
 }

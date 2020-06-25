@@ -54,39 +54,39 @@ namespace Tests
         }
 
         [TestMethod]
-        public void AddAlarmSearchInDays()
+        public void AddEntityAlarmSearchInDays()
         {
             businessLogicController.AddEntity("1");
 
-            Assert.AreEqual(0, businessLogicController.GetAlarmsChecked().ToList().Count);
+            Assert.AreEqual(0, businessLogicController.GetEntityAlarmsChecked().ToList().Count);
 
-            businessLogicController.AddAlarm("1", true, 2, false, 3);
+            businessLogicController.AddEntityAlarm("1", true, 2, false, 3);
 
-            Assert.AreEqual(1, businessLogicController.GetAlarmsChecked().ToList().Count);
+            Assert.AreEqual(1, businessLogicController.GetEntityAlarmsChecked().ToList().Count);
         }
 
         [TestMethod]
-        public void AddAlarmSearchInHours()
+        public void AddEntityAlarmSearchInHours()
         {
             businessLogicController.AddEntity("1");
 
-            Assert.AreEqual(0, businessLogicController.GetAlarmsChecked().ToList().Count);
+            Assert.AreEqual(0, businessLogicController.GetEntityAlarmsChecked().ToList().Count);
 
-            businessLogicController.AddAlarm("1", false, 2, false, 3);
+            businessLogicController.AddEntityAlarm("1", false, 2, false, 3);
 
-            Assert.AreEqual(1, businessLogicController.GetAlarmsChecked().ToList().Count);
+            Assert.AreEqual(1, businessLogicController.GetEntityAlarmsChecked().ToList().Count);
         }
 
         [TestMethod]
-        public void GetAlarmsChecked()
+        public void GetEntityAlarmsChecked()
         {
             businessLogicController.AddOrUpdateAuthor("test", "s", "t", DateTime.Now);
             businessLogicController.AddEntity("Valorant");
-            businessLogicController.AddAlarm("Valorant", true, 1, true, 2);
+            businessLogicController.AddEntityAlarm("Valorant", true, 1, true, 2);
             businessLogicController.AddPhrase("Valorant is good", DateTime.Now, "test");
             businessLogicController.AddPositiveSentiment("Good");
 
-            IEnumerable<TimeLapseAlarm> alarms = businessLogicController.GetAlarmsChecked();
+            IEnumerable<EntityTimeLapseAlarm> alarms = businessLogicController.GetEntityAlarmsChecked();
 
             Assert.AreEqual(true, alarms.ToList()[0].IsActivated);
         }
@@ -268,7 +268,7 @@ namespace Tests
             businessLogicController.AddPhrase("Muy rica la mostaza", DateTime.Now.AddDays(-1).AddSeconds(-20), "stos");
             businessLogicController.AddEntity("mostaza");
             businessLogicController.AddPositiveSentiment("RicA");
-            
+
             businessLogicController.AnalyzePhrases();
             businessLogicController.AnalyzeAuthors();
 
@@ -281,11 +281,55 @@ namespace Tests
         }
 
         [TestMethod]
-        public void DeleteAuthorTest()
+        public void AddAuthorAlarmSearchInDays()
         {
-            businessLogicController.AddOrUpdateAuthor("stos", "Elsa", "Pallito", DateTime.Now);
-            businessLogicController.DeleteAuthorByUsername("stos");
-            Assert.AreEqual(0, businessLogicController.GetAuthors().ToList().Count);
+            businessLogicController.AddOrUpdateAuthor("stej", "Harry", "Armas", DateTime.Now);
+
+            Assert.AreEqual(0, businessLogicController.GetEntityAlarmsChecked().ToList().Count);
+
+            businessLogicController.AddAuthorAlarm(true, 2, false, 3);
+
+            Assert.AreEqual(1, businessLogicController.GetAuthorAlarmsChecked().ToList().Count);
+        }
+
+        [TestMethod]
+        public void AddAuthorAlarmSearchInHours()
+        {
+            businessLogicController.AddOrUpdateAuthor("stej", "Harry", "Armas", DateTime.Now);
+
+            Assert.AreEqual(0, businessLogicController.GetAuthorAlarmsChecked().ToList().Count);
+
+            businessLogicController.AddAuthorAlarm(false, 2, false, 3);
+
+            Assert.AreEqual(1, businessLogicController.GetAuthorAlarmsChecked().ToList().Count);
+        }
+
+        [TestMethod]
+        public void GetAuthorAlarmsChecked()
+        {
+            businessLogicController.AddOrUpdateAuthor("test", "s", "t", DateTime.Now);
+            businessLogicController.AddEntity("Valorant");
+            businessLogicController.AddAuthorAlarm(true, 1, true, 2);
+            businessLogicController.AddPhrase("Valorant is good", DateTime.Now, "test");
+            businessLogicController.AddPositiveSentiment("Good");
+
+            IEnumerable<AuthorTimeLapseAlarm> alarms = businessLogicController.GetAuthorAlarmsChecked();
+
+            Assert.AreEqual(true, alarms.ToList()[0].IsActivated);
+        }
+
+        [TestMethod]
+        public void GetAuthorsOfAuthorAlarmsChecked()
+        {
+            businessLogicController.AddOrUpdateAuthor("test", "s", "t", DateTime.Now);
+            businessLogicController.AddEntity("Valorant");
+            businessLogicController.AddAuthorAlarm(true, 1, true, 2);
+            businessLogicController.AddPhrase("Valorant is good", DateTime.Now, "test");
+            businessLogicController.AddPositiveSentiment("Good");
+
+            IEnumerable<AuthorTimeLapseAlarm> alarms = businessLogicController.GetAuthorAlarmsChecked();
+
+            Assert.AreEqual(1, alarms.ElementAt(0).ActivatingAuthors.Count());
         }
     }
 }
