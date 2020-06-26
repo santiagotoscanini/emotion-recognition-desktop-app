@@ -161,6 +161,7 @@ namespace Tests
             Assert.IsFalse(businessLogicController.AddPositiveSentiment("good"));
             Assert.IsFalse(businessLogicController.AddNegativeSentiment("good"));
         }
+
         [TestMethod]
         public void ValidateAddingDulpicatedPositiveSentiment()
         {
